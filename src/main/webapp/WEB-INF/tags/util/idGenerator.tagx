@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	version="2.0">
+	
+  	<jsp:output omit-xml-declaration="yes" />
+
+	<jsp:directive.attribute name="prefix" required="true" description="Préfixe identifiant" />
+	
+	<!-- générer un identifiant -->
+ 	<spring:eval expression="new String('${prefix }').trim() + (new java.util.Random().nextLong())" scope="request" var="generatedId"/>   
+ 	
+</jsp:root>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	version="2.0">
+	
+  	<jsp:output omit-xml-declaration="yes" />
+
+  	<jsp:directive.attribute name="url" type="java.lang.String" required="true" description="URL du lien (relative ou absolue)" />  
+  	<jsp:directive.attribute name="message" type="java.lang.String" required="true" description="La clé de traduction" />
+  
+  	<!-- préparer l'url -->
+  	<spring:url value="${url}" javaScriptEscape="true" var="javascriptURL" />
+  	<util:idGenerator prefix="itemMenu" />
+  	
+  	<!-- élément de menu -->
+  	<div id="${fn:escapeXml(generatedId)}">
+  		<spring:message code="${message}" />
+  	</div>
+  	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.ElementDecoration({
+			elementId: "${fn:escapeXml(generatedId)}",
+			widgetType: "dijit.MenuItem",
+			widgetAttrs: { 
+				iconClass: "dijitEditorIcon dijitEditorIconTabIndent"
+			}
+		}));
+		
+		//ajouter le lien
+		dojo.addOnLoad(function() {
+			dojo.connect(dijit.byId("${fn:escapeXml(generatedId)}"), "onClick", function() {
+				document.location = "${javascriptURL}";
+			});
+		});
+	</script>	
+  
+</jsp:root>

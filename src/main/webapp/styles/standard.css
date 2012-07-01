@@ -1,0 +1,299 @@
+/* main elements */
+
+body,div,td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #666;
+}
+
+body {
+	background-color: #49ADBC;
+}
+
+/* block div principaux */
+#wrapper {
+	background-color: #ffffff;
+	width:1000px;
+	margin-right: auto;
+	margin-left: auto;
+	
+	overflow:hidden;
+	display:block;
+}
+
+#main {
+	overflow:hidden;
+	display: block;
+	margin: 5px;
+}
+
+/* header and footer elements */
+#header {
+	background: #49ADBC;
+}
+
+#footer {
+	background:#ffffff;
+	display: block;
+	border-color: #1BA8E0;
+	border-width: 1px;
+	margin: 5px;
+	border-style: dotted;
+	padding: 2px;
+}
+
+#footer a:link {color: #7db223;}
+
+#footer span#themeChooser {
+	margin-left: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-left: 1px solid #1BA8E0;	
+}
+
+#footer span#themeChooser > form {
+	margin-left: 5px;
+	display: inline;
+}
+
+#footer #changePasswordWrapper {
+	padding-left: 10px;
+	padding-right: 10px;
+	border-left: 1px solid #1BA8E0;
+	border-right: 1px solid #1BA8E0;
+}
+
+#footer #logoutPanel {
+	padding-left: 10px;
+}
+
+#footer #logoutIdentifier {
+	margin-left: 10px;
+	padding-left: 10px;
+	border-left: 1px solid #1BA8E0;
+	color: #E01B25;	
+	font-weight: bold;
+}
+
+/* menu */
+#menu {
+   	position: relative;
+  	float: left;  	
+  	left: 0px;
+  	padding-left: 5px;
+  	padding-top: 5px;
+  	width: 220px;
+  	margin-right: 15px;
+}
+
+/* tableaux pagination */
+.tableLineHeader {
+	float: left;
+	font-weight: bold;
+	font-size: 14px;
+	display: inline;
+	position: relative;
+	border: 1px dashed #F22C2F;
+	padding: 2px;
+	margin: 2px;
+}
+
+.listLine1 {
+	float: left;
+	display: inline;
+	position: relative;
+	padding: 2px;
+	margin: 2px;
+	background-color: #6CBAE0;
+}
+
+.listLine2 {
+	float: left;
+	display: inline;
+	position: relative;
+	padding: 2px;
+	margin: 2px;
+	background-color: #C0C1C4;
+}
+
+/* pagination */
+#paginationContainer {
+	text-align: center;
+	vertical-align: middle;	
+}
+
+.paginationElementContainer {
+	display: inline;
+	text-align: center;
+	vertical-align: middle;
+	margin: 2px;
+}
+
+.paginationForm {
+	display: inline;
+}
+	
+.quicklinks {
+	clear:both; 
+	padding-bottom: 15px
+}
+.quicklinks span {
+	float: right;
+}
+
+table.navigation {
+	border: 0px;
+}
+
+label {
+	width:120px;
+	float:left;
+	margin-left: 5px;
+	margin-top: 0px;
+}
+
+
+input.image {
+	border: none;
+	height: auto;
+}
+
+/* menu elements*/
+
+a.menu, a.menu:link, a.menu:visited {display:block; width:150px; height:25px;} 
+	
+/* text styles */
+
+h1,h2,h3 {
+	font-family: Helvetica, sans-serif;
+	color: #7db223;
+}
+
+h1 {
+	font-size: 20px;
+	line-height: 26px;
+}
+
+h2 {
+	font-size: 18px;
+	line-height: 20px;
+}
+
+h3 {
+	font-size: 15px;
+	line-height: 21px;
+	color:#555;
+}
+
+h4 {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.errors {
+	color: red;
+	font-weight: bold;
+	display: block;
+}
+
+a {
+	text-decoration: underline;
+	font-size: 12px;
+}
+
+a img {
+	border: 0 none;
+	vertical-align: middle;
+}
+
+tr:nth-child(odd) {
+	background-color: #FFFFFF;
+}
+
+tr:nth-child(even) {
+	background-color: #EFEFEF;
+}
+
+a:link {
+	color: #7db223;
+}
+
+a:hover {
+	color: #456314;
+	text-decoration: none;
+}
+
+a:active {
+	color: #7db223;
+}
+
+a:visited {
+	color: #7db223;
+}
+
+li {
+	padding-top: 5px;
+	text-align: left;
+}
+
+ul li {
+	margin:0 0 0.25em 0;
+	padding:0;
+}
+/* table elements */
+
+table {
+	background: #EEEEEE;
+	margin: 2px 0 0 0;
+	border: 1px solid #BBBBBB;
+	border-collapse: collapse;
+	width: 100%
+}
+
+table table {
+	margin: -5px 0;
+	border: 0px solid #e0e7d3;
+	width: 100%;
+}
+
+table td,table th {
+	padding: 2px;
+	border: 1px solid #CCCCCC;
+}
+
+table td form {
+	text-align:center;
+	vertical-align: middle;
+	margin: 0px;
+}
+
+table th {
+	font-size: 0.9em;
+	text-align: left;
+	font-weight: bold;
+	color: #FFF;
+	background: #999;
+}
+
+table thead {
+	font-weight: bold;
+	font-style: italic;
+	background-color: #BBBBBB;
+}
+
+table a:link {color: #303030;}
+
+
+
+
+
+/* utilisé dans les tags de formulaires */
+.submit {
+	margin-top: 5px;	
+}
+
+/* utilisé pour le changement de locale */
+.flag {
+	height: 11px;
+	width: 16px;
+}

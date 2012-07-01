@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	version="2.0">
+	
+	<jsp:output omit-xml-declaration="yes"/>
+
+	<!-- paramètres jsp -->
+	<jsp:directive.attribute name="image" required="true" description="Nom de image"/>
+	<jsp:directive.attribute name="height" required="true" description="Hauteur du span" />
+	<jsp:directive.attribute name="width" required="true" description="Largeur du span" />
+
+	<!-- déclaration du span -->
+	<div class="tableLineHeader" style="height: ${height}; width: ${width}">
+			<!-- afficher icone -->
+			<util:image image="${image }" />
+			
+			<!-- traitement du contenu de la page -->
+			<jsp:doBody />
+	</div>	
+		
+</jsp:root>

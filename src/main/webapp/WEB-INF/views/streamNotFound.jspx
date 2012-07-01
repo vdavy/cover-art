@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  
+  	<jsp:output omit-xml-declaration="yes" />
+ 
+	<div>
+	  	<spring:message var="title" code="streamNotFound.title" htmlEscape="false"/>
+  		<util:panel id="title" title="${title}" >
+  		
+  			<!-- titre et entete -->
+    		<h3>
+      			<spring:message code="streamNotFound.title" />
+    		</h3>
+    		<p>
+      			<spring:message code="streamNotFound.description" arguments="${streamPattern }" />
+    		</p>
+    		
+    		<!-- liste des liens -->
+    		<p>
+    			<c:set var="link1" >
+    				<a href="http://www.djgregmc.fr/dotclear/pages/Ecouter-Station-Millenium">www.djgregmc.fr</a>
+    			</c:set>
+    			<c:set var="link2">
+    				<a href="http://www.station-millenium.com">www.station-millenium.com</a>
+    			</c:set>
+      			<spring:message code="streamNotFound.links" arguments="${link1 },${link2 }" htmlEscape="false" />
+    		</p>
+    		
+  		</util:panel>  		
+	</div>
+	
+</jsp:root>

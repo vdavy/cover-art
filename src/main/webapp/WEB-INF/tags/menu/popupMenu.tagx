@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	version="2.0">
+		
+	<jsp:output omit-xml-declaration="yes"/>
+	
+	<jsp:directive.attribute name="message" type="java.lang.String" required="true" description="La clé de traduction" />
+	
+	<!-- générer un identifiant -->
+	<util:idGenerator prefix="popupMenu" />
+	<c:set var="popupMenuId">${fn:escapeXml(generatedId)}</c:set>
+	
+	<!-- élément du menu -->
+	<div id="${popupMenuId}">		
+  		<span>
+  			<spring:message code="${message}" />
+  		</span>
+  		
+  		<div id="${popupMenuId}-sub">  			
+  			<jsp:doBody />
+  		</div>
+  		
+  		<script type="text/javascript">
+		  	//sous menu
+			Spring.addDecoration(new Spring.ElementDecoration({
+				elementId: "${popupMenuId}-sub",
+				widgetType: "dijit.Menu",
+				widgetAttrs: { 
+					//nothing ton add
+				}
+			}));
+		</script>
+  	</div>
+  	
+  	<!-- script création sous menu -->
+  	<script type="text/javascript">
+		//menu principal
+		Spring.addDecoration(new Spring.ElementDecoration({
+			elementId: "${popupMenuId}",
+			widgetType: "dijit.PopupMenuItem",
+			widgetAttrs: { 
+				iconClass: "dijitEditorIcon dijitEditorIconRedo"
+			}
+		}));
+	</script>
+  	
+</jsp:root>

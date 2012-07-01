@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	version="2.0">
+	
+  	<jsp:output omit-xml-declaration="yes" />
+
+	<!-- fermer le waiting panel au chargement -->
+	<c:if test="${param['fragments'] != null }">
+	 	<script type="text/javascript">	 		 			 	
+	 		dojo.addOnLoad(function() {
+	 			dojo.disconnect(selectPageListConnection); //déconnecter l'événement
+	 			dijit.byId("selectPageList").set("value", "${paginationDTO.currentPage}"); //chnager la liste
+	 			setTimeout(replugSelectPageListEvent, 3000); //rebrancher 3s plus tard
+	 		}); 	
+ 		</script>   
+ 	</c:if>
+ 	
+</jsp:root>

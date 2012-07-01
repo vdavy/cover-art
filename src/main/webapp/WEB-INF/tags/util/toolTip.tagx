@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	version="2.0">
+	
+	<jsp:output omit-xml-declaration="yes" />
+	
+	<!-- paramètres du tooltip -->
+	<jsp:directive.attribute name="id" type="java.lang.String" required="true" description="Id sur lequel appliquer le tooltip" />
+	<jsp:directive.attribute name="label" type="java.lang.String" required="true" description="Le texte à afficher" />
+	<jsp:directive.attribute name="position" type="java.lang.String" required="false" description="Position du tooltip" />
+	
+	<!-- traiter la position -->
+	<c:set var="positionText">${position }</c:set>
+	<spring:eval expression="positionText ?: 'after'" var="positionText"/> 
+	
+	<!-- afficher le tooltip -->
+	<script type="text/javascript">
+		dojo.require("dijit.Tooltip");
+		new dijit.Tooltip({
+		   connectId: ["${id}"],
+		   label: "${fn:escapeXml(label)}",
+		   position: ["${positionText}"]
+		});
+	</script>
+	
+</jsp:root>

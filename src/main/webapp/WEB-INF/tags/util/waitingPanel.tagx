@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+	
+	<spring:message code="loading.loading" var="loadingText"/>
+	
+	<!-- définir le panel -->
+	<div id="waitingPanel">
+		<span id="waitingProgressBar"/>
+	</div>
+    
+	<!-- afficher le dialog -->
+	<script type="text/javascript">
+		//panel d'attente
+		Spring.addDecoration(new Spring.ElementDecoration({
+	        elementId: "waitingPanel",
+	        widgetType: "dijit.Dialog",
+	        widgetAttrs: { 
+	        	title: "${loadingText}",
+	        	style: "width: 300px; height: 65px; text-align: center",
+	        	closable: false
+	        }
+		}));
+		
+		//barre de progression
+		Spring.addDecoration(new Spring.ElementDecoration({
+	        elementId: "waitingProgressBar",
+	        widgetType: "dijit.ProgressBar",
+	        widgetAttrs: { 
+	        	style: "width: 280px; height: 15px",
+	        	indeterminate: true
+	        }
+		}));
+		
+		//afficher tout ce petit monde à la sortie d'une page
+		dojo.addOnUnload(function() { 
+			dijit.byId("waitingPanel").show();		
+		});		
+					
+	</script>
+	
+</jsp:root>

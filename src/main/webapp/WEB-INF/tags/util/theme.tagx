@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	version="2.0">
+
+  	<jsp:output omit-xml-declaration="yes" />
+	
+	<!-- afficher la liste des themes -->
+	<spring:eval expression="{'claro', 'nihilo', 'soria', 'tundra'}" var="themesList" />
+	<span id="themeChooser" >
+
+		<spring:message code="theme.title" />
+
+		<spring:url value="" var="action" />
+		<form action="${action}" method="get" id="themeListForm">
+			<select id="theme" name="theme">
+				<c:forEach items="${themesList }" var="theme">
+					<option value="${theme }"><spring:message code="theme.list.${theme }" /></option>
+				</c:forEach> 
+			</select>
+			
+			<!-- ajouter déco spring -->
+			<spring:message code="theme.list.tooltip" var="themeListToolTip" htmlEscape="false"/>
+			<spring:theme code="dojoTheme" var="dojoTheme" />
+			<script type="text/javascript">
+				Spring.addDecoration(new Spring.ElementDecoration({
+					elementId: "theme",
+					widgetType: "dijit.form.FilteringSelect",
+					widgetAttrs: { 
+						tootip: "${themeListToolTip}",
+						value: "${dojoTheme}"
+					}
+				}));
+				
+				//poster le formulaire pour sélectionner le theme
+				dojo.addOnLoad(function() {
+					dojo.connect(dijit.byId("theme"), "onChange", function() {
+						dojo.byId("themeListForm").submit();
+					});
+				});
+			</script>			
+		</form>
+
+		<util:toolTip id="themeChooser" label="${themeListToolTip}" />
+	</span>
+</jsp:root>

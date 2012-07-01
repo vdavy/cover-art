@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+	
+	<head>	
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />	
+		
+		<!-- chargement CSS -->
+		<util:load-css />
+		
+		<!-- chargement scripts -->
+		<util:load-scripts />
+	
+		<!-- titre de page -->
+		<title>
+			<spring:message code="header.titre" />
+		</title>
+	</head>
+</jsp:root>

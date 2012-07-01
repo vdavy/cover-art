@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<!-- footer avec mot de passe -->
+	<definition name="footer/withPassword" template="/WEB-INF/views/includes/definedIncludes/footer.jspx">
+		<put-attribute name="changePassword" value="/WEB-INF/views/includes/definedIncludes/changePassword.jspx" />
+	</definition>
+	
+	<!-- footer avec mot de passe -->
+	<definition name="footer/withoutPassword" template="/WEB-INF/views/includes/definedIncludes/footer.jspx" />
+	
+	<!-- page de pagination -->
+	<definition name="pagination" template="/WEB-INF/views/includes/definedIncludes/pagination.jspx" />	
+	
+</tiles-definitions>
