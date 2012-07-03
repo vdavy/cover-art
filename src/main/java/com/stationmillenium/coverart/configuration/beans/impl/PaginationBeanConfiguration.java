@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.configuration.beans;
+package com.stationmillenium.coverart.configuration.beans.impl;
 
 import java.util.HashMap;
 import java.util.List;

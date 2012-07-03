@@ -32,6 +32,7 @@
 		<jta.version>1.1</jta.version>
 		<jstl.version>1.2</jstl.version>
 		<joda-time.version>2.0</joda-time.version>
+		<jsoup.version>1.6.3</jsoup.version>
 		
 		<!-- common parts -->
 		<commons-pool.version>1.6</commons-pool.version>
@@ -87,6 +88,13 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<dependencies>
+		<!-- Added dependencies -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
+		</dependency>
+            
 		<!-- General dependencies for standard applications -->
 		<dependency>
 			<groupId>junit</groupId>
