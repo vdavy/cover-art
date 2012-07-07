@@ -3,10 +3,8 @@
  */
 package com.stationmillenium.coverart.configuration.beans;
 
-import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +16,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
+import com.stationmillenium.coverart.beans.interfaces.PropertyBeanInterface;
 import com.stationmillenium.coverart.exceptions.PropertyBeanException;
 
 /**
@@ -29,11 +27,11 @@ import com.stationmillenium.coverart.exceptions.PropertyBeanException;
  * @author vincent
  *
  */
-public abstract class AbstractPropertiesBeanConfiguration<T> implements ApplicationContextAware {
+public abstract class AbstractPropertiesBeanConfiguration<T extends PropertyBeanInterface> implements ApplicationContextAware {
 
 	//application context
 	private ApplicationContext context;
-	private static final Logger logger  =  LoggerFactory.getLogger("Property initialization");
+	private static final Logger LOGGER  =  LoggerFactory.getLogger("Property initialization");
 	
 	//abstract methods
 	/**
@@ -47,20 +45,26 @@ public abstract class AbstractPropertiesBeanConfiguration<T> implements Applicat
 	 * @return the output bean
 	 */
 	protected abstract T buildBean();
-		
+	
 	/**
-	 * Get shoutcast server propeties bean
-	 * @return the bean
+	 * Provide the output bean, properly casted for dependency injection
+	 * @return the configuration bean
 	 */
 	@Bean
-	@Scope("singleton")
-	public T getBean() {
+	@Scope("singleton")	
+	protected abstract T getBean();
+		
+	/**
+	 * Assemble the bean : check values and make it
+	 * @return the bean
+	 */	
+	protected T assembleBean() {
 		try {
 			checkNullOrEmptyPropertiesValues(); //check no null or empty value
 			propertyCustomChecker(); //custom values
 			return buildBean();
 		} catch (PropertyBeanException e) { //if error
-			logger.error("Error during property parsing - app starting stopped", e);
+			LOGGER.error("Error during property parsing - app starting stopped", e);
 			((AbstractApplicationContext) context).close(); //unload context (stop starting)
 			return null; //nothing to return
 		}

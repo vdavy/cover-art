@@ -23,4 +23,52 @@ privileged aspect ShoutcastServerPropertiesBean_Roo_JavaBean {
         this.shoutcastServerSongHistoryPage = shoutcastServerSongHistoryPage;
     }
     
+    public String ShoutcastServerPropertiesBean.getUserAgent() {
+        return this.userAgent;
+    }
+    
+    public void ShoutcastServerPropertiesBean.setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+    
+    public String ShoutcastServerPropertiesBean.getStatusPageSelect() {
+        return this.statusPageSelect;
+    }
+    
+    public void ShoutcastServerPropertiesBean.setStatusPageSelect(String statusPageSelect) {
+        this.statusPageSelect = statusPageSelect;
+    }
+    
+    public String ShoutcastServerPropertiesBean.getStatusPageSelectText() {
+        return this.statusPageSelectText;
+    }
+    
+    public void ShoutcastServerPropertiesBean.setStatusPageSelectText(String statusPageSelectText) {
+        this.statusPageSelectText = statusPageSelectText;
+    }
+    
+    public String ShoutcastServerPropertiesBean.getSongHistoryPageSelect() {
+        return this.songHistoryPageSelect;
+    }
+    
+    public void ShoutcastServerPropertiesBean.setSongHistoryPageSelect(String songHistoryPageSelect) {
+        this.songHistoryPageSelect = songHistoryPageSelect;
+    }
+    
+    public String ShoutcastServerPropertiesBean.getSongHistorySongSeparator() {
+        return this.songHistorySongSeparator;
+    }
+    
+    public void ShoutcastServerPropertiesBean.setSongHistorySongSeparator(String songHistorySongSeparator) {
+        this.songHistorySongSeparator = songHistorySongSeparator;
+    }
+    
+    public String ShoutcastServerPropertiesBean.getSongHistoryDateSeparator() {
+        return this.songHistoryDateSeparator;
+    }
+    
+    public void ShoutcastServerPropertiesBean.setSongHistoryDateSeparator(String songHistoryDateSeparator) {
+        this.songHistoryDateSeparator = songHistoryDateSeparator;
+    }
+    
 }
