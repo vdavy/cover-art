@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stationmillenium.coverart.beans.ShoutcastServerPropertiesBean;
-import com.stationmillenium.coverart.dto.services.SongHistoryItemDTO;
-import com.stationmillenium.coverart.services.ShoutcastParser;
+import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.services.history.ShoutcastParser;
 
 /**
  * Test part for the Shoutcast server parser through Jsoup

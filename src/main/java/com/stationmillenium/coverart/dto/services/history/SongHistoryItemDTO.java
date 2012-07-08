@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.dto.services;
+package com.stationmillenium.coverart.dto.services.history;
 
 import java.util.Calendar;
 

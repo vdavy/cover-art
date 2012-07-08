@@ -3,7 +3,8 @@
 
 package com.stationmillenium.coverart.dto.services;
 
-import com.stationmillenium.coverart.dto.services.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+
 import java.util.Calendar;
 
 privileged aspect SongHistoryItemDTO_Roo_JavaBean {

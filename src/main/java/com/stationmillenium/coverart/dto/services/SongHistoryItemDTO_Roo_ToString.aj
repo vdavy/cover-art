@@ -3,7 +3,8 @@
 
 package com.stationmillenium.coverart.dto.services;
 
-import com.stationmillenium.coverart.dto.services.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

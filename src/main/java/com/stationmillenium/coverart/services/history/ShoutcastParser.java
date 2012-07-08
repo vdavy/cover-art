@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.services;
+package com.stationmillenium.coverart.services.history;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stationmillenium.coverart.beans.ShoutcastServerPropertiesBean;
-import com.stationmillenium.coverart.dto.services.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 
 /**
  * Shoutcast parser to get song history
