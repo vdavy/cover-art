@@ -11,19 +11,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.stationmillenium.coverart.beans.ShoutcastServerPropertiesBean;
 
 /**
- * Test 
+ * Test property loading and validation 
  * @author vincent
  *
  */
-public class TestPropertyChecker {
+public class TestPropertiesChecker {
 
-	private static final Logger logger = LoggerFactory.getLogger(TestPropertyChecker.class);
+	//set up logger
+	private static final Logger logger = LoggerFactory.getLogger(TestPropertiesChecker.class);
 	
+	//DI : the configuration for the shouctast server
 	@Autowired
 	private ShoutcastServerPropertiesBean shoutcastPropertiesBean;
 	
+	/**
+	 * Test Shouctast server properties
+	 */
 	@Test
-	public void testPropertyChecker() {
+	public void testShoucastServerProperties() {
 		logger.debug(shoutcastPropertiesBean.toString());
 	}
 }
