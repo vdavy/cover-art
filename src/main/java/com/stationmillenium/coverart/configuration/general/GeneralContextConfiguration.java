@@ -3,11 +3,11 @@
  */
 package com.stationmillenium.coverart.configuration.general;
 
-import org.springframework.beans.factory.aspectj.EnableSpringConfigured;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableSpringConfigured;
 
 /**
- * Configuration générale du contexte du projet
+ * Context global configuration
  * @author vincent
  *
  */

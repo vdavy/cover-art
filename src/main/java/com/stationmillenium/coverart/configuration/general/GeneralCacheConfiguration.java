@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configration générale des caches du projet
+ * Cache global configuration
  * @author vincent
  *
  */

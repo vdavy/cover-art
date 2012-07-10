@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
- * Configuration générale de AspectJ du projet
+ * AspectJ main project configuration
  * @author vincent
  *
  */

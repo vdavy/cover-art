@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * Configuration générale des taches asynchrones du projet
+ * Async task main configuration
  * @author vincent
  *
  */
