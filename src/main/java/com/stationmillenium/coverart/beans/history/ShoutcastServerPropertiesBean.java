@@ -1,4 +1,4 @@
-package com.stationmillenium.coverart.beans;
+package com.stationmillenium.coverart.beans.history;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.beans;
+package com.stationmillenium.coverart.beans.utils;
 
 import java.util.List;
 import java.util.Map;

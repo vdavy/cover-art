@@ -6,8 +6,8 @@ package com.stationmillenium.coverart.services.utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.stationmillenium.coverart.beans.PaginationPropertiesBean;
-import com.stationmillenium.coverart.beans.PaginationPropertiesBean.PaginationList;
+import com.stationmillenium.coverart.beans.utils.PaginationPropertiesBean;
+import com.stationmillenium.coverart.beans.utils.PaginationPropertiesBean.PaginationList;
 import com.stationmillenium.coverart.dto.utils.PaginationDTO;
 
 /**

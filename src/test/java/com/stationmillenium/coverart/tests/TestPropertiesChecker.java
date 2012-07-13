@@ -8,7 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.stationmillenium.coverart.beans.ShoutcastServerPropertiesBean;
+import com.stationmillenium.coverart.beans.history.ShoutcastServerPropertiesBean;
+import com.stationmillenium.coverart.beans.history.SongHistoryFilterPropertiesBean;
 
 /**
  * Test property loading and validation 
@@ -20,9 +21,13 @@ public class TestPropertiesChecker {
 	//set up logger
 	private static final Logger logger = LoggerFactory.getLogger(TestPropertiesChecker.class);
 	
-	//DI : the configuration for the shouctast server
+	//the configuration for the shoutast server
 	@Autowired
 	private ShoutcastServerPropertiesBean shoutcastPropertiesBean;
+	
+	//the configuration for the song history filter
+	@Autowired
+	private SongHistoryFilterPropertiesBean songHistoryPropertiesBean;
 	
 	/**
 	 * Test Shouctast server properties
@@ -30,5 +35,13 @@ public class TestPropertiesChecker {
 	@Test
 	public void testShoucastServerProperties() {
 		logger.debug(shoutcastPropertiesBean.toString());
+	}
+	
+	/**
+	 * Test song history filter properties
+	 */
+	@Test
+	public void testSongHistoryFilterProperties() {
+		logger.debug(songHistoryPropertiesBean.toString());
 	}
 }

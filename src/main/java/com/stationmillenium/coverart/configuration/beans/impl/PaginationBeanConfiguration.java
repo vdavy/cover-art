@@ -18,8 +18,8 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
-import com.stationmillenium.coverart.beans.PaginationPropertiesBean;
-import com.stationmillenium.coverart.beans.PaginationPropertiesBean.PaginationList;
+import com.stationmillenium.coverart.beans.utils.PaginationPropertiesBean;
+import com.stationmillenium.coverart.beans.utils.PaginationPropertiesBean.PaginationList;
 
 /**
  * Classe de configuration des données pour la pagination

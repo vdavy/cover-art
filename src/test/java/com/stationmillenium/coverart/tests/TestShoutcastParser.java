@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.stationmillenium.coverart.beans.ShoutcastServerPropertiesBean;
+import com.stationmillenium.coverart.beans.history.ShoutcastServerPropertiesBean;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.services.history.ShoutcastParser;
 

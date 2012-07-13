@@ -3,11 +3,13 @@
  */
 package com.stationmillenium.coverart.configuration.beans.impl;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
-import com.stationmillenium.coverart.beans.ShoutcastServerPropertiesBean;
+import com.stationmillenium.coverart.beans.history.ShoutcastServerPropertiesBean;
 import com.stationmillenium.coverart.configuration.beans.AbstractPropertiesBeanConfiguration;
 import com.stationmillenium.coverart.exceptions.PropertyBeanException;
 
@@ -51,8 +53,13 @@ public class ShoutcastServerPropertiesBeanConfiguration extends AbstractProperti
 		checkValueAgainstExpress("(T(java.lang.Integer).parseInt(#property) >= 1) and (T(java.lang.Integer).parseInt(#property) < 65535)", "shoutcastPort"); //check port range
 	}
 
-	@Override
-	protected ShoutcastServerPropertiesBean getBean() {
+	/**
+	 * Provide the produced bean
+	 * @return the <code>ShoutcastServerPropertiesBean</code>
+	 */
+	@Bean
+	@Qualifier("shoutcastServerPropertiesBean")
+	public ShoutcastServerPropertiesBean getShoutcastServerPropertiesBean() {
 		return assembleBean();
 	}
 	

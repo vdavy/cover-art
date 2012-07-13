@@ -3,7 +3,7 @@
 
 package com.stationmillenium.coverart.dto.utils;
 
-import com.stationmillenium.coverart.beans.PaginationPropertiesBean.PaginationList;
+import com.stationmillenium.coverart.beans.utils.PaginationPropertiesBean.PaginationList;
 import com.stationmillenium.coverart.dto.utils.PaginationDTO;
 import java.util.List;
 

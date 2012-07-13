@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.stationmillenium.coverart.beans.PaginationPropertiesBean.PaginationList;
+import com.stationmillenium.coverart.beans.utils.PaginationPropertiesBean.PaginationList;
 ;
 
 /**

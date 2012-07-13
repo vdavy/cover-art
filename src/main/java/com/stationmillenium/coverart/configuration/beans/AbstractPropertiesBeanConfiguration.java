@@ -13,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
@@ -48,14 +46,6 @@ public abstract class AbstractPropertiesBeanConfiguration<T extends PropertyBean
 	 * @return the output bean
 	 */
 	protected abstract T buildBean();
-	
-	/**
-	 * Provide the output bean, properly casted for dependency injection
-	 * @return the configuration bean
-	 */
-	@Bean
-	@Scope("singleton")	
-	protected abstract T getBean();
 		
 	/**
 	 * Assemble the bean : check values and make it
