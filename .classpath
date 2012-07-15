@@ -16,5 +16,15 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/vincent/.m2/repository/org/mockito/mockito-all/1.9.0/mockito-all-1.9.0.jar" sourcepath="/home/vincent/.m2/repository/org/mockito/mockito-all/1.9.0/mockito-all-1.9.0-sources.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="javadoc_location" value="jar:file:/home/vincent/.m2/repository/org/mockito/mockito-all/1.9.0/mockito-all-1.9.0-javadoc.jar!/"/>
+			<attribute name="maven.groupId" value="org.mockito"/>
+			<attribute name="maven.artifactId" value="mockito-all"/>
+			<attribute name="maven.version" value="1.9.0"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

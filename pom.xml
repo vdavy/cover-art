@@ -11,7 +11,7 @@
 		
 		<!-- spring part -->
 		<spring.version>3.1.2.RELEASE</spring.version>
-		<aspectj.version>1.7.0.RC1</aspectj.version>
+		<aspectj.version>1.7.0</aspectj.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<hibernate.version>4.1.4.Final</hibernate.version>
 		<hibernate.validator.version>4.3.0.Final</hibernate.validator.version>
@@ -22,8 +22,7 @@
 		<ehcache.version>2.5.2</ehcache.version>
 		<tiles.version>2.2.2</tiles.version>
 		
-		<!-- third parts -->
-		<junit.version>4.10</junit.version>
+		<!-- third parts -->		
 		<log4j.version>1.2.17</log4j.version>
 		<flexjson.version>2.1</flexjson.version>
 		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
@@ -47,6 +46,10 @@
 		<el-api.version>2.2</el-api.version>
 		<jsp-api.version>2.2</jsp-api.version>
 		<java.version>1.7</java.version><!-- java 1.7 not supported by aspectj compiler 1.4 -->
+		
+		<!-- test framework -->
+		<junit.version>4.10</junit.version>
+		<mockito.version>1.9.0</mockito.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -448,6 +451,12 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${spring-security.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+  			<artifactId>mockito-all</artifactId>
+  			<version>${mockito.version}</version>
+  			<scope>test</scope>
+		</dependency>		
 	</dependencies>
 	<build>
 		<plugins>
