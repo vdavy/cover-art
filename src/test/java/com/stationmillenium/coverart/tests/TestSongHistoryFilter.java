@@ -37,13 +37,14 @@ public class TestSongHistoryFilter {
 	
 	//mock variable
 	@Spy
-	private  List<SongHistoryItemDTO> songHistoryList = new ArrayList<>();
+	private  List<SongHistoryItemDTO> songHistoryList;
 	
 	/**
 	 * Init mockito
 	 */
 	@Before
 	public void initMockito() {
+		songHistoryList = new ArrayList<>();
 		MockitoAnnotations.initMocks(this);
 	}
 	
@@ -73,8 +74,28 @@ public class TestSongHistoryFilter {
 	public void testSongHistoryFilterSongNameAndTitle() {
 		//mock the list
 		songHistoryList.add(mockSongItem("Millenium", "foo", 0));
-		songHistoryList.add(mockSongItem("foor", "bar", 1000));
-		songHistoryList.add(mockSongItem("foor", "Jingle", 0));				
+		songHistoryList.add(mockSongItem("foo", "bar", 1000));
+		songHistoryList.add(mockSongItem("foo", "Jingle", 0));				
+		
+		//filter
+		List<SongHistoryItemDTO> filteredList = songHistoryFilter.filterSongHistory(songHistoryList, mockSongItem("", "", 0));
+		
+		//verify
+		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(0);
+		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(1);
+		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(2);
+		Assert.assertEquals(filteredList.size(), 1);
+	}
+	
+	/**
+	 * Test song filtering against played date
+	 */
+	@Test
+	public void testSongHistoryFilterPlayedDate() {
+		//mock the list
+		songHistoryList.add(mockSongItem("foo", "bar", 60));
+		songHistoryList.add(mockSongItem("foo", "bar", 10));
+		songHistoryList.add(mockSongItem("foo", "bar", 5));				
 		
 		//filter
 		List<SongHistoryItemDTO> filteredList = songHistoryFilter.filterSongHistory(songHistoryList, mockSongItem("", "", 0));

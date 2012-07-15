@@ -55,7 +55,7 @@ public class SongHistoryFilter {
 				timeDelta = songHistoryList.get(i).getPlayedDate().getTimeInMillis() - lastSong.getPlayedDate().getTimeInMillis();
 			else
 				timeDelta = songHistoryList.get(i).getPlayedDate().getTimeInMillis() - songHistoryList.get(i + 1).getPlayedDate().getTimeInMillis();
-			if (timeDelta < config.getMinimalLength() * 1000) //if too short song
+			if (timeDelta < config.getMinimalLength() * 1_000) //if too short song
 				canBeAdded = false;
 			
 			if (canBeAdded) //add to final list
