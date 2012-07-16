@@ -4,6 +4,7 @@
 package com.stationmillenium.coverart.configuration.beans.impl;
 
 import com.stationmillenium.coverart.configuration.beans.impl.SongHistoryFilterPropertiesBeanConfiguration;
+import java.util.List;
 
 privileged aspect SongHistoryFilterPropertiesBeanConfiguration_Roo_JavaBean {
     
@@ -21,6 +22,14 @@ privileged aspect SongHistoryFilterPropertiesBeanConfiguration_Roo_JavaBean {
     
     public void SongHistoryFilterPropertiesBeanConfiguration.setMinimalLength(String minimalLength) {
         this.minimalLength = minimalLength;
+    }
+    
+    public List<String> SongHistoryFilterPropertiesBeanConfiguration.getForbiddenKeywordsList() {
+        return this.forbiddenKeywordsList;
+    }
+    
+    public void SongHistoryFilterPropertiesBeanConfiguration.setForbiddenKeywordsList(List<String> forbiddenKeywordsList) {
+        this.forbiddenKeywordsList = forbiddenKeywordsList;
     }
     
 }

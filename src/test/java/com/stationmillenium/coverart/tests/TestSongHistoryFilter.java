@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,9 +101,9 @@ public class TestSongHistoryFilter {
 		List<SongHistoryItemDTO> filteredList = songHistoryFilter.filterSongHistory(songHistoryList, mockSongItem("", "", 0));
 		
 		//verify
-		Mockito.verify(songHistoryList, atLeastOnce()).get(0);
-		Mockito.verify(songHistoryList, atLeastOnce()).get(1);
-		Mockito.verify(songHistoryList, atLeastOnce()).get(2);
+		verify(songHistoryList, atLeastOnce()).get(0);
+		verify(songHistoryList, atLeastOnce()).get(1);
+		verify(songHistoryList, atLeastOnce()).get(2);
 		assertEquals(filteredList.size(), 1);
 	}
 	
