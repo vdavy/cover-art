@@ -3,20 +3,21 @@
  */
 package com.stationmillenium.coverart.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
@@ -81,10 +82,10 @@ public class TestSongHistoryFilter {
 		List<SongHistoryItemDTO> filteredList = songHistoryFilter.filterSongHistory(songHistoryList, mockSongItem("", "", 0));
 		
 		//verify
-		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(0);
-		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(1);
-		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(2);
-		Assert.assertEquals(filteredList.size(), 1);
+		verify(songHistoryList, atLeastOnce()).get(0);
+		verify(songHistoryList, atLeastOnce()).get(1);
+		verify(songHistoryList, atLeastOnce()).get(2);
+		assertEquals(filteredList.size(), 1);
 	}
 	
 	/**
@@ -101,10 +102,10 @@ public class TestSongHistoryFilter {
 		List<SongHistoryItemDTO> filteredList = songHistoryFilter.filterSongHistory(songHistoryList, mockSongItem("", "", 0));
 		
 		//verify
-		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(0);
-		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(1);
-		Mockito.verify(songHistoryList, VerificationModeFactory.atLeastOnce()).get(2);
-		Assert.assertEquals(filteredList.size(), 1);
+		Mockito.verify(songHistoryList, atLeastOnce()).get(0);
+		Mockito.verify(songHistoryList, atLeastOnce()).get(1);
+		Mockito.verify(songHistoryList, atLeastOnce()).get(2);
+		assertEquals(filteredList.size(), 1);
 	}
 	
 }
