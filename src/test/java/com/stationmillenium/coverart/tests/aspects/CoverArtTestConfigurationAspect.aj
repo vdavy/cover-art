@@ -16,5 +16,5 @@ public aspect CoverArtTestConfigurationAspect {
 	    
 	declare @type: com.stationmillenium.coverart.tests..Test* : @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
 	
-	declare @type: com.stationmillenium.coverart.tests..Test* : @ActiveProfiles("dev");
+	declare @type: com.stationmillenium.coverart.tests..Test* : @ActiveProfiles("test");
 }

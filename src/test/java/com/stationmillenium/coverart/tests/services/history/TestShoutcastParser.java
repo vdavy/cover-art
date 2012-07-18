@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.tests;
+package com.stationmillenium.coverart.tests.services.history;
 
 import java.util.Calendar;
 import java.util.List;
