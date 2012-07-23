@@ -137,12 +137,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterLastSongIsLastRecorded() {
-		//insert test data into db
-		SongHistory songHistory = new SongHistory();
-		songHistory.setArtist("foo");
-		songHistory.setTitle("bar");
-		songHistory.setPlayedDate(referenceCalendar);
-		songHistory.persist();
+		SongHistory songHistory = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo", "bar", 0));
@@ -166,12 +161,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterRemoveSongTwo() {
-		//insert test data into db
-		SongHistory songHistory = new SongHistory();
-		songHistory.setArtist("foo");
-		songHistory.setTitle("bar");
-		songHistory.setPlayedDate(referenceCalendar);
-		songHistory.persist();
+		SongHistory songHistory = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo2", "bar2", -15));
@@ -196,12 +186,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterRemoveSongEndingList() {
-		//insert test data into db
-		SongHistory songHistory = new SongHistory();
-		songHistory.setArtist("foo");
-		songHistory.setTitle("bar");
-		songHistory.setPlayedDate(referenceCalendar);
-		songHistory.persist();
+		SongHistory songHistory = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo2", "bar2", -15));
@@ -225,12 +210,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterRemoveSongNotInList() {
-		//insert test data into db
-		SongHistory songHistory = new SongHistory();
-		songHistory.setArtist("foo");
-		songHistory.setTitle("bar");
-		songHistory.setPlayedDate(referenceCalendar);
-		songHistory.persist();
+		SongHistory songHistory = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo2", "bar2", -15));
@@ -254,12 +234,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterNotRemoving() {
-		//insert test data into db
-		SongHistory songHistory = new SongHistory();
-		songHistory.setArtist("foo");
-		songHistory.setTitle("bar");
-		songHistory.setPlayedDate(referenceCalendar);
-		songHistory.persist();
+		SongHistory songHistory = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo2", "bar2", -510));
@@ -278,6 +253,20 @@ public class TestSongHistoryFilter {
 		
 		//delete database entry
 		songHistory.remove();
+	}
+
+	/**
+	 * Generate the test entity
+	 * @return entity
+	 */
+	private SongHistory generateTestEntity() {
+		//insert test data into db
+		SongHistory songHistory = new SongHistory();
+		songHistory.setArtist("foo");
+		songHistory.setTitle("bar");
+		songHistory.setPlayedDate(referenceCalendar);
+		songHistory.persist();
+		return songHistory;
 	}
 	
 }
