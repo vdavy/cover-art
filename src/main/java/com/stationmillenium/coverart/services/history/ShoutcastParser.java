@@ -155,7 +155,8 @@ public class ShoutcastParser {
 	/**
 	 * Clean song history item :
 	 * -trim title and name
-	 * Add it if all params set
+	 * -correct song title and name if null
+	 * Add it date is set 
 	 * @param item item to clean
 	 * @param list the list where to add item
 	 */
@@ -163,16 +164,23 @@ public class ShoutcastParser {
 		//format artist name
 		if (item.getArtist() != null)
 			item.setArtist(item.getArtist().trim());
+		else {
+			LOGGER.debug("Song with null artist : " + item);
+			item.setArtist("");
+		}
 		
 		//format title
 		if (item.getTitle() != null) 
 			item.setTitle(item.getTitle().trim());
+		else {
+			LOGGER.debug("Song with null title : " + item);
+			item.setTitle("");
+		}
 		
-		if ((item.getArtist() != null) && (item.getTitle() != null) //if all item set 
-				&& (item.getPlayedDate() != null))
+		if (item.getPlayedDate() != null) //if date not null
 				list.add(item);
 		else
-			LOGGER.info("Song item not added to song history list - not properly filled in : " + list);
+			LOGGER.info("Song item not added to song history list - played date null : " + item);
 	}
 }
  
