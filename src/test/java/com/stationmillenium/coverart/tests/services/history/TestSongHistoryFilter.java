@@ -103,7 +103,7 @@ public class TestSongHistoryFilter {
 		verify(songHistoryList, atLeastOnce()).get(0);
 		verify(songHistoryList, atLeastOnce()).get(1);
 		verify(songHistoryList, atLeastOnce()).get(2);
-		verify(songHistoryList, atLeastOnce()).get(4);
+		verify(songHistoryList, atLeastOnce()).get(3);
 		assertEquals(filteredList.size(), 1);
 	}
 	

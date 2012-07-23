@@ -3,6 +3,8 @@
  */
 package com.stationmillenium.coverart.repositories;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -48,5 +50,16 @@ public class SongHistoryRepository {
 		Query query = entityManager.createNamedQuery("getLastSong"); //create query
 		SongHistory song = (SongHistory) query.getSingleResult(); //Execute query and get entity
 		song.remove(); //remove the song
+	}
+	
+	/**
+	 * Insert a {@link SongHistoryItemDTO} list
+	 * @param listToInsert the list of {@link SongHistoryItemDTO} to insert
+	 */
+	public void insertSongHistoryList(List<SongHistoryItemDTO> listToInsert) {
+		for (SongHistoryItemDTO song : listToInsert) { //for each song
+			SongHistory songHistoryEntity = mapper.map(song, SongHistory.class); //convert into entity
+			songHistoryEntity.persist(); //persist
+		}
 	}
 }
