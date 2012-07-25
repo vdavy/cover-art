@@ -4,6 +4,7 @@
 package com.stationmillenium.coverart.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -56,8 +57,9 @@ public class PollingService {
 	 */
 	public void doServerPolling() {
 		List<SongHistoryItemDTO> songHistoryList = queryShoutcastServer();
-		LOGGER.info("Gathered song list : " + songHistoryList);
+		LOGGER.debug("Gathered song list : " + songHistoryList);
 		
+		insertSongList(songHistoryList);
 	}
 	
 	/**
@@ -93,5 +95,26 @@ public class PollingService {
 			else
 				serverStatusRepository.recordServerDown(); //record server down
 		}
+	}
+	
+	/**
+	 * Insert song list into DB
+	 * Stop when last recorded song is encountered
+	 * @param songList the song list to insert
+	 */
+	private void insertSongList(List<SongHistoryItemDTO> songList) {
+		SongHistoryItemDTO lastSong = songHistoryRepository.getLastSongHistoryItem(); //get last recorded song
+		List<SongHistoryItemDTO> listToInsert = new ArrayList<>(); //list of song to insert
+		
+		for (int i = 0; i < songList.size(); i++) { //for each song in the list
+			if (!lastSong.equals(songList.get(i))) //if not equals
+				listToInsert.add(songList.get(i)); //add to the list
+			else
+				break; //reach the same - do not add and quit
+		}
+		
+		Collections.reverse(listToInsert);
+		LOGGER.info("Song list inserted : " + listToInsert);
+		songHistoryRepository.insertSongHistoryList(listToInsert); //insert in db		
 	}
 }

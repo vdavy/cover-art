@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stationmillenium.coverart.domain.SongHistory;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
@@ -56,6 +57,7 @@ public class SongHistoryRepository {
 	 * Insert a {@link SongHistoryItemDTO} list
 	 * @param listToInsert the list of {@link SongHistoryItemDTO} to insert
 	 */
+	@Transactional
 	public void insertSongHistoryList(List<SongHistoryItemDTO> listToInsert) {
 		for (SongHistoryItemDTO song : listToInsert) { //for each song
 			SongHistory songHistoryEntity = mapper.map(song, SongHistory.class); //convert into entity
