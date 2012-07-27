@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.stationmillenium.coverart.beans.covergraber.LastFMCoverServicePropertiesBean;
 import com.stationmillenium.coverart.beans.history.ShoutcastServerPropertiesBean;
 import com.stationmillenium.coverart.beans.history.SongHistoryFilterPropertiesBean;
 
@@ -29,6 +30,10 @@ public class TestPropertiesChecker {
 	@Autowired
 	private SongHistoryFilterPropertiesBean songHistoryPropertiesBean;
 	
+	//the configuration for the last fm cover service
+	@Autowired
+	private LastFMCoverServicePropertiesBean lastFMCoverServicePropertiesBean;
+	
 	/**
 	 * Test Shouctast server properties
 	 */
@@ -43,5 +48,13 @@ public class TestPropertiesChecker {
 	@Test
 	public void testSongHistoryFilterProperties() {
 		logger.debug(songHistoryPropertiesBean.toString());
+	}
+	
+	/**
+	 * Test last FM cover service properties
+	 */
+	@Test
+	public void testLastFMCoverServiceProperties() {
+		logger.debug(lastFMCoverServicePropertiesBean.toString());
 	}
 }

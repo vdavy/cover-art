@@ -20,7 +20,6 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import com.stationmillenium.coverart.beans.history.SongHistoryFilterPropertiesBean;
 import com.stationmillenium.coverart.configuration.beans.AbstractPropertiesBeanConfiguration;
@@ -32,7 +31,6 @@ import com.stationmillenium.coverart.exceptions.PropertyBeanException;
  *
  */
 @Configuration
-@RooJavaBean
 public class SongHistoryFilterPropertiesBeanConfiguration extends AbstractPropertiesBeanConfiguration<SongHistoryFilterPropertiesBean> {
 
 	//local logger

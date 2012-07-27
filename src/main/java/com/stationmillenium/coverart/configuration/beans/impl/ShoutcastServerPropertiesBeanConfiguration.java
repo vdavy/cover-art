@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import com.stationmillenium.coverart.beans.history.ShoutcastServerPropertiesBean;
 import com.stationmillenium.coverart.configuration.beans.AbstractPropertiesBeanConfiguration;
@@ -23,7 +22,6 @@ import com.stationmillenium.coverart.exceptions.PropertyBeanException;
  *
  */
 @Configuration
-@RooJavaBean
 public class ShoutcastServerPropertiesBeanConfiguration extends AbstractPropertiesBeanConfiguration<ShoutcastServerPropertiesBean> {
 
 	//property list
