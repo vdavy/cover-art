@@ -5,6 +5,10 @@ package com.stationmillenium.coverart.configuration.beans.impl;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,7 +39,12 @@ public class SongHistoryFilterPropertiesBeanConfiguration extends AbstractProper
 	private static final Logger LOGGER = LoggerFactory.getLogger(SongHistoryFilterPropertiesBeanConfiguration.class);
 	
 	//property list
+	@NotNull
+	@Size(min = 5)
 	private @Value("${songHistory.forbiddenKeywords}") String forbiddenKeywordsString;
+	
+	@NotNull
+	@Pattern(regexp = "[\\d]+")
 	private @Value("${songHistory.minimalLength}") String minimalLength;
 
 	//instance variable
@@ -60,8 +69,6 @@ public class SongHistoryFilterPropertiesBeanConfiguration extends AbstractProper
 			LOGGER.warn("Error during parsing forbidden keywords : " + forbiddenKeywordsString, e);
 			throw new PropertyBeanException("forbiddenKeywordsString", e);
 		}
-		
-		checkValueAgainstExpress("(T(java.lang.Integer).parseInt(#property) >= 1)", "minimalLength"); //check minimal length
 	}
 	
 	/**
