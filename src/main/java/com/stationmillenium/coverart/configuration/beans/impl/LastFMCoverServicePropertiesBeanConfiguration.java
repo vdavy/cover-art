@@ -38,12 +38,17 @@ public class LastFMCoverServicePropertiesBeanConfiguration extends AbstractPrope
 	@Size(min = 1)
 	private @Value("${lastFMCover.textToRemoveInXML}") String textToRemoveInXML;
 	
+	@NotNull
+	@Size(min = 1)
+	private @Value("${lastFMCover.imageSize}") String imageSize;
+		
 	@Override
 	protected LastFMCoverServicePropertiesBean buildBean() {
 		LastFMCoverServicePropertiesBean propertiesBean = new LastFMCoverServicePropertiesBean();
 		propertiesBean.setUrl(url);
 		propertiesBean.setApiKey(apiKey);
 		propertiesBean.setTextToRemoveInXML(textToRemoveInXML);
+		propertiesBean.setImageSize(imageSize);
 		return propertiesBean;
 	}
 	

@@ -31,4 +31,12 @@ privileged aspect LastFMCoverServicePropertiesBean_Roo_JavaBean {
         this.textToRemoveInXML = textToRemoveInXML;
     }
     
+    public String LastFMCoverServicePropertiesBean.getImageSize() {
+        return this.imageSize;
+    }
+    
+    public void LastFMCoverServicePropertiesBean.setImageSize(String imageSize) {
+        this.imageSize = imageSize;
+    }
+    
 }

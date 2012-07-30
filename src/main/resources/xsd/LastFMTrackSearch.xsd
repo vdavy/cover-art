@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="lfm">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="track">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" name="id" type="xs:unsignedInt" />
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="mbid" type="xs:string" />
+              <xs:element minOccurs="0" name="url" type="xs:string" />
+              <xs:element minOccurs="0" name="duration" type="xs:unsignedInt" />
+              <xs:element minOccurs="0" name="streamable">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:unsignedByte">
+                      <xs:attribute name="fulltrack" type="xs:unsignedByte" use="optional" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="listeners" type="xs:unsignedInt" />
+              <xs:element minOccurs="0" name="playcount" type="xs:unsignedInt" />
+              <xs:element minOccurs="0" name="artist">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string" />
+                    <xs:element minOccurs="0" name="mbid" type="xs:string" />
+                    <xs:element minOccurs="0" name="url" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="album">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" name="artist" type="xs:string" />
+                    <xs:element minOccurs="0" name="title" type="xs:string" />
+                    <xs:element minOccurs="0" name="mbid" type="xs:string" />
+                    <xs:element minOccurs="0" name="url" type="xs:string" />
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="image">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="size" type="xs:string" use="optional" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="position" type="xs:unsignedByte" use="optional" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="toptags">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="tag">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element minOccurs="0" name="name" type="xs:string" />
+                          <xs:element minOccurs="0" name="url" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="wiki">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" name="published" type="xs:string" />
+                    <xs:element minOccurs="0" name="summary" type="xs:string" />
+                    <xs:element minOccurs="0" name="content" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="status" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

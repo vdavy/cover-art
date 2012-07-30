@@ -21,5 +21,6 @@ public class LastFMCoverServicePropertiesBean implements PropertyBeanInterface {
 	private String url;
 	private String apiKey;
 	private String textToRemoveInXML;
+	private String imageSize;
 	
 }

@@ -634,9 +634,11 @@
 				</executions>
 				<configuration>
 					<schemaIncludes>
-						<include>xsd/*.xsd</include>
+						<include>xsd/LastFMTrackSearch.xsd</include>
+						<!-- <include>xsd/LastFMTrackSearchError.xsd</include> -->
 					</schemaIncludes>
-					<generatePackage>com.stationmillenium.coverart.schema</generatePackage>
+					<generatePackage>com.stationmillenium.coverart.schema.lastfmtracksearch</generatePackage>
+					<!-- <generatePackage>com.stationmillenium.coverart.schema.lastfmtracksearcherror</generatePackage> -->
 				</configuration>
 			</plugin>
 			<!-- <plugin> <groupId>net.alchim31.maven</groupId> <artifactId>yuicompressor-maven-plugin</artifactId> 
