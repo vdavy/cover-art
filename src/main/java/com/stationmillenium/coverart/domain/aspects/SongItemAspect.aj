@@ -3,21 +3,21 @@ package com.stationmillenium.coverart.domain.aspects;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import com.stationmillenium.coverart.domain.SongHistory;;
+import com.stationmillenium.coverart.domain.SongItem;
 
 /**
- * @Pre* aspects for SongHistory entity
+ * @Pre* aspects for SongItem entity
  * @author vincent
  *
  */
-privileged aspect SongHistoryAspect {
+privileged aspect SongItemAspect {
 
 	/**
 	 * Truncate artist and title
 	 */
 	@PrePersist
 	@PreUpdate
-	public void SongHistory.truncateUserAgentValue() {
+	public void SongItem.truncateUserAgentValue() {
 		truncateField("artist");
 		truncateField("title");
 	}

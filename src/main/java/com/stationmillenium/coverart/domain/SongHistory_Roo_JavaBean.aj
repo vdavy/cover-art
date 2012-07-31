@@ -4,25 +4,10 @@
 package com.stationmillenium.coverart.domain;
 
 import com.stationmillenium.coverart.domain.SongHistory;
+import com.stationmillenium.coverart.domain.SongItem;
 import java.util.Calendar;
 
 privileged aspect SongHistory_Roo_JavaBean {
-    
-    public String SongHistory.getArtist() {
-        return this.artist;
-    }
-    
-    public void SongHistory.setArtist(String artist) {
-        this.artist = artist;
-    }
-    
-    public String SongHistory.getTitle() {
-        return this.title;
-    }
-    
-    public void SongHistory.setTitle(String title) {
-        this.title = title;
-    }
     
     public Calendar SongHistory.getPlayedDate() {
         return this.playedDate;
@@ -30,6 +15,14 @@ privileged aspect SongHistory_Roo_JavaBean {
     
     public void SongHistory.setPlayedDate(Calendar playedDate) {
         this.playedDate = playedDate;
+    }
+    
+    public SongItem SongHistory.getSong() {
+        return this.song;
+    }
+    
+    public void SongHistory.setSong(SongItem song) {
+        this.song = song;
     }
     
 }

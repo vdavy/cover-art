@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.ServerStatusRepository;
-import com.stationmillenium.coverart.repositories.SongHistoryRepository;
+import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.services.history.ShoutcastParser;
 import com.stationmillenium.coverart.services.history.SongHistoryFilter;
 
@@ -46,7 +46,7 @@ public class PollingService {
 	
 	//the song history repository
 	@Autowired
-	private SongHistoryRepository songHistoryRepository;
+	private SongItemRepository songHistoryRepository;
 	
 	/**
 	 * Method to do server polling :

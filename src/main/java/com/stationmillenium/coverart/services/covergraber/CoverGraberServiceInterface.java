@@ -3,9 +3,9 @@
  */
 package com.stationmillenium.coverart.services.covergraber;
 
-import org.springframework.stereotype.Service;
+import java.awt.image.BufferedImage;
 
-import com.stationmillenium.coverart.dto.services.covergraber.ImageArray;
+import org.springframework.stereotype.Service;
 
 /**
  * Interface for all cover grabers
@@ -20,7 +20,7 @@ public interface CoverGraberServiceInterface {
 	 * Return null if not found
 	 * @param artist the name of the artist to search
 	 * @param title the title
-	 * @return the found image as {@link ImageArray}
+	 * @return the found image as {@link BufferedImage}
 	 */
-	public ImageArray grabCover(String artist, String title);
+	public BufferedImage grabCover(String artist, String title);
 }

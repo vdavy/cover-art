@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.stationmillenium.coverart.beans.history.SongHistoryFilterPropertiesBean;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
-import com.stationmillenium.coverart.repositories.SongHistoryRepository;
+import com.stationmillenium.coverart.repositories.SongItemRepository;
 
 /**
  * Service to analyse the song history and to filter some song to exclude :
@@ -35,7 +35,7 @@ public class SongHistoryFilter {
 	
 	//song history repository
 	@Autowired
-	private SongHistoryRepository songHistoryRepository;
+	private SongItemRepository songHistoryRepository;
 	
 	/**
 	 * Filter songs among history :Calendar.getInstance()

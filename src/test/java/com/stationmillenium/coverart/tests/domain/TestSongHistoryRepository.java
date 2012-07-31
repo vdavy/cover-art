@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 
 import org.dozer.Mapper;
@@ -18,8 +19,9 @@ import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stationmillenium.coverart.domain.SongHistory;
+import com.stationmillenium.coverart.domain.SongItem;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
-import com.stationmillenium.coverart.repositories.SongHistoryRepository;
+import com.stationmillenium.coverart.repositories.SongItemRepository;
 
 /**
  * Tests of the song history repository
@@ -30,7 +32,7 @@ public class TestSongHistoryRepository {
 	
 	//the repository
 	@Autowired
-	private SongHistoryRepository  repository;
+	private SongItemRepository  repository;
 		
 	//dozer mapper
 	@Autowired
@@ -83,17 +85,22 @@ public class TestSongHistoryRepository {
 	public void testDeleteLastRecordedSong() {
 		//insert test data into db
 		SongHistory songHistory = new SongHistory();
-		songHistory.setArtist("foo");
-		songHistory.setTitle("bar");
-		songHistory.setPlayedDate(Calendar.getInstance());
-		songHistory.persist();
-				
+		songHistory.setPlayedDate(Calendar.getInstance());		
+		SongItem songItem = new SongItem();
+		songItem.setArtist("foo");
+		songItem.setTitle("bar");
+		songItem.setPlayedTimes(new HashSet<SongHistory>());
+		songItem.getPlayedTimes().add(songHistory);
+		songItem.persist();
+					
 		//process
 		repository.deleteLastRecordedSong();
 		
 		//assert
 		SongHistoryItemDTO lastSongItemFromDB = repository.getLastSongHistoryItem();
-		assertFalse(mapper.map(songHistory, SongHistoryItemDTO.class).equals(lastSongItemFromDB));
+		SongHistoryItemDTO returnedDTO = mapper.map(songItem, SongHistoryItemDTO.class);
+		returnedDTO.setPlayedDate(((SongHistory) songItem.getPlayedTimes().toArray()[0]).getPlayedDate());
+		assertFalse(returnedDTO.equals(lastSongItemFromDB));
 	}
 	
 	@Test

@@ -3,9 +3,9 @@
 
 package com.stationmillenium.coverart.domain;
 
-import com.stationmillenium.coverart.domain.SongHistoryDataOnDemand;
-import com.stationmillenium.coverart.domain.SongHistoryIntegrationTest;
+import com.stationmillenium.coverart.domain.SongHistoryImageIntegrationTest;
 import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.SongItemDataOnDemand;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,26 +15,26 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect SongHistoryIntegrationTest_Roo_IntegrationTest {
+privileged aspect SongHistoryImageIntegrationTest_Roo_IntegrationTest {
     
-    declare @type: SongHistoryIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
+    declare @type: SongHistoryImageIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
     
-    declare @type: SongHistoryIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
+    declare @type: SongHistoryImageIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
     
-    declare @type: SongHistoryIntegrationTest: @Transactional;
+    declare @type: SongHistoryImageIntegrationTest: @Transactional;
     
     @Autowired
-    private SongHistoryDataOnDemand SongHistoryIntegrationTest.dod;
+    private SongItemDataOnDemand SongHistoryImageIntegrationTest.dod;
     
     @Test
-    public void SongHistoryIntegrationTest.testCountSongItems() {
+    public void SongHistoryImageIntegrationTest.testCountSongItems() {
         Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", dod.getRandomSongItem());
         long count = SongItem.countSongItems();
         Assert.assertTrue("Counter for 'SongItem' incorrectly reported there were no entries", count > 0);
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testFindSongItem() {
+    public void SongHistoryImageIntegrationTest.testFindSongItem() {
         SongItem obj = dod.getRandomSongItem();
         Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", obj);
         Long id = obj.getId();
@@ -45,7 +45,7 @@ privileged aspect SongHistoryIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testFindAllSongItems() {
+    public void SongHistoryImageIntegrationTest.testFindAllSongItems() {
         Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", dod.getRandomSongItem());
         long count = SongItem.countSongItems();
         Assert.assertTrue("Too expensive to perform a find all test for 'SongItem', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
@@ -55,7 +55,7 @@ privileged aspect SongHistoryIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testFindSongItemEntries() {
+    public void SongHistoryImageIntegrationTest.testFindSongItemEntries() {
         Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", dod.getRandomSongItem());
         long count = SongItem.countSongItems();
         if (count > 20) count = 20;
@@ -67,7 +67,7 @@ privileged aspect SongHistoryIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testFlush() {
+    public void SongHistoryImageIntegrationTest.testFlush() {
         SongItem obj = dod.getRandomSongItem();
         Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", obj);
         Long id = obj.getId();
@@ -81,7 +81,7 @@ privileged aspect SongHistoryIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testMergeUpdate() {
+    public void SongHistoryImageIntegrationTest.testMergeUpdate() {
         SongItem obj = dod.getRandomSongItem();
         Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", obj);
         Long id = obj.getId();
@@ -96,7 +96,7 @@ privileged aspect SongHistoryIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testPersist() {
+    public void SongHistoryImageIntegrationTest.testPersist() {
         Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", dod.getRandomSongItem());
         SongItem obj = dod.getNewTransientSongItem(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'SongItem' failed to provide a new transient entity", obj);
@@ -107,7 +107,7 @@ privileged aspect SongHistoryIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testRemove() {
+    public void SongHistoryImageIntegrationTest.testRemove() {
         SongItem obj = dod.getRandomSongItem();
         Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", obj);
         Long id = obj.getId();

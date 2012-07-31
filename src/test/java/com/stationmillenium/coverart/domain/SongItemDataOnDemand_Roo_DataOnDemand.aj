@@ -3,9 +3,9 @@
 
 package com.stationmillenium.coverart.domain;
 
-import com.stationmillenium.coverart.domain.SongHistoryDataOnDemand;
 import com.stationmillenium.coverart.domain.SongHistoryImage;
 import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.SongItemDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,15 +15,15 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
-privileged aspect SongHistoryDataOnDemand_Roo_DataOnDemand {
+privileged aspect SongItemDataOnDemand_Roo_DataOnDemand {
     
-    declare @type: SongHistoryDataOnDemand: @Component;
+    declare @type: SongItemDataOnDemand: @Component;
     
-    private Random SongHistoryDataOnDemand.rnd = new SecureRandom();
+    private Random SongItemDataOnDemand.rnd = new SecureRandom();
     
-    private List<SongItem> SongHistoryDataOnDemand.data;
+    private List<SongItem> SongItemDataOnDemand.data;
     
-    public SongItem SongHistoryDataOnDemand.getNewTransientSongItem(int index) {
+    public SongItem SongItemDataOnDemand.getNewTransientSongItem(int index) {
         SongItem obj = new SongItem();
         setArtist(obj, index);
         setImage(obj, index);
@@ -31,7 +31,7 @@ privileged aspect SongHistoryDataOnDemand_Roo_DataOnDemand {
         return obj;
     }
     
-    public void SongHistoryDataOnDemand.setArtist(SongItem obj, int index) {
+    public void SongItemDataOnDemand.setArtist(SongItem obj, int index) {
         String artist = "artist_" + index;
         if (artist.length() > 200) {
             artist = artist.substring(0, 200);
@@ -39,12 +39,12 @@ privileged aspect SongHistoryDataOnDemand_Roo_DataOnDemand {
         obj.setArtist(artist);
     }
     
-    public void SongHistoryDataOnDemand.setImage(SongItem obj, int index) {
+    public void SongItemDataOnDemand.setImage(SongItem obj, int index) {
         SongHistoryImage image = null;
         obj.setImage(image);
     }
     
-    public void SongHistoryDataOnDemand.setTitle(SongItem obj, int index) {
+    public void SongItemDataOnDemand.setTitle(SongItem obj, int index) {
         String title = "title_" + index;
         if (title.length() > 200) {
             title = title.substring(0, 200);
@@ -52,7 +52,7 @@ privileged aspect SongHistoryDataOnDemand_Roo_DataOnDemand {
         obj.setTitle(title);
     }
     
-    public SongItem SongHistoryDataOnDemand.getSpecificSongItem(int index) {
+    public SongItem SongItemDataOnDemand.getSpecificSongItem(int index) {
         init();
         if (index < 0) {
             index = 0;
@@ -65,18 +65,18 @@ privileged aspect SongHistoryDataOnDemand_Roo_DataOnDemand {
         return SongItem.findSongItem(id);
     }
     
-    public SongItem SongHistoryDataOnDemand.getRandomSongItem() {
+    public SongItem SongItemDataOnDemand.getRandomSongItem() {
         init();
         SongItem obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
         return SongItem.findSongItem(id);
     }
     
-    public boolean SongHistoryDataOnDemand.modifySongItem(SongItem obj) {
+    public boolean SongItemDataOnDemand.modifySongItem(SongItem obj) {
         return false;
     }
     
-    public void SongHistoryDataOnDemand.init() {
+    public void SongItemDataOnDemand.init() {
         int from = 0;
         int to = 10;
         data = SongItem.findSongItemEntries(from, to);

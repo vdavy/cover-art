@@ -3,30 +3,25 @@
  */
 package com.stationmillenium.coverart.services.covergraber.impl;
 
-import java.io.IOException;
+import java.awt.image.BufferedImage;
 import java.io.StringReader;
-import java.net.URI;
+import java.net.URL;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.oxm.XmlMappingException;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
 import com.stationmillenium.coverart.beans.covergraber.LastFMCoverServicePropertiesBean;
-import com.stationmillenium.coverart.dto.services.covergraber.ImageArray;
 import com.stationmillenium.coverart.schema.lastfmtracksearch.Lfm;
 import com.stationmillenium.coverart.schema.lastfmtracksearch.Lfm.Track;
 import com.stationmillenium.coverart.schema.lastfmtracksearch.Lfm.Track.Album;
@@ -66,7 +61,7 @@ public class LastFmCoverGraberService implements CoverGraberServiceInterface {
 	private Jaxb2Marshaller oxmLastFMTrackSearch;
 		
 	@Override
-	public ImageArray grabCover(String artist, String title) {
+	public BufferedImage grabCover(String artist, String title) {
 		String xmlData = gatherXMLData(artist, title); //gather XML
 		if (xmlData != null) {
 			Lfm lfm = unmarshallNormalData(xmlData);  //unmarshall
@@ -169,36 +164,14 @@ public class LastFmCoverGraberService implements CoverGraberServiceInterface {
 	/**
 	 * Gather image container
 	 * @param urlText the URL of the image
-	 * @return the image container
+	 * @return the image 
 	 */
-	private ImageArray gatherImage(String urlText)  {
+	private BufferedImage gatherImage(String urlText)  {
 		try {
-			URI url = new URI(urlText);
-			RestTemplate template = new RestTemplate();
-			ImageArray imageContainer = template.execute(url, HttpMethod.GET, null, new ResponseExtractor<ImageArray>() {
-				@Override
-				public ImageArray extractData(ClientHttpResponse response) throws IOException {
-					ImageArray returnObject = new ImageArray();
-					
-					//image array
-					byte[] imageAsArray = IOUtils.toByteArray(response.getBody());
-					returnObject.setImageArray(imageAsArray);
-					
-					//image type
-					MediaType mediaType = response.getHeaders().getContentType();
-					if (MediaType.IMAGE_PNG.equals(mediaType))
-						returnObject.setFileExtension("png");
-					else if (MediaType.IMAGE_JPEG.equals(mediaType))
-						returnObject.setFileExtension("jpeg");
-					else
-						LOGGER.warn("Unknown media type : " + mediaType);
-								
-					return returnObject;
-				}
-			});
-			
-			LOGGER.debug("Gathered image : " +  imageContainer);
-			return imageContainer;
+			URL url = new URL(urlText);
+			BufferedImage image = ImageIO.read(url);
+			LOGGER.debug("Gathered image : " +  image);
+			return image;
 		} catch (Exception e) { //if error occurs
 			LOGGER.warn("Error during gathering image", e);
 			return null;

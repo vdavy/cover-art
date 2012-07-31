@@ -4,8 +4,6 @@
 package com.stationmillenium.coverart.tests.services.history;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -14,6 +12,7 @@ import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 
 import org.dozer.Mapper;
@@ -24,8 +23,9 @@ import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stationmillenium.coverart.domain.SongHistory;
+import com.stationmillenium.coverart.domain.SongItem;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
-import com.stationmillenium.coverart.repositories.SongHistoryRepository;
+import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.services.history.SongHistoryFilter;
 
 	 
@@ -47,7 +47,7 @@ public class TestSongHistoryFilter {
 	
 	//song history repository
 	@Autowired
-	private SongHistoryRepository songHistoryRepository;
+	private SongItemRepository songHistoryRepository;
 	
 	//reference calendar needed for duration computation
 	private Calendar referenceCalendar = Calendar.getInstance();
@@ -137,7 +137,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterLastSongIsLastRecorded() {
-		SongHistory songHistory = generateTestEntity();
+		SongItem songItem = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo", "bar", 0));
@@ -148,10 +148,10 @@ public class TestSongHistoryFilter {
 		//assert
 		verify(songHistoryList, atLeastOnce()).get(0);
 		SongHistoryItemDTO lastSongItemFromDB = songHistoryRepository.getLastSongHistoryItem();
-		assertTrue(mapper.map(songHistory, SongHistoryItemDTO.class).equals(lastSongItemFromDB));
+		assertSongItem(songItem, lastSongItemFromDB, true);
 		
 		//delete database entry
-		songHistory.remove();
+		songItem.remove();
 	}
 	
 	
@@ -161,7 +161,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterRemoveSongTwo() {
-		SongHistory songHistory = generateTestEntity();
+		SongItem songItem = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo2", "bar2", -15));
@@ -176,7 +176,7 @@ public class TestSongHistoryFilter {
 		verify(songHistoryList, atLeastOnce()).get(1);
 		verify(songHistoryList, never()).get(2);
 		SongHistoryItemDTO lastSongItemFromDB = songHistoryRepository.getLastSongHistoryItem();
-		assertFalse(mapper.map(songHistory, SongHistoryItemDTO.class).equals(lastSongItemFromDB));
+		assertSongItem(songItem, lastSongItemFromDB, false);
 	}
 	
 	
@@ -186,7 +186,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterRemoveSongEndingList() {
-		SongHistory songHistory = generateTestEntity();
+		SongItem songItem = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo2", "bar2", -15));
@@ -201,7 +201,7 @@ public class TestSongHistoryFilter {
 		verify(songHistoryList, atLeastOnce()).get(1);
 		verify(songHistoryList, atLeastOnce()).get(2);
 		SongHistoryItemDTO lastSongItemFromDB = songHistoryRepository.getLastSongHistoryItem();
-		assertFalse(mapper.map(songHistory, SongHistoryItemDTO.class).equals(lastSongItemFromDB));
+		assertSongItem(songItem, lastSongItemFromDB, false);
 	}
 	
 	/**
@@ -210,7 +210,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterRemoveSongNotInList() {
-		SongHistory songHistory = generateTestEntity();
+		SongItem songItem = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo2", "bar2", -15));
@@ -225,7 +225,7 @@ public class TestSongHistoryFilter {
 		verify(songHistoryList, atLeastOnce()).get(1);
 		verify(songHistoryList, atLeastOnce()).get(2);
 		SongHistoryItemDTO lastSongItemFromDB = songHistoryRepository.getLastSongHistoryItem();
-		assertFalse(mapper.map(songHistory, SongHistoryItemDTO.class).equals(lastSongItemFromDB));
+		assertSongItem(songItem, lastSongItemFromDB, false);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class TestSongHistoryFilter {
 	 */
 	@Test
 	public void testLastRecordedSongFilterNotRemoving() {
-		SongHistory songHistory = generateTestEntity();
+		SongItem songItem = generateTestEntity();
 		
 		//mock data
 		songHistoryList.add(mockSongItem("foo2", "bar2", -510));
@@ -249,24 +249,40 @@ public class TestSongHistoryFilter {
 		verify(songHistoryList, atLeastOnce()).get(1);
 		verify(songHistoryList, atLeastOnce()).get(2);
 		SongHistoryItemDTO lastSongItemFromDB = songHistoryRepository.getLastSongHistoryItem();
-		assertTrue(mapper.map(songHistory, SongHistoryItemDTO.class).equals(lastSongItemFromDB));
+		assertSongItem(songItem, lastSongItemFromDB, true);
 		
 		//delete database entry
-		songHistory.remove();
+		songItem.remove();
+	}
+
+	/**
+	 * Assert if song item equals last song item from db
+	 * @param songItem the song item
+	 * @param lastSongItemFromDB the last song from db
+	 */
+	private void assertSongItem(SongItem songItem, SongHistoryItemDTO lastSongItemFromDB, boolean assertBoolean) {
+		SongHistoryItemDTO returnedDTO = mapper.map(songItem, SongHistoryItemDTO.class);
+		returnedDTO.setPlayedDate(((SongHistory) songItem.getPlayedTimes().toArray()[0]).getPlayedDate());
+		assertEquals(returnedDTO.equals(lastSongItemFromDB), assertBoolean);
 	}
 
 	/**
 	 * Generate the test entity
 	 * @return entity
 	 */
-	private SongHistory generateTestEntity() {
+	private SongItem generateTestEntity() {
 		//insert test data into db
 		SongHistory songHistory = new SongHistory();
-		songHistory.setArtist("foo");
-		songHistory.setTitle("bar");
 		songHistory.setPlayedDate(referenceCalendar);
-		songHistory.persist();
-		return songHistory;
+		
+		SongItem songItem = new SongItem();
+		songItem.setArtist("foo");
+		songItem.setTitle("bar");
+		songItem.setPlayedTimes(new HashSet<SongHistory>());
+		songItem.getPlayedTimes().add(songHistory);
+		songItem.persist();
+		
+		return songItem;
 	}
 	
 }

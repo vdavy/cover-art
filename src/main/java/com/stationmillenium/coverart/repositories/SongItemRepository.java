@@ -3,6 +3,7 @@
  */
 package com.stationmillenium.coverart.repositories;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stationmillenium.coverart.domain.SongHistory;
+import com.stationmillenium.coverart.domain.SongItem;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 
 /**
@@ -23,7 +25,7 @@ import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
  *
  */
 @Repository
-public class SongHistoryRepository {
+public class SongItemRepository {
 
 	//entity manager to access db
 	@PersistenceContext
@@ -39,8 +41,9 @@ public class SongHistoryRepository {
 	 */
 	public SongHistoryItemDTO getLastSongHistoryItem() {
 		Query query = entityManager.createNamedQuery("getLastSong"); //create query
-		SongHistory song = (SongHistory) query.getSingleResult(); //Execute query and get entity
+		SongItem song = (SongItem) query.getSingleResult(); //Execute query and get entity
 		SongHistoryItemDTO songHistoryItem = mapper.map(song, SongHistoryItemDTO.class); //process mapping to output dto
+		songHistoryItem.setPlayedDate(((SongHistory) song.getPlayedTimes().toArray()[0]).getPlayedDate()); //process date
 		return songHistoryItem; //return dto
 	}
 	
@@ -49,7 +52,7 @@ public class SongHistoryRepository {
 	 */
 	public void deleteLastRecordedSong() {
 		Query query = entityManager.createNamedQuery("getLastSong"); //create query
-		SongHistory song = (SongHistory) query.getSingleResult(); //Execute query and get entity
+		SongItem song = (SongItem) query.getSingleResult(); //Execute query and get entity
 		song.remove(); //remove the song
 	}
 	
@@ -60,8 +63,13 @@ public class SongHistoryRepository {
 	@Transactional
 	public void insertSongHistoryList(List<SongHistoryItemDTO> listToInsert) {
 		for (SongHistoryItemDTO song : listToInsert) { //for each song
-			SongHistory songHistoryEntity = mapper.map(song, SongHistory.class); //convert into entity
-			songHistoryEntity.persist(); //persist
+			SongHistory songHistory = new SongHistory();
+			songHistory.setPlayedDate(song.getPlayedDate()); //played date
+			
+			SongItem songItemEntity = mapper.map(song, SongItem.class); //convert into entity
+			songItemEntity.setPlayedTimes(new HashSet<SongHistory>());
+			songItemEntity.getPlayedTimes().add(songHistory);
+			songItemEntity.persist(); //persist
 		}
 	}
 }
