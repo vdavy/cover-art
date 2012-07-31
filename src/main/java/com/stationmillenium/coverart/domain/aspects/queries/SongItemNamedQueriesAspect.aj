@@ -24,7 +24,21 @@ public aspect SongItemNamedQueriesAspect {
 				query = "SELECT item FROM SongItem AS item " +
 						"JOIN FETCH item.playedTimes AS history " +
 						"WHERE history.id = (SELECT max(id) FROM SongHistory) " +
-						"ORDER BY history.playedDate DESC")
+						"ORDER BY history.playedDate DESC"),
+		
+		/**
+		 * Check if song exists
+		 */
+		@NamedQuery( 
+				name = "checkExistingSong", 
+				query = "SELECT count(item) FROM SongItem AS item WHERE artist = :artist AND title = :title"),
+		
+		/**
+		 * Load existing song
+		 */
+		@NamedQuery( 
+				name = "loadExistingSong", 
+				query = "FROM SongItem WHERE artist = :artist AND title = :title")
 		
 	});
 	

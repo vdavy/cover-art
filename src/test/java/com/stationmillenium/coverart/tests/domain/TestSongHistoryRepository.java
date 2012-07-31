@@ -1,5 +1,6 @@
 package com.stationmillenium.coverart.tests.domain;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +9,7 @@ import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -79,7 +81,7 @@ public class TestSongHistoryRepository {
 	}
 	
 	/**
-	 * Test the { {@link SongHistoryRepository#deleteLastRecordedSong()}
+	 * Test the {@link SongHistoryRepository#deleteLastRecordedSong()}
 	 */
 	@Test
 	public void testDeleteLastRecordedSong() {
@@ -103,6 +105,9 @@ public class TestSongHistoryRepository {
 		assertFalse(returnedDTO.equals(lastSongItemFromDB));
 	}
 	
+	/**
+	 * Test the {@link SongHistoryRepository#insertSongHistoryList()}
+	 */
 	@Test
 	public void testInsertSongHistoryList() {
 		//mock data
@@ -111,7 +116,8 @@ public class TestSongHistoryRepository {
 		songHistoryList.add(mockSongItem("foo3", "bar3"));
 		
 		//process
-		repository.insertSongHistoryList(songHistoryList);
+		for (SongHistoryItemDTO song : songHistoryList)
+			repository.insertSongHistory(song);
 		
 		//assert
 		for (int i = songHistoryList.size() - 1; i >= 0; i--) {
@@ -119,5 +125,49 @@ public class TestSongHistoryRepository {
 			assertTrue(lastSongItemFromDB.equals(songHistoryList.get(i)));
 			repository.deleteLastRecordedSong();
 		}	
+	}
+
+	/**
+	 * Test the {@link SongHistoryRepository#sExistingSong()}
+	 */
+	@Test
+	public void testIsExistingSong() {
+		//mock data
+		songHistoryList.add(mockSongItem("foo1", "bar1"));
+		repository.insertSongHistory(songHistoryList.get(0));
+
+		//process 
+		boolean existingSong = repository.isExistingSong(songHistoryList.get(0));
+		
+		//assert
+		assertTrue(existingSong);
+		
+		//process
+		repository.deleteLastRecordedSong();
+		existingSong = repository.isExistingSong(songHistoryList.get(0));
+		
+		//assert
+		assertFalse(existingSong);		
+	}
+	
+	/**
+	 * Test the {@link SongHistoryRepository#addTimeToExistingSong()}
+	 */
+	@Test
+	public void testAddTimeToExistingSong() {
+		//mock data
+		songHistoryList.add(mockSongItem("foo1", "bar1"));
+		repository.insertSongHistory(songHistoryList.get(0));
+
+		//process 
+		repository.addTimeToExistingSong(songHistoryList.get(0));
+		
+		//assert
+		List<SongItem> songList = SongItem.findAllSongItems();
+		Collections.reverse(songList);		
+		assertEquals(songList.get(0).getPlayedTimes().size(), 2);
+		
+		//process
+		repository.deleteLastRecordedSong();
 	}
 }

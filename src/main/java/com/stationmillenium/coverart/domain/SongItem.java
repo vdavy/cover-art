@@ -38,7 +38,7 @@ public class SongItem {
 	private SongHistoryImage image;
 	
 	//associated playing times
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "song")
 	private Set<SongHistory> playedTimes;
 	
 }

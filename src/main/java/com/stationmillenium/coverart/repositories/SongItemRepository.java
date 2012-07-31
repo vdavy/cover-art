@@ -4,7 +4,6 @@
 package com.stationmillenium.coverart.repositories;
 
 import java.util.HashSet;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -58,18 +57,50 @@ public class SongItemRepository {
 	
 	/**
 	 * Insert a {@link SongHistoryItemDTO} list
-	 * @param listToInsert the list of {@link SongHistoryItemDTO} to insert
+	 * @param songToInsert {@link SongHistoryItemDTO} to insert
 	 */
 	@Transactional
-	public void insertSongHistoryList(List<SongHistoryItemDTO> listToInsert) {
-		for (SongHistoryItemDTO song : listToInsert) { //for each song
-			SongHistory songHistory = new SongHistory();
-			songHistory.setPlayedDate(song.getPlayedDate()); //played date
-			
-			SongItem songItemEntity = mapper.map(song, SongItem.class); //convert into entity
-			songItemEntity.setPlayedTimes(new HashSet<SongHistory>());
-			songItemEntity.getPlayedTimes().add(songHistory);
-			songItemEntity.persist(); //persist
-		}
+	public void insertSongHistory(SongHistoryItemDTO songToInsert) {
+		SongItem songItemEntity = mapper.map(songToInsert, SongItem.class); //convert into entity
+		SongHistory songHistory = new SongHistory();
+		songHistory.setPlayedDate(songToInsert.getPlayedDate()); //played date			
+		songItemEntity.setPlayedTimes(new HashSet<SongHistory>());
+
+		//link history and item
+		songItemEntity.getPlayedTimes().add(songHistory);
+		songHistory.setSong(songItemEntity); 		
+		songItemEntity.persist(); //persist
+	}
+	
+	/**
+	 * Check if a song exists
+	 * @param songToCheck the song to check
+	 * @return <code>true</code> if found, <code>false</code> if not found
+	 */
+	public boolean isExistingSong(SongHistoryItemDTO songToCheck) {
+		Query query = entityManager.createNamedQuery("checkExistingSong"); //create query
+		query.setParameter("artist", songToCheck.getArtist()); //artist param
+		query.setParameter("title", songToCheck.getTitle()); //title param
+		Long songCount = (Long) query.getSingleResult(); //Execute query and get count
+		return (songCount != 0);
+	}
+	
+	/**
+	 * Check if a song exists
+	 * @param songToCheck the song to check
+	 * @return <code>true</code> if found, <code>false</code> if not found
+	 */
+	public void addTimeToExistingSong(SongHistoryItemDTO songToCheck) {
+		//load song
+		Query query = entityManager.createNamedQuery("loadExistingSong"); //create query
+		query.setParameter("artist", songToCheck.getArtist()); //artist param
+		query.setParameter("title", songToCheck.getTitle()); //title param
+		SongItem song  = (SongItem) query.getSingleResult(); //Execute query and get count
+		
+		//add time
+		SongHistory songHistory = new SongHistory();
+		songHistory.setPlayedDate(songToCheck.getPlayedDate());
+		songHistory.setSong(song);
+		songHistory.persist(); //persit add
 	}
 }

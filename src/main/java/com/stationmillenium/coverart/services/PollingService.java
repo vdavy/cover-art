@@ -115,6 +115,14 @@ public class PollingService {
 		
 		Collections.reverse(listToInsert);
 		LOGGER.info("Song list inserted : " + listToInsert);
-		songHistoryRepository.insertSongHistoryList(listToInsert); //insert in db		
+		for (SongHistoryItemDTO song : listToInsert) {
+			if (songHistoryRepository.isExistingSong(song)) { //check if sonf already exists
+				songHistoryRepository.addTimeToExistingSong(song); //just add time
+				LOGGER.debug("Song already exists : " + song);
+			} else {
+				songHistoryRepository.insertSongHistory(song); //insert in db		
+				LOGGER.debug("Song not existing : " + song);
+			}
+		}
 	}
 }
