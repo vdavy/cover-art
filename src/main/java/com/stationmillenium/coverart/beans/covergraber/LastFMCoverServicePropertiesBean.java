@@ -9,7 +9,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import com.stationmillenium.coverart.beans.interfaces.PropertyBeanInterface;
 
 /**
- * Last FM cover serevice properties bean
+ * Last FM cover service properties bean
  * @author vincent
  *
  */
