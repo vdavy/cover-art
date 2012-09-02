@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.ServerStatusRepository;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
+import com.stationmillenium.coverart.services.covergraber.CoverGraberRootService;
 import com.stationmillenium.coverart.services.history.ShoutcastParser;
 import com.stationmillenium.coverart.services.history.SongHistoryFilter;
 
@@ -48,6 +49,10 @@ public class PollingService {
 	@Autowired
 	private SongItemRepository songHistoryRepository;
 	
+	//the service to gather
+	@Autowired
+	private CoverGraberRootService coverGraberRootService;
+	
 	/**
 	 * Method to do server polling :
 	 * -query shoutcast server
@@ -56,10 +61,16 @@ public class PollingService {
 	 * -launch cover search
 	 */
 	public void doServerPolling() {
+		//query shoutcast
 		List<SongHistoryItemDTO> songHistoryList = queryShoutcastServer();
 		LOGGER.debug("Gathered song list : " + songHistoryList);
 		
-		insertSongList(songHistoryList);
+		//insert song list
+		List<SongHistoryItemDTO> songImageMissingList = insertSongList(songHistoryList);
+		LOGGER.debug("Songs with missing image list : " + songImageMissingList);
+		
+		//get the image
+		coverGraberRootService.grabImageForSongs(songImageMissingList);
 	}
 	
 	/**
@@ -102,7 +113,7 @@ public class PollingService {
 	 * Stop when last recorded song is encountered
 	 * @param songList the song list to insert
 	 */
-	private void insertSongList(List<SongHistoryItemDTO> songList) {
+	private List<SongHistoryItemDTO> insertSongList(List<SongHistoryItemDTO> songList) {
 		SongHistoryItemDTO lastSong = songHistoryRepository.getLastSongHistoryItem(); //get last recorded song
 		List<SongHistoryItemDTO> listToInsert = new ArrayList<>(); //list of song to insert
 		
@@ -115,6 +126,7 @@ public class PollingService {
 		
 		Collections.reverse(listToInsert);
 		LOGGER.info("Song list inserted : " + listToInsert);
+		List<SongHistoryItemDTO> songListToGatherImage = new ArrayList<>(); //list to put new song where image is missing
 		for (SongHistoryItemDTO song : listToInsert) {
 			if (songHistoryRepository.isExistingSong(song)) { //check if sonf already exists
 				songHistoryRepository.addTimeToExistingSong(song); //just add time
@@ -122,7 +134,11 @@ public class PollingService {
 			} else {
 				songHistoryRepository.insertSongHistory(song); //insert in db		
 				LOGGER.debug("Song not existing : " + song);
+				songListToGatherImage.add(song); //add it into the list to 
 			}
 		}
+		
+		return songListToGatherImage;
 	}
+	
 }

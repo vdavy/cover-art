@@ -34,6 +34,10 @@ public class TestPropertiesChecker {
 	@Autowired
 	private LastFMCoverServicePropertiesBean lastFMCoverServicePropertiesBean;
 	
+	//the configuration for the deezer cover service
+	@Autowired
+	private LastFMCoverServicePropertiesBean deezerCoverServicePropertiesBean;
+		
 	/**
 	 * Test Shouctast server properties
 	 */
@@ -56,5 +60,13 @@ public class TestPropertiesChecker {
 	@Test
 	public void testLastFMCoverServiceProperties() {
 		logger.debug(lastFMCoverServicePropertiesBean.toString());
+	}
+	
+	/**
+	 * Test Deezer cover service properties
+	 */
+	@Test
+	public void testDeezerCoverServiceProperties() {
+		logger.debug(deezerCoverServicePropertiesBean.toString());
 	}
 }

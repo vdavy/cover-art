@@ -21,6 +21,11 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaActiveRecord
 public class SongHistoryImage {
 
+	public enum Provider {
+		LAST_FM,
+		DEEZER
+	}
+	
 	//image file name
 	@NotNull
 	private String fileName;
@@ -32,6 +37,10 @@ public class SongHistoryImage {
 	//image height
 	@Min(10)
 	private int height;
+	
+	//image provider
+	@NotNull
+	private Provider provider;
 	
 	//reverse link to mapped song item
 	@OneToOne(mappedBy = "image")

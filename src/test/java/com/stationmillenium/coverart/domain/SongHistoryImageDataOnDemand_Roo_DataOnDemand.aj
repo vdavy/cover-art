@@ -4,8 +4,9 @@
 package com.stationmillenium.coverart.domain;
 
 import com.stationmillenium.coverart.domain.SongHistoryImage;
+import com.stationmillenium.coverart.domain.SongHistoryImage.Provider;
 import com.stationmillenium.coverart.domain.SongHistoryImageDataOnDemand;
-import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.SongItemDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect SongHistoryImageDataOnDemand_Roo_DataOnDemand {
@@ -21,38 +23,47 @@ privileged aspect SongHistoryImageDataOnDemand_Roo_DataOnDemand {
     
     private Random SongHistoryImageDataOnDemand.rnd = new SecureRandom();
     
-    private List<SongItem> SongHistoryImageDataOnDemand.data;
+    private List<SongHistoryImage> SongHistoryImageDataOnDemand.data;
     
-    public SongItem SongHistoryImageDataOnDemand.getNewTransientSongItem(int index) {
-        SongItem obj = new SongItem();
-        setArtist(obj, index);
-        setImage(obj, index);
-        setTitle(obj, index);
+    @Autowired
+    private SongItemDataOnDemand SongHistoryImageDataOnDemand.songItemDataOnDemand;
+    
+    public SongHistoryImage SongHistoryImageDataOnDemand.getNewTransientSongHistoryImage(int index) {
+        SongHistoryImage obj = new SongHistoryImage();
+        setFileName(obj, index);
+        setHeight(obj, index);
+        setProvider(obj, index);
+        setWidth(obj, index);
         return obj;
     }
     
-    public void SongHistoryImageDataOnDemand.setArtist(SongItem obj, int index) {
-        String artist = "artist_" + index;
-        if (artist.length() > 200) {
-            artist = artist.substring(0, 200);
+    public void SongHistoryImageDataOnDemand.setFileName(SongHistoryImage obj, int index) {
+        String fileName = "fileName_" + index;
+        obj.setFileName(fileName);
+    }
+    
+    public void SongHistoryImageDataOnDemand.setHeight(SongHistoryImage obj, int index) {
+        int height = index;
+        if (height < 10) {
+            height = 10;
         }
-        obj.setArtist(artist);
+        obj.setHeight(height);
     }
     
-    public void SongHistoryImageDataOnDemand.setImage(SongItem obj, int index) {
-        SongHistoryImage image = null;
-        obj.setImage(image);
+    public void SongHistoryImageDataOnDemand.setProvider(SongHistoryImage obj, int index) {
+        Provider provider = null;
+        obj.setProvider(provider);
     }
     
-    public void SongHistoryImageDataOnDemand.setTitle(SongItem obj, int index) {
-        String title = "title_" + index;
-        if (title.length() > 200) {
-            title = title.substring(0, 200);
+    public void SongHistoryImageDataOnDemand.setWidth(SongHistoryImage obj, int index) {
+        int width = index;
+        if (width < 10) {
+            width = 10;
         }
-        obj.setTitle(title);
+        obj.setWidth(width);
     }
     
-    public SongItem SongHistoryImageDataOnDemand.getSpecificSongItem(int index) {
+    public SongHistoryImage SongHistoryImageDataOnDemand.getSpecificSongHistoryImage(int index) {
         init();
         if (index < 0) {
             index = 0;
@@ -60,36 +71,36 @@ privileged aspect SongHistoryImageDataOnDemand_Roo_DataOnDemand {
         if (index > (data.size() - 1)) {
             index = data.size() - 1;
         }
-        SongItem obj = data.get(index);
+        SongHistoryImage obj = data.get(index);
         Long id = obj.getId();
-        return SongItem.findSongItem(id);
+        return SongHistoryImage.findSongHistoryImage(id);
     }
     
-    public SongItem SongHistoryImageDataOnDemand.getRandomSongItem() {
+    public SongHistoryImage SongHistoryImageDataOnDemand.getRandomSongHistoryImage() {
         init();
-        SongItem obj = data.get(rnd.nextInt(data.size()));
+        SongHistoryImage obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return SongItem.findSongItem(id);
+        return SongHistoryImage.findSongHistoryImage(id);
     }
     
-    public boolean SongHistoryImageDataOnDemand.modifySongItem(SongItem obj) {
+    public boolean SongHistoryImageDataOnDemand.modifySongHistoryImage(SongHistoryImage obj) {
         return false;
     }
     
     public void SongHistoryImageDataOnDemand.init() {
         int from = 0;
         int to = 10;
-        data = SongItem.findSongItemEntries(from, to);
+        data = SongHistoryImage.findSongHistoryImageEntries(from, to);
         if (data == null) {
-            throw new IllegalStateException("Find entries implementation for 'SongItem' illegally returned null");
+            throw new IllegalStateException("Find entries implementation for 'SongHistoryImage' illegally returned null");
         }
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new ArrayList<SongItem>();
+        data = new ArrayList<SongHistoryImage>();
         for (int i = 0; i < 10; i++) {
-            SongItem obj = getNewTransientSongItem(i);
+            SongHistoryImage obj = getNewTransientSongHistoryImage(i);
             try {
                 obj.persist();
             } catch (ConstraintViolationException e) {

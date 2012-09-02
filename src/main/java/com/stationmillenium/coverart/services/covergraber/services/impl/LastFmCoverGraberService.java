@@ -1,14 +1,11 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.services.covergraber.impl;
+package com.stationmillenium.coverart.services.covergraber.services.impl;
 
-import java.awt.image.BufferedImage;
 import java.io.StringReader;
-import java.net.URL;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.xml.transform.stream.StreamSource;
 
 import org.slf4j.Logger;
@@ -26,15 +23,15 @@ import com.stationmillenium.coverart.schema.lastfmtracksearch.Lfm;
 import com.stationmillenium.coverart.schema.lastfmtracksearch.Lfm.Track;
 import com.stationmillenium.coverart.schema.lastfmtracksearch.Lfm.Track.Album;
 import com.stationmillenium.coverart.schema.lastfmtracksearch.Lfm.Track.Album.Image;
-import com.stationmillenium.coverart.services.covergraber.CoverGraberServiceInterface;
+import com.stationmillenium.coverart.services.covergraber.services.AbstractCoverGraberService;
 
 /**
  * Cover graber for Last FM service
  * @author vincent
  *
  */
-@Service
-public class LastFmCoverGraberService implements CoverGraberServiceInterface {
+@Service("lastFmCoverGraberService")
+public class LastFmCoverGraberService extends AbstractCoverGraberService<Lfm> {
 
 	//logger
 	private static final Logger LOGGER = LoggerFactory.getLogger(LastFmCoverGraberService.class);
@@ -56,45 +53,41 @@ public class LastFmCoverGraberService implements CoverGraberServiceInterface {
 	private LastFMCoverServicePropertiesBean lastFMCoverServicePropertiesBean;
 	
 	//xml marshallers
+	//last fm
 	@Autowired
 	@Qualifier("oxmLastFMTrackSearch")
 	private Jaxb2Marshaller oxmLastFMTrackSearch;
 		
 	@Override
-	public BufferedImage grabCover(String artist, String title) {
-		String xmlData = gatherXMLData(artist, title); //gather XML
-		if (xmlData != null) {
-			Lfm lfm = unmarshallNormalData(xmlData);  //unmarshall
-			if (lfm != null) { //process data
-				Track track = lfm.getTrack();
-				if (track != null) {
-					Album album = track.getAlbum();
-					if (album != null) {
-						List<Image> imageList = album.getImage();
-						if (imageList != null) {
-							if (imageList.size() > 0) {
-								
-								//all data are defined
-								String imageURL = extractImageURL(imageList); //try to gather url
-								LOGGER.debug("Image URL found : " + imageURL);								
-								return gatherImage(imageURL);
-								
-							} else
-								LOGGER.warn("XML album image list empty");
+	protected String getImageURLFromXML(Lfm lfm) {
+		if (lfm != null) { //process data
+			Track track = lfm.getTrack();
+			if (track != null) {
+				Album album = track.getAlbum();
+				if (album != null) {
+					List<Image> imageList = album.getImage();
+					if (imageList != null) {
+						if (imageList.size() > 0) {
+							
+							//all data are defined
+							String imageURL = extractImageURL(imageList); //try to gather url
+							LOGGER.debug("Image URL found : " + imageURL);								
+							return imageURL;
+							
 						} else
-							LOGGER.warn("XML album image list null");					
+							LOGGER.warn("XML album image list empty");
 					} else
-						LOGGER.warn("XML album data null");
+						LOGGER.warn("XML album image list null");					
 				} else
-					LOGGER.warn("XML track data null");				
-			} else  
-				LOGGER.error("Last FM data as object null");	//some error might have occured		
-		} else
-			LOGGER.debug("Last FM xml data nulll");
+					LOGGER.warn("XML album data null");
+			} else
+				LOGGER.warn("XML track data null");				
+		} else  
+			LOGGER.error("Last FM data as object null");	//some error might have occured		
 		
 		return null;
 	}
-
+	
 	/**
 	 * Extract image URL
 	 * @param imageList the image list from XML
@@ -125,13 +118,8 @@ public class LastFmCoverGraberService implements CoverGraberServiceInterface {
 		return imageURL;
 	}
 
-	/**
-	 * Gather XML data for a song search
-	 * @param artist the artist to search
-	 * @param title the title to search
-	 * @return the XML data as {@code String} or null if error
-	 */
-	private String gatherXMLData(String artist, String title)  {
+	@Override
+	protected String gatherXMLData(String artist, String title)  {
 		try {
 			RestTemplate template = new RestTemplate();
 			String xmlData = template.getForObject(lastFMCoverServicePropertiesBean.getUrl(), String.class, lastFMCoverServicePropertiesBean.getApiKey(), artist, title);
@@ -145,35 +133,14 @@ public class LastFmCoverGraberService implements CoverGraberServiceInterface {
 		}
 	}
 	
-	/**
-	 * Unmarshall the xml data as normal data 
-	 * @param xmlData the xml data as string
-	 * @return the {@link Lfm} or null if error occured
-	 */
-	private Lfm unmarshallNormalData(String xmlData) {
+	@Override
+	protected Lfm unmarshalllData(String xmlData) {
 		try {
 			oxmLastFMTrackSearch.setSchema(new ClassPathResource("xsd/LastFMTrackSearch.xsd"));
 			Lfm returnXMl = (Lfm) oxmLastFMTrackSearch.unmarshal(new StreamSource(new StringReader(xmlData)));
 			return returnXMl;
 		} catch (XmlMappingException e) {
 			LOGGER.warn("Error while unmarshalling normal data", e);
-			return null;
-		}
-	}
-	
-	/**
-	 * Gather image container
-	 * @param urlText the URL of the image
-	 * @return the image 
-	 */
-	private BufferedImage gatherImage(String urlText)  {
-		try {
-			URL url = new URL(urlText);
-			BufferedImage image = ImageIO.read(url);
-			LOGGER.debug("Gathered image : " +  image);
-			return image;
-		} catch (Exception e) { //if error occurs
-			LOGGER.warn("Error during gathering image", e);
 			return null;
 		}
 	}

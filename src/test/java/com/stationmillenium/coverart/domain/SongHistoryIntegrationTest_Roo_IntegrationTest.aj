@@ -3,9 +3,9 @@
 
 package com.stationmillenium.coverart.domain;
 
-import com.stationmillenium.coverart.domain.SongHistoryDataOnDemand;
+import com.stationmillenium.coverart.domain.SongHistoryImage;
+import com.stationmillenium.coverart.domain.SongHistoryImageDataOnDemand;
 import com.stationmillenium.coverart.domain.SongHistoryIntegrationTest;
-import com.stationmillenium.coverart.domain.SongItem;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,98 +24,98 @@ privileged aspect SongHistoryIntegrationTest_Roo_IntegrationTest {
     declare @type: SongHistoryIntegrationTest: @Transactional;
     
     @Autowired
-    private SongHistoryDataOnDemand SongHistoryIntegrationTest.dod;
+    private SongHistoryImageDataOnDemand SongHistoryIntegrationTest.dod;
     
     @Test
-    public void SongHistoryIntegrationTest.testCountSongItems() {
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", dod.getRandomSongItem());
-        long count = SongItem.countSongItems();
-        Assert.assertTrue("Counter for 'SongItem' incorrectly reported there were no entries", count > 0);
+    public void SongHistoryIntegrationTest.testCountSongHistoryImages() {
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to initialize correctly", dod.getRandomSongHistoryImage());
+        long count = SongHistoryImage.countSongHistoryImages();
+        Assert.assertTrue("Counter for 'SongHistoryImage' incorrectly reported there were no entries", count > 0);
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testFindSongItem() {
-        SongItem obj = dod.getRandomSongItem();
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", obj);
+    public void SongHistoryIntegrationTest.testFindSongHistoryImage() {
+        SongHistoryImage obj = dod.getRandomSongHistoryImage();
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to initialize correctly", obj);
         Long id = obj.getId();
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to provide an identifier", id);
-        obj = SongItem.findSongItem(id);
-        Assert.assertNotNull("Find method for 'SongItem' illegally returned null for id '" + id + "'", obj);
-        Assert.assertEquals("Find method for 'SongItem' returned the incorrect identifier", id, obj.getId());
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to provide an identifier", id);
+        obj = SongHistoryImage.findSongHistoryImage(id);
+        Assert.assertNotNull("Find method for 'SongHistoryImage' illegally returned null for id '" + id + "'", obj);
+        Assert.assertEquals("Find method for 'SongHistoryImage' returned the incorrect identifier", id, obj.getId());
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testFindAllSongItems() {
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", dod.getRandomSongItem());
-        long count = SongItem.countSongItems();
-        Assert.assertTrue("Too expensive to perform a find all test for 'SongItem', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<SongItem> result = SongItem.findAllSongItems();
-        Assert.assertNotNull("Find all method for 'SongItem' illegally returned null", result);
-        Assert.assertTrue("Find all method for 'SongItem' failed to return any data", result.size() > 0);
+    public void SongHistoryIntegrationTest.testFindAllSongHistoryImages() {
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to initialize correctly", dod.getRandomSongHistoryImage());
+        long count = SongHistoryImage.countSongHistoryImages();
+        Assert.assertTrue("Too expensive to perform a find all test for 'SongHistoryImage', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
+        List<SongHistoryImage> result = SongHistoryImage.findAllSongHistoryImages();
+        Assert.assertNotNull("Find all method for 'SongHistoryImage' illegally returned null", result);
+        Assert.assertTrue("Find all method for 'SongHistoryImage' failed to return any data", result.size() > 0);
     }
     
     @Test
-    public void SongHistoryIntegrationTest.testFindSongItemEntries() {
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", dod.getRandomSongItem());
-        long count = SongItem.countSongItems();
+    public void SongHistoryIntegrationTest.testFindSongHistoryImageEntries() {
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to initialize correctly", dod.getRandomSongHistoryImage());
+        long count = SongHistoryImage.countSongHistoryImages();
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
-        List<SongItem> result = SongItem.findSongItemEntries(firstResult, maxResults);
-        Assert.assertNotNull("Find entries method for 'SongItem' illegally returned null", result);
-        Assert.assertEquals("Find entries method for 'SongItem' returned an incorrect number of entries", count, result.size());
+        List<SongHistoryImage> result = SongHistoryImage.findSongHistoryImageEntries(firstResult, maxResults);
+        Assert.assertNotNull("Find entries method for 'SongHistoryImage' illegally returned null", result);
+        Assert.assertEquals("Find entries method for 'SongHistoryImage' returned an incorrect number of entries", count, result.size());
     }
     
     @Test
     public void SongHistoryIntegrationTest.testFlush() {
-        SongItem obj = dod.getRandomSongItem();
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", obj);
+        SongHistoryImage obj = dod.getRandomSongHistoryImage();
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to initialize correctly", obj);
         Long id = obj.getId();
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to provide an identifier", id);
-        obj = SongItem.findSongItem(id);
-        Assert.assertNotNull("Find method for 'SongItem' illegally returned null for id '" + id + "'", obj);
-        boolean modified =  dod.modifySongItem(obj);
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to provide an identifier", id);
+        obj = SongHistoryImage.findSongHistoryImage(id);
+        Assert.assertNotNull("Find method for 'SongHistoryImage' illegally returned null for id '" + id + "'", obj);
+        boolean modified =  dod.modifySongHistoryImage(obj);
         Integer currentVersion = obj.getVersion();
         obj.flush();
-        Assert.assertTrue("Version for 'SongItem' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
+        Assert.assertTrue("Version for 'SongHistoryImage' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
     @Test
     public void SongHistoryIntegrationTest.testMergeUpdate() {
-        SongItem obj = dod.getRandomSongItem();
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", obj);
+        SongHistoryImage obj = dod.getRandomSongHistoryImage();
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to initialize correctly", obj);
         Long id = obj.getId();
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to provide an identifier", id);
-        obj = SongItem.findSongItem(id);
-        boolean modified =  dod.modifySongItem(obj);
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to provide an identifier", id);
+        obj = SongHistoryImage.findSongHistoryImage(id);
+        boolean modified =  dod.modifySongHistoryImage(obj);
         Integer currentVersion = obj.getVersion();
-        SongItem merged = obj.merge();
+        SongHistoryImage merged = obj.merge();
         obj.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
-        Assert.assertTrue("Version for 'SongItem' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
+        Assert.assertTrue("Version for 'SongHistoryImage' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
     @Test
     public void SongHistoryIntegrationTest.testPersist() {
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", dod.getRandomSongItem());
-        SongItem obj = dod.getNewTransientSongItem(Integer.MAX_VALUE);
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to provide a new transient entity", obj);
-        Assert.assertNull("Expected 'SongItem' identifier to be null", obj.getId());
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to initialize correctly", dod.getRandomSongHistoryImage());
+        SongHistoryImage obj = dod.getNewTransientSongHistoryImage(Integer.MAX_VALUE);
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to provide a new transient entity", obj);
+        Assert.assertNull("Expected 'SongHistoryImage' identifier to be null", obj.getId());
         obj.persist();
         obj.flush();
-        Assert.assertNotNull("Expected 'SongItem' identifier to no longer be null", obj.getId());
+        Assert.assertNotNull("Expected 'SongHistoryImage' identifier to no longer be null", obj.getId());
     }
     
     @Test
     public void SongHistoryIntegrationTest.testRemove() {
-        SongItem obj = dod.getRandomSongItem();
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to initialize correctly", obj);
+        SongHistoryImage obj = dod.getRandomSongHistoryImage();
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to initialize correctly", obj);
         Long id = obj.getId();
-        Assert.assertNotNull("Data on demand for 'SongItem' failed to provide an identifier", id);
-        obj = SongItem.findSongItem(id);
+        Assert.assertNotNull("Data on demand for 'SongHistoryImage' failed to provide an identifier", id);
+        obj = SongHistoryImage.findSongHistoryImage(id);
         obj.remove();
         obj.flush();
-        Assert.assertNull("Failed to remove 'SongItem' with identifier '" + id + "'", SongItem.findSongItem(id));
+        Assert.assertNull("Failed to remove 'SongHistoryImage' with identifier '" + id + "'", SongHistoryImage.findSongHistoryImage(id));
     }
     
 }

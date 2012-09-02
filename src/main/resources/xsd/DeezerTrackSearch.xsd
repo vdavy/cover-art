@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="root">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="data" minOccurs="0" maxOccurs="1">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="track" maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="id" minOccurs="0" maxOccurs="1" type="xsd:int"/>
+                    <xsd:element name="readable" minOccurs="0" maxOccurs="1" type="xsd:int"/>
+                    <xsd:element name="title" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+                    <xsd:element name="link" minOccurs="0" maxOccurs="1" type="xsd:anyURI"/>
+                    <xsd:element name="duration" minOccurs="0" maxOccurs="1" type="xsd:int"/>
+                    <xsd:element name="rank" minOccurs="0" maxOccurs="1" type="xsd:int"/>
+                    <xsd:element name="preview" minOccurs="0" maxOccurs="1" type="xsd:anyURI"/>
+                    <xsd:element name="artist" minOccurs="0" maxOccurs="1">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="id" minOccurs="0" maxOccurs="1" type="xsd:int"/>
+                          <xsd:element name="name" minOccurs="0" maxOccurs="1" type="xsd:normalizedString"/>
+                          <xsd:element name="link" minOccurs="0" maxOccurs="1" type="xsd:anyURI"/>
+                          <xsd:element name="picture" minOccurs="0" maxOccurs="1" type="xsd:anyURI"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="album" minOccurs="0" maxOccurs="1">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="id" minOccurs="0" maxOccurs="1" type="xsd:int"/>
+                          <xsd:element name="title" minOccurs="0" maxOccurs="1" type="xsd:normalizedString"/>
+                          <xsd:element name="cover" minOccurs="0" maxOccurs="1" type="xsd:anyURI"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="type" minOccurs="0" maxOccurs="1" type="xsd:normalizedString"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="total" minOccurs="0" maxOccurs="1" type="xsd:int"/>
+        <xsd:element name="next" minOccurs="0" maxOccurs="1" type="xsd:anyURI"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

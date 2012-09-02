@@ -14,6 +14,10 @@
     		<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
     		<property name="net.sf.ehcache.configurationResourceName" value="/META-INF/ehcache.xml" />
     		
+    		<!-- hibernate search -->
+    		<property name="hibernate.search.default.directory_provider" value="filesystem"/> 
+			<property name="hibernate.search.default.indexBase" value="indexes"/> 
+    		
     		<!-- debug -->    		
     		<property name="hibernate.show_sql" value="true"/>
     		<property name="hibernate.format_sql" value="true"/>

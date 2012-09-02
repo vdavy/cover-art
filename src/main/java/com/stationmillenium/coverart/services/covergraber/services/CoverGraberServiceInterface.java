@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.services.covergraber;
+package com.stationmillenium.coverart.services.covergraber.services;
 
 import java.awt.image.BufferedImage;
 

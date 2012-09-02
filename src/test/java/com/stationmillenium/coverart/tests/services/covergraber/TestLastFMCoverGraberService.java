@@ -3,10 +3,13 @@
  */
 package com.stationmillenium.coverart.tests.services.covergraber;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.stationmillenium.coverart.services.covergraber.impl.LastFmCoverGraberService;
+import com.stationmillenium.coverart.services.covergraber.services.impl.LastFmCoverGraberService;
 
 /**
  * Test class for the {@link LastFmCoverGraberService}
@@ -24,6 +27,15 @@ public class TestLastFMCoverGraberService {
 	 */
 	@Test
 	public void testLastFmCoverGraberService() {
-		lastFmCoverGraberService.grabCover("Cher", "Believe");
+		assertNotNull(lastFmCoverGraberService.grabCover("Cher", "Believe"));
 	}
+	
+	/**
+	 * Test the {@link LastFmCoverGraberService} - null test
+	 */
+	@Test
+	public void testLastFmCoverGraberServiceNullTest() {
+		assertNull(lastFmCoverGraberService.grabCover("azerty", "ytreza"));
+	}
+	
 }

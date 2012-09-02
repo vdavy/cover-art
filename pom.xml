@@ -15,11 +15,12 @@
 		<slf4j.version>1.6.4</slf4j.version>
 		<hibernate.version>4.1.4.Final</hibernate.version>
 		<hibernate.validator.version>4.3.0.Final</hibernate.validator.version>
+		<hibernate.search.version>4.1.1.Final</hibernate.search.version>
 		<spring.webflow.version>2.3.1.RELEASE</spring.webflow.version>
 		<spring-js-resources.version>2.4.0.BUILD-SNAPSHOT-dojo-1.6.1</spring-js-resources.version>
 		<spring-security.version>3.1.0.RELEASE</spring-security.version>
 		<mysql-connector-java.version>5.1.20</mysql-connector-java.version>
-		<ehcache.version>2.5.2</ehcache.version>
+		<ehcache.version>2.6.0</ehcache.version>
 		<tiles.version>2.2.2</tiles.version>
 
 		<!-- third parts -->
@@ -114,7 +115,12 @@
             <artifactId>spring-oxm</artifactId>
             <version>${spring.version}</version>
         </dependency>    
-
+        <dependency>
+		   <groupId>org.hibernate</groupId>
+		   <artifactId>hibernate-search</artifactId>
+		   <version>${hibernate.search.version}</version>
+		</dependency>
+			
 		<!-- General dependencies for standard applications -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -622,7 +628,9 @@
 					</webAppConfig>
 				</configuration>
 			</plugin>
-			<plugin>
+			
+			<!-- JAX-B plugin for Last FM api class generation -->
+			<!-- <plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<executions>
@@ -633,16 +641,14 @@
 					</execution>
 				</executions>
 				<configuration>
-					<schemaIncludes>
-						<include>xsd/LastFMTrackSearch.xsd</include>
-						<!-- <include>xsd/LastFMTrackSearchError.xsd</include> -->
-					</schemaIncludes>
-					<generatePackage>com.stationmillenium.coverart.schema.lastfmtracksearch</generatePackage>
-					<!-- <generatePackage>com.stationmillenium.coverart.schema.lastfmtracksearcherror</generatePackage> -->
+					<schemaIncludes> -->
+						<!-- <include>xsd/LastFMTrackSearch.xsd</include> -->
+						<!-- <include>xsd/DeezerTrackSearch.xsd</include>
+					</schemaIncludes> -->
+					<!-- <generatePackage>com.stationmillenium.coverart.schema.lastfmtracksearch</generatePackage> -->
+					<!-- <generatePackage>com.stationmillenium.coverart.schema.deezertracksearch</generatePackage>
 				</configuration>
-			</plugin>
-			<!-- <plugin> <groupId>net.alchim31.maven</groupId> <artifactId>yuicompressor-maven-plugin</artifactId> 
-				<version>1.3.0</version> </plugin> -->
+			</plugin>	 -->		
 		</plugins>
 	</build>
 	<artifactId>coverart</artifactId>

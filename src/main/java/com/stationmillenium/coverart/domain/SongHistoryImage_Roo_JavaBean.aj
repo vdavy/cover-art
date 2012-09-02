@@ -32,6 +32,14 @@ privileged aspect SongHistoryImage_Roo_JavaBean {
         this.height = height;
     }
     
+    public Provider SongHistoryImage.getProvider() {
+        return this.provider;
+    }
+    
+    public void SongHistoryImage.setProvider(Provider provider) {
+        this.provider = provider;
+    }
+    
     public SongItem SongHistoryImage.getSongHistory() {
         return this.songHistory;
     }

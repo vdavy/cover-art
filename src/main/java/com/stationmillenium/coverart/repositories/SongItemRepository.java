@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stationmillenium.coverart.domain.SongHistory;
+import com.stationmillenium.coverart.domain.SongHistoryImage;
+import com.stationmillenium.coverart.domain.SongHistoryImage.Provider;
 import com.stationmillenium.coverart.domain.SongItem;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 
@@ -86,21 +88,50 @@ public class SongItemRepository {
 	}
 	
 	/**
-	 * Check if a song exists
-	 * @param songToCheck the song to check
-	 * @return <code>true</code> if found, <code>false</code> if not found
+	 * Add time to existing song
+	 * @param songToAddTime the song with time to add
 	 */
-	public void addTimeToExistingSong(SongHistoryItemDTO songToCheck) {
+	@Transactional
+	public void addTimeToExistingSong(SongHistoryItemDTO songToAddTime) {
 		//load song
 		Query query = entityManager.createNamedQuery("loadExistingSong"); //create query
-		query.setParameter("artist", songToCheck.getArtist()); //artist param
-		query.setParameter("title", songToCheck.getTitle()); //title param
+		query.setParameter("artist", songToAddTime.getArtist()); //artist param
+		query.setParameter("title", songToAddTime.getTitle()); //title param
 		SongItem song  = (SongItem) query.getSingleResult(); //Execute query and get count
 		
 		//add time
 		SongHistory songHistory = new SongHistory();
-		songHistory.setPlayedDate(songToCheck.getPlayedDate());
+		songHistory.setPlayedDate(songToAddTime.getPlayedDate());
 		songHistory.setSong(song);
 		songHistory.persist(); //persit add
+	}
+	
+	/**
+	 * Add an image to the song
+	 * @param songToAddTime the song to add image
+	 * @param fileName the file name
+	 * @param width the width
+	 * @param height the height
+	 * @param provider the image provider (see {@link Provider}
+	 */
+	@Transactional
+	public void addImageToSong(SongHistoryItemDTO songToAddTime, String fileName,  int width, int height, Provider provider) {
+		//load song
+		Query query = entityManager.createNamedQuery("loadExistingSong"); //create query
+		query.setParameter("artist", songToAddTime.getArtist()); //artist param
+		query.setParameter("title", songToAddTime.getTitle()); //title param
+		SongItem song  = (SongItem) query.getSingleResult(); //Execute query and get count
+		
+		//new image
+		SongHistoryImage songHistoryImage = new SongHistoryImage(); //create entity
+		songHistoryImage.setWidth(width); //set width
+		songHistoryImage.setHeight(height); //set height
+		songHistoryImage.setFileName(fileName); //set file name
+		songHistoryImage.setProvider(provider); //set image provider
+		songHistoryImage.persist();
+		
+		//link to song
+		song.setImage(songHistoryImage);
+		song.merge();
 	}
 }
