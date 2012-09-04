@@ -13,7 +13,7 @@
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<aspectj.version>1.7.0</aspectj.version>
 		<slf4j.version>1.6.4</slf4j.version>
-		<hibernate.version>4.1.4.Final</hibernate.version>
+		<hibernate.version>4.1.6.Final</hibernate.version>
 		<hibernate.validator.version>4.3.0.Final</hibernate.validator.version>
 		<hibernate.search.version>4.1.1.Final</hibernate.search.version>
 		<mysql-connector-java.version>5.1.20</mysql-connector-java.version>
@@ -38,7 +38,7 @@
 
 		<!-- project properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<servlet-api.version>3.0-alpha-1</servlet-api.version>
+		<servlet-api.version>1.0.2.Final</servlet-api.version>
 		<el-api.version>2.2</el-api.version>
 		<jsp-api.version>2.2</jsp-api.version>
 		<java.version>1.7</java.version><!-- java 1.7 not supported by aspectj 
@@ -153,11 +153,12 @@
 			<version>${aspectj.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
 			<version>${servlet-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- ROO dependencies -->
 		<dependency>
 			<groupId>org.springframework.roo</groupId>

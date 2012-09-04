@@ -10,7 +10,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +31,9 @@ import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 @Repository
 public class SongItemRepository {
 
+	//logger 
+	private static final Logger LOGGER = LoggerFactory.getLogger(SongItemRepository.class);
+			
 	//entity manager to access db
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -38,14 +44,20 @@ public class SongItemRepository {
 
 	/**
 	 * Get the last recorded song in the DB
-	 * @return the {@link SongHistoryItemDTO} filled with last recorded song data
+	 * @return the {@link SongHistoryItemDTO} filled with last recorded song data - empty DTO if not found
 	 */
 	public SongHistoryItemDTO getLastSongHistoryItem() {
-		Query query = entityManager.createNamedQuery("getLastSong"); //create query
-		SongItem song = (SongItem) query.getSingleResult(); //Execute query and get entity
-		SongHistoryItemDTO songHistoryItem = mapper.map(song, SongHistoryItemDTO.class); //process mapping to output dto
-		songHistoryItem.setPlayedDate(((SongHistory) song.getPlayedTimes().toArray()[0]).getPlayedDate()); //process date
-		return songHistoryItem; //return dto
+		try {
+			Query query = entityManager.createNamedQuery("getLastSong"); //create query
+			SongItem song = (SongItem) query.getSingleResult(); //Execute query and get entity
+			SongHistoryItemDTO songHistoryItem = mapper.map(song, SongHistoryItemDTO.class); //process mapping to output dto
+			songHistoryItem.setPlayedDate(((SongHistory) song.getPlayedTimes().toArray()[0]).getPlayedDate()); //process date
+			return songHistoryItem; //return dto
+			
+		} catch (EmptyResultDataAccessException e) { //if not found
+			LOGGER.warn("No entity found", e);
+			return new SongHistoryItemDTO(); //return empty DTO
+		}
 	}
 	
 	/**
@@ -70,8 +82,9 @@ public class SongItemRepository {
 
 		//link history and item
 		songItemEntity.getPlayedTimes().add(songHistory);
-		songHistory.setSong(songItemEntity); 		
-		songItemEntity.persist(); //persist
+		songHistory.setSong(songItemEntity); 
+		songHistory.persist(); //persist time
+		songItemEntity.persist(); //persist song
 	}
 	
 	/**

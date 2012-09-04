@@ -23,7 +23,7 @@ public class SongHistoryItemDTO {
 	private Calendar playedDate;
 	private String artist;
 	private String title;
-	
+
 	/**
 	 * Equals only if title, artist and played date are not null and equal each other.
 	 */
@@ -37,17 +37,18 @@ public class SongHistoryItemDTO {
 			SongHistoryItemDTO objToCompare = (SongHistoryItemDTO) obj;
 			if ((objToCompare.getArtist() == null)  //if anything null
 					|| (objToCompare.getTitle() == null)
-					|| (objToCompare.getPlayedDate() == null))
+					|| (objToCompare.getPlayedDate() == null)
+					|| (playedDate == null))
 				return false;
 			else {
 				long timeDelta = objToCompare.getPlayedDate().getTimeInMillis() - playedDate.getTimeInMillis();
 				timeDelta /= 1000;
 				if ((objToCompare.getArtist().equals(artist)) //if all are equals
-					&& (objToCompare.getTitle().equals(title))
-					&& (timeDelta == 0))
-				return true;
-			else 
-				return false;				
+						&& (objToCompare.getTitle().equals(title))
+						&& (timeDelta == 0))
+					return true;
+				else 
+					return false;				
 			}
 		}
 	}
