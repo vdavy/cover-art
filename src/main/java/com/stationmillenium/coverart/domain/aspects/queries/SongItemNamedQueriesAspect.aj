@@ -23,7 +23,7 @@ public aspect SongItemNamedQueriesAspect {
 				name = "getLastSong", 
 				query = "SELECT item FROM SongItem AS item " +
 						"JOIN FETCH item.playedTimes AS history " +
-						"WHERE history.id = (SELECT max(id) FROM SongHistory) " +
+						"WHERE history.playedDate = (SELECT max(playedDate) FROM SongHistory) " +
 						"ORDER BY history.playedDate DESC"),
 		
 		/**

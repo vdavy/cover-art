@@ -42,10 +42,10 @@ public class SongHistoryItemDTO {
 				return false;
 			else {
 				long timeDelta = objToCompare.getPlayedDate().getTimeInMillis() - playedDate.getTimeInMillis();
-				timeDelta /= 1000;
 				if ((objToCompare.getArtist().equals(artist)) //if all are equals
 						&& (objToCompare.getTitle().equals(title))
-						&& (timeDelta == 0))
+						&& (timeDelta >= -3000)
+						&& (timeDelta <= 3000))
 					return true;
 				else 
 					return false;				
