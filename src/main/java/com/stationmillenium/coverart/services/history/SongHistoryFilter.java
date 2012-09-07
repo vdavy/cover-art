@@ -66,12 +66,10 @@ public class SongHistoryFilter {
 			//if not minimal length
 			long timeDelta = 0;
 			if (canBeAdded) { //if test needed
-				if (i == 0) { //if first
-					timeDelta = config.getMinimalLength() * 1_000; //always add 
-				} else
+				if (i != 0)
 					timeDelta = songHistoryList.get(i - 1).getPlayedDate().getTimeInMillis() - songHistoryList.get(i).getPlayedDate().getTimeInMillis();
 				
-				if (timeDelta < config.getMinimalLength() * 1_000) { //if too short song
+				if ((i != 0) && (timeDelta < config.getMinimalLength() * 1_000)) { //if too short song
 					canBeAdded = false;
 					LOGGER.debug("Song rejected due to too short length : " + songHistoryList.get(i));
 				}
@@ -95,25 +93,27 @@ public class SongHistoryFilter {
 	public void filterLastRecordedSong(List<SongHistoryItemDTO> songHistoryList) {
 		if (songHistoryList.size() > 0) { //if not empty list
 			SongHistoryItemDTO lastRecordedSong = songHistoryRepository.getLastSongHistoryItem(); //get the last song
-			if (!lastRecordedSong.equals(songHistoryList.get(0))) { //if not the first object (no comparison can be done)
-				
-				SongHistoryItemDTO songToCompare = null;
-				for (int i = 1; i < songHistoryList.size(); i++) { //for each song
-					if (lastRecordedSong.equals(songHistoryList.get(i))) { //if song found 
-						songToCompare = songHistoryList.get(i - 1);
-						break;
+			if ((lastRecordedSong.getPlayedDate() != null)) { //if time defined
+				if (!lastRecordedSong.equals(songHistoryList.get(0))) { //if not the first object (no comparison can be done)
+					
+					SongHistoryItemDTO songToCompare = null;
+					for (int i = 1; i < songHistoryList.size(); i++) { //for each song
+						if (lastRecordedSong.equals(songHistoryList.get(i))) { //if song found 
+							songToCompare = songHistoryList.get(i - 1);
+							break;
+						}
 					}
-				}
-				
-				if (songToCompare == null) //if no song found
-					songToCompare = songHistoryList.get(songHistoryList.size() - 1); //use last
-				
-				long timeDelta = songToCompare.getPlayedDate().getTimeInMillis() - lastRecordedSong.getPlayedDate().getTimeInMillis(); //do comparison
-				if (timeDelta < config.getMinimalLength() * 1_000) { //if too short song
-					songHistoryRepository.deleteLastRecordedSong(); //delete last entry
-					LOGGER.debug("Last recorded song deleted due to too short length : " + lastRecordedSong);					
-				}
-			}			
+					
+					if (songToCompare == null) //if no song found
+						songToCompare = songHistoryList.get(songHistoryList.size() - 1); //use last
+					
+					long timeDelta = songToCompare.getPlayedDate().getTimeInMillis() - lastRecordedSong.getPlayedDate().getTimeInMillis(); //do comparison
+					if (timeDelta < config.getMinimalLength() * 1_000) { //if too short song
+						songHistoryRepository.deleteLastRecordedSong(); //delete last entry
+						LOGGER.debug("Last recorded song deleted due to too short length : " + lastRecordedSong);					
+					}
+				}			
+			}
 		}
 	}
 	

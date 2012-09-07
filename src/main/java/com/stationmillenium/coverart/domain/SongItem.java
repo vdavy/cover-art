@@ -39,11 +39,11 @@ public class SongItem {
 	private String title;
 	
 	//associated image
-	@OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private SongHistoryImage image;
 	
 	//associated playing times
-	@OneToMany(mappedBy = "song")
+	@OneToMany(mappedBy = "song", cascade = CascadeType.ALL)
 	private Set<SongHistory> playedTimes;
 	
 }

@@ -18,7 +18,7 @@ import org.springframework.roo.addon.tostring.RooToString;
  */
 @RooJavaBean
 @RooToString
-public class SongHistoryItemDTO {
+public class SongHistoryItemDTO implements Cloneable {
 
 	private Calendar playedDate;
 	private String artist;
@@ -42,8 +42,8 @@ public class SongHistoryItemDTO {
 				return false;
 			else {
 				long timeDelta = objToCompare.getPlayedDate().getTimeInMillis() - playedDate.getTimeInMillis();
-				if ((objToCompare.getArtist().equals(artist)) //if all are equals
-						&& (objToCompare.getTitle().equals(title))
+				if ((objToCompare.getArtist().equalsIgnoreCase(artist)) //if all are equals
+						&& (objToCompare.getTitle().equalsIgnoreCase(title))
 						&& (timeDelta >= -3000)
 						&& (timeDelta <= 3000))
 					return true;
@@ -51,5 +51,21 @@ public class SongHistoryItemDTO {
 					return false;				
 			}
 		}
+	}
+	
+	@Override
+	public SongHistoryItemDTO clone() throws CloneNotSupportedException {
+		SongHistoryItemDTO returnedDTO = new SongHistoryItemDTO();
+		returnedDTO.setArtist(artist);
+		returnedDTO.setTitle(title);
+		
+		//process calendar
+		if (playedDate != null) {
+			Calendar returnedTime = Calendar.getInstance();
+			returnedTime.setTimeInMillis(playedDate.getTimeInMillis());
+			returnedDTO.setPlayedDate(returnedTime);
+		}
+		
+		return returnedDTO;
 	}
 }

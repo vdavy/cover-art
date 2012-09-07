@@ -93,10 +93,32 @@ public class ShoutcastParser {
 			LOGGER.error("Error during Shoucast server song history list parsing", e);
 		}		
 		
+		//day change
+		handeDateChange(songHistoryList);
+				
 		//logging
 		LOGGER.debug("Song history found : " + songHistoryList);
 		
 		return songHistoryList; //return the list
+	}
+
+	/**
+	 * Handle the date change
+	 * @param songHistoryList the list to process
+	 */
+	private void handeDateChange(List<SongHistoryItemDTO> songHistoryList) {
+		//handle the case of day changing
+		for (int i = 0; i < songHistoryList.size() - 1; i++) {
+			//get songs
+			SongHistoryItemDTO currentSong = songHistoryList.get(i); 
+			SongHistoryItemDTO nextSong = songHistoryList.get(i + 1);
+			
+			//if current song before the next song
+			if (currentSong.getPlayedDate().before(nextSong.getPlayedDate())) {
+				nextSong.getPlayedDate().add(Calendar.DAY_OF_MONTH, -1); //song of the previous day
+				LOGGER.debug("Changed the date of song : " + nextSong);
+			}
+		}
 	}
 	
 	/**
@@ -137,15 +159,7 @@ public class ShoutcastParser {
 			LOGGER.warn("Error while plitting date in song history list");
 			playedDate = null;
 		}
-			
-		
-		//handle the case of day changing
-		if ((songHistoryList.size() > 0) && (playedDate != null)){ //if there already some data
-			SongHistoryItemDTO previousItem = songHistoryList.get(songHistoryList.size() - 1);
-			if (previousItem.getPlayedDate().before(playedDate)) //if date previous 
-				playedDate.add(Calendar.DAY_OF_MONTH, 1);  //add one day			
-		}
-		
+				
 		item.setPlayedDate(playedDate);  //set played date
 		
 		cleanSongHistoryItemAndAddIt(item, songHistoryList); //add item

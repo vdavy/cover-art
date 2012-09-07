@@ -31,6 +31,9 @@ public class PollingService {
 	//logger
 	private static final Logger LOGGER = LoggerFactory.getLogger(PollingService.class);
 
+	//current song
+	private SongHistoryItemDTO currentSong;
+	
 	//service injection
 	//the shoutcast parser
 	@Autowired
@@ -83,9 +86,18 @@ public class PollingService {
 	private List<SongHistoryItemDTO> queryShoutcastServer() {
 		if (shoutcastParser.checkShoutcastStatus()) { //test if shoutcast parser up
 			recordServerStatus(true);
-			List<SongHistoryItemDTO> songHistoryList = shoutcastParser.getSongHistoryList(); //get the list
+			List<SongHistoryItemDTO> songHistoryList = shoutcastParser.getSongHistoryList(); //get the list			
 			List<SongHistoryItemDTO> filteredSongHistoryFiltersList = songFilter.filterSongHistory(songHistoryList); //process filter
+			songFilter.filterLastRecordedSong(filteredSongHistoryFiltersList); //filter last recorded song
 			
+			//set current song
+			if ((songHistoryList.size() > 0) && (songHistoryList.get(0) != null))
+				try {
+					currentSong = songHistoryList.get(0).clone();
+				} catch (CloneNotSupportedException e) {
+					LOGGER.error("Error during current song notification", e);
+				}
+				
 			return filteredSongHistoryFiltersList;
 			
 		} else { //if server down
@@ -141,4 +153,11 @@ public class PollingService {
 		return songListToGatherImage;
 	}
 	
+	/**
+	 * Get the current song
+	 * @return the {@code SongHistoryItemDTO
+	 */
+	public SongHistoryItemDTO getCurrentSong() {
+		return currentSong;
+	}
 }
