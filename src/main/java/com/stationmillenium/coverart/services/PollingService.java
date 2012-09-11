@@ -4,6 +4,7 @@
 package com.stationmillenium.coverart.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.ServerStatusRepository;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
@@ -56,6 +58,10 @@ public class PollingService {
 	@Autowired
 	private CoverGraberRootService coverGraberRootService;
 	
+	//configuration
+	@Autowired
+	private GeneralPropertiesBean config;
+		
 	/**
 	 * Method to do server polling :
 	 * -query shoutcast server
@@ -87,17 +93,32 @@ public class PollingService {
 		if (shoutcastParser.checkShoutcastStatus()) { //test if shoutcast parser up
 			recordServerStatus(true);
 			List<SongHistoryItemDTO> songHistoryList = shoutcastParser.getSongHistoryList(); //get the list			
-			List<SongHistoryItemDTO> filteredSongHistoryFiltersList = songFilter.filterSongHistory(songHistoryList); //process filter
-			songFilter.filterLastRecordedSong(filteredSongHistoryFiltersList); //filter last recorded song
+			
 			
 			//set current song
 			if ((songHistoryList.size() > 0) && (songHistoryList.get(0) != null))
 				try {
 					currentSong = songHistoryList.get(0).clone();
+					
+					//check playlist update timeout
+					Calendar timeoutCalendar = Calendar.getInstance();
+					timeoutCalendar.add(Calendar.MINUTE, -config.getPlaylistUpdateTimeout());
+					
+					if (timeoutCalendar.after(currentSong.getPlayedDate())) {
+						serverStatusRepository.recordPlaylistUpdateTimeout();
+						LOGGER.warn("Playlist not updated in timeout");
+					} else {
+						serverStatusRepository.recordPlaylistUpdated();
+						LOGGER.debug("Playlist updated");
+					}
+					
 				} catch (CloneNotSupportedException e) {
 					LOGGER.error("Error during current song notification", e);
 				}
 				
+			List<SongHistoryItemDTO> filteredSongHistoryFiltersList = songFilter.filterSongHistory(songHistoryList); //process filter
+			songFilter.filterLastRecordedSong(filteredSongHistoryFiltersList); //filter last recorded song
+			
 			return filteredSongHistoryFiltersList;
 			
 		} else { //if server down
@@ -126,13 +147,22 @@ public class PollingService {
 	 * @param songList the song list to insert
 	 */
 	private List<SongHistoryItemDTO> insertSongList(List<SongHistoryItemDTO> songList) {
+		//compute current date
+		Calendar currentDate = Calendar.getInstance();
+		currentDate.add(Calendar.MINUTE, 1);
+		
 		SongHistoryItemDTO lastSong = songHistoryRepository.getLastSongHistoryItem(); //get last recorded song
 		List<SongHistoryItemDTO> listToInsert = new ArrayList<>(); //list of song to insert
 		
 		for (int i = 0; i < songList.size(); i++) { //for each song in the list
-			if (!lastSong.equals(songList.get(i))) //if not equals
-				listToInsert.add(songList.get(i)); //add to the list
-			else
+			if (!lastSong.equals(songList.get(i))) { //if not equals
+				if (((lastSong.getPlayedDate() == null) //if no entity found
+						|| (lastSong.getPlayedDate().before(songList.get(i).getPlayedDate()))) 
+						&& (currentDate.after(songList.get(i).getPlayedDate()))) //past the last recorded song and not in the future
+					listToInsert.add(songList.get(i)); //add to the list
+				else
+					LOGGER.warn("Song not in right time range : " + songList.get(i));
+			} else
 				break; //reach the same - do not add and quit
 		}
 		

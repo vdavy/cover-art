@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.stationmillenium.coverart.domain.ServerStatus;
+import com.stationmillenium.coverart.domain.statuses.PlaylistStatus;
+import com.stationmillenium.coverart.domain.statuses.ServerStatus;
 
 /**
  * Repository for {@link ServerStatus}}
@@ -70,4 +71,42 @@ public class ServerStatusRepository {
 		serverStatus.setDateOfChange(Calendar.getInstance());
 		serverStatus.persist();
 	}
+	
+	/**
+	 * Record playlist update timeout
+	 */
+	public void recordPlaylistUpdateTimeout() {
+		recordPlaylist(false);
+	}
+	
+	/**
+	 * Record playlist updated
+	 */
+	public void recordPlaylistUpdated() {
+		recordPlaylist(true);
+	}
+	
+	/**
+	 * Update playlist status if needed
+	 * @param updated the status to record
+	 */
+	private void recordPlaylist(boolean updated) {
+		//get previous update status
+		boolean previousUpdate = false;
+		try {
+			Query query = entityManager.createNamedQuery("getLastPlaylistBoolean");
+			previousUpdate = (boolean) query.getSingleResult();
+		} catch (EmptyResultDataAccessException e) { //if not found
+			LOGGER.warn("No entity found", e);
+		}
+		
+		//insert update if needed
+		if (updated != previousUpdate) {
+			PlaylistStatus playlistStatus = new PlaylistStatus();
+			playlistStatus.setDateOfChange(Calendar.getInstance());
+			playlistStatus.setPlaylistUpdated(updated);
+			playlistStatus.persist();
+		}
+	}
+	
 }

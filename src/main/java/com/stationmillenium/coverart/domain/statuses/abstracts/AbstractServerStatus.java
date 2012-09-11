@@ -1,4 +1,4 @@
-package com.stationmillenium.coverart.domain;
+package com.stationmillenium.coverart.domain.statuses.abstracts;
 
 import java.util.Calendar;
 
@@ -15,13 +15,8 @@ import org.springframework.roo.addon.tostring.RooToString;
  */
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord
-public class ServerStatus {
-	
-	/**
-	 * Boolean to note if server is up or down
-	 */
-	private boolean serverUp;
+@RooJpaActiveRecord(inheritanceType = "SINGLE_TABLE")
+public abstract class AbstractServerStatus {
 	
 	/**
 	 * Date of the change

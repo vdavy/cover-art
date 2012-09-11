@@ -1,4 +1,4 @@
-package com.stationmillenium.coverart.domain;
+package com.stationmillenium.coverart.domain.history;
 
 import java.util.Set;
 
@@ -45,5 +45,5 @@ public class SongItem {
 	//associated playing times
 	@OneToMany(mappedBy = "song", cascade = CascadeType.ALL)
 	private Set<SongHistory> playedTimes;
-	
+
 }

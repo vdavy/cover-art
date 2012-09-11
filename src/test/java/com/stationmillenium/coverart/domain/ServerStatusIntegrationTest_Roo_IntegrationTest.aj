@@ -3,9 +3,9 @@
 
 package com.stationmillenium.coverart.domain;
 
-import com.stationmillenium.coverart.domain.ServerStatus;
 import com.stationmillenium.coverart.domain.ServerStatusDataOnDemand;
 import com.stationmillenium.coverart.domain.ServerStatusIntegrationTest;
+import com.stationmillenium.coverart.domain.statuses.ServerStatus;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -89,7 +89,7 @@ privileged aspect ServerStatusIntegrationTest_Roo_IntegrationTest {
         obj = ServerStatus.findServerStatus(id);
         boolean modified =  dod.modifyServerStatus(obj);
         Integer currentVersion = obj.getVersion();
-        ServerStatus merged = obj.merge();
+        ServerStatus merged = (ServerStatus)obj.merge();
         obj.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         Assert.assertTrue("Version for 'ServerStatus' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);

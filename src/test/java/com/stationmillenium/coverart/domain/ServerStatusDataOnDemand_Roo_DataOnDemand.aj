@@ -3,8 +3,8 @@
 
 package com.stationmillenium.coverart.domain;
 
-import com.stationmillenium.coverart.domain.ServerStatus;
 import com.stationmillenium.coverart.domain.ServerStatusDataOnDemand;
+import com.stationmillenium.coverart.domain.statuses.ServerStatus;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;

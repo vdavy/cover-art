@@ -17,10 +17,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.stationmillenium.coverart.domain.SongHistory;
-import com.stationmillenium.coverart.domain.SongHistoryImage;
-import com.stationmillenium.coverart.domain.SongHistoryImage.Provider;
-import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.history.SongHistory;
+import com.stationmillenium.coverart.domain.history.SongHistoryImage;
+import com.stationmillenium.coverart.domain.history.SongHistoryImage.Provider;
+import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 
 /**

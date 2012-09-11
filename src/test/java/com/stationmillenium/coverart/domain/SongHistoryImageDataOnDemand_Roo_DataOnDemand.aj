@@ -3,8 +3,8 @@
 
 package com.stationmillenium.coverart.domain;
 
-import com.stationmillenium.coverart.domain.SongHistoryImage;
-import com.stationmillenium.coverart.domain.SongHistoryImage.Provider;
+import com.stationmillenium.coverart.domain.history.SongHistoryImage;
+import com.stationmillenium.coverart.domain.history.SongHistoryImage.Provider;
 import com.stationmillenium.coverart.domain.SongHistoryImageDataOnDemand;
 import com.stationmillenium.coverart.domain.SongItemDataOnDemand;
 import java.security.SecureRandom;

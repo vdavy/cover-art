@@ -3,7 +3,8 @@
  */
 package com.stationmillenium.coverart.domain.aspects.queries;
 
-import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.history.SongItem;
+
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 

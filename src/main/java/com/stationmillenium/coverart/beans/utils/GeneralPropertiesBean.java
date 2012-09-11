@@ -3,6 +3,7 @@
  */
 package com.stationmillenium.coverart.beans.utils;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -35,5 +36,8 @@ public class GeneralPropertiesBean implements PropertyBeanInterface {
 	@Size(min = 3, max = 4)
 	@Pattern(regexp = "[a-z]{3-4}")
 	private String coverImagesExtension;
+	
+	@Min(1)
+	private int playlistUpdateTimeout;
 	
 }

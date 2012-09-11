@@ -30,4 +30,12 @@ privileged aspect GeneralPropertiesBean_Roo_JavaBean {
     public void GeneralPropertiesBean.setFallbackPath(String fallbackPath) {
         this.fallbackPath = fallbackPath;
     }
+    
+    public int GeneralPropertiesBean.getPlaylistUpdateTimeout() {
+        return this.playlistUpdateTimeout;
+    }
+    
+    public void GeneralPropertiesBean.setPlaylistUpdateTimeout(int playlistUpdateTimeout) {
+        this.playlistUpdateTimeout = playlistUpdateTimeout;
+    }
 }

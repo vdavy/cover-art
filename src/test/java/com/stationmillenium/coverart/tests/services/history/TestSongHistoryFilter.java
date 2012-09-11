@@ -22,8 +22,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.stationmillenium.coverart.domain.SongHistory;
-import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.history.SongHistory;
+import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.services.history.SongHistoryFilter;

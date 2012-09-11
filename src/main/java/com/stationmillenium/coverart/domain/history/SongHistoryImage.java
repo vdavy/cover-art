@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.domain;
+package com.stationmillenium.coverart.domain.history;
 
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
@@ -45,5 +45,5 @@ public class SongHistoryImage {
 	//reverse link to mapped song item
 	@OneToOne(mappedBy = "image")
 	private SongItem songHistory;
-	
+
 }

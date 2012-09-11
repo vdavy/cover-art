@@ -1,4 +1,4 @@
-package com.stationmillenium.coverart.domain;
+package com.stationmillenium.coverart.domain.history;
 
 import java.util.Calendar;
 

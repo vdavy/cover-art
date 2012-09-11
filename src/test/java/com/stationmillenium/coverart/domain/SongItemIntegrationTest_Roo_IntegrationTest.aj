@@ -3,9 +3,10 @@
 
 package com.stationmillenium.coverart.domain;
 
-import com.stationmillenium.coverart.domain.SongItem;
 import com.stationmillenium.coverart.domain.SongItemDataOnDemand;
 import com.stationmillenium.coverart.domain.SongItemIntegrationTest;
+import com.stationmillenium.coverart.domain.history.SongItem;
+
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;

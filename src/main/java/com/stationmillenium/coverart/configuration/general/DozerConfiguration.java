@@ -9,7 +9,7 @@ import org.dozer.loader.api.TypeMappingOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 
 /**

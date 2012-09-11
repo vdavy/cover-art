@@ -3,9 +3,10 @@
 
 package com.stationmillenium.coverart.domain;
 
-import com.stationmillenium.coverart.domain.SongHistoryImage;
-import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.SongHistoryImageDataOnDemand;
 import com.stationmillenium.coverart.domain.SongItemDataOnDemand;
+import com.stationmillenium.coverart.domain.history.SongItem;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect SongItemDataOnDemand_Roo_DataOnDemand {
@@ -23,10 +25,12 @@ privileged aspect SongItemDataOnDemand_Roo_DataOnDemand {
     
     private List<SongItem> SongItemDataOnDemand.data;
     
+    @Autowired
+    private SongHistoryImageDataOnDemand SongItemDataOnDemand.songHistoryImageDataOnDemand;
+    
     public SongItem SongItemDataOnDemand.getNewTransientSongItem(int index) {
         SongItem obj = new SongItem();
         setArtist(obj, index);
-        setImage(obj, index);
         setTitle(obj, index);
         return obj;
     }
@@ -37,11 +41,6 @@ privileged aspect SongItemDataOnDemand_Roo_DataOnDemand {
             artist = artist.substring(0, 200);
         }
         obj.setArtist(artist);
-    }
-    
-    public void SongItemDataOnDemand.setImage(SongItem obj, int index) {
-        SongHistoryImage image = null;
-        obj.setImage(image);
     }
     
     public void SongItemDataOnDemand.setTitle(SongItem obj, int index) {

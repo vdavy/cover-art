@@ -3,7 +3,7 @@ package com.stationmillenium.coverart.domain.aspects;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import com.stationmillenium.coverart.domain.SongItem;
+import com.stationmillenium.coverart.domain.history.SongItem;
 
 /**
  * @Pre* aspects for SongItem entity

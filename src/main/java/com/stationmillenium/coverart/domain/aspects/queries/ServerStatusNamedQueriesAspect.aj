@@ -3,7 +3,8 @@
  */
 package com.stationmillenium.coverart.domain.aspects.queries;
 
-import com.stationmillenium.coverart.domain.ServerStatus;
+import com.stationmillenium.coverart.domain.statuses.ServerStatus;
+
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -21,7 +22,14 @@ public aspect ServerStatusNamedQueriesAspect {
 		 */
 		@NamedQuery( 
 			name = "getLastServerStatusBoolean", 
-			query = "SELECT serverUp FROM ServerStatus WHERE id = (SELECT max(id) FROM ServerStatus)")
+			query = "SELECT serverUp FROM ServerStatus WHERE id = (SELECT max(id) FROM ServerStatus)"),
+		
+		/**
+		 * Get the last server status as boolean
+		 */
+		@NamedQuery( 
+			name = "getLastPlaylistBoolean", 
+			query = "SELECT playlistUpdated FROM PlaylistStatus WHERE id = (SELECT max(id) FROM PlaylistStatus)")
 		
 	});
 	

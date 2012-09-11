@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.ServletContextAware;
 
 import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
-import com.stationmillenium.coverart.domain.SongHistoryImage.Provider;
+import com.stationmillenium.coverart.domain.history.SongHistoryImage.Provider;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.services.covergraber.services.CoverGraberServiceInterface;
