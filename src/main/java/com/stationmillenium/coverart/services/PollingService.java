@@ -93,33 +93,41 @@ public class PollingService {
 		if (shoutcastParser.checkShoutcastStatus()) { //test if shoutcast parser up
 			recordServerStatus(true);
 			List<SongHistoryItemDTO> songHistoryList = shoutcastParser.getSongHistoryList(); //get the list			
-			
-			
+						
 			//set current song
-			if ((songHistoryList.size() > 0) && (songHistoryList.get(0) != null))
+			if ((songHistoryList.size() > 0) && (songHistoryList.get(0) != null)) {
 				try {
-					currentSong = songHistoryList.get(0).clone();
+					currentSong = songHistoryList.get(0).clone(); //set current song
 					
 					//check playlist update timeout
 					Calendar timeoutCalendar = Calendar.getInstance();
 					timeoutCalendar.add(Calendar.MINUTE, -config.getPlaylistUpdateTimeout());
 					
-					if (timeoutCalendar.after(currentSong.getPlayedDate())) {
-						serverStatusRepository.recordPlaylistUpdateTimeout();
-						LOGGER.warn("Playlist not updated in timeout");
-					} else {
+					if (timeoutCalendar.before(currentSong.getPlayedDate())) { //check playlist update
+						//record playlist updated
 						serverStatusRepository.recordPlaylistUpdated();
 						LOGGER.debug("Playlist updated");
-					}
+						
+						//playlist updated - process filtering
+						List<SongHistoryItemDTO> filteredSongHistoryFiltersList = songFilter.filterSongHistory(songHistoryList); //process filter
+						songFilter.filterLastRecordedSong(filteredSongHistoryFiltersList); //filter last recorded song
+						return filteredSongHistoryFiltersList;			
+						
+					} else { //playlist not updated
+						serverStatusRepository.recordPlaylistUpdateTimeout();
+						LOGGER.warn("Playlist not updated in timeout");						
+						return new ArrayList<>(); //return empty list
+					}					
 					
-				} catch (CloneNotSupportedException e) {
+				} catch (CloneNotSupportedException e) { //error during cloning
 					LOGGER.error("Error during current song notification", e);
-				}
+					return new ArrayList<>(); //return empty list
+				}		
 				
-			List<SongHistoryItemDTO> filteredSongHistoryFiltersList = songFilter.filterSongHistory(songHistoryList); //process filter
-			songFilter.filterLastRecordedSong(filteredSongHistoryFiltersList); //filter last recorded song
-			
-			return filteredSongHistoryFiltersList;
+			} else {
+				LOGGER.warn("Playlist empty");		
+				return new ArrayList<>(); //return empty list
+			}
 			
 		} else { //if server down
 			recordServerStatus(false);
