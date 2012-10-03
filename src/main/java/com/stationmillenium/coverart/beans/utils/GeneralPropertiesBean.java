@@ -3,6 +3,7 @@
  */
 package com.stationmillenium.coverart.beans.utils;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -39,5 +40,9 @@ public class GeneralPropertiesBean implements PropertyBeanInterface {
 	
 	@Min(1)
 	private int playlistUpdateTimeout;
+	
+	@Min(1)
+	@Max(120)
+	private int alertTimeout;
 	
 }

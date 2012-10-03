@@ -25,9 +25,11 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private @Value("${generalConfiguration.coverImagesExtension}") String coverImagesExtension;
 	private @Value("${generalConfiguration.fallbackPath}") String fallbackPath;
 	private @Value("${generalConfiguration.playlistUpdateTimeout}") String playlistUpdateTimeout;
+	private @Value("${generalConfiguration.alertTimeout}") String alertTimeout;
 	
 	//instance vars
 	private int playlistUpdateTimeoutInt;
+	private int alertTimeoutInt;
 	
 	@Override
 	protected GeneralPropertiesBean buildBean() {
@@ -36,15 +38,22 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 		propertiesBean.setCoverImagesExtension(coverImagesExtension);
 		propertiesBean.setFallbackPath(fallbackPath);
 		propertiesBean.setPlaylistUpdateTimeout(playlistUpdateTimeoutInt);
+		propertiesBean.setAlertTimeout(alertTimeoutInt);
 		return propertiesBean;
 	}
 	
 	@Override
 	protected void propertyCustomChecker() throws PropertyBeanException {
-		try {
+		try { //convert playlistUpdateTimeout into number
 			playlistUpdateTimeoutInt = Integer.parseInt(playlistUpdateTimeout);
 		} catch(NumberFormatException e) {
 			throw new PropertyBeanException("playlistUpdateTimeout", e);
+		}
+		
+		try { //convert alertTimeout into number
+			alertTimeoutInt = Integer.parseInt(alertTimeout);
+		} catch(NumberFormatException e) {
+			throw new PropertyBeanException("alertTimeout", e);
 		}
 	}
 

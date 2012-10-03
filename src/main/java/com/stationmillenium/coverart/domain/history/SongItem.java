@@ -6,11 +6,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -44,6 +46,8 @@ public class SongItem {
 	
 	//associated playing times
 	@OneToMany(mappedBy = "song", cascade = CascadeType.ALL)
+	@OrderBy("playedDate DESC")
+	@IndexedEmbedded
 	private Set<SongHistory> playedTimes;
 
 }

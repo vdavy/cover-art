@@ -38,4 +38,12 @@ privileged aspect GeneralPropertiesBean_Roo_JavaBean {
     public void GeneralPropertiesBean.setPlaylistUpdateTimeout(int playlistUpdateTimeout) {
         this.playlistUpdateTimeout = playlistUpdateTimeout;
     }
+    
+    public int GeneralPropertiesBean.getAlertTimeout() {
+        return this.alertTimeout;
+    }
+    
+    public void GeneralPropertiesBean.setAlertTimeout(int alertTimeout) {
+        this.alertTimeout = alertTimeout;
+    }
 }

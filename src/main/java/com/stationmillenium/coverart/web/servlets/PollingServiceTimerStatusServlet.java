@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.web;
+package com.stationmillenium.coverart.web.servlets;
 
 import java.io.IOException;
 
@@ -21,9 +21,9 @@ import com.stationmillenium.coverart.services.PollingServiceTimer;
  * @author vincent
  *
  */
-@WebServlet("/pollingServiceEnabler")
+@WebServlet("/pollingServiceStatus")
 @Configurable
-public class PollingServiceTimerEnablerServlet extends HttpServlet {
+public class PollingServiceTimerStatusServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -36,9 +36,7 @@ public class PollingServiceTimerEnablerServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		boolean enabled = (req.getParameter("active") != null);
-		pollingServiceTimer.setEnable(enabled);
-		resp.getWriter().print("Enable Polling status : " + pollingServiceTimer.isEnable());
+		resp.getWriter().print("Polling status : " + pollingServiceTimer.isEnable());
 	}
 	
 }

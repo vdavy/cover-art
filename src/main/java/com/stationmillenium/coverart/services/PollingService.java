@@ -36,6 +36,9 @@ public class PollingService {
 	//current song
 	private SongHistoryItemDTO currentSong;
 	
+	//time for server status
+	private Calendar serverStatusCalendar;
+	
 	//service injection
 	//the shoutcast parser
 	@Autowired
@@ -91,7 +94,9 @@ public class PollingService {
 	 */
 	private List<SongHistoryItemDTO> queryShoutcastServer() {
 		if (shoutcastParser.checkShoutcastStatus()) { //test if shoutcast parser up
-			recordServerStatus(true);
+			recordServerStatus(true); //deal with server up
+			serverStatusCalendar = null; //reset calendar
+			
 			List<SongHistoryItemDTO> songHistoryList = shoutcastParser.getSongHistoryList(); //get the list			
 						
 			//set current song
@@ -130,7 +135,19 @@ public class PollingService {
 			}
 			
 		} else { //if server down
-			recordServerStatus(false);
+			//deal with server down
+			if (serverStatusCalendar == null) {
+				serverStatusCalendar = Calendar.getInstance();
+				LOGGER.debug("Server down at : " + serverStatusCalendar);
+			} else {
+				Calendar currentServerDownTime = Calendar.getInstance();
+				currentServerDownTime.add(Calendar.SECOND, -config.getAlertTimeout()); //add alert delay time
+				if (currentServerDownTime.after(serverStatusCalendar)) {
+					recordServerStatus(false);
+					LOGGER.debug("Record server down at : " + currentServerDownTime);
+				}					
+			}						
+
 			return new ArrayList<>(); //return empty list
 		}
 	}
