@@ -3,7 +3,9 @@
  */
 package com.stationmillenium.coverart.repositories;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -160,8 +162,34 @@ public class SongItemRepository {
 		query.setParameter("artist", songToSearch.getArtist()); //artist param
 		query.setParameter("title", songToSearch.getTitle()); //title param
 		query.setParameter("calendar", songToSearch.getPlayedDate()); //calendar param
+		@SuppressWarnings("unused")
 		SongHistoryImage imageEntity = (SongHistoryImage) query.getSingleResult(); //Execute query 
 		
 		return null;
+	}
+
+
+	/**
+	 * Get the last 5 played songs
+	 * @param displayLastSong display last song
+	 * @return the list of {@link SongHistoryItemDTO}
+	 */
+	public List<SongHistoryItemDTO> getLast5PlayedSongs(boolean displayLastSong) {
+		//query db
+		Query query = entityManager.createNamedQuery("getSongsOrderedByPlayedTime", SongItem.class); //create query
+		query.setMaxResults(5);
+		if (!displayLastSong) //if needed shift first result
+			query.setFirstResult(1);
+		@SuppressWarnings("unchecked")
+		List<SongItem> lastSongsList = query.getResultList();
+
+		//convert
+		List<SongHistoryItemDTO> resultSongsList = new ArrayList<>();
+		for (SongItem songItem : lastSongsList) {
+			SongHistoryItemDTO songHistoryItem = mapper.map(songItem, SongHistoryItemDTO.class); //process mapping to output dto
+			resultSongsList.add(songHistoryItem);
+		}
+
+		return resultSongsList; 
 	}
 }

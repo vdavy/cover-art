@@ -170,4 +170,23 @@ public class TestSongHistoryRepository {
 		//process
 		repository.deleteLastRecordedSong();
 	}
+	
+	/**
+	 * Test the {@link SongHistoryRepository#getLast5PlayedSongs()}
+	 */
+	@Test
+	public void testGetLast5PlayedSongs() {
+		//process
+		List<SongHistoryItemDTO> lastSongsList = repository.getLast5PlayedSongs(true);
+		
+		//assert
+		assertEquals(lastSongsList.size(), 5);
+		
+		//process 
+		lastSongsList = repository.getLast5PlayedSongs(false);
+		
+		//assert
+		assertEquals(lastSongsList.size(), 5);		
+	}
+	
 }

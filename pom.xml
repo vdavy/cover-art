@@ -29,6 +29,7 @@
 		<joda-time.version>2.0</joda-time.version>
 		<jsoup.version>1.6.3</jsoup.version>
 		<dozer.version>5.3.2</dozer.version>
+		<gwt.version>2.4.0</gwt.version>
 
 		<!-- common parts -->
 		<commons-pool.version>1.6</commons-pool.version>
@@ -99,12 +100,7 @@
 			<artifactId>dozer</artifactId>
 			<version>${dozer.version}</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.springframework.ws</groupId>
-			<artifactId>spring-ws</artifactId>
-			<version>${spring-oxm.version}</version>
-		</dependency> -->
-            <dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
             <version>${spring.version}</version>
@@ -113,8 +109,20 @@
 		   <groupId>org.hibernate</groupId>
 		   <artifactId>hibernate-search</artifactId>
 		   <version>${hibernate.search.version}</version>
+		</dependency>			
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<!-- "provided" so that we don't deploy -->
+			<scope>provided</scope>
 		</dependency>
-			
+		
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
 		<!-- General dependencies for standard applications -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -531,6 +539,21 @@
 					<webAppConfig>
 						<contextPath>/${project.name}</contextPath>
 					</webAppConfig>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gwt.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<extraParam>true</extraParam>
 				</configuration>
 			</plugin>
 			

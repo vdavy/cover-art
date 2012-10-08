@@ -39,8 +39,17 @@ public aspect SongItemNamedQueriesAspect {
 		 */
 		@NamedQuery( 
 				name = "loadExistingSong", 
-				query = "FROM SongItem WHERE artist = :artist AND title = :title")
+				query = "FROM SongItem WHERE artist = :artist AND title = :title"),
 		
+		/**
+		 * Get the last songs ordered by played time
+		 */
+		@NamedQuery( 
+				name = "getSongsOrderedByPlayedTime", 
+				query = "SELECT item FROM SongItem AS item " +
+						"JOIN FETCH item.playedTimes AS history " +
+						"ORDER BY history.playedDate DESC")
+						
 	});
 	
 }

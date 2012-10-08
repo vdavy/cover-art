@@ -1,0 +1,83 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+    
+    <!-- Style -->
+	<ui:style>
+		/* Add CSS here. See the GWT docs on UI Binder for more details */
+		.current-song {
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 15px;
+			color: #ffffff;
+			font-size: 15px;
+		}
+		
+		.current-song-title {
+			font-weight: bold;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 15px;
+			color: #ffffff;
+		}
+		
+		.background-player {
+			background-image: url('resources/fond-player-millenium.jpg');
+			background-position: center top;
+			background-repeat: no-repeat;
+			background-color: black;
+		}
+		
+		.history-title {
+			color: #ffffff;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-weight: bold;
+			font-size: 12px;
+			margin-top: 15px;
+		}
+		
+		
+		.history-list {			
+			color: #ffffff;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+		}
+		
+		.player {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+	</ui:style>
+	
+	<!-- Panel content -->
+	<g:DockLayoutPanel unit="PX" width="500px" height="281px" styleName="{style.background-player}">
+		<g:north size="45">
+			<g:HorizontalPanel width="500px" horizontalAlignment="center">
+				<g:HTMLPanel width="300px" styleName="{style.player}">
+					<object type="application/x-shockwave-flash" name="audioplayer_1"
+						data="http://www.station-millenium.com/wp-millenium/wp-content/plugins/audio-player-oogiechetos/assets/player.swf?ver=2.0.4.1"
+						width="290" height="24" id="audioplayer_1">
+						<param name="bgcolor" value="#FFFFFF" />
+						<param name="wmode" value="transparent" />
+						<param name="menu" value="false" />
+						<param name="flashvars"	value="animation=no&amp;encode=no&amp;autostart=yes&amp;initialvolume=60&amp;remaining=no&amp;noinfo=yes&amp;buffer=5&amp;checkpolicy=no&amp;rtl=no&amp;bg=E5E5E5&amp;text=333333&amp;leftbg=CCCCCC&amp;lefticon=333333&amp;volslider=666666&amp;voltrack=FFFFFF&amp;rightbg=B4B4B4&amp;rightbghover=999999&amp;righticon=333333&amp;righticonhover=FFFFFF&amp;track=FFFFFF&amp;loader=009900&amp;border=CCCCCC&amp;tracker=DDDDDD&amp;skip=666666&amp;soundFile=http://www.station-millenium.com/millenium.mp3&amp;playerID=audioplayer_1" />
+					</object>
+				</g:HTMLPanel> 
+			</g:HorizontalPanel>			
+		</g:north>
+		<g:west size="270" >
+			<g:VerticalPanel>
+				<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement</ui:msg></g:Label>				
+				<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
+				<g:Label styleName="{style.history-title}"><ui:msg>5 dernier titres</ui:msg></g:Label>
+				<c:CellList rowCount="5" ui:field="songList" width="200px" height="100px" styleName="{style.history-list}"/>
+			</g:VerticalPanel>			
+		</g:west>
+		<g:center>
+			<g:Image ui:field="songImage" />
+		</g:center>
+	</g:DockLayoutPanel>
+	
+</ui:UiBinder> 

@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.stationmillenium.coverart.domain.history.SongItem;
+import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.web.gwt.player.shared.SongGWTDTO;
 
 /**
  * Configuration class for Dozer mapping
@@ -44,6 +46,18 @@ public class DozerConfiguration {
 						TypeMappingOptions.mapEmptyString()).exclude("playedDate")
 						.fields("artist", "artist")
 						.fields("title", "title");
+				
+				mapping(SongHistoryItemDTO.class, SongGWTDTO.class, TypeMappingOptions.mapNull(),
+						TypeMappingOptions.mapEmptyString())
+						.fields("artist", "artist")
+						.fields("title", "title")
+						.fields("playedDate", "playedDate");
+				
+				mapping(SongImageDTO.class, SongGWTDTO.class, TypeMappingOptions.mapNull(),
+						TypeMappingOptions.mapEmptyString())
+						.fields("fileName", "imagePath")
+						.fields("width", "imageWidth")
+						.fields("height", "imageHeight");
 			}
 		};
 		
