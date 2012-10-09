@@ -63,9 +63,6 @@ public class Player implements EntryPoint {
 	    
 	    //timer for player update
 	    setupTimer();
-	    
-	    //launch first time to init
-	    clientFactory.getEventBus().fireEvent(new UpdatePlayerEvent());			
 	}
 
 	/**

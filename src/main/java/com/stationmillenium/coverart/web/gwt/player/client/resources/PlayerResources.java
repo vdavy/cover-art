@@ -16,4 +16,7 @@ public interface PlayerResources extends ClientBundle {
 	@Source("logo-millenium.png")
 	ImageResource logoMillenium();
 
+	@Source("logo-player-live.png")
+	ImageResource logoPlayerLive();
+	
 }
