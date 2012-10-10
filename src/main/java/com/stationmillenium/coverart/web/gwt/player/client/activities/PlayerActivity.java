@@ -17,7 +17,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.stationmillenium.coverart.web.gwt.player.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.player.client.events.UpdateHistoryListEvent;
-import com.stationmillenium.coverart.web.gwt.player.client.events.UpdatePlayerEvent;
 import com.stationmillenium.coverart.web.gwt.player.client.view.PlayerViewInterface;
 import com.stationmillenium.coverart.web.gwt.player.client.view.PlayerViewInterface.PlayerViewPresenter;
 import com.stationmillenium.coverart.web.gwt.player.shared.SongGWTDTO;
@@ -52,9 +51,6 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 		PlayerViewInterface view = clientFactory.getPlayerView();
 		view.setPresenter(this);
 		panel.setWidget(view);
-		
-		 //launch first time to init
-	    clientFactory.getEventBus().fireEvent(new UpdatePlayerEvent());		
 	}
 
 	@Override

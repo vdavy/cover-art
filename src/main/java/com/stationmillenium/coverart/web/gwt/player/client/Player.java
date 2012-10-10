@@ -63,6 +63,8 @@ public class Player implements EntryPoint {
 	    
 	    //timer for player update
 	    setupTimer();
+
+	    
 	}
 
 	/**
@@ -76,7 +78,8 @@ public class Player implements EntryPoint {
 			}
 		};
 		
-		timer.scheduleRepeating(10000);
+		timer.scheduleRepeating(10000); //update each 10s
+		timer.schedule(2000); //first update 5s
 	}
 
 }

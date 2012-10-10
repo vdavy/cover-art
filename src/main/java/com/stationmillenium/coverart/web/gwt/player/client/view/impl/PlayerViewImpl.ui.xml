@@ -11,11 +11,12 @@
     <!-- Style -->
 	<ui:style>
 		/* Add CSS here. See the GWT docs on UI Binder for more details */
-		.current-song {
-			font-family: Geneva, Arial, Helvetica, sans-serif;
-			font-size: 15px;
-			color: #ffffff;
-			font-size: 15px;
+		.background-player {
+			/*background-image: url('resources/fond-player-millenium.jpg');
+			background-position: center top;
+			background-repeat: no-repeat;*/
+			background-color: black;
+			padding-top: 10px;
 		}
 		
 		.current-song-title {
@@ -23,13 +24,59 @@
 			font-family: Geneva, Arial, Helvetica, sans-serif;
 			font-size: 15px;
 			color: #ffffff;
+			margin-top: 35px;
+			padding-top: 5px;
+			padding-bottom: 3px;			
 		}
 		
-		.background-player {
-			background-image: url('resources/fond-player-millenium.jpg');
-			background-position: center top;
-			background-repeat: no-repeat;
-			background-color: red;
+		.current-song {
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 15px;
+			color: #ffffff;
+			font-size: 15px;
+			font-style: italic;			
+		}
+		
+		.current-song-block {
+			border-radius: 5px;
+			box-shadow: 0px 0px 3px #000000;
+			background-image: -moz-linear-gradient(top, #ff2217, #000000);
+			background-image: -ms-linear-gradient(top, #ff2217, #000000);
+			background-image: -o-linear-gradient(top, #ff2217, #000000);
+			background-image: -webkit-linear-gradient(top, #ff2217, #000000);
+			background-image: linear-gradient(top, #ff2217, #000000);
+			background-clip: padding-box;
+			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+			opacity: 0.85;			
+		}
+		
+		.player-image-block {
+			margin-top: 5px;
+		}
+		
+		.image {
+			border-right-color: #ffffff;
+			border-right-width: 2px;
+			border-right-style: dashed;			
+			margin-right: 5px;			
+		}
+		
+		.history-panel {
+			border-radius: 5px;
+			box-shadow: 0px 0px 3px #000000;
+			background-image: -moz-linear-gradient(top, #1f7eff, #000000);
+			background-image: -ms-linear-gradient(top, #1f7eff, #000000);
+			background-image: -o-linear-gradient(top, #1f7eff, #000000);
+			background-image: -webkit-linear-gradient(top, #1f7eff, #000000);
+			background-image: linear-gradient(top, #1f7eff, #000000);
+			background-clip: padding-box;
+			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+			opacity: 0.85;
+			
+			padding-left: 10px;
+			margin-bottom: 5px;				
 		}
 		
 		.history-title {
@@ -38,32 +85,38 @@
 			font-weight: bold;
 			font-size: 12px;
 			margin-top: 15px;
+			margin-bottom: 5px;
+			text-decoration: underline;
 		}
 		
 		
 		.history-list {			
 			color: #ffffff;
 			font-family: Geneva, Arial, Helvetica, sans-serif;
-			font-size: 12px;
+			font-size: 10px;
 		}
 		
 		.player {
-			margin-top: 10px;
-			margin-bottom: 10px;
+			margin-top: 25px;
 		}
 	</ui:style>
 	
 	<!-- Panel content -->
-	<g:VerticalPanel width="800px" height="500px" styleName="{style.background-player}" horizontalAlignment="center">
+	<g:VerticalPanel width="520px" height="465px" styleName="{style.background-player}" horizontalAlignment="center">
 		<g:Image resource="{res.logoPlayerLive}"/>
-		<g:DockLayoutPanel unit="PX" width="500px" height="180px" >
+		<g:DockLayoutPanel unit="PX" width="500px" height="180px" styleName="{style.player-image-block}">
 			<g:west size="200">
-				<g:Image ui:field="songImage" />
+				<g:SimplePanel width="200" height="200" styleName="{style.image}">
+					<g:Image ui:field="songImage" />
+				</g:SimplePanel>				
 			</g:west>
+			
 			<g:center>
-				<g:VerticalPanel>
-					<g:Label><ui:msg>Actuellement à l'antenne</ui:msg></g:Label>
-					<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
+				<g:VerticalPanel horizontalAlignment="center">
+					<g:FlowPanel styleName="{style.current-song-block}" width="290px" height="50px">
+						<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement à l'antenne</ui:msg></g:Label>
+						<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
+					</g:FlowPanel>					
 					<g:HTMLPanel width="300px" styleName="{style.player}">
 						<object type="application/x-shockwave-flash" name="audioplayer_1"
 							data="http://www.station-millenium.com/wp-millenium/wp-content/plugins/audio-player-oogiechetos/assets/player.swf?ver=2.0.4.1"
@@ -75,12 +128,15 @@
 						</object>
 					</g:HTMLPanel> 
 				</g:VerticalPanel>
-			</g:center>
+			</g:center>			
 		</g:DockLayoutPanel>
+		
 		<g:VerticalPanel width="500px" horizontalAlignment="left">
+			<g:FlowPanel styleName="{style.history-panel}" width="250px">
 				<g:Label styleName="{style.history-title}"><ui:msg>5 dernier titres</ui:msg></g:Label>
 				<c:CellList rowCount="5" ui:field="songList" width="200px" height="120px" styleName="{style.history-list}"/>
-			</g:VerticalPanel>			
-		</g:VerticalPanel>
+			</g:FlowPanel>
+		</g:VerticalPanel>			
+	</g:VerticalPanel>
 		
 </ui:UiBinder> 
