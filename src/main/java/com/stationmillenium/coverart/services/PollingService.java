@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.ServerStatusRepository;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
+import com.stationmillenium.coverart.repositories.SongSearchRepository;
 import com.stationmillenium.coverart.services.covergraber.CoverGraberRootService;
 import com.stationmillenium.coverart.services.history.ShoutcastParser;
 import com.stationmillenium.coverart.services.history.SongHistoryFilter;
@@ -61,10 +64,22 @@ public class PollingService {
 	@Autowired
 	private CoverGraberRootService coverGraberRootService;
 	
+	//song search repository for indexing
+	@Autowired
+	private SongSearchRepository songSearchRepository;
+	
 	//configuration
 	@Autowired
 	private GeneralPropertiesBean config;
-		
+	
+	/**
+	 * Index the database on startup
+	 */
+	@PostConstruct
+	public void doIndexing() {
+		songSearchRepository.indexAsync();
+	}
+	
 	/**
 	 * Method to do server polling :
 	 * -query shoutcast server

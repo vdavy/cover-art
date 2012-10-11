@@ -56,6 +56,17 @@ public class SongSearchRepository {
 	}
 	
 	/**
+	 * Launch async indexing
+	 */
+	@Transactional
+	public void indexAsync() {
+		LOGGER.debug("Launch async indexing");
+		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+		MassIndexer indexer = fullTextEntityManager.createIndexer(); //get indexer
+		indexer.start();
+	}
+	
+	/**
 	 * Search song by artist across Lucene index
 	 * @param artistName the artist name to search for
 	 * @return the song list found (empty list if nothing found)
