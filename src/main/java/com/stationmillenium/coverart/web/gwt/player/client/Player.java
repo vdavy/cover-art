@@ -62,15 +62,17 @@ public class Player implements EntryPoint {
 	    historyHandler.handleCurrentHistory();
 	    
 	    //timer for player update
-	    setupTimer();
+	    setupScheduledTimer();
 
+	    //timer for player start
+	    setupStartTimer();
 	    
 	}
 
 	/**
 	 * Set up timer for player update
 	 */
-	private void setupTimer() {
+	private void setupScheduledTimer() {
 		Timer timer = new Timer() {			
 			@Override
 			public void run() {
@@ -79,7 +81,21 @@ public class Player implements EntryPoint {
 		};
 		
 		timer.scheduleRepeating(10000); //update each 10s
+	}
+	
+	/**
+	 * Set up timer for player start
+	 */
+	private void setupStartTimer() {
+		Timer timer = new Timer() {			
+			@Override
+			public void run() {
+				clientFactory.getEventBus().fireEvent(new UpdatePlayerEvent());				
+			}
+		};
+		
 		timer.schedule(2000); //first update 5s
 	}
+
 
 }
