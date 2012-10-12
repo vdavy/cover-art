@@ -68,6 +68,11 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 						if (newSong.getImagePath() != null) {
 							SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + newSong.getImagePath());
 							clientFactory.getPlayerView().setImage(imageUri, newSong.getImageWidth(), newSong.getImageHeight());
+						} else {
+							clientFactory.getPlayerView().setImage(
+									clientFactory.getResources().logoMillenium().getSafeUri(), 
+									String.valueOf(clientFactory.getResources().logoMillenium().getWidth()), 
+									String.valueOf(clientFactory.getResources().logoMillenium().getHeight()));	
 						}
 						
 						//finish update						

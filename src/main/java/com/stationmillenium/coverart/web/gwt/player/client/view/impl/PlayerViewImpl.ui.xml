@@ -117,7 +117,13 @@
 						<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement à l'antenne</ui:msg></g:Label>
 						<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
 					</g:FlowPanel>					
-					<g:HTMLPanel width="300px" styleName="{style.player}">
+					<g:HTMLPanel width="200px" styleName="{style.player}">
+						<object type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3.swf" width="200" height="20">
+						    <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3.swf" />
+						    <param name="bgcolor" value="#000000" />
+						    <param name="FlashVars" value="mp3=http%3A//www.station-millenium.com/millenium.mp3&amp;loop=1&amp;autoplay=1&amp;showstop=1&amp;bgcolor=000000&amp;bgcolor1=fa2e00" />
+						</object>
+						<!-- 
 						<object type="application/x-shockwave-flash" name="audioplayer_1"
 							data="http://www.station-millenium.com/wp-millenium/wp-content/plugins/audio-player-oogiechetos/assets/player.swf?ver=2.0.4.1"
 							width="290" height="24" id="audioplayer_1">
@@ -126,6 +132,7 @@
 							<param name="menu" value="false" />
 							<param name="flashvars"	value="animation=no&amp;encode=no&amp;autostart=yes&amp;initialvolume=60&amp;remaining=no&amp;noinfo=yes&amp;buffer=5&amp;checkpolicy=no&amp;rtl=no&amp;bg=E5E5E5&amp;text=333333&amp;leftbg=CCCCCC&amp;lefticon=333333&amp;volslider=666666&amp;voltrack=FFFFFF&amp;rightbg=B4B4B4&amp;rightbghover=999999&amp;righticon=333333&amp;righticonhover=FFFFFF&amp;track=FFFFFF&amp;loader=009900&amp;border=CCCCCC&amp;tracker=DDDDDD&amp;skip=666666&amp;soundFile=http://www.station-millenium.com/millenium.mp3&amp;playerID=audioplayer_1" />
 						</object>
+						 -->						
 					</g:HTMLPanel> 
 				</g:VerticalPanel>
 			</g:center>			
@@ -136,7 +143,22 @@
 				<g:Label styleName="{style.history-title}"><ui:msg>5 dernier titres</ui:msg></g:Label>
 				<c:CellList rowCount="5" ui:field="songList" width="200px" height="120px" styleName="{style.history-list}"/>
 			</g:FlowPanel>
-		</g:VerticalPanel>			
+		</g:VerticalPanel>
+		
+		<g:HTMLPanel width="0px" height="0px">
+			<!-- Piwik --> 
+			<script type="text/javascript">
+			var pkBaseURL = (("https:" == document.location.protocol) ? "https://www.station-millenium.com/piwik/piwik/" : "http://www.station-millenium.com/piwik/piwik/");
+			document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+			</script><script type="text/javascript">
+			try {
+			var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2);
+			piwikTracker.trackPageView();
+			piwikTracker.enableLinkTracking();
+			} catch( err ) {}
+			</script><noscript><p><img src="http://www.station-millenium.com/piwik/piwik/piwik.php?idsite=2" style="border:0" alt="" /></p></noscript>
+			<!-- End Piwik Tracking Code -->
+		</g:HTMLPanel>			
 	</g:VerticalPanel>
 		
 </ui:UiBinder> 
