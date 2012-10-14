@@ -17,6 +17,8 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 import com.stationmillenium.coverart.web.gwt.player.client.view.PlayerViewInterface;
 
 /**
@@ -45,13 +47,21 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 	public PlayerViewImpl() {		
 		//init celle list
 		songList = new CellList<String>(new TextCell());
-/*		songList.setRowCount(5);
-		songList.setWidth("100px");
-		songList.setHeight("100px");*/
+		final SingleSelectionModel<String> ssm =  new SingleSelectionModel<String>();
+		ssm.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {			
+			@Override
+			public void onSelectionChange(SelectionChangeEvent event) {
+				String selected  = ssm.getSelectedObject();
+				GWT.log("Selection " + selected);
+			}
+		});
+		songList.setSelectionModel(ssm);
 		dataProvider.addDataDisplay(songList);
 
 		//init ui binder
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		
 	}
 
 	@Override

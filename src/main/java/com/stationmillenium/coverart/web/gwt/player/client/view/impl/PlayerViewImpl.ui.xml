@@ -17,6 +17,8 @@
 			background-repeat: no-repeat;*/
 			background-color: black;
 			padding-top: 10px;
+			margin-left: auto;
+			margin-right: auto;
 		}
 		
 		.current-song-title {
@@ -38,6 +40,7 @@
 		}
 		
 		.current-song-block {
+			background-color: #ff2217;
 			border-radius: 5px;
 			box-shadow: 0px 0px 3px #000000;
 			background-image: -moz-linear-gradient(top, #ff2217, #000000);
@@ -60,11 +63,14 @@
 			border-right-width: 2px;
 			border-right-style: dashed;			
 			margin-right: 5px;			
+			padding-top: 20px;
 		}
 		
 		.history-panel {
+			background-color: #1f7eff;
+			border: 2px solid #999999;
 			border-radius: 5px;
-			box-shadow: 0px 0px 3px #000000;
+			box-shadow: 0px 0px 3px #ffffff;
 			background-image: -moz-linear-gradient(top, #1f7eff, #000000);
 			background-image: -ms-linear-gradient(top, #1f7eff, #000000);
 			background-image: -o-linear-gradient(top, #1f7eff, #000000);
@@ -74,9 +80,11 @@
 			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
 			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
 			opacity: 0.85;
+
 			
 			padding-left: 10px;
 			margin-bottom: 5px;				
+			text-align: left;
 		}
 		
 		.history-title {
@@ -98,6 +106,13 @@
 		
 		.player {
 			margin-top: 25px;
+		}
+		
+		.bottom-label {
+			color: #ffffff;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 9px;
+			font-style: italic;			
 		}
 	</ui:style>
 	
@@ -138,13 +153,20 @@
 			</g:center>			
 		</g:DockLayoutPanel>
 		
-		<g:VerticalPanel width="500px" horizontalAlignment="left">
-			<g:FlowPanel styleName="{style.history-panel}" width="250px">
-				<g:Label styleName="{style.history-title}"><ui:msg>5 dernier titres</ui:msg></g:Label>
-				<c:CellList rowCount="5" ui:field="songList" width="200px" height="120px" styleName="{style.history-list}"/>
-			</g:FlowPanel>
-		</g:VerticalPanel>
-		
+		<g:DockLayoutPanel unit="PX" width="500px" height="130px">
+			<g:west size="280">
+				<g:FlowPanel styleName="{style.history-panel}" width="250px">
+					<g:Label styleName="{style.history-title}"><ui:msg>5 dernier titres</ui:msg></g:Label>
+					<c:CellList rowCount="5" ui:field="songList" width="240px" height="120px" styleName="{style.history-list}"/>
+				</g:FlowPanel>
+			</g:west>
+			<g:east size="140">
+				<g:VerticalPanel verticalAlignment="bottom" horizontalAlignment="right" height="110px">
+					<g:Label styleName="{style.bottom-label}"><ui:msg>Player Millenium BETA by Vince</ui:msg></g:Label>
+				</g:VerticalPanel>
+			</g:east>			
+		</g:DockLayoutPanel>
+
 		<g:HTMLPanel width="0px" height="0px">
 			<!-- Piwik --> 
 			<script type="text/javascript">
