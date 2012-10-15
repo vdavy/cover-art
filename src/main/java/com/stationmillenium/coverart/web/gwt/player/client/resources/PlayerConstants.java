@@ -19,4 +19,7 @@ public interface PlayerConstants extends Constants {
 	@DefaultStringValue("Indisponible")
 	String songUnaivalaible();
 	
+	@DefaultStringArrayValue({"http://www.station-millenium.com/millenium.mp3", "http://www.station-millenium.com/millenium.ogg"})
+	String[] streamURLs();
+	
 }

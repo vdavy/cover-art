@@ -15,12 +15,6 @@ import com.google.gwt.user.client.ui.IsWidget;
  *
  */
 public interface PlayerViewInterface extends IsWidget {
-
-	/**
-	 * Set the presenter for the view
-	 * @param presenter the presenter
-	 */
-	public void setPresenter(PlayerViewPresenter presenter);
 	
 	/**
 	 * Set the current song
@@ -59,6 +53,12 @@ public interface PlayerViewInterface extends IsWidget {
 		 * @param displayLastSong if need to display last played song
 		 */
 		public void updateHistoryList(boolean displayLastSong);
+		
+		/**
+		 * Return the list of stream URL
+		 * @return URL as array
+		 */
+		public String[] getStreamURLs();
 		
 	}
 	

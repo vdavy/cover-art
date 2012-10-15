@@ -49,7 +49,6 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		PlayerViewInterface view = clientFactory.getPlayerView();
-		view.setPresenter(this);
 		panel.setWidget(view);
 	}
 
@@ -151,30 +150,8 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 		}
 	}
 
-	/**
-	 * Manage song history
-	 * @param text text to add
-	 */
-//	private void manageSongHistory(String text) {
-//		//manage history
-//		if ((historyList.size() > 0) && (historyList.get(0) != null)) { //if some entry
-//			if (!historyList.contains(text)) { //if not already 
-//				historyList.add(0, text);
-//				GWT.log("Added to history list : " + text);
-//			} else
-//				GWT.log("Already existing in history list : " + text);
-//
-//		} else { //if no entry, add it
-//			historyList.add(text);
-//			GWT.log("Added to history list : " + text);
-//		}
-//
-//		//manage hisotry length
-//		if (historyList.size() > 5) { //no more than 5 history items
-//			historyList.remove(5);
-//		}
-//		
-//		//update list
-//		clientFactory.getPlayerView().setSongHistoryList(historyList);
-//	}
+	@Override
+	public String[] getStreamURLs() {
+		return clientFactory.getConstants().streamURLs();
+	}
 }

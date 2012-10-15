@@ -28,7 +28,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	private PlayerConstants constants = GWT.create(PlayerConstants.class);
 	private PlayerMessages messages = GWT.create(PlayerMessages.class);
 	private PlayerServiceAsync playerService = GWT.create(PlayerService.class);
-	private PlayerViewInterface playerView = new PlayerViewImpl();
+	private PlayerViewInterface playerView = new PlayerViewImpl(this);
 	private PlayerResources resources = GWT.create(PlayerResources.class);
 	private PlayerActivity activity = new PlayerActivity(this);
 	
