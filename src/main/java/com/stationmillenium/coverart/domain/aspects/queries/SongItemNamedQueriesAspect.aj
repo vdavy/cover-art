@@ -46,10 +46,9 @@ public aspect SongItemNamedQueriesAspect {
 		 */
 		@NamedQuery( 
 				name = "getSongsOrderedByPlayedTime", 
-				query = "SELECT item FROM SongItem AS item " +
-						"JOIN FETCH item.playedTimes AS history " +
+				query = "SELECT history.song FROM SongHistory AS history " +
 						"ORDER BY history.playedDate DESC")
-						
+					
 	});
 	
 }

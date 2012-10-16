@@ -41,7 +41,7 @@ public class SongItem {
 	private String title;
 	
 	//associated image
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private SongHistoryImage image;
 	
 	//associated playing times
