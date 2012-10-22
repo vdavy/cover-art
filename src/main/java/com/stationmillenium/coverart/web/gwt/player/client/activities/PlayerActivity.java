@@ -5,6 +5,8 @@ package com.stationmillenium.coverart.web.gwt.player.client.activities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
@@ -28,9 +30,11 @@ import com.stationmillenium.coverart.web.gwt.player.shared.SongGWTDTO;
  */
 public class PlayerActivity extends AbstractActivity implements PlayerViewPresenter {
 
-	private ClientFactory clientFactory;
+	//log
+	private static final Logger LOGGER = Logger.getLogger(PlayerActivity.class.getName());	
 
 	//local instances	
+	private ClientFactory clientFactory;
 	private SongGWTDTO currentSong;
 	private boolean inError = false;
 		
@@ -79,12 +83,12 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 						inError = false;
 						clientFactory.getEventBus().fireEvent(new UpdateHistoryListEvent()); //fire update history list event
 						
-						GWT.log("Player updated : " + newSong);
+						LOGGER.info("Player updated : " + newSong);
 						
 					} else
-						GWT.log("Player already up-to-date");					
+						LOGGER.fine("Player already up-to-date");					
 				} else { 
-					GWT.log("Player updated : null");
+					LOGGER.warning("Player updated : null");
 					displayErrorSong();
 				}			
 				
@@ -92,7 +96,7 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 
 			@Override
 			public void onFailure(Throwable caught) { //in case of error
-				GWT.log("Error during player update", caught);
+				LOGGER.log(Level.SEVERE, "Error during player update", caught);
 				displayErrorSong();
 			}
 			
@@ -113,7 +117,7 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 					if ((song != null) && (song.getArtist() != null) && (song.getTitle() != null)) { //if some data
 						String text = clientFactory.getMessages().currentSongText(song.getArtist(), song.getTitle()); //format text
 						historyList.add(text); //add text
-						GWT.log("Added to history list : " + text);
+						LOGGER.fine("Added to history list : " + text);
 					}
 				}
 				
@@ -123,7 +127,7 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				GWT.log("Error during songs history loading", caught);
+				LOGGER.log(Level.WARNING, "Error during songs history loading", caught);
 			}
 			
 		});

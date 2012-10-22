@@ -3,7 +3,8 @@
  */
 package com.stationmillenium.coverart.web.gwt.player.client.mvp;
 
-import com.google.gwt.core.client.GWT;
+import java.util.logging.Logger;
+
 import com.stationmillenium.coverart.web.gwt.player.client.activities.PlayerActivity;
 import com.stationmillenium.coverart.web.gwt.player.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.player.client.events.UpdateHistoryListEvent;
@@ -18,6 +19,9 @@ import com.stationmillenium.coverart.web.gwt.player.client.events.UpdatePlayerEv
  */
 public class PlayerEventsHandler implements UpdatePlayerEventHandler, UpdateHistoryListEventHandler {
 
+	//log
+	private static final Logger LOGGER = Logger.getLogger(PlayerEventsHandler.class.getName());
+	
 	//presenter
 	private PlayerActivity presenter;
 	
@@ -36,13 +40,13 @@ public class PlayerEventsHandler implements UpdatePlayerEventHandler, UpdateHist
 	
 	@Override
 	public void onUpdatePlayer(UpdatePlayerEvent event) {
-		GWT.log("Update player event received");
+		LOGGER.fine("Update player event received");
 		presenter.updatePlayer();
 	}
 
 	@Override
 	public void onUpdateHistoryList(UpdateHistoryListEvent event) {
-		GWT.log("Update history list event received");
+		LOGGER.fine("Update history list event received");
 		presenter.updateHistoryList(event.isDisplayLastSong());
 	}
 	

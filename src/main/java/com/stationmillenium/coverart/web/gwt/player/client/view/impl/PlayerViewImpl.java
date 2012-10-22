@@ -4,6 +4,7 @@
 package com.stationmillenium.coverart.web.gwt.player.client.view.impl;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
@@ -30,6 +31,9 @@ import com.stationmillenium.coverart.web.gwt.player.client.view.PlayerViewInterf
  */
 public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 
+	//log
+	private static final Logger LOGGER = Logger.getLogger(PlayerViewImpl.class.getName());
+	
 	//ui binder
 	private static PlayerViewImplUiBinder uiBinder = GWT.create(PlayerViewImplUiBinder.class);
 
@@ -53,7 +57,7 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				String selected  = ssm.getSelectedObject();
-				GWT.log("Selection " + selected);
+				LOGGER.fine("Selection " + selected);
 			}
 		});
 		songList.setSelectionModel(ssm);
@@ -64,7 +68,7 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 		
 		//add html5 player if supported
 		if (Audio.isSupported()) {
-			GWT.log("Audio tag supported"); 
+			LOGGER.info("Audio tag supported"); 
 			
 			//create it
 			Audio audioTag = Audio.createIfSupported();
@@ -75,7 +79,7 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 			
 			for (String url : clientFactory.getConstants().streamURLs()) { //add sources
 				audioTag.addSource(url);
-				GWT.log("Source added : " + url);
+				LOGGER.fine("Source added : " + url);
 			}
 			
 			//add to dom
