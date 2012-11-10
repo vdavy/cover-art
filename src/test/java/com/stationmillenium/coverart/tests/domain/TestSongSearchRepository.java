@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.SongSearchRepository;
 
@@ -38,16 +39,27 @@ public class TestSongSearchRepository {
 	 */
 	@Test
 	public void testSearchSongs() {
-		List<SongHistoryItemDTO> songList = repository.searchSongs("David guetta");
+		List<SongHistoryItemImageDTO> songList = repository.searchSongs("David guetta");
 		assertTrue(songList.size() > 0);
 	}
+	
+	/**
+	 * Test song search for suggest
+	 */
+	@Test
+	public void testSearchSongsForSuggest() {
+		List<SongHistoryItemDTO> songList = repository.searchSongsForSuggest("David guetta", 3);
+		assertTrue(songList.size() > 0);
+		assertTrue(songList.size() <= 3);
+	}
+	
 	
 	/**
 	 * Test song search by artist
 	 */
 	@Test
 	public void testSearchSongsByArtist() {
-		List<SongHistoryItemDTO> songList = repository.searchSongsByArtist("David");
+		List<SongHistoryItemImageDTO> songList = repository.searchSongsByArtist("David");
 		assertTrue(songList.size() > 0);
 		
 		songList = repository.searchSongsByArtist("Gueta");
@@ -59,7 +71,7 @@ public class TestSongSearchRepository {
 	 */
 	@Test
 	public void testSearchSongsByTitle() {
-		List<SongHistoryItemDTO> songList = repository.searchSongsByTitle("she wolf");
+		List<SongHistoryItemImageDTO> songList = repository.searchSongsByTitle("she wolf");
 		assertTrue(songList.size() > 0);
 		
 		songList = repository.searchSongsByTitle("shie wolh");
@@ -79,7 +91,7 @@ public class TestSongSearchRepository {
 		ending.set(2012, 8, 15, 0, 0, 0);
 		
 		//test
-		List<SongHistoryItemDTO> songList = repository.searchSongsByTime(beginning, ending);
+		List<SongHistoryItemImageDTO> songList = repository.searchSongsByTime(beginning, ending);
 		assertTrue(songList.size() > 0);
 	}
 	

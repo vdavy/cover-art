@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
 lastWarOutDir=/home/vincent/Documents/P\u00E9p\u00E9/Dev/workspace/git/cover-art/target/coverart-0.1.0.BUILD-SNAPSHOT
+launchConfigExternalUrlPrefix=http\://localhost\:8080/cover-art/
 warSrcDir=src/main/webapp
 warSrcDirIsOutput=false

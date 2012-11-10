@@ -46,4 +46,20 @@ privileged aspect GeneralPropertiesBean_Roo_JavaBean {
     public void GeneralPropertiesBean.setAlertTimeout(int alertTimeout) {
         this.alertTimeout = alertTimeout;
     }
+    
+    public int GeneralPropertiesBean.getHistoryDisplayMinMinutes() {
+        return this.historyDisplayMinMinutes;
+    }
+    
+    public void GeneralPropertiesBean.setHistoryDisplayMinMinutes(int historyDisplayMinMinutes) {
+        this.historyDisplayMinMinutes = historyDisplayMinMinutes;
+    }
+    
+    public int GeneralPropertiesBean.getDateSearchDelta() {
+        return this.dateSearchDelta;
+    }
+    
+    public void GeneralPropertiesBean.setDateSearchDelta(int dateSearchDelta) {
+        this.dateSearchDelta = dateSearchDelta;
+    }
 }

@@ -1,0 +1,110 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+	xmlns:dp="urn:import:com.google.gwt.user.datepicker.client"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+    
+    <ui:with type="com.stationmillenium.coverart.web.gwt.history.client.resources.HistoryResources" field="res" />
+    
+    <!-- Style -->
+	<ui:style>
+		/* Add CSS here. See the GWT docs on UI Binder for more details */
+		.background-player {
+			background-color: white;
+		}
+		 
+		.searchField {
+			text-align: right;
+			padding-right: 3px;
+			display: inline;
+		}
+			
+		.searchFieldFirst {
+			text-align: left;
+			padding-right: 5px;
+			display: inline;
+		}
+		
+		.searchFieldIntermediate {
+			text-align: right;
+			padding-right: 3px;
+			display: inline;
+			padding-left: 5px;
+		}
+			
+		.searchHour {
+			text-align: left;
+			display: inline;
+			padding-right: 5px;
+			padding-left: 2px;
+		}
+		
+		.searchMinute {
+			text-align: left;
+			display: inline;
+			padding-left: 2px;
+		}
+		
+		.spacer {
+			display: inline;
+			padding-left: 10px;		
+		}	
+		
+		.searchDateBlock {
+			margin-top: 5px;
+		}
+		
+		.searchButton {
+			margin-right: 10px;
+		}
+		
+		.image {
+			padding-top: 20px;
+			padding-left: 10px;			
+		}
+		
+	</ui:style>
+	
+	<!-- Panel content -->
+	<g:DockLayoutPanel unit="PX" height="1000px" width="600px" styleName="{style.background-player}" >
+		<g:north size="80">
+			<g:VerticalPanel width="600px" verticalAlignment="top" horizontalAlignment="left">
+				<g:FlowPanel>
+					<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnField">Chercher</g:RadioButton>
+					<g:SuggestBox ui:field="searchKeywords" width="120px" />
+					<g:Label styleName="{style.searchFieldIntermediate}">sur</g:Label>
+					<g:RadioButton name="searchType" ui:field="searchTypeAll">tout</g:RadioButton>
+					<g:RadioButton name="searchType" ui:field="searchTypeArtist">artiste</g:RadioButton>
+					<g:RadioButton name="searchType" styleName="{style.searchButton}" ui:field="searchTypeTitle">titre</g:RadioButton>
+					<g:Button ui:field="launchSearch">Rechercher</g:Button>
+					<g:Label styleName="{style.spacer}"/>
+					<g:Button ui:field="cancelSearch">Annuler</g:Button>
+				</g:FlowPanel>			
+				<g:FlowPanel styleName="{style.searchDateBlock}">
+				<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnDate">Ou par date</g:RadioButton>
+					<dp:DateBox ui:field="dateSearch" width="70px"/>
+					<g:Label styleName="{style.spacer}" />
+					<g:TextBox ui:field="hourSearch" width="15px"/>
+					<g:Label styleName="{style.searchHour}">H</g:Label>
+					<g:TextBox ui:field="minuteSearch" width="15px" />
+					<g:Label styleName="{style.searchMinute}">M</g:Label>					
+				</g:FlowPanel>					
+			</g:VerticalPanel>
+		</g:north>
+		<g:west size="400">
+			<g:VerticalPanel horizontalAlignment="center" width="400px" height="550px">
+				<c:DataGrid ui:field="historyGrid" width="400px" pageSize="12" height="500px" />
+				<c:SimplePager ui:field="historyGridPager" width="225px" height="50px" />
+			</g:VerticalPanel>			
+		</g:west>
+		<g:east size="200">
+			<g:SimplePanel styleName="{style.image}" width="200px" height="200px">
+				<g:Image ui:field="songImage" />
+			</g:SimplePanel>		
+		</g:east>
+	</g:DockLayoutPanel>
+		
+</ui:UiBinder> 

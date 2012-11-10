@@ -47,6 +47,18 @@ public aspect SongItemNamedQueriesAspect {
 		@NamedQuery( 
 				name = "getSongsOrderedByPlayedTime", 
 				query = "SELECT history.song FROM SongHistory AS history " +
+						"ORDER BY history.playedDate DESC"),
+		
+		/**
+		 * Get the last histories ordered by played time, with song and image fetched
+		 * Set limit min date
+		 */
+		@NamedQuery( 
+				name = "getSongsFetchedOrderedByPlayedTimeWithMinDate", 
+				query = "FROM SongHistory AS history " +
+						"JOIN FETCH history.song " +
+						"JOIN FETCH history.song.image " +						
+						"WHERE history.playedDate > :minDate " +
 						"ORDER BY history.playedDate DESC")
 					
 	});

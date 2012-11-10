@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.stationmillenium.coverart.beans.covergraber.LastFMCoverServicePropertiesBean;
 import com.stationmillenium.coverart.beans.history.ShoutcastServerPropertiesBean;
 import com.stationmillenium.coverart.beans.history.SongHistoryFilterPropertiesBean;
+import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
 
 /**
  * Test property loading and validation 
@@ -38,6 +39,10 @@ public class TestPropertiesChecker {
 	@Autowired
 	private LastFMCoverServicePropertiesBean deezerCoverServicePropertiesBean;
 		
+	//the general configuration
+	@Autowired
+	private GeneralPropertiesBean generalPropertiesBean;
+	
 	/**
 	 * Test Shouctast server properties
 	 */
@@ -68,5 +73,13 @@ public class TestPropertiesChecker {
 	@Test
 	public void testDeezerCoverServiceProperties() {
 		logger.debug(deezerCoverServicePropertiesBean.toString());
+	}
+	
+	/**
+	 * Test general properties
+	 */
+	@Test
+	public void testGeneralPropertiesBean() {
+		logger.debug(generalPropertiesBean.toString());
 	}
 }

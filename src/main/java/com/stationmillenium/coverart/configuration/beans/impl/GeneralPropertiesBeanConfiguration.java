@@ -26,10 +26,14 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private @Value("${generalConfiguration.fallbackPath}") String fallbackPath;
 	private @Value("${generalConfiguration.playlistUpdateTimeout}") String playlistUpdateTimeout;
 	private @Value("${generalConfiguration.alertTimeout}") String alertTimeout;
+	private @Value("${generalConfiguration.historyDisplayMinMinutes}") String historyDisplayMinMinutes;
+	private @Value("${generalConfiguration.dateSearchDelta}") String dateSearchDelta;
 	
 	//instance vars
 	private int playlistUpdateTimeoutInt;
 	private int alertTimeoutInt;
+	private int historyDisplayMinMinutesInt;
+	private int dateSearchDeltaInt;
 	
 	@Override
 	protected GeneralPropertiesBean buildBean() {
@@ -39,6 +43,8 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 		propertiesBean.setFallbackPath(fallbackPath);
 		propertiesBean.setPlaylistUpdateTimeout(playlistUpdateTimeoutInt);
 		propertiesBean.setAlertTimeout(alertTimeoutInt);
+		propertiesBean.setHistoryDisplayMinMinutes(historyDisplayMinMinutesInt);
+		propertiesBean.setDateSearchDelta(dateSearchDeltaInt);
 		return propertiesBean;
 	}
 	
@@ -54,6 +60,18 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 			alertTimeoutInt = Integer.parseInt(alertTimeout);
 		} catch(NumberFormatException e) {
 			throw new PropertyBeanException("alertTimeout", e);
+		}
+		
+		try { //convert historyDisplayMinMinutes into number
+			historyDisplayMinMinutesInt = Integer.parseInt(historyDisplayMinMinutes);
+		} catch(NumberFormatException e) {
+			throw new PropertyBeanException("historyDisplayMinMinutes", e);
+		}
+		
+		try { //convert dateSearchDelta into number
+			dateSearchDeltaInt = Integer.parseInt(dateSearchDelta);
+		} catch(NumberFormatException e) {
+			throw new PropertyBeanException("dateSearchDelta", e);
 		}
 	}
 

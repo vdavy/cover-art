@@ -4,6 +4,7 @@
 package com.stationmillenium.coverart.repositories;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.stationmillenium.coverart.domain.history.SongHistory;
 import com.stationmillenium.coverart.domain.history.SongHistoryImage;
 import com.stationmillenium.coverart.domain.history.SongHistoryImage.Provider;
 import com.stationmillenium.coverart.domain.history.SongItem;
+import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
 import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 
@@ -192,4 +194,28 @@ public class SongItemRepository {
 
 		return resultSongsList; 
 	}
+	
+	/**
+	 * Get the last played songs with played date and image 
+	 * Limit search to a min date
+	 * @param minDate the min date for song extract
+	 * @return the list of {@link SongHistoryItemImageDTO}
+	 */
+	public List<SongHistoryItemImageDTO> getLastSongsFromMinDate(Calendar minDate) {
+		//query db
+		Query query = entityManager.createNamedQuery("getSongsFetchedOrderedByPlayedTimeWithMinDate", SongHistory.class); //create query
+		query.setParameter("minDate", minDate);
+		@SuppressWarnings("unchecked")
+		List<SongHistory> songHistoryList = query.getResultList();
+		
+		//convert to result list
+		List<SongHistoryItemImageDTO> resultList = new ArrayList<>();
+		for (SongHistory song : songHistoryList) {
+			SongHistoryItemImageDTO resultSong = mapper.map(song,SongHistoryItemImageDTO.class );
+			resultList.add(resultSong);
+		}
+		
+		return resultList;
+	}
+	
 }

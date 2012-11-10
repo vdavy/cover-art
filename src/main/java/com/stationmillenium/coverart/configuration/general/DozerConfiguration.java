@@ -9,9 +9,12 @@ import org.dozer.loader.api.TypeMappingOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.stationmillenium.coverart.domain.history.SongHistory;
 import com.stationmillenium.coverart.domain.history.SongItem;
+import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
 import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.web.gwt.history.shared.HistoryGWTDTO;
 import com.stationmillenium.coverart.web.gwt.player.shared.SongGWTDTO;
 
 /**
@@ -58,6 +61,24 @@ public class DozerConfiguration {
 						.fields("fileName", "imagePath")
 						.fields("width", "imageWidth")
 						.fields("height", "imageHeight");
+				
+				mapping(SongHistory.class, SongHistoryItemImageDTO.class, TypeMappingOptions.mapNull(),
+						TypeMappingOptions.mapEmptyString())
+						.fields("playedDate", "songHistoryItemDTO.playedDate")
+						.fields("song.artist", "songHistoryItemDTO.artist")
+						.fields("song.title", "songHistoryItemDTO.title")			
+						.fields("song.image.fileName", "songImageDTO.fileName")
+						.fields("song.image.width", "songImageDTO.width")
+						.fields("song.image.height", "songImageDTO.height");
+				
+				mapping(SongHistoryItemImageDTO.class, HistoryGWTDTO.class, TypeMappingOptions.mapNull(),
+						TypeMappingOptions.mapEmptyString())
+						.fields("songHistoryItemDTO.playedDate", "playedDate")
+						.fields("songHistoryItemDTO.artist", "artist")
+						.fields("songHistoryItemDTO.title", "title")			
+						.fields("songImageDTO.fileName", "imagePath")
+						.fields("songImageDTO.width", "imageWidth")
+						.fields("songImageDTO.height", "imageHeight");
 			}
 		};
 		

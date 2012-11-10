@@ -45,4 +45,12 @@ public class GeneralPropertiesBean implements PropertyBeanInterface {
 	@Max(120)
 	private int alertTimeout;
 	
+	@Min(1)
+	@Max(10080)
+	private int historyDisplayMinMinutes;
+	
+	@Min(10)
+	@Max(240)
+	private int dateSearchDelta;
+	
 }

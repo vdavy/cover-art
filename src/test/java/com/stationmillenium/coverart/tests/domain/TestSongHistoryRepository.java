@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stationmillenium.coverart.domain.history.SongHistory;
 import com.stationmillenium.coverart.domain.history.SongItem;
+import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 
@@ -187,6 +188,35 @@ public class TestSongHistoryRepository {
 		
 		//assert
 		assertEquals(lastSongsList.size(), 5);		
+	}
+	
+	/**
+	 * Test the {@link SongHistoryRepository#getLastSongsFromMinDate()}
+	 */
+	@Test
+	public void testGetLastSongsFromMinDate() {
+		//set up param
+		Calendar minDate = Calendar.getInstance();
+		minDate.add(Calendar.DAY_OF_YEAR, -100);
+		
+		//process
+		List<SongHistoryItemImageDTO> songList = repository.getLastSongsFromMinDate(minDate);
+		
+		//assert
+		assertTrue(songList.size() > 0);
+		for (SongHistoryItemImageDTO song : songList) {
+			assertNotNull(song.getSongHistoryItemDTO().getArtist());
+			assertNotNull(song.getSongHistoryItemDTO().getTitle());
+			assertNotNull(song.getSongHistoryItemDTO().getPlayedDate());
+			assertTrue(minDate.before(song.getSongHistoryItemDTO().getPlayedDate()));
+			
+			if ((song.getSongImageDTO().getHeight() != 0)
+					|| (song.getSongImageDTO().getWidth() != 0)){
+				assertNotNull(song.getSongImageDTO().getFileName());
+				assertTrue(song.getSongImageDTO().getHeight() != 0);
+				assertTrue(song.getSongImageDTO().	getWidth() != 0);
+			}
+		}
 	}
 	
 }
