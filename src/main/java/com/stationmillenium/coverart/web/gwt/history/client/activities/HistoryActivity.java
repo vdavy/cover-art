@@ -46,8 +46,9 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 		public void onSuccess(List<HistoryGWTDTO> result) {
 			LOGGER.fine("Found songs list : " + result);
 			clientFactory.getHistoryView().setSongHistoryList(result);
+			initImage(result);
 		}
-		
+
 		@Override
 		public void onFailure(Throwable caught) {
 			LOGGER.log(Level.SEVERE, "Error during songs search", caught);
@@ -88,6 +89,7 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 			public void onSuccess(List<HistoryGWTDTO> result) {
 				LOGGER.fine("History received : " + result);
 				clientFactory.getHistoryView().setSongHistoryList(result);
+				initImage(result);
 			}
 			
 			@Override
@@ -188,5 +190,16 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 				clientFactory.getResources().logoMillenium().getSafeUri(), 
 				String.valueOf(clientFactory.getResources().logoMillenium().getWidth()), 
 				String.valueOf(clientFactory.getResources().logoMillenium().getHeight()));
+	}
+	
+	/**
+	 * Initialize image following the result list
+	 * @param result the list of {@link HistoryGWTDTO}
+	 */
+	private void initImage(List<HistoryGWTDTO> result) {
+		if (result.size() > 0)
+			songSelected(result.get(0)); //set first image
+		else
+			displayDefaultImage(); //initialize image
 	}
 }

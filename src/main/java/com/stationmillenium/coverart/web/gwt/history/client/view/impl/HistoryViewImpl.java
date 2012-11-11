@@ -21,6 +21,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
@@ -82,7 +83,7 @@ public class HistoryViewImpl extends Composite implements HistoryViewInterface {
 		dataProvider.addDataDisplay(historyGrid); //set datasource		
 		historyGrid.addColumnSortHandler(sortHandler);
 		
-		historyGridPager = new SimplePager(); //pagination
+		historyGridPager = new SimplePager(TextLocation.CENTER, false, true); //pagination
 		historyGridPager.setDisplay(historyGrid);
 		
 		defineDatagridColumns(clientFactory);		
@@ -111,7 +112,7 @@ public class HistoryViewImpl extends Composite implements HistoryViewInterface {
 	private void initSearchFields() {
 		searchKeywords.setValue("");
 		searchTypeAll.setValue(true);
-		searchOnField.setValue(true);
+		selectSearchOnDate();
 		
 		//display current date in date search
 		dateSearch.setFormat(new DefaultFormat(DateTimeFormat.getFormat("dd/MM/yyyy")));
@@ -222,6 +223,7 @@ public class HistoryViewImpl extends Composite implements HistoryViewInterface {
 	public void setSongHistoryList(List<HistoryGWTDTO> songHistory) {
 		dataProvider.setList(songHistory);		
 		sortHandler.setList(dataProvider.getList());
+		historyGrid.setPageStart(0);
 	}
 
 	/**

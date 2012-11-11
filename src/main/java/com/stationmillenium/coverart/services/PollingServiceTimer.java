@@ -3,6 +3,8 @@
  */
 package com.stationmillenium.coverart.services;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,14 @@ public class PollingServiceTimer {
 			LOGGER.debug("Polling service not running");
 	}
 
+	/**
+	 * Auto enable polling when server start
+	 */
+	@PostConstruct
+	public void autoEnableOnStartup() {
+		setEnable(true);		
+	}
+	
 	/**
 	 * Get enable state (sync'ed)
 	 * @return <code>true</code> if active, <code>false</code> if not active

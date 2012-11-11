@@ -13,6 +13,10 @@
 	<ui:style>
 		/* Add CSS here. See the GWT docs on UI Binder for more details */
 		.background-player {
+			background-color: black;
+		}
+		
+		.background-white {
 			background-color: white;
 		}
 		 
@@ -25,7 +29,7 @@
 		.searchFieldFirst {
 			text-align: left;
 			padding-right: 5px;
-			display: inline;
+			display: inline;			
 		}
 		
 		.searchFieldIntermediate {
@@ -46,6 +50,7 @@
 			text-align: left;
 			display: inline;
 			padding-left: 2px;
+			margin-right: 10px;
 		}
 		
 		.spacer {
@@ -53,12 +58,8 @@
 			padding-left: 10px;		
 		}	
 		
-		.searchDateBlock {
+		.searchFieldsBlock {
 			margin-top: 5px;
-		}
-		
-		.searchButton {
-			margin-right: 10px;
 		}
 		
 		.image {
@@ -66,45 +67,63 @@
 			padding-left: 10px;			
 		}
 		
+		.search-block {
+			background-color: #ff2217;
+			border-radius: 5px;
+			box-shadow: 0px 0px 3px #000000;
+			background-image: -moz-linear-gradient(top, #ff2217, #000000);
+			background-image: -ms-linear-gradient(top, #ff2217, #000000);
+			background-image: -o-linear-gradient(top, #ff2217, #000000);
+			background-image: -webkit-linear-gradient(top, #ff2217, #000000);
+			background-image: linear-gradient(top, #ff2217, #000000);
+			background-clip: padding-box;
+			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+			/*opacity: 0.85;*/			
+			color: #ffffff;
+			padding: 3px;
+			margin: 2px;
+		}
+		
 	</ui:style>
 	
 	<!-- Panel content -->
-	<g:DockLayoutPanel unit="PX" height="1000px" width="600px" styleName="{style.background-player}" >
+	<g:DockLayoutPanel unit="PX" height="860px" width="575px" styleName="{style.background-player}" >
 		<g:north size="80">
-			<g:VerticalPanel width="600px" verticalAlignment="top" horizontalAlignment="left">
-				<g:FlowPanel>
-					<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnField">Chercher</g:RadioButton>
-					<g:SuggestBox ui:field="searchKeywords" width="120px" />
-					<g:Label styleName="{style.searchFieldIntermediate}">sur</g:Label>
-					<g:RadioButton name="searchType" ui:field="searchTypeAll">tout</g:RadioButton>
-					<g:RadioButton name="searchType" ui:field="searchTypeArtist">artiste</g:RadioButton>
-					<g:RadioButton name="searchType" styleName="{style.searchButton}" ui:field="searchTypeTitle">titre</g:RadioButton>
-					<g:Button ui:field="launchSearch">Rechercher</g:Button>
-					<g:Label styleName="{style.spacer}"/>
-					<g:Button ui:field="cancelSearch">Annuler</g:Button>
-				</g:FlowPanel>			
-				<g:FlowPanel styleName="{style.searchDateBlock}">
-				<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnDate">Ou par date</g:RadioButton>
+			<g:VerticalPanel width="570px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.search-block}">
+				<g:FlowPanel >
+					<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnDate">Rechercher par date</g:RadioButton>
 					<dp:DateBox ui:field="dateSearch" width="70px"/>
 					<g:Label styleName="{style.spacer}" />
 					<g:TextBox ui:field="hourSearch" width="15px"/>
 					<g:Label styleName="{style.searchHour}">H</g:Label>
 					<g:TextBox ui:field="minuteSearch" width="15px" />
-					<g:Label styleName="{style.searchMinute}">M</g:Label>					
-				</g:FlowPanel>					
+					<g:Label styleName="{style.searchMinute}">M</g:Label>			
+					<g:Button ui:field="launchSearch">Rechercher</g:Button>
+					<g:Label styleName="{style.spacer}"/>
+					<g:Button ui:field="cancelSearch">Annuler</g:Button>		
+				</g:FlowPanel>	
+				<g:FlowPanel styleName="{style.searchFieldsBlock}">
+					<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnField">Ou</g:RadioButton>
+					<g:SuggestBox ui:field="searchKeywords" width="120px" />
+					<g:Label styleName="{style.searchFieldIntermediate}">sur</g:Label>
+					<g:RadioButton name="searchType" ui:field="searchTypeAll">tout</g:RadioButton>
+					<g:RadioButton name="searchType" ui:field="searchTypeArtist">artiste</g:RadioButton>
+					<g:RadioButton name="searchType" ui:field="searchTypeTitle">titre</g:RadioButton>					
+				</g:FlowPanel>										
 			</g:VerticalPanel>
 		</g:north>
-		<g:west size="400">
-			<g:VerticalPanel horizontalAlignment="center" width="400px" height="550px">
-				<c:DataGrid ui:field="historyGrid" width="400px" pageSize="12" height="500px" />
-				<c:SimplePager ui:field="historyGridPager" width="225px" height="50px" />
+		<g:west size="575">
+			<g:VerticalPanel horizontalAlignment="center" width="575px" height="550px">
+				<g:SimplePanel styleName="{style.image}" width="200px" height="200px">
+					<g:Image ui:field="songImage" />
+				</g:SimplePanel>
+				<g:FlowPanel styleName="{style.background-white}" width="410px" height="560px">	
+					<c:DataGrid ui:field="historyGrid" width="400px" pageSize="12" height="500px" />
+					<c:SimplePager ui:field="historyGridPager" width="225px" height="50px"/>
+				</g:FlowPanel>
 			</g:VerticalPanel>			
 		</g:west>
-		<g:east size="200">
-			<g:SimplePanel styleName="{style.image}" width="200px" height="200px">
-				<g:Image ui:field="songImage" />
-			</g:SimplePanel>		
-		</g:east>
 	</g:DockLayoutPanel>
 		
 </ui:UiBinder> 
