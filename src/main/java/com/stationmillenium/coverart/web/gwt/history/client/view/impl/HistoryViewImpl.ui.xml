@@ -63,8 +63,7 @@
 		}
 		
 		.image {
-			padding-top: 20px;
-			padding-left: 10px;			
+			padding-top: 10px;
 		}
 		
 		.search-block {
@@ -85,45 +84,70 @@
 			margin: 2px;
 		}
 		
+		.clickOnCover {
+			color: white;
+			font-style: italic;
+			font-size: 10px;	
+			margin-top: 3px;
+		}
+		
+		.mention {
+			text-align: left;
+			color: white;
+			font-style: italic;
+			font-size: 10px;	
+			margin-top: 3px;
+		}
+		
 	</ui:style>
 	
 	<!-- Panel content -->
-	<g:DockLayoutPanel unit="PX" height="860px" width="575px" styleName="{style.background-player}" >
-		<g:north size="80">
-			<g:VerticalPanel width="570px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.search-block}">
-				<g:FlowPanel >
-					<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnDate">Rechercher par date</g:RadioButton>
-					<dp:DateBox ui:field="dateSearch" width="70px"/>
-					<g:Label styleName="{style.spacer}" />
-					<g:TextBox ui:field="hourSearch" width="15px"/>
-					<g:Label styleName="{style.searchHour}">H</g:Label>
-					<g:TextBox ui:field="minuteSearch" width="15px" />
-					<g:Label styleName="{style.searchMinute}">M</g:Label>			
-					<g:Button ui:field="launchSearch">Rechercher</g:Button>
-					<g:Label styleName="{style.spacer}"/>
-					<g:Button ui:field="cancelSearch">Annuler</g:Button>		
-				</g:FlowPanel>	
-				<g:FlowPanel styleName="{style.searchFieldsBlock}">
-					<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnField">Ou</g:RadioButton>
-					<g:SuggestBox ui:field="searchKeywords" width="120px" />
-					<g:Label styleName="{style.searchFieldIntermediate}">sur</g:Label>
-					<g:RadioButton name="searchType" ui:field="searchTypeAll">tout</g:RadioButton>
-					<g:RadioButton name="searchType" ui:field="searchTypeArtist">artiste</g:RadioButton>
-					<g:RadioButton name="searchType" ui:field="searchTypeTitle">titre</g:RadioButton>					
-				</g:FlowPanel>										
-			</g:VerticalPanel>
-		</g:north>
-		<g:west size="575">
-			<g:VerticalPanel horizontalAlignment="center" width="575px" height="550px">
-				<g:SimplePanel styleName="{style.image}" width="200px" height="200px">
-					<g:Image ui:field="songImage" />
-				</g:SimplePanel>
-				<g:FlowPanel styleName="{style.background-white}" width="410px" height="560px">	
-					<c:DataGrid ui:field="historyGrid" width="400px" pageSize="12" height="500px" />
-					<c:SimplePager ui:field="historyGridPager" width="225px" height="50px"/>
-				</g:FlowPanel>
-			</g:VerticalPanel>			
-		</g:west>
-	</g:DockLayoutPanel>
+	<g:VerticalPanel width="575px" horizontalAlignment="center">
+		<g:Image resource="{res.cetaitQuoi}"/>
+		<g:DockLayoutPanel unit="PX" height="880px" width="575px" styleName="{style.background-player}" >
+			<g:north size="100">
+				<g:VerticalPanel>
+					<g:VerticalPanel width="570px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.search-block}">					
+						<g:FlowPanel >
+							<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnDate">Rechercher par date</g:RadioButton>
+							<dp:DateBox ui:field="dateSearch" width="70px"/>
+							<g:Label styleName="{style.spacer}" />
+							<g:TextBox ui:field="hourSearch" width="15px"/>
+							<g:Label styleName="{style.searchHour}">H</g:Label>
+							<g:TextBox ui:field="minuteSearch" width="15px" />
+							<g:Label styleName="{style.searchMinute}">M</g:Label>			
+							<g:Button ui:field="launchSearch">Rechercher</g:Button>
+							<g:Label styleName="{style.spacer}"/>
+							<g:Button ui:field="cancelSearch">Annuler</g:Button>		
+						</g:FlowPanel>	
+						<g:FlowPanel styleName="{style.searchFieldsBlock}">
+							<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnField">Ou</g:RadioButton>
+							<g:SuggestBox ui:field="searchKeywords" width="120px" />
+							<g:Label styleName="{style.searchFieldIntermediate}">sur</g:Label>
+							<g:RadioButton name="searchType" ui:field="searchTypeAll">tout</g:RadioButton>
+							<g:RadioButton name="searchType" ui:field="searchTypeArtist">artiste</g:RadioButton>
+							<g:RadioButton name="searchType" ui:field="searchTypeTitle">titre</g:RadioButton>					
+						</g:FlowPanel>										
+					</g:VerticalPanel>			
+					<g:Label styleName="{style.clickOnCover}">Cliquer sur un titre pour en afficher la pochette</g:Label>
+				</g:VerticalPanel>
+			</g:north>
+			<g:west size="575">
+				<g:VerticalPanel horizontalAlignment="center" width="575px" height="550px">
+					<g:SimplePanel styleName="{style.image}" width="200px" height="200px">
+						<g:Image ui:field="songImage" />
+					</g:SimplePanel>
+					<g:FlowPanel styleName="{style.background-white}" width="410px" height="560px">	
+						<c:DataGrid ui:field="historyGrid" width="400px" pageSize="12" height="500px" />
+						<c:SimplePager ui:field="historyGridPager" width="225px" height="50px"/>
+					</g:FlowPanel>
+				</g:VerticalPanel>			
+			</g:west>
+		</g:DockLayoutPanel>
+		<g:SimplePanel width="575px" styleName="{style.mention}">
+			<g:Label>Page « C’était quoi ce titre ? » Station Millenium by Vince</g:Label>
+		</g:SimplePanel>
 		
-</ui:UiBinder> 
+	</g:VerticalPanel>	
+		
+</ui:UiBinder>

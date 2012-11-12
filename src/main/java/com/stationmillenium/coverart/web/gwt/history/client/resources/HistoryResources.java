@@ -15,5 +15,8 @@ public interface HistoryResources extends ClientBundle {
 
 	@Source("logo-millenium.png")
 	ImageResource logoMillenium();
+
+	@Source("cetait-quoi.png")
+	ImageResource cetaitQuoi();
 	
 }
