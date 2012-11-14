@@ -18,5 +18,8 @@ public interface HistoryResources extends ClientBundle {
 
 	@Source("cetait-quoi.png")
 	ImageResource cetaitQuoi();
+
+	@Source("ajax-loader.gif")
+	ImageResource ajaxLoader();
 	
 }

@@ -29,7 +29,7 @@ public class HistoryEventsHandler implements RefreshHistoryEventHandler {
 	 */
 	public HistoryEventsHandler(ClientFactory clientFactory) {
 		//initialization
-		presenter =  clientFactory.getPlayerActivity();
+		presenter =  clientFactory.getHistoryActivity();
 		
 		//register event
 		clientFactory.getEventBus().addHandler(RefreshHistoryEvent.TYPE, this);

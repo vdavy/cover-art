@@ -61,7 +61,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	}
 	
 	@Override
-	public HistoryActivity getPlayerActivity() {
+	public HistoryActivity getHistoryActivity() {
 		return activity;
 	}
 	

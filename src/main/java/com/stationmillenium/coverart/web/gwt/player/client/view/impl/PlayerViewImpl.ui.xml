@@ -117,7 +117,7 @@
 	</ui:style>
 	
 	<!-- Panel content -->
-	<g:VerticalPanel width="520px" height="465px" styleName="{style.background-player}" horizontalAlignment="center">
+	<g:VerticalPanel width="520px" height="480px" styleName="{style.background-player}" horizontalAlignment="center">
 		<g:Image resource="{res.logoPlayerLive}"/>
 		<g:DockLayoutPanel unit="PX" width="500px" height="180px" styleName="{style.player-image-block}">
 			<g:west size="200">
@@ -146,7 +146,7 @@
 			</g:center>			
 		</g:DockLayoutPanel>
 		
-		<g:DockLayoutPanel unit="PX" width="500px" height="130px">
+		<g:DockLayoutPanel unit="PX" width="500px" height="145px">
 			<g:west size="280">
 				<g:FlowPanel styleName="{style.history-panel}" width="250px">
 					<g:Label styleName="{style.history-title}"><ui:msg>5 dernier titres</ui:msg></g:Label>

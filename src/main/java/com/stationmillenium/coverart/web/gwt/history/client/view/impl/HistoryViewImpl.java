@@ -25,6 +25,7 @@ import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
@@ -67,10 +68,10 @@ public class HistoryViewImpl extends Composite implements HistoryViewInterface {
 	@UiField DateBox dateSearch;
 	@UiField TextBox hourSearch;
 	@UiField TextBox minuteSearch;
-	//@UiField Button launchSearch;
 	@UiField(provided = true) DataGrid<HistoryGWTDTO> historyGrid = new DataGrid<HistoryGWTDTO>();
 	@UiField(provided = true) SimplePager historyGridPager;
 	@UiField Image songImage;
+	@UiField PopupPanel ajaxLoading;
 	
 	//data provider
 	private ListDataProvider<HistoryGWTDTO> dataProvider = new ListDataProvider<HistoryGWTDTO>();
@@ -334,5 +335,11 @@ public class HistoryViewImpl extends Composite implements HistoryViewInterface {
 		songImage.setUrl(uri);
 		songImage.setWidth(width);
 		songImage.setHeight(height);
+	}
+	
+	@Override
+	public void showAjaxLoading(boolean display) {
+		ajaxLoading.center();
+		ajaxLoading.setVisible(display);
 	}
 }

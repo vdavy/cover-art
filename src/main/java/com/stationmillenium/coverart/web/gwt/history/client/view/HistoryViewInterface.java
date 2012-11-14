@@ -38,6 +38,13 @@ public interface HistoryViewInterface extends IsWidget {
 	 * @param height the height
 	 */
 	public void setImage(SafeUri uri, String width, String height);
+	
+	/**
+	 * Show the ajax loading popup
+	 * @param display true to display, false to hide
+	 */
+	public void showAjaxLoading(boolean display);
+	
 	/**
 	 * History view presenter interface
 	 * @author vincent

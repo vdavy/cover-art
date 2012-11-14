@@ -47,12 +47,14 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 			LOGGER.fine("Found songs list : " + result);
 			clientFactory.getHistoryView().setSongHistoryList(result);
 			initImage(result);
+			clientFactory.getHistoryView().showAjaxLoading(false);
 		}
 
 		@Override
 		public void onFailure(Throwable caught) {
 			LOGGER.log(Level.SEVERE, "Error during songs search", caught);
-			Window.alert(clientFactory.getConstants().songSearchError());
+			clientFactory.getHistoryView().showAjaxLoading(false);
+			Window.alert(clientFactory.getConstants().songSearchError());			
 		}
 		
 	};
@@ -83,6 +85,7 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 	
 	@Override
 	public void refreshHistory() {
+		clientFactory.getHistoryView().showAjaxLoading(true);
 		clientFactory.getService().getSongHistory(new AsyncCallback<List<HistoryGWTDTO>>() {
 			
 			@Override
@@ -90,11 +93,13 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 				LOGGER.fine("History received : " + result);
 				clientFactory.getHistoryView().setSongHistoryList(result);
 				initImage(result);
+				clientFactory.getHistoryView().showAjaxLoading(false);
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
 				LOGGER.log(Level.SEVERE, "Error during gathering history list", caught);
+				clientFactory.getHistoryView().showAjaxLoading(false);
 				Window.alert(clientFactory.getConstants().historyLoadingError());
 			}
 		});
@@ -144,23 +149,28 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 	@Override
 	public void launchSearchFields(String query, SearchFieldType searchType) {
 		LOGGER.fine("Search type : " + searchType + " - search query : " + query);
-		switch (searchType) { //follow search type
-		case ALL:
-			clientFactory.getService().searchAll(query, asyncCallback);
-			break;
-
-		case ARTIST:
-			clientFactory.getService().searchByArtist(query, asyncCallback);
-			break;
-		
-		case TITLE:
-			clientFactory.getService().searchByTitle(query, asyncCallback);
-			break;
-		}
+		if ((query != null) && (query.length() > 0)) {
+			clientFactory.getHistoryView().showAjaxLoading(true);
+			switch (searchType) { //follow search type
+			case ALL:
+				clientFactory.getService().searchAll(query, asyncCallback);
+				break;
+	
+			case ARTIST:
+				clientFactory.getService().searchByArtist(query, asyncCallback);
+				break;
+			
+			case TITLE:
+				clientFactory.getService().searchByTitle(query, asyncCallback);
+				break;
+			}
+		} else
+			LOGGER.fine("Query empty !");
 	}
 	
 	@Override
 	public void launchSearchDates(Date date, String hours, String minutes) {
+		clientFactory.getHistoryView().showAjaxLoading(true);
 		try {
 			long hoursInLong = Long.valueOf(hours) * 3600 * 1000;
 			long minutesInLong = Long.valueOf(minutes) * 60 * 1000;

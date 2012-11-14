@@ -26,7 +26,7 @@ public class HistoryActivityMapper implements ActivityMapper {
 	@Override
 	public Activity getActivity(Place place) {
 		if (place instanceof HistoryPlace) 
-			return clientFactory.getPlayerActivity();
+			return clientFactory.getHistoryActivity();
 		else
 			return null;
 	}

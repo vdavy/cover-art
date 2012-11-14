@@ -20,5 +20,5 @@ public interface ClientFactory {
 	HistoryServiceAsync getService();
 	HistoryViewInterface getHistoryView();
 	HistoryResources getResources();
-	HistoryActivity getPlayerActivity();
+	HistoryActivity getHistoryActivity();
 }
