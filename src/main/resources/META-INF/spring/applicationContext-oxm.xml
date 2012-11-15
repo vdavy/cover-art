@@ -16,5 +16,6 @@
 	<!-- OXM marsahallers definitions -->   
 	<oxm:jaxb2-marshaller id="oxmLastFMTrackSearch" contextPath="com.stationmillenium.coverart.schema.lastfmtracksearch"/>
 	<oxm:jaxb2-marshaller id="oxmDeezerTrackSearch" contextPath="com.stationmillenium.coverart.schema.deezertracksearch"/>
+	<oxm:jaxb2-marshaller id="oxmCurrentSong" contextPath="com.stationmillenium.coverart.schema.currentsong"/>
 
 </beans>
