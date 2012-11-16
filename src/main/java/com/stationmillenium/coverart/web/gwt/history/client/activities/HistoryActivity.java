@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.safehtml.shared.SafeUri;
@@ -85,102 +86,148 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 	
 	@Override
 	public void refreshHistory() {
-		clientFactory.getHistoryView().showAjaxLoading(true);
-		clientFactory.getService().getSongHistory(new AsyncCallback<List<HistoryGWTDTO>>() {
+		GWT.runAsync(new RunAsyncCallback() {
 			
 			@Override
-			public void onSuccess(List<HistoryGWTDTO> result) {
-				LOGGER.fine("History received : " + result);
-				clientFactory.getHistoryView().setSongHistoryList(result);
-				initImage(result);
-				clientFactory.getHistoryView().showAjaxLoading(false);
+			public void onSuccess() {
+				clientFactory.getHistoryView().showAjaxLoading(true);
+				clientFactory.getService().getSongHistory(new AsyncCallback<List<HistoryGWTDTO>>() {
+					
+					@Override
+					public void onSuccess(List<HistoryGWTDTO> result) {
+						LOGGER.fine("History received : " + result);
+						clientFactory.getHistoryView().setSongHistoryList(result);
+						initImage(result);
+						clientFactory.getHistoryView().showAjaxLoading(false);
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						LOGGER.log(Level.SEVERE, "Error during gathering history list", caught);
+						clientFactory.getHistoryView().showAjaxLoading(false);
+						Window.alert(clientFactory.getConstants().historyLoadingError());
+					}
+				});				
 			}
 			
 			@Override
-			public void onFailure(Throwable caught) {
-				LOGGER.log(Level.SEVERE, "Error during gathering history list", caught);
-				clientFactory.getHistoryView().showAjaxLoading(false);
-				Window.alert(clientFactory.getConstants().historyLoadingError());
+			public void onFailure(Throwable reason) {
+				LOGGER.log(Level.WARNING, "Error during refresh history", reason);
 			}
-		});
+		});		
 	}
 	
 	@Override
 	public void getSearchSuggestions(final Request request, final Callback callback) {
-		if ((request.getQuery() != null) && (request.getQuery().length() >= 3)) { //if valid query
-			clientFactory.getService().getSearchSuggestions(request.getQuery(), request.getLimit(), new AsyncCallback<List<HistoryGWTDTO>>() {
-				
-				@Override
-				public void onFailure(Throwable caught) {
-					LOGGER.log(Level.WARNING, "Error during suggestions gathering for ", caught);				
-					Response response = new Response();				
-					callback.onSuggestionsReady(request, response); //send callback
-				}
-				
-				@Override
-				public void onSuccess(List<HistoryGWTDTO> result) {
-					LOGGER.fine("Gathered suggestion for query '" + request.getQuery() + "': " + result);
-					
-					//build suggestion list
-					List<Suggestion> suggestionList = new ArrayList<Suggestion>();
-					for (final HistoryGWTDTO suggestion : result) {
-						suggestionList.add(new Suggestion() {
-							
-							@Override
-							public String getReplacementString() {
-								return suggestion.getArtist() + " " + suggestion.getTitle();
+		GWT.runAsync(new RunAsyncCallback() {
+
+			@Override
+			public void onSuccess() {
+				if ((request.getQuery() != null) && (request.getQuery().length() >= 3)) { //if valid query
+					clientFactory.getService().getSearchSuggestions(request.getQuery(), request.getLimit(), new AsyncCallback<List<HistoryGWTDTO>>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							LOGGER.log(Level.WARNING, "Error during suggestions gathering for "+ request.getQuery(), caught);				
+							Response response = new Response();				
+							callback.onSuggestionsReady(request, response); //send callback
+						}
+
+						@Override
+						public void onSuccess(List<HistoryGWTDTO> result) {
+							LOGGER.fine("Gathered suggestion for query '" + request.getQuery() + "': " + result);
+
+							//build suggestion list
+							List<Suggestion> suggestionList = new ArrayList<Suggestion>();
+							for (final HistoryGWTDTO suggestion : result) {
+								suggestionList.add(new Suggestion() {
+
+									@Override
+									public String getReplacementString() {
+										return suggestion.getArtist() + " " + suggestion.getTitle();
+									}
+
+									@Override
+									public String getDisplayString() {
+										return suggestion.getArtist() + " - " + suggestion.getTitle();
+									}
+								});
 							}
-							
-							@Override
-							public String getDisplayString() {
-								return suggestion.getArtist() + " - " + suggestion.getTitle();
-							}
-						});
-					}
-					Response response = new Response(suggestionList);
-							
-					callback.onSuggestionsReady(request, response); //send callback
+							Response response = new Response(suggestionList);
+
+							callback.onSuggestionsReady(request, response); //send callback
+						}
+					});
 				}
-				
-			});
-		}
-	}
-	
-	@Override
-	public void launchSearchFields(String query, SearchFieldType searchType) {
-		LOGGER.fine("Search type : " + searchType + " - search query : " + query);
-		if ((query != null) && (query.length() > 0)) {
-			clientFactory.getHistoryView().showAjaxLoading(true);
-			switch (searchType) { //follow search type
-			case ALL:
-				clientFactory.getService().searchAll(query, asyncCallback);
-				break;
-	
-			case ARTIST:
-				clientFactory.getService().searchByArtist(query, asyncCallback);
-				break;
-			
-			case TITLE:
-				clientFactory.getService().searchByTitle(query, asyncCallback);
-				break;
 			}
-		} else
-			LOGGER.fine("Query empty !");
+			
+			@Override
+			public void onFailure(Throwable reason) {
+				LOGGER.log(Level.WARNING, "Error during suggestions", reason);
+			}
+			
+		});
 	}
 	
 	@Override
-	public void launchSearchDates(Date date, String hours, String minutes) {
-		clientFactory.getHistoryView().showAjaxLoading(true);
-		try {
-			long hoursInLong = Long.valueOf(hours) * 3600 * 1000;
-			long minutesInLong = Long.valueOf(minutes) * 60 * 1000;
-			Date searchDate = new Date(date.getTime() + hoursInLong + minutesInLong);
-			LOGGER.fine("Search by date : " + searchDate);
-			clientFactory.getService().searchByDate(searchDate, asyncCallback);
-		} catch(NumberFormatException e) {
-			LOGGER.log(Level.WARNING, "Error durgin parsing date", e);
-			clientFactory.getService().getSongHistory(asyncCallback); //get defaut song list
-		}
+	public void launchSearchFields(final String query, final SearchFieldType searchType) {
+		GWT.runAsync(new RunAsyncCallback() {
+			
+			@Override
+			public void onSuccess() {
+				LOGGER.fine("Search type : " + searchType + " - search query : " + query);
+				if ((query != null) && (query.length() > 0)) {
+					clientFactory.getHistoryView().showAjaxLoading(true);
+					switch (searchType) { //follow search type
+					case ALL:
+						clientFactory.getService().searchAll(query, asyncCallback);
+						break;
+			
+					case ARTIST:
+						clientFactory.getService().searchByArtist(query, asyncCallback);
+						break;
+					
+					case TITLE:
+						clientFactory.getService().searchByTitle(query, asyncCallback);
+						break;
+					}
+				} else
+					LOGGER.fine("Query empty !");				
+			}
+			
+			@Override
+			public void onFailure(Throwable reason) {
+				LOGGER.log(Level.WARNING, "Error during search by fields", reason);
+			}
+			
+		});		
+	}
+	
+	@Override
+	public void launchSearchDates(final Date date, final String hours, final String minutes) {
+		GWT.runAsync(new RunAsyncCallback() {
+			
+			@Override
+			public void onSuccess() {
+				clientFactory.getHistoryView().showAjaxLoading(true);
+				try {
+					long hoursInLong = Long.valueOf(hours) * 3600 * 1000;
+					long minutesInLong = Long.valueOf(minutes) * 60 * 1000;
+					Date searchDate = new Date(date.getTime() + hoursInLong + minutesInLong);
+					LOGGER.fine("Search by date : " + searchDate);
+					clientFactory.getService().searchByDate(searchDate, asyncCallback);
+				} catch(NumberFormatException e) {
+					LOGGER.log(Level.WARNING, "Error durgin parsing date", e);
+					clientFactory.getService().getSongHistory(asyncCallback); //get defaut song list
+				}				
+			}
+			
+			@Override
+			public void onFailure(Throwable reason) {
+				LOGGER.log(Level.WARNING, "Error during search by date", reason);				
+			}
+			
+		});		
 	}
 	
 	@Override
