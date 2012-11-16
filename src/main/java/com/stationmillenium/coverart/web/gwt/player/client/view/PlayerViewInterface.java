@@ -5,7 +5,6 @@ package com.stationmillenium.coverart.web.gwt.player.client.view;
 
 import java.util.List;
 
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.user.client.ui.IsWidget;
 
@@ -18,9 +17,9 @@ public interface PlayerViewInterface extends IsWidget {
 	
 	/**
 	 * Set the current song
-	 * @param currentSong current song as {@link SafeHtml}
+	 * @param currentSong current song as string
 	 */
-	public void setCurrentSong(SafeHtml currentSong);
+	public void setCurrentSong(String currentSong);
 	
 	/**
 	 * Set the song image

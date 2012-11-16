@@ -12,9 +12,6 @@
 	<ui:style>
 		/* Add CSS here. See the GWT docs on UI Binder for more details */
 		.background-player {
-			/*background-image: url('resources/fond-player-millenium.jpg');
-			background-position: center top;
-			background-repeat: no-repeat;*/
 			background-color: black;
 			padding-top: 10px;
 			margin-left: auto;
@@ -147,17 +144,17 @@
 		</g:DockLayoutPanel>
 		
 		<g:DockLayoutPanel unit="PX" width="500px" height="145px">
-			<g:west size="280">
-				<g:FlowPanel styleName="{style.history-panel}" width="250px">
+			<g:center>
+				<g:FlowPanel styleName="{style.history-panel}" width="480px">
 					<g:Label styleName="{style.history-title}"><ui:msg>5 dernier titres</ui:msg></g:Label>
-					<c:CellList rowCount="5" ui:field="songList" width="240px" height="120px" styleName="{style.history-list}"/>
+					<c:CellList rowCount="5" ui:field="songList" width="450px" height="120px" styleName="{style.history-list}"/>
 				</g:FlowPanel>
-			</g:west>
-			<g:east size="140">
-				<g:VerticalPanel verticalAlignment="bottom" horizontalAlignment="right" height="110px">
+			</g:center>
+			<g:south size="15">
+				<g:VerticalPanel verticalAlignment="bottom" horizontalAlignment="right" width="490px">
 					<g:Label styleName="{style.bottom-label}"><ui:msg>Player Millenium HTML5 by Vince</ui:msg></g:Label>
 				</g:VerticalPanel>
-			</g:east>			
+			</g:south>			
 		</g:DockLayoutPanel>
 
 		<g:HTMLPanel width="0px" height="0px">

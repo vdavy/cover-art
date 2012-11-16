@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.user.client.Window;
@@ -67,7 +66,7 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 					if (!newSong.equals(currentSong)) {
 						//set up image and text
 						String text = clientFactory.getMessages().currentSongText(newSong.getArtist(), newSong.getTitle());
-						clientFactory.getPlayerView().setCurrentSong(SafeHtmlUtils.fromString(text));
+						clientFactory.getPlayerView().setCurrentSong(text);
 						if (newSong.getImagePath() != null) {
 							SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + newSong.getImagePath());
 							clientFactory.getPlayerView().setImage(imageUri, newSong.getImageWidth(), newSong.getImageHeight());
@@ -139,7 +138,7 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 	private void displayErrorSong() {
 		//update player
 		String text = clientFactory.getConstants().songUnaivalaible();
-		clientFactory.getPlayerView().setCurrentSong(SafeHtmlUtils.fromString(text));
+		clientFactory.getPlayerView().setCurrentSong(text);
 		clientFactory.getPlayerView().setImage(
 				clientFactory.getResources().logoMillenium().getSafeUri(), 
 				String.valueOf(clientFactory.getResources().logoMillenium().getWidth()), 

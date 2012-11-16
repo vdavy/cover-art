@@ -11,7 +11,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.media.client.Audio;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -121,8 +120,8 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 	}
 
 	@Override
-	public void setCurrentSong(SafeHtml currentSong) {
-		this.currentSong.setText(currentSong.asString());
+	public void setCurrentSong(String currentSong) {
+		this.currentSong.setText(currentSong);
 	}
 	
 	@Override
