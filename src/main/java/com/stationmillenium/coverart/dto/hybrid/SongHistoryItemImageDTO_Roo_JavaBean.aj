@@ -3,8 +3,8 @@
 
 package com.stationmillenium.coverart.dto.hybrid;
 
-import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 
 privileged aspect SongHistoryItemImageDTO_Roo_JavaBean {
     

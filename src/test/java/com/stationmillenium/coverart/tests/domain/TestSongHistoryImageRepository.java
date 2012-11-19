@@ -12,8 +12,8 @@ import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 import com.stationmillenium.coverart.repositories.SongImageRepository;
 
 /**

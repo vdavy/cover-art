@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.stationmillenium.coverart.domain.history.SongHistoryImage;
-import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 
 /**
  * Repository for {@link SongHistoryImage}}

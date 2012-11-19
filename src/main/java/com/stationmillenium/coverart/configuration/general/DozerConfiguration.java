@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import com.stationmillenium.coverart.domain.history.SongHistory;
 import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
-import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 import com.stationmillenium.coverart.web.gwt.history.shared.HistoryGWTDTO;
 import com.stationmillenium.coverart.web.gwt.player.shared.SongGWTDTO;
 

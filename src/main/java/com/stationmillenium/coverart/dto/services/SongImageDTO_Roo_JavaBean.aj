@@ -3,7 +3,7 @@
 
 package com.stationmillenium.coverart.dto.services;
 
-import com.stationmillenium.coverart.dto.services.SongImageDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 
 privileged aspect SongImageDTO_Roo_JavaBean {
     

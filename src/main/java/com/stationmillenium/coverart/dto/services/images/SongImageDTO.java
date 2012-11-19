@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.dto.services;
+package com.stationmillenium.coverart.dto.services.images;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;

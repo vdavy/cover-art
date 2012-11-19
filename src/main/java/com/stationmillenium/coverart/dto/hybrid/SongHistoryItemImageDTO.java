@@ -6,8 +6,8 @@ package com.stationmillenium.coverart.dto.hybrid;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 
 /**
  * DTO containing {@link SongHistoryItemDTO} a	nd {@link SongImageDTO}

@@ -25,8 +25,8 @@ import com.stationmillenium.coverart.domain.history.SongHistoryImage;
 import com.stationmillenium.coverart.domain.history.SongHistoryImage.Provider;
 import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
-import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 
 /**
  * Repository for {@link SongHistory}}

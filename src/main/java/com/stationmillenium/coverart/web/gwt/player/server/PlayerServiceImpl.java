@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Configurable;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
-import com.stationmillenium.coverart.dto.services.SongImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 import com.stationmillenium.coverart.repositories.SongImageRepository;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.services.PollingService;
