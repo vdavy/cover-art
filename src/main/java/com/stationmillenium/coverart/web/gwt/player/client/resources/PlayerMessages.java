@@ -18,4 +18,8 @@ public interface PlayerMessages extends Messages {
 
 	@DefaultMessage("{0} - {1}")
 	public String currentSongText(String artist, String title);
+	
+	@DefaultMessage("Player Millenium | {0} - {1}")
+	public String windowTitlecurrentSong(String artist, String title);
+	
 }

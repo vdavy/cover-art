@@ -7,18 +7,18 @@ import org.springframework.roo.addon.tostring.RooToString;
 import com.stationmillenium.coverart.domain.statuses.abstracts.AbstractStatus;
 
 /**
- * Entity of the playlist update changes
+ * Entity of the fm states changes
  * @author vincent
  *
  */
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class PlaylistStatus extends AbstractStatus {
-	
+public class FMStatus extends AbstractStatus {
+	 
 	/**
-	 * Boolean to note if server is up or down
+	 * Boolean to note if fm is up or down
 	 */
-	private boolean playlistUpdated; 
-	
+	private boolean fmUp;
+		
 }

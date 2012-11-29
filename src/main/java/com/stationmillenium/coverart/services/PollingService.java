@@ -16,10 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
+import com.stationmillenium.coverart.domain.alert.AlertType;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
-import com.stationmillenium.coverart.repositories.ServerStatusRepository;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.repositories.SongSearchRepository;
+import com.stationmillenium.coverart.repositories.StatusRepository;
+import com.stationmillenium.coverart.services.alerts.AlertService;
 import com.stationmillenium.coverart.services.covergraber.CoverGraberRootService;
 import com.stationmillenium.coverart.services.history.ShoutcastParser;
 import com.stationmillenium.coverart.services.history.SongHistoryFilter;
@@ -51,10 +53,14 @@ public class PollingService {
 	@Autowired
 	private SongHistoryFilter songFilter;
 	
+	//the alert service to send alert mails
+	@Autowired	
+	private AlertService alertService;
+	
 	//repositories injection
 	//the server status repository
 	@Autowired
-	private ServerStatusRepository serverStatusRepository;
+	private StatusRepository statusRepository;
 	
 	//the song history repository
 	@Autowired
@@ -125,7 +131,9 @@ public class PollingService {
 					
 					if (timeoutCalendar.before(currentSong.getPlayedDate())) { //check playlist update
 						//record playlist updated
-						serverStatusRepository.recordPlaylistUpdated();
+						boolean sendAlert = statusRepository.recordPlaylistUpdated();
+						if (sendAlert)
+							alertService.sendEndedAlert(AlertType.PLAYLIST);
 						LOGGER.debug("Playlist updated");
 						
 						//playlist updated - process filtering
@@ -134,7 +142,9 @@ public class PollingService {
 						return filteredSongHistoryFiltersList;			
 						
 					} else { //playlist not updated
-						serverStatusRepository.recordPlaylistUpdateTimeout();
+						boolean sendAlert = statusRepository.recordPlaylistUpdateTimeout();
+						if (sendAlert)
+							alertService.sendActiveAlert(AlertType.PLAYLIST);
 						LOGGER.warn("Playlist not updated in timeout");						
 						return new ArrayList<>(); //return empty list
 					}					
@@ -173,11 +183,14 @@ public class PollingService {
 	 * @param serverStatus <code>true</code> if server is up, <code>false</code> if server is down
 	 */
 	private void recordServerStatus(boolean serverStatus) {
-		if (serverStatusRepository.getLastServerStatus() != serverStatus) { //if server status changed from previous one
-			if (serverStatus)
-				serverStatusRepository.recordServerUp(); //record server up
-			else
-				serverStatusRepository.recordServerDown(); //record server down
+		if (statusRepository.getLastServerStatus() != serverStatus) { //if server status changed from previous one
+			if (serverStatus) {
+				statusRepository.recordServerUp(); //record server up
+				alertService.sendEndedAlert(AlertType.SHOUTCAST); //stop sending alert
+			} else {
+				statusRepository.recordServerDown(); //record server down
+				alertService.sendActiveAlert(AlertType.SHOUTCAST); //send alert
+			}
 		}
 	}
 	

@@ -53,4 +53,8 @@ public class GeneralPropertiesBean implements PropertyBeanInterface {
 	@Max(240)
 	private int dateSearchDelta;
 	
+	@Min(10)
+	@Max(120)
+	private int fmAlertTimeout;
+		
 }

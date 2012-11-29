@@ -28,12 +28,14 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private @Value("${generalConfiguration.alertTimeout}") String alertTimeout;
 	private @Value("${generalConfiguration.historyDisplayMinMinutes}") String historyDisplayMinMinutes;
 	private @Value("${generalConfiguration.dateSearchDelta}") String dateSearchDelta;
+	private @Value("${generalConfiguration.fmAlertTimeout}") String fmAlertTimeout;
 	
 	//instance vars
 	private int playlistUpdateTimeoutInt;
 	private int alertTimeoutInt;
 	private int historyDisplayMinMinutesInt;
 	private int dateSearchDeltaInt;
+	private int fmAlertTimeoutInt;
 	
 	@Override
 	protected GeneralPropertiesBean buildBean() {
@@ -45,6 +47,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 		propertiesBean.setAlertTimeout(alertTimeoutInt);
 		propertiesBean.setHistoryDisplayMinMinutes(historyDisplayMinMinutesInt);
 		propertiesBean.setDateSearchDelta(dateSearchDeltaInt);
+		propertiesBean.setFmAlertTimeout(fmAlertTimeoutInt);
 		return propertiesBean;
 	}
 	
@@ -72,6 +75,12 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 			dateSearchDeltaInt = Integer.parseInt(dateSearchDelta);
 		} catch(NumberFormatException e) {
 			throw new PropertyBeanException("dateSearchDelta", e);
+		}
+		
+		try { //convert fmAlertTimeout into number
+			fmAlertTimeoutInt = Integer.parseInt(fmAlertTimeout);
+		} catch(NumberFormatException e) {
+			throw new PropertyBeanException("fmAlertTimeout", e);
 		}
 	}
 

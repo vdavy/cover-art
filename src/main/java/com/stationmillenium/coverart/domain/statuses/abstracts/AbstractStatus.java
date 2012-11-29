@@ -1,10 +1,12 @@
-package com.stationmillenium.coverart.domain.statuses;
+package com.stationmillenium.coverart.domain.statuses.abstracts;
+
+import java.util.Calendar;
+
+import javax.validation.constraints.NotNull;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
-
-import com.stationmillenium.coverart.domain.statuses.abstracts.AbstractStatus;
 
 /**
  * Entity of the server states changes
@@ -13,12 +15,13 @@ import com.stationmillenium.coverart.domain.statuses.abstracts.AbstractStatus;
  */
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord
-public class ServerStatus extends AbstractStatus {
-	 
+@RooJpaActiveRecord(inheritanceType = "SINGLE_TABLE")
+public abstract class AbstractStatus {
+	
 	/**
-	 * Boolean to note if server is up or down
+	 * Date of the change
 	 */
-	private boolean serverUp;
-		
+	@NotNull
+	private Calendar dateOfChange;
+	
 }

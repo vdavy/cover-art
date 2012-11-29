@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm.xsd">
+
+	<!-- mail sender -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mailConfiguration.mailHost}" />
+	</bean>
+
+	<!-- mail templates -->
+	<!-- fm templates -->
+	<bean id="fmActiveAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${mailConfiguration.from}" />
+		<property name="subject" value="${mailConfiguration.fmAlert.activeAlert.subject}" />
+		<property name="text" value="${mailConfiguration.fmAlert.activeAlert.text}" />
+	</bean>
+	<bean id="fmEndedAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${mailConfiguration.from}" />
+		<property name="subject" value="${mailConfiguration.fmAlert.endedAlert.subject}" />
+		<property name="text" value="${mailConfiguration.fmAlert.endedAlert.text}" />
+	</bean>
+	
+	<!-- shouctast templates -->
+	<bean id="shoutcastActiveAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${mailConfiguration.from}" />
+		<property name="subject" value="${mailConfiguration.shoutcastAlert.activeAlert.subject}" />
+		<property name="text" value="${mailConfiguration.shoutcastAlert.activeAlert.text}" />
+	</bean>
+	<bean id="shoutcastEndedAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${mailConfiguration.from}" />
+		<property name="subject" value="${mailConfiguration.shoutcastAlert.endedAlert.subject}" />
+		<property name="text" value="${mailConfiguration.shoutcastAlert.endedAlert.text}" />
+	</bean>
+	
+	<!-- playlist templates -->
+	<bean id="playlistActiveAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${mailConfiguration.from}" />
+		<property name="subject" value="${mailConfiguration.playlistAlert.activeAlert.subject}" />
+		<property name="text" value="${mailConfiguration.playlistAlert.activeAlert.text}" />
+	</bean>
+	<bean id="playlistEndedAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${mailConfiguration.from}" />
+		<property name="subject" value="${mailConfiguration.playlistAlert.endedAlert.subject}" />
+		<property name="text" value="${mailConfiguration.playlistAlert.endedAlert.text}" />
+	</bean>
+
+</beans>

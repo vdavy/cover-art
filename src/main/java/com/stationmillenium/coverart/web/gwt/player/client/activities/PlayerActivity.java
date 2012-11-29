@@ -67,6 +67,7 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 						//set up image and text
 						String text = clientFactory.getMessages().currentSongText(newSong.getArtist(), newSong.getTitle());
 						clientFactory.getPlayerView().setCurrentSong(text);
+						Window.setTitle(clientFactory.getMessages().windowTitlecurrentSong(newSong.getArtist(), newSong.getTitle()));
 						if (newSong.getImagePath() != null) {
 							SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + newSong.getImagePath());
 							clientFactory.getPlayerView().setImage(imageUri, newSong.getImageWidth(), newSong.getImageHeight());
@@ -139,6 +140,7 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 		//update player
 		String text = clientFactory.getConstants().songUnaivalaible();
 		clientFactory.getPlayerView().setCurrentSong(text);
+		Window.setTitle(clientFactory.getConstants().getWindowTitle());
 		clientFactory.getPlayerView().setImage(
 				clientFactory.getResources().logoMillenium().getSafeUri(), 
 				String.valueOf(clientFactory.getResources().logoMillenium().getWidth()), 

@@ -62,4 +62,12 @@ privileged aspect GeneralPropertiesBean_Roo_JavaBean {
     public void GeneralPropertiesBean.setDateSearchDelta(int dateSearchDelta) {
         this.dateSearchDelta = dateSearchDelta;
     }
+    
+    public int GeneralPropertiesBean.getFmAlertTimeout() {
+        return this.fmAlertTimeout;
+    }
+    
+    public void GeneralPropertiesBean.setFmAlertTimeout(int fmAlertTimeout) {
+        this.fmAlertTimeout = fmAlertTimeout;
+    }
 }

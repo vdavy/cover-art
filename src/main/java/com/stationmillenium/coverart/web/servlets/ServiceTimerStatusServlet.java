@@ -14,33 +14,36 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import com.stationmillenium.coverart.repositories.SongSearchRepository;
+import com.stationmillenium.coverart.services.cron.CronTimer;
+import com.stationmillenium.coverart.services.cron.CronType;
 
 /**
- * Servlet to launch Hibernate Search index
+ * 
  * @author vincent
  *
  */
-@WebServlet("/admin/index")
+@WebServlet("/admin/serviceStatus")
 @Configurable
-public class HibernateIndexServlet extends HttpServlet {
+public class ServiceTimerStatusServlet extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	//the polling service
 	@Autowired
-	private SongSearchRepository repository;
+	private CronTimer cronTimer;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-			repository.index();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		try  {
+			CronType type = CronType.valueOf(req.getParameter("type"));
+			resp.getWriter().print("Service " + type + " status : " + cronTimer.isEnable(type));
+		} catch (IllegalArgumentException | NullPointerException e) {
+			throw new ServletException(e);			
 		}
+		
 	}
 	
 }

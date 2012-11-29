@@ -22,13 +22,14 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.schema.currentsong.CurrentSong;
 import com.stationmillenium.coverart.services.PollingService;
+import com.stationmillenium.coverart.services.alerts.FMAlertService;
 
 /**
- * 
+ * Servlet to get the current song
  * @author vincent
  *
  */
-@WebServlet("/currentSong")
+@WebServlet("/admin/currentSong")
 @Configurable
 public class CurrentSongServlet extends HttpServlet {
 
@@ -49,6 +50,10 @@ public class CurrentSongServlet extends HttpServlet {
 	//dozer
 	@Autowired
 	private Mapper mapper;
+	
+	//fm alert service to notify polling
+	@Autowired
+	private FMAlertService fmAlertService;
 		
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,6 +70,9 @@ public class CurrentSongServlet extends HttpServlet {
 		//mashall output
 		oxmCurrentSong.setSchema(new ClassPathResource("xsd/CurrentSong.xsd")); 
 		oxmCurrentSong.marshal(currentSong, new StreamResult(resp.getWriter()));
+		
+		//notify polling
+		fmAlertService.updateQueryDate();
 	}
 	
 }
