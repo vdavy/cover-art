@@ -26,4 +26,29 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<!-- security part -->	
+	<security-constraint>
+		<display-name>Tomcat authentication</display-name>
+		<!-- secured pages -->
+		<web-resource-collection>
+			<web-resource-name>Admin</web-resource-name>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<!-- allowed roles -->
+		<auth-constraint>
+			<role-name>coverart</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<login-config>
+	 <!-- authentication type -->
+	 <auth-method>BASIC</auth-method>
+	 <realm-name>coverart realm</realm-name>
+	</login-config>
+	<!-- roles used in app -->
+	<security-role>
+		<description>Admin role</description>
+		<role-name>coverart</role-name>
+	</security-role>
+	
 </web-app>
