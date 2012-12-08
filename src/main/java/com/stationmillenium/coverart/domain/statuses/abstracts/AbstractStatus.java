@@ -1,6 +1,6 @@
 package com.stationmillenium.coverart.domain.statuses.abstracts;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
@@ -22,6 +22,6 @@ public abstract class AbstractStatus {
 	 * Date of the change
 	 */
 	@NotNull
-	private Calendar dateOfChange;
+	private Date dateOfChange;
 	
 }

@@ -85,7 +85,7 @@ public class StatusRepository {
 	private void recordServerStatus(boolean status) {
 		ServerStatus serverStatus = new ServerStatus();
 		serverStatus.setServerUp(status);
-		serverStatus.setDateOfChange(Calendar.getInstance());
+		serverStatus.setDateOfChange(Calendar.getInstance().getTime());
 		serverStatus.persist();
 	}
 	
@@ -110,7 +110,7 @@ public class StatusRepository {
 	private void recordFMStatus(boolean status) {
 		FMStatus  fmStatus = new FMStatus();
 		fmStatus.setFmUp(status);
-		fmStatus.setDateOfChange(Calendar.getInstance());
+		fmStatus.setDateOfChange(Calendar.getInstance().getTime());
 		fmStatus.persist();
 	}
 	
@@ -148,7 +148,7 @@ public class StatusRepository {
 		//insert update if needed
 		if (updated != previousUpdate) {
 			PlaylistStatus playlistStatus = new PlaylistStatus();
-			playlistStatus.setDateOfChange(Calendar.getInstance());
+			playlistStatus.setDateOfChange(Calendar.getInstance().getTime());
 			playlistStatus.setPlaylistUpdated(updated);
 			playlistStatus.persist();
 			return true;

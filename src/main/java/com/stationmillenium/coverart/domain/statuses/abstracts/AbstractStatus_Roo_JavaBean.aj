@@ -4,15 +4,15 @@
 package com.stationmillenium.coverart.domain.statuses.abstracts;
 
 import com.stationmillenium.coverart.domain.statuses.abstracts.AbstractStatus;
-import java.util.Calendar;
+import java.util.Date;
 
 privileged aspect AbstractStatus_Roo_JavaBean {
     
-    public Calendar AbstractStatus.getDateOfChange() {
+    public Date AbstractStatus.getDateOfChange() {
         return this.dateOfChange;
     }
     
-    public void AbstractStatus.setDateOfChange(Calendar dateOfChange) {
+    public void AbstractStatus.setDateOfChange(Date dateOfChange) {
         this.dateOfChange = dateOfChange;
     }
     
