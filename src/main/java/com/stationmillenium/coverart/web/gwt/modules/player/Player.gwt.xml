@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.5.0/distro-source/core/src/gwt-module.dtd">
+<module rename-to="player">
+	<!-- module inheritance -->
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name='com.google.gwt.activity.Activity'/>
+  	<inherits name='com.google.gwt.place.Place'/>
+  	<inherits name="com.google.gwt.i18n.I18N"/>
+  	<inherits name="com.google.gwt.resources.Resources" />
+  	<inherits name="com.google.gwt.logging.Logging"/>
+  	
+  	<!-- source path -->
+	<source path="client"/>
+	<source path="shared"/>
+	<source path="server"/>
+	
+	<!-- Use ClientFactoryImpl by default -->
+    <replace-with class="com.stationmillenium.coverart.web.gwt.modules.player.client.clientfactory.ClientFactoryImpl">
+    	<when-type-is class="com.stationmillenium.coverart.web.gwt.modules.player.client.clientfactory.ClientFactory"/>
+    </replace-with>
+    
+    <!-- entry point -->
+	<entry-point class="com.stationmillenium.coverart.web.gwt.modules.player.client.Player" />
+	
+	 <!-- Logging properties -->
+	 <set-property name="gwt.logging.enabled" value="TRUE"/>	 
+	 <set-property name="gwt.logging.logLevel" value="FINE"/>
+	 <set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+	 <set-property name="gwt.logging.firebugHandler" value="ENABLED" />
+	 <set-property name="gwt.logging.developmentModeHandler" value="ENABLED" />
+	 <set-property name="gwt.logging.systemHandler" value="ENABLED" />
+	 <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />	 
+	 <set-property name="gwt.logging.popupHandler" value="DISABLED" />
+  
+</module>

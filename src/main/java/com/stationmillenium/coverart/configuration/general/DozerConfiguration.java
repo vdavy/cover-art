@@ -14,8 +14,8 @@ import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
-import com.stationmillenium.coverart.web.gwt.history.shared.HistoryGWTDTO;
-import com.stationmillenium.coverart.web.gwt.player.shared.SongGWTDTO;
+import com.stationmillenium.coverart.web.gwt.modules.history.shared.HistoryGWTDTO;
+import com.stationmillenium.coverart.web.gwt.modules.player.shared.SongGWTDTO;
 
 /**
  * Configuration class for Dozer mapping
