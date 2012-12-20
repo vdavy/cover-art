@@ -1,0 +1,161 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+    
+    <ui:with type="com.stationmillenium.coverart.web.gwt.player.client.resources.PlayerResources" field="res" />
+    
+    <!-- Style -->
+	<ui:style>
+		/* Add CSS here. See the GWT docs on UI Binder for more details */
+		.background-player {
+			background-color: black;
+			padding-top: 10px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		.current-song-title {
+			font-weight: bold;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 15px;
+			color: #ffffff;
+			margin-top: 35px;
+			padding-top: 5px;
+			padding-bottom: 3px;			
+		}
+		
+		.current-song {
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 15px;
+			color: #ffffff;
+			font-size: 15px;
+			font-style: italic;			
+		}
+		
+		.current-song-block {
+			background-color: #ff2217;
+			border-radius: 5px;
+			box-shadow: 0px 0px 3px #000000;
+			background-image: -moz-linear-gradient(top, #ff2217, #000000);
+			background-image: -ms-linear-gradient(top, #ff2217, #000000);
+			background-image: -o-linear-gradient(top, #ff2217, #000000);
+			background-image: -webkit-linear-gradient(top, #ff2217, #000000);
+			background-image: linear-gradient(top, #ff2217, #000000);
+			background-clip: padding-box;
+			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+			opacity: 0.85;			
+		}
+		
+		.player-image-block {
+			margin-top: 5px;
+		}
+		
+		.image {
+			border-right-color: #ffffff;
+			border-right-width: 2px;
+			border-right-style: dashed;			
+			margin-right: 5px;			
+			padding-top: 20px;
+		}
+		
+		.history-panel {
+			background-color: #1f7eff;
+			border: 2px solid #999999;
+			border-radius: 5px;
+			box-shadow: 0px 0px 3px #ffffff;
+			background-image: -moz-linear-gradient(top, #1f7eff, #000000);
+			background-image: -ms-linear-gradient(top, #1f7eff, #000000);
+			background-image: -o-linear-gradient(top, #1f7eff, #000000);
+			background-image: -webkit-linear-gradient(top, #1f7eff, #000000);
+			background-image: linear-gradient(top, #1f7eff, #000000);
+			background-clip: padding-box;
+			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+			opacity: 0.85;
+
+			
+			padding-left: 10px;
+			margin-bottom: 5px;				
+			text-align: left;
+		}
+		
+		.history-title {
+			color: #ffffff;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-weight: bold;
+			font-size: 12px;
+			margin-top: 15px;
+			margin-bottom: 5px;
+			text-decoration: underline;
+		}
+		
+		
+		.history-list {			
+			color: #ffffff;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 10px;
+		}
+		
+		.player {
+			margin-top: 25px;
+		}
+		
+		.bottom-label {
+			color: #ffffff;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 9px;
+			font-style: italic;			
+		}
+	</ui:style>
+	
+	<!-- Panel content -->
+	<g:VerticalPanel width="520px" height="480px" styleName="{style.background-player}" horizontalAlignment="center">
+		<g:Image resource="{res.logoPlayerLive}"/>
+		<g:DockLayoutPanel unit="PX" width="500px" height="180px" styleName="{style.player-image-block}">
+			<g:west size="200">
+				<g:SimplePanel width="200" height="200" styleName="{style.image}">
+					<g:Image ui:field="songImage" />
+				</g:SimplePanel>				
+			</g:west>
+			
+			<g:center>
+				<g:VerticalPanel horizontalAlignment="center">
+					<g:FlowPanel styleName="{style.current-song-block}" width="290px" height="50px">
+						<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement à l'antenne</ui:msg></g:Label>
+						<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
+					</g:FlowPanel>		
+					<g:FlowPanel ui:field="player" width="290px" styleName="{style.player}">
+						<!-- flash player removed if html5 supported -->
+						<g:HTMLPanel >
+							<object type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3.swf" width="200" height="20">
+							    <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3.swf" />
+							    <param name="bgcolor" value="#000000" />
+							    <param name="FlashVars" value="mp3=http%3A//www.station-millenium.com/millenium.mp3&amp;loop=1&amp;autoplay=1&amp;showstop=1&amp;bgcolor=000000&amp;bgcolor1=fa2e00" />
+							</object>		
+						</g:HTMLPanel> 
+					</g:FlowPanel>		
+				</g:VerticalPanel>
+			</g:center>			
+		</g:DockLayoutPanel>
+		
+		<g:DockLayoutPanel unit="PX" width="500px" height="145px">
+			<g:center>
+				<g:FlowPanel styleName="{style.history-panel}" width="480px">
+					<g:Label styleName="{style.history-title}"><ui:msg>5 dernier titres</ui:msg></g:Label>
+					<c:CellList rowCount="5" ui:field="songList" width="450px" height="120px" styleName="{style.history-list}"/>
+				</g:FlowPanel>
+			</g:center>
+			<g:south size="15">
+				<g:VerticalPanel verticalAlignment="bottom" horizontalAlignment="right" width="490px">
+					<g:Label styleName="{style.bottom-label}"><ui:msg>Player Millenium HTML5 by Vince</ui:msg></g:Label>
+				</g:VerticalPanel>
+			</g:south>			
+		</g:DockLayoutPanel>		
+	</g:VerticalPanel>
+		
+</ui:UiBinder> 

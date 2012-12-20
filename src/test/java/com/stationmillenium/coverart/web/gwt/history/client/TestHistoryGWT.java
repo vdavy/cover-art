@@ -7,8 +7,8 @@ import java.util.Date;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.stationmillenium.coverart.web.gwt.modules.history.client.clientfactory.ClientFactory;
-import com.stationmillenium.coverart.web.gwt.modules.history.client.view.HistoryViewInterface.HistoryViewPresenter.SearchFieldType;
+import com.stationmillenium.coverart.web.gwt.history.client.clientfactory.ClientFactory;
+import com.stationmillenium.coverart.web.gwt.history.client.view.HistoryViewInterface.HistoryViewPresenter.SearchFieldType;
 
 /**
  * Test case for history

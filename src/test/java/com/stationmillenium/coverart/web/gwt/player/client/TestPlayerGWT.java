@@ -5,8 +5,8 @@ package com.stationmillenium.coverart.web.gwt.player.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.stationmillenium.coverart.web.gwt.modules.player.client.activities.PlayerActivity;
-import com.stationmillenium.coverart.web.gwt.modules.player.client.clientfactory.ClientFactory;
+import com.stationmillenium.coverart.web.gwt.player.client.activities.PlayerActivity;
+import com.stationmillenium.coverart.web.gwt.player.client.clientfactory.ClientFactory;
 
 /**
  * Test case for player
