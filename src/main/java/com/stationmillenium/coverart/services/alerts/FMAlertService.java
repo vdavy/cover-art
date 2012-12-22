@@ -74,10 +74,10 @@ public class FMAlertService {
 	private void recordFMStatus(boolean fmStatus) {
 		if (statusRepository.getLastFMStatus() != fmStatus) { //if server status changed from previous one
 			if (fmStatus) {
-				statusRepository.recordServerUp(); //record server up
+				statusRepository.recordFMUp(); //record FM up
 				alertService.sendEndedAlert(AlertType.FM); //stop sending alert
 			} else {
-				statusRepository.recordServerDown(); //record server down
+				statusRepository.recordFMDown(); //record FM down
 				alertService.sendActiveAlert(AlertType.FM); //send alert
 			}
 		}
