@@ -1,0 +1,23 @@
+.messageLabelDefault {
+	font-size: 15px;
+	color: #555555;
+	margin-bottom: 5px;
+	font-style: normal;
+	font-weight: normal;
+}
+
+.messageLabelRed {
+	font-size: 15px;
+	color: #F51818;
+	margin-bottom: 5px;
+	font-weight: bold;
+	font-style: normal;
+}
+
+.messageLabelGreen {
+	font-size: 15px;
+	color: #00BA06;
+	margin-bottom: 5px;
+	font-weight: normal;
+	font-style: italic;
+}

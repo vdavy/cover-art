@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-      version="3.0"> 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 
 	<display-name>cover-art</display-name>
 
+	<!-- request factory servlet -->
+	<servlet>
+		<servlet-name>requestFactoryServlet</servlet-name>
+		<servlet-class>com.google.web.bindery.requestfactory.server.RequestFactoryServlet</servlet-class>
+		<init-param>
+			<param-name>symbolMapsDirectory</param-name>
+			<!-- You'll need to compile with -extras and move the symbolMaps directory 
+				to this location if you want stack trace deobfuscation to work -->
+			<param-value>WEB-INF/classes/symbolMaps/</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>requestFactoryServlet</servlet-name>
+		<url-pattern>/gwtRequest</url-pattern>
+	</servlet-mapping>
 
 	<!-- Enable escaping of form submission contents -->
 	<context-param>
@@ -15,8 +31,7 @@
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 	<session-config>
@@ -26,8 +41,8 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	
-	<!-- security part -->	
+
+	<!-- security part -->
 	<security-constraint>
 		<display-name>Tomcat authentication</display-name>
 		<!-- secured pages -->
@@ -41,14 +56,14 @@
 		</auth-constraint>
 	</security-constraint>
 	<login-config>
-	 <!-- authentication type -->
-	 <auth-method>BASIC</auth-method>
-	 <realm-name>coverart realm</realm-name>
+		<!-- authentication type -->
+		<auth-method>BASIC</auth-method>
+		<realm-name>coverart realm</realm-name>
 	</login-config>
 	<!-- roles used in app -->
 	<security-role>
 		<description>Admin role</description>
 		<role-name>coverart</role-name>
 	</security-role>
-	
+
 </web-app>

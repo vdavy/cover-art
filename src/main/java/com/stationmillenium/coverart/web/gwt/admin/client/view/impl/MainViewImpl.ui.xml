@@ -1,0 +1,41 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+	<ui:style>
+		/* Add CSS here. See the GWT docs on UI Binder for more details */
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:DockLayoutPanel unit="PX" width="1000px" height="850px">
+		<g:north size="30">
+			<g:MenuBar animationEnabled="true" width="500px" autoOpen="true">
+				<g:MenuItem><ui:msg>Rapport de status</ui:msg>
+			    	<g:MenuBar vertical="true" animationEnabled="true" autoOpen="true">
+			       		<g:MenuItem ui:field="shoutcastStatusMenuItem"><ui:msg>Shoutcast</ui:msg></g:MenuItem>
+			       		<g:MenuItem ui:field="playlistStatusMenuItem"><ui:msg>Playlist</ui:msg></g:MenuItem>
+			       		<g:MenuItem ui:field="fmStatusMenuItem"><ui:msg>FM</ui:msg></g:MenuItem>
+			     	</g:MenuBar>
+			   	</g:MenuItem>
+			    <g:MenuItemSeparator/>
+			   	<g:MenuItem><ui:msg>Extraction...</ui:msg>
+			     	<g:MenuBar vertical="true" animationEnabled="true" autoOpen="true">
+			       		<g:MenuItem ui:field="playlistExtractMenuItem"><ui:msg>Playlist</ui:msg></g:MenuItem>
+			     	</g:MenuBar>
+			   	</g:MenuItem>
+			   	<g:MenuItemSeparator/>
+			   	<g:MenuItem><ui:msg>Configuration...</ui:msg>
+			   		<g:MenuBar vertical="true" animationEnabled="true" autoOpen="true">
+		       		<g:MenuItem ui:field="alertsConfigMenuItem"><ui:msg>Alertes</ui:msg></g:MenuItem>
+			    	</g:MenuBar>
+		   		</g:MenuItem>
+			</g:MenuBar>
+		</g:north>
+		<g:center>
+			<g:SimplePanel width="1000px" height="200px" ui:field="contentPanel" />
+		</g:center>
+	</g:DockLayoutPanel>	
+</ui:UiBinder> 

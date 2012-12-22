@@ -1,0 +1,83 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:dp="urn:import:com.google.gwt.user.datepicker.client"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+	<!-- Style -->
+	<ui:style>		
+		.searchHour {
+			text-align: left;
+			display: inline;
+			padding-right: 5px;
+			padding-left: 2px;
+		}
+		
+		.searchMinute {
+			text-align: left;
+			display: inline;
+			padding-left: 2px;
+			margin-right: 10px;
+		}
+		
+		.spacer {
+			display: inline;
+			padding-left: 10px;		
+		}	
+		
+		.exteriorPanel {
+			padding-top: 10px;
+		}
+		
+		.interiorPanel {
+			margin:5px;
+		}
+				
+		.secondDate {
+			margin-top:5px;
+		}
+		
+		.buttons {
+			text-align: right;			
+		}
+		
+	</ui:style>
+	<g:VerticalPanel width="500px" height="200px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.exteriorPanel}">
+		<g:DecoratorPanel height="100px">
+			<g:VerticalPanel width="450px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
+				<g:Label ui:field="messageLabel" />
+				<g:FlowPanel>
+					<g:InlineLabel><ui:msg>Date de début</ui:msg></g:InlineLabel>
+					<g:Label styleName="{style.spacer}" />
+					<dp:DateBox ui:field="startDateSearch" width="70px"/>
+					<g:Label styleName="{style.spacer}" />
+					<g:TextBox ui:field="startHourSearch" width="15px"/>
+					<g:Label styleName="{style.searchHour}"><ui:msg>H</ui:msg></g:Label>
+					<g:TextBox ui:field="startMinuteSearch" width="15px" />
+					<g:Label styleName="{style.searchMinute}"><ui:msg>M</ui:msg></g:Label>				
+				</g:FlowPanel>
+				<g:FlowPanel styleName="{style.secondDate}">
+					<g:InlineLabel><ui:msg>Date de fin</ui:msg></g:InlineLabel>
+					<g:Label styleName="{style.spacer}" />
+					<dp:DateBox ui:field="endDateSearch" width="70px"/>
+					<g:Label styleName="{style.spacer}" />
+					<g:TextBox ui:field="endHourSearch" width="15px"/>
+					<g:Label styleName="{style.searchHour}"><ui:msg>H</ui:msg></g:Label>
+					<g:TextBox ui:field="endMinuteSearch" width="15px" />
+					<g:Label styleName="{style.searchMinute}"><ui:msg>M</ui:msg></g:Label>				
+				</g:FlowPanel>
+			</g:VerticalPanel>
+		</g:DecoratorPanel>
+		
+		<g:FlowPanel width="450px" styleName="{style.buttons}">
+			<g:Button ui:field="sendButton"><ui:msg>Extraire</ui:msg></g:Button>
+			<g:Label styleName="{style.spacer}" />
+			<g:Button ui:field="resetButton"><ui:msg>Effacer</ui:msg></g:Button>
+		</g:FlowPanel>
+		
+		<g:FormPanel ui:field="form" visible="false" method="post">
+			<g:Hidden ui:field="jsonContent" name="jsonContent" />
+		</g:FormPanel>
+	</g:VerticalPanel>
+</ui:UiBinder> 

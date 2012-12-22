@@ -219,4 +219,26 @@ public class TestSongHistoryRepository {
 		}
 	}
 	
+	/**
+	 * Test the {@link SongItemRepository#getSongsPlayedBetween2Dates(Calendar, Calendar)}
+	 */
+	@Test
+	public void testGetSongsPlayedBetween2Dates() {
+		//set up param
+		Calendar minDate = Calendar.getInstance();
+		minDate.add(Calendar.DAY_OF_YEAR, -100);
+		Calendar maxDate = Calendar.getInstance();
+		
+		//process
+		List<SongHistoryItemDTO> songList = repository.getSongsPlayedBetween2Dates(minDate, maxDate);
+		
+		//assert
+		assertTrue(songList.size() > 0);
+		for (SongHistoryItemDTO song : songList) {
+			assertNotNull(song.getPlayedDate());
+			assertNotNull(song.getArtist());
+			assertNotNull(song.getTitle());
+		}
+	}
+	
 }

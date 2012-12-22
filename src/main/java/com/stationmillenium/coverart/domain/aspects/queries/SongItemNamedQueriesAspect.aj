@@ -59,6 +59,17 @@ public aspect SongItemNamedQueriesAspect {
 						"JOIN FETCH history.song " +
 						"JOIN FETCH history.song.image " +						
 						"WHERE history.playedDate > :minDate " +
+						"ORDER BY history.playedDate DESC"),
+		
+		/**
+		 * Get histories with song fetched where played date is beitwe
+		 */
+		@NamedQuery( 
+				name = "getSongsFetchedOrderedByPlayedTimeBetween2Dates", 
+				query = "FROM SongHistory AS history " +
+						"JOIN FETCH history.song " +
+						"WHERE history.playedDate " +
+						"BETWEEN :minDate AND :maxDate " +
 						"ORDER BY history.playedDate DESC")
 					
 	});

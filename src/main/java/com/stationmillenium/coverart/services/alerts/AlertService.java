@@ -27,7 +27,7 @@ public class AlertService {
 	//logger
 	private static final Logger LOGGER = LoggerFactory.getLogger(AlertService.class);
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	
 	//alert repository
 	@Autowired

@@ -218,4 +218,28 @@ public class SongItemRepository {
 		return resultList;
 	}
 	
+	/**
+	 * Get songs played between 2 dates
+	 * @param minDate the min date (excluding)
+	 * @param maxDate the max date (excluding)
+	 * @return the list of {@link SongHistoryItemDTO}
+	 */
+	public List<SongHistoryItemDTO> getSongsPlayedBetween2Dates(Calendar minDate, Calendar maxDate) {
+		//prepare query
+		Query query = entityManager.createNamedQuery("getSongsFetchedOrderedByPlayedTimeBetween2Dates", SongHistory.class); //create query
+		query.setParameter("minDate", minDate);
+		query.setParameter("maxDate", maxDate);
+		@SuppressWarnings("unchecked")
+		List<SongHistory> songHistoryList = query.getResultList();
+		
+		//convert
+		List<SongHistoryItemDTO> returnList = new ArrayList<>();
+		for (SongHistory songItem : songHistoryList) {
+			SongHistoryItemDTO songHistoryItem = mapper.map(songItem, SongHistoryItemDTO.class); //process mapping to output dto
+			returnList.add(songHistoryItem);
+		}
+				
+		return returnList;
+	}
+	
 }
