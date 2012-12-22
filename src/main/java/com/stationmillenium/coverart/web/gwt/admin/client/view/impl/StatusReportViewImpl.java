@@ -40,7 +40,7 @@ import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.statuse
 public class StatusReportViewImpl extends Composite implements StatusReportView {
 
 	private static final Logger LOGGER = Logger.getLogger(StatusReportViewImpl.class.getName());
-	private static final DateTimeFormat DATE_FORMAT = DateTimeFormat.getFormat("dd/MM/yyyy HH:mm");
+	private static final DateTimeFormat DATE_FORMAT = DateTimeFormat.getFormat("dd/MM/yyyy HH:mm:ss");
 	
 	private ClientFactory clientFactory; 
 	
