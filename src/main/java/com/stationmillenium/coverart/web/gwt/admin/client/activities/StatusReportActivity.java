@@ -39,13 +39,14 @@ public class StatusReportActivity extends AbstractActivity implements Presenter 
 		@Override
 		public void onSuccess(List<? extends StatusProxy> response) {
 			LOGGER.fine("Gathered statuses : " + response);
-			StatusProxy lastIndexObject = response.get(response.size() - 1);
-			if (lastIndexObject instanceof FMStatusProxy) //fm case
-				clientFactory.getStatusReportView().setAlertActive(((FMStatusProxy) lastIndexObject).isFmUp());
-			else if (lastIndexObject instanceof ServerStatusProxy) //server case
-				clientFactory.getStatusReportView().setAlertActive(((ServerStatusProxy) lastIndexObject).isServerUp());
-			else if (lastIndexObject instanceof PlaylistStatusProxy) //playlist case
-				clientFactory.getStatusReportView().setAlertActive(((PlaylistStatusProxy) lastIndexObject).isPlaylistUpdated());
+			Collections.reverse(response); //reverse collections
+			StatusProxy indexObject = response.get(0);
+			if (indexObject instanceof FMStatusProxy) //fm case
+				clientFactory.getStatusReportView().setAlertActive(((FMStatusProxy) indexObject).isFmUp());
+			else if (indexObject instanceof ServerStatusProxy) //server case
+				clientFactory.getStatusReportView().setAlertActive(((ServerStatusProxy) indexObject).isServerUp());
+			else if (indexObject instanceof PlaylistStatusProxy) //playlist case
+				clientFactory.getStatusReportView().setAlertActive(((PlaylistStatusProxy) indexObject).isPlaylistUpdated());
 			
 			clientFactory.getStatusReportView().setStatusesList(response);
 		}
