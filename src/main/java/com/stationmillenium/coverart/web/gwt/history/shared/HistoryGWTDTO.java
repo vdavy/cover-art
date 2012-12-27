@@ -3,17 +3,16 @@
  */
 package com.stationmillenium.coverart.web.gwt.history.shared;
 
+import java.io.Serializable;
 import java.util.Date;
-
-import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * DTO for the song
  * @author vincent
  *
  */
-//@SuppressWarnings("serial")
-public class HistoryGWTDTO implements IsSerializable {
+@SuppressWarnings("serial")
+public class HistoryGWTDTO implements Serializable {
 
 	//fields
 	private String artist;
