@@ -15,8 +15,8 @@ import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 import com.stationmillenium.coverart.web.gwt.admin.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.PlaylistExtractView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.PlaylistExtractView.Presenter;
-import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.PlaylistExtractViewImpl.MessageLabelStyle;
-import com.stationmillenium.coverart.web.gwt.admin.shared.autobean.PlaylistExtract;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.AbstractMessageView.MessageLabelStyle;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.autobean.PlaylistExtract;
 
 /**
  * Activity for the playlist extract part

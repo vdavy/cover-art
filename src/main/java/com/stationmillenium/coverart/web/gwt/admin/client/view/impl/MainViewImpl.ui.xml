@@ -29,7 +29,8 @@
 			   	<g:MenuItemSeparator/>
 			   	<g:MenuItem><ui:msg>Configuration...</ui:msg>
 			   		<g:MenuBar vertical="true" animationEnabled="true" autoOpen="true">
-		       		<g:MenuItem ui:field="alertsConfigMenuItem"><ui:msg>Alertes</ui:msg></g:MenuItem>
+			       		<g:MenuItem ui:field="generalConfigMenuItem"><ui:msg>Générale</ui:msg></g:MenuItem>
+			       		<g:MenuItem ui:field="alertsConfigMenuItem"><ui:msg>Alertes</ui:msg></g:MenuItem>
 			    	</g:MenuBar>
 		   		</g:MenuItem>
 			</g:MenuBar>

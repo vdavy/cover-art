@@ -12,7 +12,6 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.Hidden;
 import com.google.gwt.user.client.ui.Label;
@@ -28,19 +27,8 @@ import com.stationmillenium.coverart.web.gwt.admin.client.view.PlaylistExtractVi
  * @author vincent
  *
  */
-public class PlaylistExtractViewImpl extends Composite implements PlaylistExtractView {
+public class PlaylistExtractViewImpl extends AbstractMessageView implements PlaylistExtractView {
 
-	/**
-	 * Available styles for message label
-	 * @author vincent
-	 *
-	 */
-	public static enum MessageLabelStyle {
-		DEFAULT,
-		GREEN,
-		RED;
-	}
-	
 	interface PlaylistExtractViewImplUiBinder extends UiBinder<Widget, PlaylistExtractViewImpl> {}
 	
 	//static variables
@@ -127,20 +115,17 @@ public class PlaylistExtractViewImpl extends Composite implements PlaylistExtrac
 	
 	@Override
 	public void setMessageLabelTextAndStyle(String text, MessageLabelStyle style) {
-		messageLabel.setText(text); //set text
-		switch (style) { //set style
-		case DEFAULT:
-			messageLabel.setStyleName(clientFactory.getAdminBundle().playlistExtract().messageLabelDefault());
-			break;
-			
-		case GREEN:
-			messageLabel.setStyleName(clientFactory.getAdminBundle().playlistExtract().messageLabelGreen());
-			break;
-			
-		case RED:
-			messageLabel.setStyleName(clientFactory.getAdminBundle().playlistExtract().messageLabelRed());
-			break;
-		}
+		super.setMessageLabelTextAndStyle(text, style);
 	}
 	
+	@Override
+	protected ClientFactory getClientFactory() {
+		return clientFactory;
+	}
+	
+	@Override
+	protected Label getMessageLabel() {
+		return messageLabel; 
+	}
+
 }

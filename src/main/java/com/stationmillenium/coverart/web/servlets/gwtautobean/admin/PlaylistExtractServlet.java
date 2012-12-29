@@ -30,8 +30,8 @@ import com.google.web.bindery.autobean.shared.AutoBeanFactory;
 import com.google.web.bindery.autobean.vm.AutoBeanFactorySource;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
-import com.stationmillenium.coverart.web.gwt.admin.client.server.autobean.AdminAutobeanFactory;
-import com.stationmillenium.coverart.web.gwt.admin.shared.autobean.PlaylistExtract;
+import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.autobean.AdminAutobeanFactory;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.autobean.PlaylistExtract;
 
 /**
  * Servlet for playlist extract

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.web.gwt.admin.shared.autobean;
+package com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.autobean;
 
 import java.util.Date;
 

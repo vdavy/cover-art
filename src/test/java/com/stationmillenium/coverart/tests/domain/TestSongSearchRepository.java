@@ -30,8 +30,12 @@ public class TestSongSearchRepository {
 	 * @throws InterruptedException 
 	 */
 	@Test
-	public void testIndex() throws InterruptedException {
-		repository.index();
+	public void testIndexing() throws InterruptedException {
+		repository.indexAsync();
+		boolean indexingFinished = repository.isIndexingFinished();
+		while (!indexingFinished) {
+			indexingFinished = repository.isIndexingFinished();
+		}
 	}
 	
 	/**

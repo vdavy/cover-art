@@ -9,13 +9,18 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.AdminBundle;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.GeneralConfigConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.PlaylistExtractConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.StatusReportConstants;
-import com.stationmillenium.coverart.web.gwt.admin.client.server.autobean.AdminAutobeanFactory;
-import com.stationmillenium.coverart.web.gwt.admin.client.server.requests.AdminRequestFactory;
+import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.autobean.AdminAutobeanFactory;
+import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
+import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminService;
+import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminServiceAsync;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.GeneralConfigView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.MainView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.PlaylistExtractView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.StatusReportView;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.GeneralConfigViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.MainViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.PlaylistExtractViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.StatusReportViewImpl;
@@ -36,7 +41,10 @@ public class ClientFactoryImpl implements ClientFactory {
 	private AdminBundle adminBundle = GWT.create(AdminBundle.class);
 	private AdminAutobeanFactory adminAutobeanFactory = GWT.create(AdminAutobeanFactory.class);
 	private PlaylistExtractConstants playlistExtractConstants = GWT.create(PlaylistExtractConstants.class);
+	private GeneralConfigConstants generalConfigConstants = GWT.create(GeneralConfigConstants.class);
 	private PlaylistExtractView playlistExtractView = new PlaylistExtractViewImpl(this);
+	private GeneralConfigView generalConfigView = new GeneralConfigViewImpl(this);
+	private AdminServiceAsync adminService = GWT.create(AdminService.class);
 	
 	public ClientFactoryImpl() {
 		adminRequestFactory.initialize(eventBus);
@@ -95,6 +103,21 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public PlaylistExtractConstants getPlaylistExtractConstants() {
 		return playlistExtractConstants;
+	}
+
+	@Override
+	public GeneralConfigView getGeneralConfigView() {
+		return generalConfigView;
+	}
+	
+	@Override
+	public AdminServiceAsync getAdminService() {
+		return adminService;
+	}
+	
+	@Override
+	public GeneralConfigConstants getGeneralConfigConstants() {
+		return generalConfigConstants;
 	}
 	
 }

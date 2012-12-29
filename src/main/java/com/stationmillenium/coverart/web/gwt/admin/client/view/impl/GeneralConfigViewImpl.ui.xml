@@ -1,0 +1,65 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+	<ui:style>
+		.exteriorPanel {
+			padding-top: 10px;
+		}
+		
+		.interiorPanel {
+			margin:5px;
+		}
+		
+		.labelDisplayInlineMargin {
+			display: inline;
+			margin-left: 5px;
+		}
+		
+		.labelDisplayInline {
+			display: inline;
+			font-weight: bold;
+			margin-right: 3px;
+		}
+		
+		.flowPanel {
+			margin-top: 10px;
+		}
+		
+		.image {
+			vertical-align: top;
+		}
+	</ui:style>
+	<g:SimplePanel styleName="{style.exteriorPanel}" height="500px" width="200px">
+		<g:DecoratorPanel >
+			<g:VerticalPanel width="450px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
+				<g:Label ui:field="messageLabel" />
+				<g:FlowPanel styleName="{style.flowPanel}">
+					<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Récupération des titres :</ui:msg></g:Label>
+					<g:Image ui:field="pollingServiceImage" styleName="{style.image}" />
+					<g:Label ui:field="pollingServiceText" styleName="{style.labelDisplayInlineMargin}"/> 
+				</g:FlowPanel>
+				<g:FlowPanel styleName="{style.flowPanel}">
+					<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Alert FM :</ui:msg></g:Label>
+					<g:Image ui:field="fmAlertImage" styleName="{style.image}" />
+					<g:Label ui:field="fmAlertText" styleName="{style.labelDisplayInlineMargin}"/> 
+				</g:FlowPanel>
+				<g:FlowPanel styleName="{style.flowPanel}">
+					<g:CheckBox ui:field="pollingServiceCheckbox"><ui:msg>Service de récupération des titres</ui:msg></g:CheckBox>
+					<g:CheckBox ui:field="fmAlertCheckbox"><ui:msg>Alerte FM</ui:msg></g:CheckBox>
+				</g:FlowPanel>
+				<g:FlowPanel styleName="{style.flowPanel}">
+					<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Indexation :</ui:msg></g:Label>
+					<g:Image ui:field="hibernateIndexImage" styleName="{style.image}" /><g:Label ui:field="hibernateIndexText" styleName="{style.labelDisplayInlineMargin}" /> 
+					<g:Button ui:field="hibernateIndexButton" styleName="{style.labelDisplayInlineMargin}"><ui:msg>Indexer</ui:msg></g:Button>
+				</g:FlowPanel>
+				<g:FlowPanel styleName="{style.flowPanel}">
+					<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Titre en cours :</ui:msg></g:Label>
+					<g:Label ui:field="currentTitleText" styleName="{style.labelDisplayInlineMargin}" />
+				</g:FlowPanel>
+			</g:VerticalPanel>
+		</g:DecoratorPanel>
+	</g:SimplePanel>	
+</ui:UiBinder> 

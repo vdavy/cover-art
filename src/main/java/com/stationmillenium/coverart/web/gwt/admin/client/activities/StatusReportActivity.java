@@ -15,7 +15,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.stationmillenium.coverart.web.gwt.admin.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.StatusReportPlace.ReportType;
-import com.stationmillenium.coverart.web.gwt.admin.client.server.requests.AdminRequestFactory;
+import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.StatusReportView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.StatusReportView.Presenter;
 import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.statuses.FMStatusProxy;

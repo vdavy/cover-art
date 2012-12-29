@@ -6,7 +6,7 @@ package com.stationmillenium.coverart.web.gwt.admin.client.view;
 import java.util.Date;
 
 import com.google.gwt.user.client.ui.IsWidget;
-import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.PlaylistExtractViewImpl.MessageLabelStyle;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.AbstractMessageView.MessageLabelStyle;
 
 /**
  * Interface for the playlist extract view

@@ -13,12 +13,14 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.stationmillenium.coverart.web.gwt.admin.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.ConfigureAlertsPlace;
+import com.stationmillenium.coverart.web.gwt.admin.client.places.GeneralConfigPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.PlaylistExtractPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.StatusReportPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.StatusReportPlace.ReportType;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.MainView;
 
 /**
+ * Main view of the GWT admin module
  * @author vincent
  *
  */
@@ -37,6 +39,7 @@ public class MainViewImpl extends Composite implements MainView {
 	@UiField MenuItem playlistStatusMenuItem;
 	@UiField MenuItem fmStatusMenuItem;
 	@UiField MenuItem playlistExtractMenuItem;
+	@UiField MenuItem generalConfigMenuItem;
 	@UiField MenuItem alertsConfigMenuItem;
 	
 	/**
@@ -81,10 +84,17 @@ public class MainViewImpl extends Composite implements MainView {
 			}
 		});
 	
+		generalConfigMenuItem.setScheduledCommand(new Command() { //set command for alerts configuration menu item
+			@Override
+			public void execute() {
+				clientFactory.getPlaceController().goTo(new GeneralConfigPlace() );	
+			}
+		});
+		
 		alertsConfigMenuItem.setScheduledCommand(new Command() { //set command for alerts configuration menu item
 			@Override
 			public void execute() {
-				clientFactory.getPlaceController().goTo(new ConfigureAlertsPlace() );
+				clientFactory.getPlaceController().goTo(new ConfigureAlertsPlace());
 			}
 		});
 	}

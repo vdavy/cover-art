@@ -6,6 +6,7 @@ package com.stationmillenium.coverart.web.gwt.admin.client.mvp;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.ConfigureAlertsPlace;
+import com.stationmillenium.coverart.web.gwt.admin.client.places.GeneralConfigPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.PlaylistExtractPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.StatusReportPlace;
 
@@ -17,7 +18,8 @@ import com.stationmillenium.coverart.web.gwt.admin.client.places.StatusReportPla
 @WithTokenizers({
 	ConfigureAlertsPlace.Tokenizer.class,
 	PlaylistExtractPlace.Tokenizer.class,
-	StatusReportPlace.Tokenizer.class
+	StatusReportPlace.Tokenizer.class,
+	GeneralConfigPlace.Tokenizer.class
 })
 public interface AdminPlaceHistoryMapper extends PlaceHistoryMapper {
 	//nothing to add

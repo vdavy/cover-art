@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Future;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,6 +43,8 @@ public class SongSearchRepository {
 	//logger 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SongSearchRepository.class);
 			
+	private Future<?> indexerFuture;
+	
 	//full text entity manager for hibernate search
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -51,19 +54,6 @@ public class SongSearchRepository {
 	private Mapper mapper;
 	
 	/**
-	 * Launch indexing
-	 * @throws InterruptedException
-	 */
-	@Transactional
-	public void index() throws InterruptedException {
-		LOGGER.debug("Launch indexing");
-		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
-		MassIndexer indexer = fullTextEntityManager.createIndexer(); //get indexer
-		indexer.startAndWait(); //index 
-		LOGGER.debug("Indexing finished");
-	}
-	
-	/**
 	 * Launch async indexing
 	 */
 	@Transactional
@@ -71,7 +61,25 @@ public class SongSearchRepository {
 		LOGGER.debug("Launch async indexing");
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
 		MassIndexer indexer = fullTextEntityManager.createIndexer(); //get indexer
-		indexer.start();
+		if (indexerFuture != null) {
+			synchronized (indexerFuture) {
+				indexerFuture = indexer.start();
+			}		
+		} else
+			indexerFuture = indexer.start();
+	}
+	
+	/**
+	 * Is the current indexing is finished ?
+	 * @return <code>true</code> if done, <code>false</code> if not
+	 */
+	public boolean isIndexingFinished() {
+		if (indexerFuture != null) {
+			synchronized (indexerFuture) {
+				return indexerFuture.isDone(); 
+			}
+		}	else
+			return true;
 	}
 	
 	/**

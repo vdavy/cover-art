@@ -5,7 +5,7 @@ package com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.status
 
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.stationmillenium.coverart.domain.statuses.ServerStatus;
-import com.stationmillenium.coverart.web.gwt.admin.server.ServerStatusRequestFactoryEntity;
+import com.stationmillenium.coverart.web.gwt.admin.server.requestfactory.ServerStatusRequestFactoryEntity;
 
 /**
  * Proxy for the {@link ServerStatus} entity
