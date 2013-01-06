@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.web.gwt.admin.server.requestfactory;
+package com.stationmillenium.coverart.web.gwt.admin.server.requestfactory.statuses;
 
 import java.util.ArrayList;
 import java.util.Date;

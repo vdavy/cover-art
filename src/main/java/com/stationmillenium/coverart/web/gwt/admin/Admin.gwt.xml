@@ -10,6 +10,7 @@
   	<inherits name="com.google.gwt.logging.Logging"/>
   	<inherits name='com.google.gwt.user.theme.clean.Clean'/>
   	<inherits name='com.google.web.bindery.requestfactory.RequestFactory' />
+  	<inherits name='com.google.gwt.editor.Editor' />
   	
   	<!-- source path -->
 	<source path="client"/>

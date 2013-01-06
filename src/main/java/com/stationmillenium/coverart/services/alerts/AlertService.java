@@ -13,8 +13,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
-import com.stationmillenium.coverart.domain.alert.AlertType;
 import com.stationmillenium.coverart.repositories.AlertRepository;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
 
 /**
  * Service to emit alerts

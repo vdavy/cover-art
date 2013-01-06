@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
-import com.stationmillenium.coverart.domain.alert.AlertType;
 import com.stationmillenium.coverart.repositories.StatusRepository;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
 
 /**
  * FM alert service to manage FM alert

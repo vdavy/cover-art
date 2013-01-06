@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.domain.alert;
+package com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts;
 
 /**
  * Type of alerts

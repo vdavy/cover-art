@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stationmillenium.coverart.domain.alert.AlertActivation;
 import com.stationmillenium.coverart.domain.alert.AlertEmail;
-import com.stationmillenium.coverart.domain.alert.AlertType;
 import com.stationmillenium.coverart.repositories.AlertRepository;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
 
 /**
  * Tests of the alert repository

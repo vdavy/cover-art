@@ -1,0 +1,51 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:e='urn:import:com.google.gwt.editor.ui.client'
+	xmlns:at='urn:import:com.stationmillenium.coverart.web.gwt.admin.client.utils.editors'
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+	<ui:style>
+	
+		.labelDisplay {
+			font-weight: bold;
+			margin-right: 3px;
+		}
+		
+		.labelDisplayMarginTop {
+			font-weight: bold;
+			margin-right: 3px;
+			margin-top: 5px;
+		}
+		
+		.panel {
+			margin-left: 10px;
+		}
+		
+		.button {
+			margin-top: 5px;
+		}
+		
+		.buttonLabel {
+			margin-left: 10px;
+			display: inline;
+		}
+		
+	</ui:style>
+	<g:FlowPanel styleName="{style.panel}">		
+		<g:Label styleName="{style.labelDisplay}"><ui:msg>Adresse mail :</ui:msg></g:Label>						
+		<e:ValueBoxEditorDecorator ui:field="email">
+	    	<e:valuebox>
+	        	<g:TextBox visibleLength="30" />
+	        </e:valuebox>
+	    </e:ValueBoxEditorDecorator>
+	    <g:Label styleName="{style.labelDisplayMarginTop}"><ui:msg>Abonnement alertes :</ui:msg></g:Label>
+	    <at:AlertTypeSetEditor ui:field="alertType" />
+	    <g:FlowPanel styleName="{style.button}">
+	    	<g:Button ui:field="save"><ui:msg>Sauvegarder</ui:msg></g:Button>
+	    	<g:Label styleName="{style.buttonLabel}"/>
+	    	<g:Button ui:field="delete"><ui:msg>Supprimer</ui:msg></g:Button>
+	    </g:FlowPanel>	    	    
+	</g:FlowPanel>			
+</ui:UiBinder> 

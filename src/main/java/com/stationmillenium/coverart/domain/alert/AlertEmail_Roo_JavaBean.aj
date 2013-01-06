@@ -4,7 +4,8 @@
 package com.stationmillenium.coverart.domain.alert;
 
 import com.stationmillenium.coverart.domain.alert.AlertEmail;
-import com.stationmillenium.coverart.domain.alert.AlertType;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
+
 import java.util.Set;
 
 privileged aspect AlertEmail_Roo_JavaBean {

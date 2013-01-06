@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
-import com.stationmillenium.coverart.domain.alert.AlertType;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.repositories.SongSearchRepository;
@@ -25,6 +24,7 @@ import com.stationmillenium.coverart.services.alerts.AlertService;
 import com.stationmillenium.coverart.services.covergraber.CoverGraberRootService;
 import com.stationmillenium.coverart.services.history.ShoutcastParser;
 import com.stationmillenium.coverart.services.history.SongHistoryFilter;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
 
 /**
  * Service to poll the Shoutcast server periodically

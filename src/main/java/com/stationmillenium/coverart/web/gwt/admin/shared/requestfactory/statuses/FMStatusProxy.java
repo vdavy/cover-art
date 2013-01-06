@@ -5,7 +5,7 @@ package com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.status
 
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.stationmillenium.coverart.domain.statuses.FMStatus;
-import com.stationmillenium.coverart.web.gwt.admin.server.requestfactory.FMStatusRequestFactoryEntity;
+import com.stationmillenium.coverart.web.gwt.admin.server.requestfactory.statuses.FMStatusRequestFactoryEntity;
 
 /**
  * Proxy for the {@link FMStatus} entity

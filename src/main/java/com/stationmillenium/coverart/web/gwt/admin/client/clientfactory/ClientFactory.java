@@ -7,12 +7,15 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.AdminBundle;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.ConfigureAlertsConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.GeneralConfigConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.PlaylistExtractConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.StatusReportConstants;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.ConfigureAlertsMessages;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.autobean.AdminAutobeanFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminServiceAsync;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.ConfigureAlertView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.GeneralConfigView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.MainView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.PlaylistExtractView;
@@ -38,4 +41,7 @@ public interface ClientFactory {
 	GeneralConfigView getGeneralConfigView();	
 	AdminServiceAsync getAdminService();
 	GeneralConfigConstants getGeneralConfigConstants();
+	ConfigureAlertView getConfigureAlertView();
+	ConfigureAlertsConstants getConfigureAlertsConstants();
+	ConfigureAlertsMessages getConfigureAlertsMessages();
 }

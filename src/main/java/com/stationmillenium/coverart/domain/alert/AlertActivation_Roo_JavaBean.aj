@@ -4,7 +4,7 @@
 package com.stationmillenium.coverart.domain.alert;
 
 import com.stationmillenium.coverart.domain.alert.AlertActivation;
-import com.stationmillenium.coverart.domain.alert.AlertType;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
 
 privileged aspect AlertActivation_Roo_JavaBean {
     

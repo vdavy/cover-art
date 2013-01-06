@@ -1,0 +1,92 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+	xmlns:e='urn:import:com.google.gwt.editor.ui.client'
+	xmlns:at='urn:import:com.stationmillenium.coverart.web.gwt.admin.client.utils.editors'
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+	<ui:style>
+		.exteriorPanel {
+			padding-top: 10px;
+		}
+		
+		.interiorPanel {
+			margin:5px;
+		}
+		
+		.flowPanel {
+			margin-top: 10px;
+		}
+		
+		
+		.labelDisplayInlineMargin {
+			display: inline;
+			margin-left: 5px;
+		}
+		
+		.labelDisplayInline {
+			display: inline;
+			font-weight: bold;
+			margin-right: 3px;
+		}
+		
+		.labelHeader {
+			font-style: italic;
+			font-size: 10px;
+		}
+		
+		.image {
+			margin-left: 10px;
+			vertical-align: top;
+		}
+		
+	</ui:style>
+	<g:VerticalPanel width="450px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
+		<g:Label ui:field="messageLabel" />
+		<g:SimplePanel styleName="{style.exteriorPanel}" height="140px">
+			<g:DecoratorPanel >
+				<g:VerticalPanel width="450px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >					
+					<g:DockLayoutPanel unit="PX" styleName="{style.flowPanel}" width="450px" height="100px">
+						<g:north size="20">
+							<g:Label styleName="{style.labelHeader}"><ui:msg>Sélectionner une alerte dans la liste et l'activer ou désactiver ensuite</ui:msg></g:Label>
+						</g:north>
+						<g:west size="200">
+							<c:CellList rowCount="3" ui:field="alertActivationList" width="200px" height="50px" />
+						</g:west>
+						<g:center>
+							<g:FlowPanel>								
+								<g:CheckBox ui:field="alertEnabled"><ui:msg>Activé</ui:msg></g:CheckBox>
+								<g:Image ui:field="enabledImage" styleName="{style.image}" />	
+							</g:FlowPanel>							
+						</g:center>
+					</g:DockLayoutPanel>					
+				</g:VerticalPanel>
+			</g:DecoratorPanel>
+		</g:SimplePanel>	
+		<g:SimplePanel styleName="{style.exteriorPanel}" height="500px" width="200px">
+			<g:DecoratorPanel>
+				<g:VerticalPanel width="450px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
+					<g:DockLayoutPanel unit="PX" styleName="{style.flowPanel}" width="450px" height="300px">
+						<g:north size="20">
+							<g:Label styleName="{style.labelHeader}"><ui:msg>Sélectionner une adresse dans la liste et l'éditer ensuite</ui:msg></g:Label>
+						</g:north>
+						<g:west size="200">
+							<c:CellList rowCount="1000" ui:field="alertEmailList" width="200px" height="250px" />
+						</g:west>
+						<g:center>
+							<at:AlertEmailEditor ui:field="alertEmailEditor" />
+						</g:center>
+						<g:south size="30">
+							<g:FlowPanel>
+								<g:Button ui:field="addEmailButton"><ui:msg>Ajouter une adresse</ui:msg></g:Button>								
+							</g:FlowPanel>
+						</g:south>
+					</g:DockLayoutPanel>	
+				</g:VerticalPanel>
+			</g:DecoratorPanel>
+		</g:SimplePanel>	
+	</g:VerticalPanel>
+	
+</ui:UiBinder> 

@@ -9,17 +9,21 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.AdminBundle;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.ConfigureAlertsConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.GeneralConfigConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.PlaylistExtractConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.StatusReportConstants;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.ConfigureAlertsMessages;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.autobean.AdminAutobeanFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminService;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminServiceAsync;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.ConfigureAlertView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.GeneralConfigView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.MainView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.PlaylistExtractView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.StatusReportView;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.ConfigureAlertViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.GeneralConfigViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.MainViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.PlaylistExtractViewImpl;
@@ -35,7 +39,6 @@ public class ClientFactoryImpl implements ClientFactory {
 	private EventBus eventBus = new SimpleEventBus();
 	private PlaceController placeController = new PlaceController(eventBus);
 	private MainViewImpl mainView = new MainViewImpl(this);
-	private AdminRequestFactory adminRequestFactory = GWT.create(AdminRequestFactory.class);
 	private StatusReportConstants statusReportConstants = GWT.create(StatusReportConstants.class);
 	private StatusReportView statusReportView = new StatusReportViewImpl(this);
 	private AdminBundle adminBundle = GWT.create(AdminBundle.class);
@@ -45,11 +48,10 @@ public class ClientFactoryImpl implements ClientFactory {
 	private PlaylistExtractView playlistExtractView = new PlaylistExtractViewImpl(this);
 	private GeneralConfigView generalConfigView = new GeneralConfigViewImpl(this);
 	private AdminServiceAsync adminService = GWT.create(AdminService.class);
-	
-	public ClientFactoryImpl() {
-		adminRequestFactory.initialize(eventBus);
-	}
-	
+	private ConfigureAlertView configureAlertView = new ConfigureAlertViewImpl(this);
+	private ConfigureAlertsConstants configureAlertsConstants = GWT.create(ConfigureAlertsConstants.class);
+	private ConfigureAlertsMessages configureAlertsMessages = GWT.create(ConfigureAlertsMessages.class);
+		
 	@Override
 	public EventBus getEventBus() {
 		return eventBus;
@@ -72,6 +74,8 @@ public class ClientFactoryImpl implements ClientFactory {
 	
 	@Override
 	public AdminRequestFactory getAdminRequestFactory() {
+		AdminRequestFactory adminRequestFactory = GWT.create(AdminRequestFactory.class);
+		adminRequestFactory.initialize(eventBus);
 		return adminRequestFactory;
 	}
 	
@@ -118,6 +122,21 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public GeneralConfigConstants getGeneralConfigConstants() {
 		return generalConfigConstants;
+	}
+	
+	@Override
+	public ConfigureAlertView getConfigureAlertView() {
+		return configureAlertView;
+	}
+	
+	@Override
+	public ConfigureAlertsConstants getConfigureAlertsConstants() {
+		return configureAlertsConstants;
+	}
+	
+	@Override
+	public ConfigureAlertsMessages getConfigureAlertsMessages() {
+		return configureAlertsMessages;
 	}
 	
 }

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.stationmillenium.coverart.domain.alert.AlertActivation;
 import com.stationmillenium.coverart.domain.alert.AlertEmail;
-import com.stationmillenium.coverart.domain.alert.AlertType;
+import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
 
 /**
  * Repository for alerts

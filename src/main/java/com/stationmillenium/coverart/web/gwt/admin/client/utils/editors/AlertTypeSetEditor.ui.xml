@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+	<ui:style>
+		/* Add CSS here. See the GWT docs on UI Binder for more details */
+	</ui:style>
+	
+	<g:VerticalPanel horizontalAlignment="left" verticalAlignment="top" width="200px">
+		<g:Label ui:field="errors" />
+		<g:FlowPanel>
+			<g:CheckBox ui:field="alertEnabledFM"><ui:msg>FM</ui:msg></g:CheckBox>
+			<g:CheckBox ui:field="alertEnabledShoutcast"><ui:msg>Shoutcast</ui:msg></g:CheckBox>
+			<g:CheckBox ui:field="alertEnabledPlaylist"><ui:msg>Playlist</ui:msg></g:CheckBox>
+		</g:FlowPanel>
+	</g:VerticalPanel>	
+</ui:UiBinder> 
