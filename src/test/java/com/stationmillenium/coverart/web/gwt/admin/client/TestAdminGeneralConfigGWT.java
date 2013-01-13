@@ -55,4 +55,14 @@ public class TestAdminGeneralConfigGWT extends GWTTestCase {
 		activity.onClickIndexButton();
 	}
 	
+	/**
+	 * Test recover button
+	 */
+	public void testGeneralConfigRecoverButton() {
+		ClientFactory clientFactory = GWT.create(ClientFactory.class);
+		GeneralConfigActivity activity = new GeneralConfigActivity(clientFactory);
+		activity.start(clientFactory.getMainView().getContentPanel(), null);
+		activity.onClickRecoverButton();
+	}
+	
 }
