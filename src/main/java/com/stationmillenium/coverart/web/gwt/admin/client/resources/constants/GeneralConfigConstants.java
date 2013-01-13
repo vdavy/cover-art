@@ -58,4 +58,25 @@ public interface GeneralConfigConstants extends Constants {
 	@DefaultStringValue("Interface prête - en attente...")
 	String getReadyState();
 	
+	@DefaultStringValue("Récupération des images en cours")
+	String getRecoveryStatusRunning();
+
+	@DefaultStringValue("Récupération en cours...")
+	String getRecoveryLaunched();
+	
+	@DefaultStringValue("Impossible de lancer la récupération des images")
+	String getLaunchRecoveryError();
+	
+	@DefaultStringValue("Impossible de récupérer le statut de la récupération")
+	String getRecoveryStatusError();
+	
+	@DefaultStringValue("Récupération des images terminée")
+	String getRecoveryStatusEnded();
+	
+	@DefaultStringValue("Récupération terminée")
+	String getRecoveryStatusFinished();
+	
+	@DefaultStringValue("Impossible de récupérer la liste des images récupérées")
+	String getRecoveredSongsListError();
+	
 }

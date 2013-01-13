@@ -21,14 +21,33 @@ public aspect SongHistoryImageNamedQueriesAspect {
 		 * Get the last song history
 		 */
 		@NamedQuery( 
-				name = "getImageForSong", 
+				name = "getImageForSongWithTime", 
 				query = "SELECT image FROM SongHistoryImage AS image " +
 						"JOIN image.songHistory.playedTimes AS times " +
 						"WHERE image.songHistory.artist = :artist " +
 						"AND image.songHistory.title = :title " +
 						"AND times = (" +
 							"FROM SongHistory WHERE playedDate = :calendar" +
-						")")
+						")"),
+		
+		/**
+		 * Get all songs with images fetched
+		 */
+		@NamedQuery( 
+				name = "getAllSongsWithImage", 
+				query = "FROM SongItem AS song " +
+						"JOIN FETCH song.image " +
+						"WHERE song.image IS NOT NULL"),
+						
+		/**
+		 * Get the last song history
+		 */
+		@NamedQuery( 
+				name = "getSongWithImage", 
+				query = "FROM SongItem AS song " +
+						"JOIN FETCH song.image " +
+						"WHERE song.artist = :artist " +
+						"AND song.title = :title ")
 		
 	});
 	

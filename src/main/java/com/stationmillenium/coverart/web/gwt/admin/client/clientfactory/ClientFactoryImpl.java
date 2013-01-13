@@ -14,6 +14,7 @@ import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.Ge
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.PlaylistExtractConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.StatusReportConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.ConfigureAlertsMessages;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.GeneralConfigMessages;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.autobean.AdminAutobeanFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminService;
@@ -51,7 +52,8 @@ public class ClientFactoryImpl implements ClientFactory {
 	private ConfigureAlertView configureAlertView = new ConfigureAlertViewImpl(this);
 	private ConfigureAlertsConstants configureAlertsConstants = GWT.create(ConfigureAlertsConstants.class);
 	private ConfigureAlertsMessages configureAlertsMessages = GWT.create(ConfigureAlertsMessages.class);
-		
+	private GeneralConfigMessages generalConfigMessages = GWT.create(GeneralConfigMessages.class);	
+	
 	@Override
 	public EventBus getEventBus() {
 		return eventBus;
@@ -112,6 +114,11 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public GeneralConfigView getGeneralConfigView() {
 		return generalConfigView;
+	}
+	
+	@Override
+	public GeneralConfigMessages getGeneralConfigMessages() {
+		return generalConfigMessages;
 	}
 	
 	@Override

@@ -12,6 +12,7 @@ import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.Ge
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.PlaylistExtractConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.StatusReportConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.ConfigureAlertsMessages;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.GeneralConfigMessages;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.autobean.AdminAutobeanFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminServiceAsync;
@@ -44,4 +45,5 @@ public interface ClientFactory {
 	ConfigureAlertView getConfigureAlertView();
 	ConfigureAlertsConstants getConfigureAlertsConstants();
 	ConfigureAlertsMessages getConfigureAlertsMessages();
+	GeneralConfigMessages getGeneralConfigMessages();
 }

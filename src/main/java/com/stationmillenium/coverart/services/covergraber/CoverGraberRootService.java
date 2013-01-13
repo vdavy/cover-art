@@ -69,7 +69,10 @@ public class CoverGraberRootService implements ServletContextAware {
 	@Qualifier("deezerCoverGraberService")
 	private CoverGraberServiceInterface deezerCoverGraberService;
 		
-	
+	/**
+	 * Grab image for the list of songs
+	 * @param songList the list of songs to grab image
+	 */
 	public void grabImageForSongs(List<SongHistoryItemDTO> songList) {
 		for (SongHistoryItemDTO song : songList) { //for each song 
 			Provider provider = Provider.LAST_FM; //last fm default provider
@@ -150,4 +153,13 @@ public class CoverGraberRootService implements ServletContextAware {
 			LOGGER.error("Error in MD5 algoruymn initialization", e);
 		}
 	}
+	
+	/**
+	 * Get the cover images directory, where images are stord
+	 * @return the directory as string
+	 */
+	public String getCoverImagesDirectory() {
+		return coverImagesDirectory;
+	}
+	
 }

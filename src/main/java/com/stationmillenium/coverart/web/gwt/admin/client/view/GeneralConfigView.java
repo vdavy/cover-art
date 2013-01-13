@@ -3,8 +3,11 @@
  */
 package com.stationmillenium.coverart.web.gwt.admin.client.view;
 
+import java.util.List;
+
 import com.google.gwt.user.client.ui.IsWidget;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.AbstractMessageView.MessageLabelStyle;
+import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.SongGWT;
 
 /**
  * Interface of the main configuration view
@@ -49,6 +52,14 @@ public interface GeneralConfigView extends IsWidget {
 	void setHibernateSearchInformation(boolean activeIndexing, String associatedText);
 
 	/**
+	 * Set the missing images recovery zone information
+	 * If the recovery is active, the recover button is disabled
+	 * @param activeRecovery if the recovery is currently active
+	 * @param associatedText the associated text to display with
+	 */
+	void setMissingImagesRecoveryInformation(boolean activeRecovery, String associatedText);
+	
+	/**
 	 * Set the current title text
 	 * @param text the text
 	 */
@@ -82,25 +93,52 @@ public interface GeneralConfigView extends IsWidget {
 	 * Lock the indexing button
 	 */
 	void lockIndexButton();
+	
+	/**
+	 * Lock the recover missing images button
+	 */
+	void lockRecoverButton();
 
+	/**
+	 * Display a list of recovered songs
+	 * @param songList the list to display
+	 */
+	void displayRecoveredSongsList(List<SongGWT> songList);
+	
+	/**
+	 * Set the recovered images label text
+	 * @param text the text
+	 */
+	void setRecoveredImagesLabelText(String text);
+	
+	/**
+	 * Interface for presenter of {@link GeneralConfigView}
+	 * @author vincent
+	 *
+	 */
 	public interface Presenter {
 
 		/**
-		 * Called when polling service checkbox if clicked
+		 * Called when polling service checkbox is clicked
 		 * @param value the value of the checkbox 
 		 */
 		void onClickPollingServiceCheckbox(boolean value);
 
 		/**
-		 *  Called when FM alert checkbox if clicked
+		 *  Called when FM alert checkbox is clicked
 		 * @param value the value of the checkbox 
 		 */
 		void onClickFMAlertCheckbox(boolean value);
 
 		/**
-		 * Called when index button if 
+		 * Called when index button is clicked 
 		 */
 		void onClickIndexButton();
+		
+		/**
+		 * Called when recover missing images button is clicked
+		 */
+		void onClickRecoverButton();
 
 	}
 

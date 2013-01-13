@@ -3,9 +3,12 @@
  */
 package com.stationmillenium.coverart.web.gwt.admin.client.server.rpc;
 
+import java.util.List;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.ServicesStatuses;
+import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.SongGWT;
 
 /**
  * Service for the admin GWT module
@@ -49,5 +52,22 @@ public interface AdminService extends RemoteService {
 	 * @return <code>true</code> if active, <code>false</code> if not
 	 */
 	boolean isIndexingActive();
-		
+	
+	/**
+	 * Launch the missing images recovery
+	 */
+	void launchMissingImagesRecovery();
+	
+	/**
+	 * Is the recovery finished ?
+	 * @return <code>true</code> if done, <code>false</code> if not
+	 */
+	boolean isRecoveryFinished();
+	
+	/**
+	 * Get the list of recovered songs
+	 * @return list of {@link SongGWT}
+	 */
+	List<SongGWT> getRecoveredSongs();
+	
 }

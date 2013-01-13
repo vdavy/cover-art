@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client"
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
     ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
     ui:generateLocales="default">
@@ -31,35 +32,60 @@
 		.image {
 			vertical-align: top;
 		}
+		
+		.labelMissingSongs {
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+		
 	</ui:style>
-	<g:SimplePanel styleName="{style.exteriorPanel}" height="500px" width="200px">
-		<g:DecoratorPanel >
-			<g:VerticalPanel width="450px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
-				<g:Label ui:field="messageLabel" />
-				<g:FlowPanel styleName="{style.flowPanel}">
-					<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Récupération des titres :</ui:msg></g:Label>
-					<g:Image ui:field="pollingServiceImage" styleName="{style.image}" />
-					<g:Label ui:field="pollingServiceText" styleName="{style.labelDisplayInlineMargin}"/> 
-				</g:FlowPanel>
-				<g:FlowPanel styleName="{style.flowPanel}">
-					<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Alert FM :</ui:msg></g:Label>
-					<g:Image ui:field="fmAlertImage" styleName="{style.image}" />
-					<g:Label ui:field="fmAlertText" styleName="{style.labelDisplayInlineMargin}"/> 
-				</g:FlowPanel>
-				<g:FlowPanel styleName="{style.flowPanel}">
-					<g:CheckBox ui:field="pollingServiceCheckbox"><ui:msg>Service de récupération des titres</ui:msg></g:CheckBox>
-					<g:CheckBox ui:field="fmAlertCheckbox"><ui:msg>Alerte FM</ui:msg></g:CheckBox>
-				</g:FlowPanel>
-				<g:FlowPanel styleName="{style.flowPanel}">
-					<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Indexation :</ui:msg></g:Label>
-					<g:Image ui:field="hibernateIndexImage" styleName="{style.image}" /><g:Label ui:field="hibernateIndexText" styleName="{style.labelDisplayInlineMargin}" /> 
-					<g:Button ui:field="hibernateIndexButton" styleName="{style.labelDisplayInlineMargin}"><ui:msg>Indexer</ui:msg></g:Button>
-				</g:FlowPanel>
-				<g:FlowPanel styleName="{style.flowPanel}">
-					<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Titre en cours :</ui:msg></g:Label>
-					<g:Label ui:field="currentTitleText" styleName="{style.labelDisplayInlineMargin}" />
-				</g:FlowPanel>
-			</g:VerticalPanel>
-		</g:DecoratorPanel>
-	</g:SimplePanel>	
+	
+	<g:FlowPanel>
+		<g:SimplePanel styleName="{style.exteriorPanel}" height="500px" width="200px">
+			<g:DecoratorPanel >
+				<g:VerticalPanel width="450px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
+					<g:Label ui:field="messageLabel" />
+					<g:FlowPanel styleName="{style.flowPanel}">
+						<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Récupération des titres :</ui:msg></g:Label>
+						<g:Image ui:field="pollingServiceImage" styleName="{style.image}" />
+						<g:Label ui:field="pollingServiceText" styleName="{style.labelDisplayInlineMargin}"/> 
+					</g:FlowPanel>
+					<g:FlowPanel styleName="{style.flowPanel}">
+						<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Alert FM :</ui:msg></g:Label>
+						<g:Image ui:field="fmAlertImage" styleName="{style.image}" />
+						<g:Label ui:field="fmAlertText" styleName="{style.labelDisplayInlineMargin}"/> 
+					</g:FlowPanel>
+					<g:FlowPanel styleName="{style.flowPanel}">
+						<g:CheckBox ui:field="pollingServiceCheckbox"><ui:msg>Service de récupération des titres</ui:msg></g:CheckBox>
+						<g:CheckBox ui:field="fmAlertCheckbox"><ui:msg>Alerte FM</ui:msg></g:CheckBox>
+					</g:FlowPanel>
+					<g:FlowPanel styleName="{style.flowPanel}">
+						<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Indexation :</ui:msg></g:Label>
+						<g:Image ui:field="hibernateIndexImage" styleName="{style.image}" /><g:Label ui:field="hibernateIndexText" styleName="{style.labelDisplayInlineMargin}" /> 
+						<g:Button ui:field="hibernateIndexButton" styleName="{style.labelDisplayInlineMargin}"><ui:msg>Indexer</ui:msg></g:Button>
+					</g:FlowPanel>
+					<g:FlowPanel styleName="{style.flowPanel}">
+						<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Indexation :</ui:msg></g:Label>
+						<g:Image ui:field="missingImagesImage" styleName="{style.image}" /><g:Label ui:field="missingImagesText" styleName="{style.labelDisplayInlineMargin}" /> 
+						<g:Button ui:field="missingImagesButton" styleName="{style.labelDisplayInlineMargin}"><ui:msg>Récupérer</ui:msg></g:Button>
+					</g:FlowPanel>
+					<g:FlowPanel styleName="{style.flowPanel}">
+						<g:Label styleName="{style.labelDisplayInline}"><ui:msg>Titre en cours :</ui:msg></g:Label>
+						<g:Label ui:field="currentTitleText" styleName="{style.labelDisplayInlineMargin}" />
+					</g:FlowPanel>
+				</g:VerticalPanel>
+			</g:DecoratorPanel>
+		</g:SimplePanel>	
+		
+		<g:DialogBox ui:field="recoveredSongsDialogBox" width="350px" height="500px" animationEnabled="true" glassEnabled="true" visible="false" autoHideEnabled="true">
+			<g:caption><ui:msg>Liste des images récupérées</ui:msg></g:caption>
+			<g:FlowPanel>
+				<g:Label ui:field="recoveredSongsTopLabel" styleName="{style.labelMissingSongs}"/>
+				<g:ScrollPanel width="330px" height="450px">
+					<c:CellList ui:field="recoveredSongsList" width="310px" height="450px" pageSize="100000" />
+				</g:ScrollPanel>
+			</g:FlowPanel>
+			
+		</g:DialogBox>
+	</g:FlowPanel>	
 </ui:UiBinder> 

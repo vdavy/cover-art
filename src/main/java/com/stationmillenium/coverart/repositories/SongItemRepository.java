@@ -26,7 +26,6 @@ import com.stationmillenium.coverart.domain.history.SongHistoryImage.Provider;
 import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
-import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
 
 /**
  * Repository for {@link SongHistory}}
@@ -153,24 +152,6 @@ public class SongItemRepository {
 		song.merge();
 	}
 	
-	/**
-	 * Search image for a song
-	 * @param songToSearch the song to search for image
-	 * @return the {@link SongImageDTO} if found, null otherwise
-	 */
-	public SongImageDTO getImageForSong(SongHistoryItemDTO songToSearch) {
-		//load song
-		Query query = entityManager.createNamedQuery("getImageForSong"); //create query
-		query.setParameter("artist", songToSearch.getArtist()); //artist param
-		query.setParameter("title", songToSearch.getTitle()); //title param
-		query.setParameter("calendar", songToSearch.getPlayedDate()); //calendar param
-		@SuppressWarnings("unused")
-		SongHistoryImage imageEntity = (SongHistoryImage) query.getSingleResult(); //Execute query 
-		
-		return null;
-	}
-
-
 	/**
 	 * Get the last 5 played songs
 	 * @param displayLastSong display last song

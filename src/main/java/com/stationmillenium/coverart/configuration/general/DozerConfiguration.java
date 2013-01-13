@@ -14,6 +14,7 @@ import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
 import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
+import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.SongGWT;
 import com.stationmillenium.coverart.web.gwt.history.shared.HistoryGWTDTO;
 import com.stationmillenium.coverart.web.gwt.player.shared.SongGWTDTO;
 
@@ -85,6 +86,20 @@ public class DozerConfiguration {
 						.fields("playedDate", "playedDate")
 						.fields("song.artist", "artist")
 						.fields("song.title", "title");			
+				
+				mapping(SongItem.class, SongHistoryItemImageDTO.class, TypeMappingOptions.mapNull(),
+						TypeMappingOptions.mapEmptyString())
+						.fields("artist", "songHistoryItemDTO.artist")
+						.fields("title", "songHistoryItemDTO.title")			
+						.fields("image.fileName", "songImageDTO.fileName")
+						.fields("image.width", "songImageDTO.width")
+						.fields("image.height", "songImageDTO.height");
+				
+				mapping(SongHistoryItemDTO.class, SongGWT.class, TypeMappingOptions.mapNull(),
+						TypeMappingOptions.mapEmptyString()).exclude("playedDate")
+						.fields("artist", "artist")
+						.fields("title", "title");
+				
 			}
 		};
 		

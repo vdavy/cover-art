@@ -3,6 +3,7 @@
  */
 package com.stationmillenium.coverart.web.gwt.admin.client.view.impl;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
@@ -12,13 +13,19 @@ import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
 import com.stationmillenium.coverart.web.gwt.admin.client.clientfactory.ClientFactory;
+import com.stationmillenium.coverart.web.gwt.admin.client.utils.cells.ProxyAbstractSafeHtmlCell;
+import com.stationmillenium.coverart.web.gwt.admin.client.utils.cells.SongGWTRenderer;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.GeneralConfigView;
+import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.SongGWT;
 
 /**
  * Implementation of the {@link GeneralConfigView}
@@ -35,27 +42,50 @@ public class GeneralConfigViewImpl extends AbstractMessageView implements Genera
 	interface GeneralConfigViewImplUiBinder extends UiBinder<Widget, GeneralConfigViewImpl> {}
 
 	//fields
+	//top label
 	@UiField Label messageLabel;
+	
+	//polling service
 	@UiField Image pollingServiceImage;
 	@UiField Label pollingServiceText;
+	@UiField CheckBox pollingServiceCheckbox;
+	
+	//fm alert service
 	@UiField Image fmAlertImage;
 	@UiField Label fmAlertText;
-	@UiField CheckBox pollingServiceCheckbox;
 	@UiField CheckBox fmAlertCheckbox;
+	
+	//hibernate search index
 	@UiField Image hibernateIndexImage;
 	@UiField Label hibernateIndexText;
 	@UiField Button hibernateIndexButton;
+	
+	//missing images recover
+	@UiField Image missingImagesImage;
+	@UiField Label missingImagesText;
+	@UiField Button missingImagesButton;
+	@UiField DialogBox recoveredSongsDialogBox;
+	@UiField Label recoveredSongsTopLabel;
+	@UiField(provided = true) CellList<SongGWT> recoveredSongsList;
+	
+	//current title
 	@UiField Label currentTitleText;
 	
 	//local instances
 	private Presenter presenter;
 	private ClientFactory clientFactory;
+	private ListDataProvider<SongGWT> listDataProvider = new ListDataProvider<SongGWT>();
 	
 	/**
 	 * Create a new {@link GeneralConfigViewImpl}
 	 */
 	public GeneralConfigViewImpl(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
+		
+		//init the cell list
+		recoveredSongsList = new CellList<SongGWT>(new ProxyAbstractSafeHtmlCell<SongGWT>(new SongGWTRenderer()));
+		listDataProvider.addDataDisplay(recoveredSongsList);
+		
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
@@ -167,6 +197,38 @@ public class GeneralConfigViewImpl extends AbstractMessageView implements Genera
 	@Override
 	public void lockIndexButton() {
 		hibernateIndexButton.setEnabled(false);
+	}
+	
+	@Override
+	public void lockRecoverButton() {
+		missingImagesButton.setEnabled(false);
+	}
+	
+	/**
+	 * Handles click on recover button
+	 * @param event the event
+	 */
+	@UiHandler("missingImagesButton")
+	public void onClickRecoverButton(ClickEvent event) {
+		presenter.onClickRecoverButton();
+	}
+	
+	@Override
+	public void setMissingImagesRecoveryInformation(boolean activeRecovery, String associatedText) {
+		setImageAndText(!activeRecovery, associatedText, missingImagesImage, missingImagesText);		
+		missingImagesButton.setEnabled(!activeRecovery);
+	}
+	
+	@Override
+	public void displayRecoveredSongsList(List<SongGWT> songList) {
+		listDataProvider.setList(songList);
+		recoveredSongsDialogBox.center();
+		recoveredSongsDialogBox.show();
+	}
+	
+	@Override
+	public void setRecoveredImagesLabelText(String text) {
+		recoveredSongsTopLabel.setText(text);
 	}
 	
 }

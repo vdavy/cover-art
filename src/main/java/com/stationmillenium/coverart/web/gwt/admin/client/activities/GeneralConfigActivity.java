@@ -3,6 +3,7 @@
  */
 package com.stationmillenium.coverart.web.gwt.admin.client.activities;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ import com.stationmillenium.coverart.web.gwt.admin.client.view.GeneralConfigView
 import com.stationmillenium.coverart.web.gwt.admin.client.view.GeneralConfigView.Presenter;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.AbstractMessageView.MessageLabelStyle;
 import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.ServicesStatuses;
+import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.SongGWT;
 
 /**
  * Activity for the main configuration
@@ -31,6 +33,7 @@ public class GeneralConfigActivity extends AbstractActivity implements Presenter
 	private ClientFactory clientFactory;
 	private Timer timer;
 	private boolean indexingRunning = true;
+	private boolean recoveryRunning = true;
 		
 	/**
 	 * Create a new {@link GeneralConfigActivity}
@@ -46,6 +49,9 @@ public class GeneralConfigActivity extends AbstractActivity implements Presenter
 				getCurrentTitle(); //get the current title
 				if (indexingRunning) //update indexing status only if running
 					getIndexingStatus();
+				
+				if (recoveryRunning) //update recovery status only if running
+					getRecoveryStatus();
 			}
 		};
 	}
@@ -64,6 +70,7 @@ public class GeneralConfigActivity extends AbstractActivity implements Presenter
 		getServicesStatuses();
 		getCurrentTitle();
 		getIndexingStatus();
+		getRecoveryStatus();
 		
 		//start timer
 		timer.scheduleRepeating(10000);
@@ -235,6 +242,88 @@ public class GeneralConfigActivity extends AbstractActivity implements Presenter
 				clientFactory.getGeneralConfigView().setMessageLabelTextAndStyle(clientFactory.getGeneralConfigConstants().getIndexingStatusError(), MessageLabelStyle.RED);
 			}
 			
+		});
+	}
+	
+	@Override
+	public void onClickRecoverButton() {
+		LOGGER.fine("Launch recovery...");
+		clientFactory.getAdminService().launchMissingImagesRecovery(new AsyncCallback<Void>() {
+			
+			@Override
+			public void onSuccess(Void result) {
+				LOGGER.fine("Recovery launched");
+				recoveryRunning = true;
+				clientFactory.getGeneralConfigView().setMissingImagesRecoveryInformation(true, clientFactory.getGeneralConfigConstants().getRecoveryStatusRunning() );
+				clientFactory.getGeneralConfigView().setMessageLabelTextAndStyle(clientFactory.getGeneralConfigConstants().getRecoveryLaunched(), MessageLabelStyle.DEFAULT);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				LOGGER.log(Level.WARNING, "Error while launching recovery", caught);
+				clientFactory.getGeneralConfigView().setMessageLabelTextAndStyle(clientFactory.getGeneralConfigConstants().getLaunchRecoveryError(), MessageLabelStyle.RED);
+			}
+			
+		});
+	}
+	
+	/**
+	 * Get the recovery status
+	 */
+	private void getRecoveryStatus() {
+		LOGGER.fine("Get recovery status");
+		clientFactory.getAdminService().isRecoveryFinished(new AsyncCallback<Boolean>() {
+			
+			@Override
+			public void onSuccess(Boolean result) {
+				LOGGER.fine("Recovery finished : " + result);
+				String recoveryStatusText = (result) 
+						? clientFactory.getGeneralConfigConstants().getRecoveryStatusEnded() 
+						: clientFactory.getGeneralConfigConstants().getRecoveryStatusRunning();						
+				clientFactory.getGeneralConfigView().setMissingImagesRecoveryInformation(!result, recoveryStatusText);
+				
+				if (result) {
+					clientFactory.getGeneralConfigView().setMessageLabelTextAndStyle(clientFactory.getGeneralConfigConstants().getRecoveryStatusFinished(), MessageLabelStyle.GREEN);
+					recoveryRunning = false;
+					
+					//display recovered songs
+					displayRecoveredSongs();
+				} else
+					clientFactory.getGeneralConfigView().setMessageLabelTextAndStyle(clientFactory.getGeneralConfigConstants().getRecoveryLaunched(), MessageLabelStyle.DEFAULT);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				LOGGER.log(Level.WARNING, "Error while getting recovery status", caught);
+				clientFactory.getGeneralConfigView().setMissingImagesRecoveryInformation(false, "");
+				clientFactory.getGeneralConfigView().setMessageLabelTextAndStyle(clientFactory.getGeneralConfigConstants().getRecoveryStatusError(), MessageLabelStyle.RED);
+			}
+			
+		});
+	}
+	
+	/**
+	 * Display the recovered songs
+	 */
+	private void displayRecoveredSongs() {
+		LOGGER.fine("Display the recovered songs");
+		clientFactory.getAdminService().getRecoveredSongs(new AsyncCallback<List<SongGWT>>() {
+			
+			@Override
+			public void onSuccess(List<SongGWT> result) {
+				LOGGER.fine("Recovered songs : " + result);
+				if ((result != null) && (result.size() > 0)) {
+					String text = clientFactory.getGeneralConfigMessages().getRecoveredSongsImagesCount(result.size());
+					clientFactory.getGeneralConfigView().setRecoveredImagesLabelText(text);
+					clientFactory.getGeneralConfigView().displayRecoveredSongsList(result);					
+				}
+			};
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				LOGGER.log(Level.WARNING, "Error while getting recovered songs list", caught);
+				clientFactory.getGeneralConfigView().setMessageLabelTextAndStyle(clientFactory.getGeneralConfigConstants().getRecoveredSongsListError(), MessageLabelStyle.RED);				
+			}
 		});
 	}
 	

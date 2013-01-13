@@ -3,8 +3,11 @@
  */
 package com.stationmillenium.coverart.web.gwt.admin.client.server.rpc;
 
+import java.util.List;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.ServicesStatuses;
+import com.stationmillenium.coverart.web.gwt.admin.shared.rpc.SongGWT;
 
 
 /**
@@ -20,5 +23,8 @@ public interface AdminServiceAsync {
 	void getCurrentTitle(AsyncCallback<String> callback);
 	void isIndexingActive(AsyncCallback<Boolean> callback);
 	void launchIndexing(AsyncCallback<Void> callback);
+	void launchMissingImagesRecovery(AsyncCallback<Void> callback);
+	void isRecoveryFinished(AsyncCallback<Boolean> callback);
+	void getRecoveredSongs(AsyncCallback<List<SongGWT>> callback);
 	
 }
