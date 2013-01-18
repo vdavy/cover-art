@@ -7,6 +7,7 @@ import com.stationmillenium.coverart.domain.alert.AlertEmail;
 
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.QueryHint;
 
 /**
  * Aspect listing named queries for {@link AlertEmail}
@@ -41,7 +42,8 @@ public aspect AlertNamedQueriesAspect {
 		@NamedQuery( 
 				name = "getAlertEnabledForAlertType", 
 				query = "FROM AlertActivation " +
-						"WHERE alertType = :type")
+						"WHERE alertType = :type",
+				hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 		
 	});
 	

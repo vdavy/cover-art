@@ -2,9 +2,12 @@ package com.stationmillenium.coverart.domain.history;
 
 import java.util.Calendar;
 
+import javax.persistence.Cacheable;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Field;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -18,6 +21,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SongHistory {
 
 	//played date on shoutcast server
@@ -27,6 +32,7 @@ public class SongHistory {
 	
 	//associated song
 	@ManyToOne
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private SongItem song;
 	
 }

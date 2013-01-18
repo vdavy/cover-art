@@ -7,6 +7,7 @@ import com.stationmillenium.coverart.domain.history.SongHistoryImage;
 
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.QueryHint;
 
 /**
  * Aspect listing named queries for {@link ServerStatus}
@@ -28,7 +29,8 @@ public aspect SongHistoryImageNamedQueriesAspect {
 						"AND image.songHistory.title = :title " +
 						"AND times = (" +
 							"FROM SongHistory WHERE playedDate = :calendar" +
-						")"),
+						")",
+						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 		
 		/**
 		 * Get all songs with images fetched

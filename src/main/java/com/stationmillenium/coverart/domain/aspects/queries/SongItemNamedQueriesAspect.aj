@@ -7,6 +7,7 @@ import com.stationmillenium.coverart.domain.history.SongItem;
 
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.QueryHint;
 
 /**
  * Aspect listing named queries for {@link ServerStatus}
@@ -32,7 +33,8 @@ public aspect SongItemNamedQueriesAspect {
 		 */
 		@NamedQuery( 
 				name = "checkExistingSong", 
-				query = "SELECT count(item) FROM SongItem AS item WHERE artist = :artist AND title = :title"),
+				query = "SELECT count(item) FROM SongItem AS item WHERE artist = :artist AND title = :title",
+				hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 		
 		/**
 		 * Load existing song
@@ -59,7 +61,8 @@ public aspect SongItemNamedQueriesAspect {
 						"JOIN FETCH history.song " +
 						"JOIN FETCH history.song.image " +						
 						"WHERE history.playedDate > :minDate " +
-						"ORDER BY history.playedDate DESC"),
+						"ORDER BY history.playedDate DESC",
+						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 		
 		/**
 		 * Get histories with song fetched where played date is beitwe
@@ -70,7 +73,8 @@ public aspect SongItemNamedQueriesAspect {
 						"JOIN FETCH history.song " +
 						"WHERE history.playedDate " +
 						"BETWEEN :minDate AND :maxDate " +
-						"ORDER BY history.playedDate DESC")
+						"ORDER BY history.playedDate DESC",
+						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 					
 	});
 	
