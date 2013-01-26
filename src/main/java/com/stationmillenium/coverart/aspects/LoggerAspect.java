@@ -15,34 +15,34 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 /**
- * Aspect pour le logger en débug et en trace
+ * Logger aspect for debugging and trace
  * @author vincent
  *
  */
 @Aspect
 public class LoggerAspect {
 
-	//déclaration du logger
+	//logger declaration
 	private static final Logger logger = LoggerFactory.getLogger("aspect");
 	
-	//déclaration des pointcut
+	//pointcut declaration
 	/**
-	 * Toutes les méthodes publiques
+	 * All public methods
 	 */
-	@Pointcut("execution(public * com.stationmillenium.covertart..*.*(..))")
+	@Pointcut("execution(public * com.stationmillenium.coverart..*.*(..))")
 	public void loggerDebug() {}
 	
 	/**
-	 * Toutes les méthodes privées sauf celle de cet aspect
+	 * All private methods except these of this aspect
 	 */
 	@Pointcut("execution(private * com.stationmillenium.coverart..*.*(..)) && !(execution(private * com.stationmillenium.coverart.aspects.LoggerAspect.*(..)))")
 	public void loggerTrace() {}
 	
 	
-	//déclaration des advices
-	//déclaration publiques
+	//advices declaration 
+	//public declaration
 	/**
-	 * Before pour les méthodes publiques
+	 * Before for public methods
 	 */
 	@Before("loggerDebug()")
 	public void loggerDebugBefore(JoinPoint joinPoint) { 
@@ -51,7 +51,7 @@ public class LoggerAspect {
  	}
 		
 	/**
-	 * After returning des méthodes publiques
+	 * After returning public methods
 	 * 
 	 */
 	@AfterReturning(pointcut = "loggerDebug()", returning = "returnObject")
@@ -61,7 +61,7 @@ public class LoggerAspect {
 	}
 	
 	/**
-	 * After throwing des méthodes publiques
+	 * After throwing public methods
 	 * 
 	 */
 	@AfterThrowing(pointcut = "loggerDebug()", throwing = "exception")
@@ -70,9 +70,9 @@ public class LoggerAspect {
 			logger.debug(getMehodInformationAfter(exception.getMessage(), joinPoint));
 	}
 	
-	//déclaration privées
+	//private declarations
 	/**
-	 * Before pour les méthodes privées
+	 * Before private methods
 	 */
 	@Before("loggerTrace()")
 	public void loggerTraceBefore(JoinPoint joinPoint) { 
@@ -81,7 +81,7 @@ public class LoggerAspect {
  	}	
 	
 	/**
-	 * After returning des méthodes privées
+	 * After returning private methods
 	 * 
 	 */
 	@AfterReturning(pointcut = "loggerTrace()", returning = "returnObject")
@@ -91,7 +91,7 @@ public class LoggerAspect {
 	}
 	
 	/**
-	 * After throwing des méthodes privées
+	 * After throwing private methods
 	 * 
 	 */
 	@AfterThrowing(pointcut = "loggerTrace()", throwing = "exception")
@@ -101,30 +101,30 @@ public class LoggerAspect {
 	}
 	
 	
-	//méthodes utilitaires	
+	//utils methods
 	/**
-	 * Obtenir des informations sur un after
+	 * Get information about after
 	 */
 	private String getMehodInformationAfter(Object returnObject, JoinPoint joinPoint) {
 		StringBuilder logString = new StringBuilder();
-		logString.append(joinPoint.getSignature().toShortString()); //le nom de la méthode
-		logString.append(" retour:");
-		logString.append(parseNullString(returnObject)); //le retour
+		logString.append(joinPoint.getSignature().toShortString()); //method name
+		logString.append(" return:");
+		logString.append(parseNullString(returnObject)); //return
 		return logString.toString();
 	}
 	
 	
 	/**
-	 * Obtenir les informations sur un before
+	 * Get information about before
 	 */
 	private String getMethodInformation(JoinPoint joinPoint) {
 		StringBuilder logString = new StringBuilder();
-		logString.append(joinPoint.getSignature().toShortString()); //le nom de la méthode
+		logString.append(joinPoint.getSignature().toShortString()); //method name
 		logString.append(" args:#");
-		logString.append((joinPoint.getArgs() != null) ? joinPoint.getArgs().length : "null"); //le nombre d'argument
+		logString.append((joinPoint.getArgs() != null) ? joinPoint.getArgs().length : "null"); //args count
 		logString.append("[");		
-		for (Object arg : joinPoint.getArgs()) //pour chaque argument
-			logString.append(parseNullString(arg) + ","); //sa valeur
+		for (Object arg : joinPoint.getArgs()) //for each args
+			logString.append(parseNullString(arg) + ","); //value
 		logString.deleteCharAt(logString.length() - 1);
 		logString.append("]");
 		
@@ -132,9 +132,9 @@ public class LoggerAspect {
 	}
 	
 	/**
-	 * Parser un objet et renvoyer son ToString ou null textuel
-	 * @param object l'objet à parser
-	 * @return sa valeur toString ou "null" sinon
+	 * Parser object and return toString() or null text
+	 * @param object object to parse
+	 * @return toString() or "null" else
 	 */
 	private String parseNullString(Object object) {
 		if (object instanceof Class<?>)

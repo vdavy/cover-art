@@ -8,7 +8,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import com.stationmillenium.coverart.beans.interfaces.PropertyBeanInterface;
 
 /**
- * Shoutcast server properties bean
+ * Song history filter properties bean
  * @author vincent
  *
  */
