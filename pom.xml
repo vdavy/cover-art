@@ -11,13 +11,13 @@
 
 		<!-- spring part -->
 		<spring.version>3.2.1.RELEASE</spring.version>
-		<aspectj.version>1.7.0</aspectj.version>
-		<slf4j.version>1.6.4</slf4j.version>
-		<hibernate.version>4.1.9.Final</hibernate.version>
+		<aspectj.version>1.7.2</aspectj.version>
+		<slf4j.version>1.7.2</slf4j.version>
+		<hibernate.version>4.1.10.Final</hibernate.version>
 		<hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
-		<hibernate.search.version>4.1.1.Final</hibernate.search.version>
-		<mysql-connector-java.version>5.1.20</mysql-connector-java.version>
-		<ehcache.version>2.6.3</ehcache.version>
+		<hibernate.search.version>4.2.0.Final</hibernate.search.version>
+		<mysql-connector-java.version>5.1.23</mysql-connector-java.version>
+		<ehcache.version>2.6.5</ehcache.version>
 
 		<!-- third parts -->
 		<log4j.version>1.2.17</log4j.version>
@@ -28,9 +28,9 @@
 		<jstl.version>1.2</jstl.version>
 		<joda-time.version>2.0</joda-time.version>
 		<jsoup.version>1.7.1</jsoup.version>
-		<dozer.version>5.3.2</dozer.version>
+		<dozer.version>5.4.0</dozer.version>
 		<gwt.version>2.5.0</gwt.version>
-		<poi.version>3.8</poi.version>
+		<poi.version>3.9</poi.version>
 
 		<!-- common parts -->
 		<commons-pool.version>1.6</commons-pool.version>
