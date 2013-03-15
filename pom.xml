@@ -10,7 +10,7 @@
 		<roo.version>1.2.3.RELEASE</roo.version>
 
 		<!-- spring part -->
-		<spring.version>3.2.1.RELEASE</spring.version>
+		<spring.version>3.2.2.RELEASE</spring.version>
 		<aspectj.version>1.7.2</aspectj.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<hibernate.version>4.1.10.Final</hibernate.version>
@@ -29,7 +29,7 @@
 		<joda-time.version>2.0</joda-time.version>
 		<jsoup.version>1.7.1</jsoup.version>
 		<dozer.version>5.4.0</dozer.version>
-		<gwt.version>2.5.0</gwt.version>
+		<gwt.version>2.5.1</gwt.version>
 		<poi.version>3.9</poi.version>
 
 		<!-- common parts -->

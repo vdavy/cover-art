@@ -43,7 +43,7 @@ public class TestSongSearchRepository {
 	 */
 	@Test
 	public void testSearchSongs() {
-		List<SongHistoryItemImageDTO> songList = repository.searchSongs("David guetta");
+		List<SongHistoryItemImageDTO> songList = repository.searchSongs("David guetta", 100);
 		assertTrue(songList.size() > 0);
 	}
 	
@@ -63,10 +63,10 @@ public class TestSongSearchRepository {
 	 */
 	@Test
 	public void testSearchSongsByArtist() {
-		List<SongHistoryItemImageDTO> songList = repository.searchSongsByArtist("David");
+		List<SongHistoryItemImageDTO> songList = repository.searchSongsByArtist("David", 100);
 		assertTrue(songList.size() > 0);
 		
-		songList = repository.searchSongsByArtist("Gueta");
+		songList = repository.searchSongsByArtist("Gueta", 100);
 		assertTrue(songList.size() > 0);
 	}
 	
@@ -75,10 +75,10 @@ public class TestSongSearchRepository {
 	 */
 	@Test
 	public void testSearchSongsByTitle() {
-		List<SongHistoryItemImageDTO> songList = repository.searchSongsByTitle("she wolf");
+		List<SongHistoryItemImageDTO> songList = repository.searchSongsByTitle("she wolf", 100);
 		assertTrue(songList.size() > 0);
 		
-		songList = repository.searchSongsByTitle("shie wolh");
+		songList = repository.searchSongsByTitle("shie wolh", 100);
 		assertTrue(songList.size() > 0);
 	}
 	
@@ -95,7 +95,7 @@ public class TestSongSearchRepository {
 		ending.set(2012, 8, 15, 0, 0, 0);
 		
 		//test
-		List<SongHistoryItemImageDTO> songList = repository.searchSongsByTime(beginning, ending);
+		List<SongHistoryItemImageDTO> songList = repository.searchSongsByTime(beginning, ending, 100);
 		assertTrue(songList.size() > 0);
 	}
 	

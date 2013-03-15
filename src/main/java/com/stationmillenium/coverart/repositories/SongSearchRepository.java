@@ -87,29 +87,32 @@ public class SongSearchRepository {
 	/**
 	 * Search song by artist across Lucene index
 	 * @param artistName the artist name to search for
+	 * @param maxResults the max results count to return
 	 * @return the song list found (empty list if nothing found)
 	 */	
-	public List<SongHistoryItemImageDTO> searchSongsByArtist(String artistName) {				
-		return searchSongsWithFuzzyField(artistName, "artist");
+	public List<SongHistoryItemImageDTO> searchSongsByArtist(String artistName, int maxResults) {				
+		return searchSongsWithFuzzyField(artistName, "artist", maxResults);
 	}
 	
 	/**
 	 * Search song by titke across Lucene index
 	 * @param titleName the title name to search for
+	 * @param maxResults the max results count to return
 	 * @return the song list found (empty list if nothing found)
 	 */
-	public List<SongHistoryItemImageDTO> searchSongsByTitle(String titleName) {
-		return searchSongsWithFuzzyField(titleName, "title");
+	public List<SongHistoryItemImageDTO> searchSongsByTitle(String titleName, int maxResults) {
+		return searchSongsWithFuzzyField(titleName, "title", maxResults);
 	}
 	
 	/**
 	 * Search songs between times
 	 * @param beginning beginning time for search
 	 * @param ending ending time for search
+	 * @param maxResults the max results count to return
 	 * @return the song list found (empty list if nothing found)
 	 */
 	@Transactional
-	public List<SongHistoryItemImageDTO> searchSongsByTime(Calendar beginning, Calendar ending) {
+	public List<SongHistoryItemImageDTO> searchSongsByTime(Calendar beginning, Calendar ending, int maxResults) {
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager); //get full text entity manager
 		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
 
@@ -126,7 +129,7 @@ public class SongSearchRepository {
 				.createQuery();
 		
 		//query
-		List<SongHistoryItemImageDTO> resultList = processFullTextQuery(fullTextEntityManager, query);
+		List<SongHistoryItemImageDTO> resultList = processFullTextQuery(fullTextEntityManager, query, maxResults);
 		Collections.sort(resultList, new Comparator<SongHistoryItemImageDTO>() { //sort
 			
 			@Override
@@ -153,10 +156,11 @@ public class SongSearchRepository {
 	 * Search songs by field with fuzzy query
 	 * @param keywords the keywords to search for
 	 * @param fieldName the field to search for into
+	 * @param maxResults the max results count to return
 	 * @return the song list found (empty list if nothing found)
 	 */
 	@Transactional
-	private List<SongHistoryItemImageDTO> searchSongsWithFuzzyField(String keywords, String fieldName) {
+	private List<SongHistoryItemImageDTO> searchSongsWithFuzzyField(String keywords, String fieldName, int maxResults) {
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager); //get full text entity manager
 		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
 
@@ -169,16 +173,17 @@ public class SongSearchRepository {
 				.matching(keywords)
 				.createQuery();
 		
-		return processFullTextQuery(fullTextEntityManager, query);
+		return processFullTextQuery(fullTextEntityManager, query, maxResults);
 	}
 	
 	/**
 	 * Search songs across Lucene index
 	 * @param keywords the words to search for
+	 * @param maxResults the max results count to return
 	 * @return the song list found (empty list if nothing found)
 	 */
 	@Transactional
-	public List<SongHistoryItemImageDTO> searchSongs(String keywords) {				
+	public List<SongHistoryItemImageDTO> searchSongs(String keywords, int maxResults) {				
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager); //get full text entity manager
 		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
 
@@ -188,19 +193,20 @@ public class SongSearchRepository {
 				.matching(keywords)
 				.createQuery();
 		
-		return processFullTextQuery(fullTextEntityManager, query);
+		return processFullTextQuery(fullTextEntityManager, query, maxResults);
 	}
 
 	/**
 	 * Process full text query
 	 * @param fullTextEntityManager entity manager to execute query
 	 * @param query the query to execute
-	 * @param loadImage load the image
+	 * @param maxResults the max results count to return
 	 * @return the found entities
 	 */
-	private List<SongHistoryItemImageDTO> processFullTextQuery(FullTextEntityManager fullTextEntityManager, Query query) {
+	private List<SongHistoryItemImageDTO> processFullTextQuery(FullTextEntityManager fullTextEntityManager, Query query, int maxResults) {
 		FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(query, SongItem.class); //create query
-
+		fullTextQuery.setMaxResults(maxResults);
+		
 		//search
 		fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID);
 		@SuppressWarnings("unchecked")
