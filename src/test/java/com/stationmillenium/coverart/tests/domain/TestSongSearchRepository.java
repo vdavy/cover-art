@@ -82,21 +82,4 @@ public class TestSongSearchRepository {
 		assertTrue(songList.size() > 0);
 	}
 	
-	/**
-	 * Test song search by times
-	 */
-	@Test
-	public void testSearchByTimes() {
-		//set up calendars
-		Calendar beginning = Calendar.getInstance();
-		beginning.set(2012, 8, 14, 0, 0, 0);
-		
-		Calendar ending = Calendar.getInstance();
-		ending.set(2012, 8, 15, 0, 0, 0);
-		
-		//test
-		List<SongHistoryItemImageDTO> songList = repository.searchSongsByTime(beginning, ending, 100);
-		assertTrue(songList.size() > 0);
-	}
-	
 }

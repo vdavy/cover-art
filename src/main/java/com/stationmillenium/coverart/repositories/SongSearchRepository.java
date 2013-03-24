@@ -105,54 +105,6 @@ public class SongSearchRepository {
 	}
 	
 	/**
-	 * Search songs between times
-	 * @param beginning beginning time for search
-	 * @param ending ending time for search
-	 * @param maxResults the max results count to return
-	 * @return the song list found (empty list if nothing found)
-	 */
-	@Transactional
-	public List<SongHistoryItemImageDTO> searchSongsByTime(Calendar beginning, Calendar ending, int maxResults) {
-		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager); //get full text entity manager
-		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
-
-		//make query
-		Query query = queryBuilder.bool().
-				must(queryBuilder.range()
-						.onField("playedTimes.playedDate")
-						.below(ending)
-						.createQuery())
-				.must(queryBuilder.range()
-						.onField("playedTimes.playedDate")
-						.above(beginning)
-						.createQuery())
-				.createQuery();
-		
-		//query
-		List<SongHistoryItemImageDTO> resultList = processFullTextQuery(fullTextEntityManager, query, maxResults);
-		Collections.sort(resultList, new Comparator<SongHistoryItemImageDTO>() { //sort
-			
-			@Override
-			public int compare(SongHistoryItemImageDTO o1, SongHistoryItemImageDTO o2) {
-				if ((o1 != null) && (o2 != null))
-					return o1.getSongHistoryItemDTO().getPlayedDate().compareTo(o2.getSongHistoryItemDTO().getPlayedDate());
-				else
-					return -1;
-			}
-			
-		});
-		
-		//refilter to be sure
-		List<SongHistoryItemImageDTO> resultFilteredList =  new ArrayList<>(); //ending list
-		for (SongHistoryItemImageDTO song : resultList) { //for each found song
-			if ((song.getSongHistoryItemDTO().getPlayedDate().after(beginning)) && (song.getSongHistoryItemDTO().getPlayedDate().before(ending))) //if in time range
-					resultFilteredList.add(song);
-		}
-		
-		return resultFilteredList;
-	}
-	
-	/**
 	 * Search songs by field with fuzzy query
 	 * @param keywords the keywords to search for
 	 * @param fieldName the field to search for into

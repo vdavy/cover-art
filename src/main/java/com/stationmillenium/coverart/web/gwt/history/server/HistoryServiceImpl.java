@@ -121,7 +121,7 @@ public class HistoryServiceImpl extends RemoteServiceServlet implements HistoryS
 		maxDate.add(Calendar.MINUTE, searchDateDelta);
 		
 		//search
-		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongsByTime(minDate, maxDate, config.getHistorySearchMaxResults());
+		List<SongHistoryItemImageDTO> songList = songItemRepository.getSongsPlayedBetween2DatesWithImages(minDate, maxDate);
 		return convertToGWTList(songList);
 	}
 	

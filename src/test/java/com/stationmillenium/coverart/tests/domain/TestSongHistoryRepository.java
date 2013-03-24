@@ -241,4 +241,34 @@ public class TestSongHistoryRepository {
 		}
 	}
 	
+	/**
+	 * Test the {@link SongItemRepository#getSongsPlayedBetween2DatesWithImages(Calendar, Calendar)}
+	 */
+	@Test
+	public void testGetSongsPlayedBetween2DatesWithImages() {
+		//set up param
+		Calendar minDate = Calendar.getInstance();
+		minDate.add(Calendar.DAY_OF_YEAR, -100);
+		Calendar maxDate = Calendar.getInstance();
+		
+		//process
+		List<SongHistoryItemImageDTO> songList = repository.getSongsPlayedBetween2DatesWithImages(minDate, maxDate);
+		
+		//assert
+		assertTrue(songList.size() > 0);
+		for (SongHistoryItemImageDTO song : songList) {
+			assertNotNull(song.getSongHistoryItemDTO().getArtist());
+			assertNotNull(song.getSongHistoryItemDTO().getTitle());
+			assertNotNull(song.getSongHistoryItemDTO().getPlayedDate());
+			assertTrue(minDate.before(song.getSongHistoryItemDTO().getPlayedDate()));
+			
+			if ((song.getSongImageDTO().getHeight() != 0)
+					|| (song.getSongImageDTO().getWidth() != 0)){
+				assertNotNull(song.getSongImageDTO().getFileName());
+				assertTrue(song.getSongImageDTO().getHeight() != 0);
+				assertTrue(song.getSongImageDTO().	getWidth() != 0);
+			}
+		}
+	}
+	
 }

@@ -15,7 +15,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -53,7 +52,6 @@ public class SongItem {
 	//associated playing times
 	@OneToMany(mappedBy = "song", cascade = CascadeType.ALL)
 	@OrderBy("playedDate DESC")
-	@IndexedEmbedded
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<SongHistory> playedTimes;
 
