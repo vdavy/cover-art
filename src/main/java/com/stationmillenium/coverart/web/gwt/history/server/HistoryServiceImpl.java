@@ -24,7 +24,7 @@ import com.stationmillenium.coverart.web.gwt.history.client.server.HistoryServic
 import com.stationmillenium.coverart.web.gwt.history.shared.HistoryGWTDTO;
 
 /**
- * Service impl for the player GWT module
+ * Service impl for the history GWT module
  * @author vincent
  *
  */
@@ -93,19 +93,19 @@ public class HistoryServiceImpl extends RemoteServiceServlet implements HistoryS
 	
 	@Override
 	public List<HistoryGWTDTO> searchAll(String query) {
-		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongs(query);
+		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongs(query, config.getHistorySearchMaxResults());
 		return convertToGWTList(songList);
 	}
 	
 	@Override
 	public List<HistoryGWTDTO> searchByArtist(String query) {
-		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongsByArtist(query);
+		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongsByArtist(query, config.getHistorySearchMaxResults());
 		return convertToGWTList(songList);
 	}
 	
 	@Override
 	public List<HistoryGWTDTO> searchByTitle(String query) {
-		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongsByTitle(query);
+		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongsByTitle(query, config.getHistorySearchMaxResults());
 		return convertToGWTList(songList);
 	}
 	
@@ -121,7 +121,7 @@ public class HistoryServiceImpl extends RemoteServiceServlet implements HistoryS
 		maxDate.add(Calendar.MINUTE, searchDateDelta);
 		
 		//search
-		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongsByTime(minDate, maxDate);
+		List<SongHistoryItemImageDTO> songList = songItemRepository.getSongsPlayedBetween2DatesWithImages(minDate, maxDate);
 		return convertToGWTList(songList);
 	}
 	

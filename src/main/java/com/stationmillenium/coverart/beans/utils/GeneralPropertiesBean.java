@@ -56,5 +56,9 @@ public class GeneralPropertiesBean implements PropertyBeanInterface {
 	@Min(10)
 	@Max(120)
 	private int fmAlertTimeout;
+	
+	@Min(1)
+	@Max(1000)
+	private int historySearchMaxResults;
 		
 }

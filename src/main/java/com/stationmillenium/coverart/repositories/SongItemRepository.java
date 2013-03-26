@@ -192,7 +192,7 @@ public class SongItemRepository {
 		//convert to result list
 		List<SongHistoryItemImageDTO> resultList = new ArrayList<>();
 		for (SongHistory song : songHistoryList) {
-			SongHistoryItemImageDTO resultSong = mapper.map(song,SongHistoryItemImageDTO.class );
+			SongHistoryItemImageDTO resultSong = mapper.map(song, SongHistoryItemImageDTO.class);
 			resultList.add(resultSong);
 		}
 		
@@ -217,6 +217,30 @@ public class SongItemRepository {
 		List<SongHistoryItemDTO> returnList = new ArrayList<>();
 		for (SongHistory songItem : songHistoryList) {
 			SongHistoryItemDTO songHistoryItem = mapper.map(songItem, SongHistoryItemDTO.class); //process mapping to output dto
+			returnList.add(songHistoryItem);
+		}
+				
+		return returnList;
+	}
+	
+	/**
+	 * Get songs played between 2 dates, with images
+	 * @param minDate the min date (excluding)
+	 * @param maxDate the max date (excluding)
+	 * @return the list of {@link SongHistoryItemDTO}
+	 */
+	public List<SongHistoryItemImageDTO> getSongsPlayedBetween2DatesWithImages(Calendar minDate, Calendar maxDate) {
+		//prepare query
+		Query query = entityManager.createNamedQuery("getSongsFetchedOrderedWithImageByPlayedTimeBetween2Dates", SongHistory.class); //create query
+		query.setParameter("minDate", minDate);
+		query.setParameter("maxDate", maxDate);
+		@SuppressWarnings("unchecked")
+		List<SongHistory> songHistoryList = query.getResultList();
+		
+		//convert
+		List<SongHistoryItemImageDTO> returnList = new ArrayList<>();
+		for (SongHistory songItem : songHistoryList) {
+			SongHistoryItemImageDTO songHistoryItem = mapper.map(songItem, SongHistoryItemImageDTO.class); //process mapping to output dto
 			returnList.add(songHistoryItem);
 		}
 				

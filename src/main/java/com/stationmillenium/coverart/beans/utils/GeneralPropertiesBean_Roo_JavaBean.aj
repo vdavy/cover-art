@@ -70,4 +70,12 @@ privileged aspect GeneralPropertiesBean_Roo_JavaBean {
     public void GeneralPropertiesBean.setFmAlertTimeout(int fmAlertTimeout) {
         this.fmAlertTimeout = fmAlertTimeout;
     }
+    
+    public int GeneralPropertiesBean.getHistorySearchMaxResults() {
+        return this.historySearchMaxResults;
+    }
+    
+    public void GeneralPropertiesBean.setHistorySearchMaxResults(int historySearchMaxResults) {
+        this.historySearchMaxResults = historySearchMaxResults;
+    }
 }

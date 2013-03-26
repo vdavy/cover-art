@@ -29,6 +29,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private @Value("${generalConfiguration.historyDisplayMinMinutes}") String historyDisplayMinMinutes;
 	private @Value("${generalConfiguration.dateSearchDelta}") String dateSearchDelta;
 	private @Value("${generalConfiguration.fmAlertTimeout}") String fmAlertTimeout;
+	private @Value("${generalConfiguration.historySearchMaxResults}") String historySearchMaxResults;
 	
 	//instance vars
 	private int playlistUpdateTimeoutInt;
@@ -36,6 +37,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private int historyDisplayMinMinutesInt;
 	private int dateSearchDeltaInt;
 	private int fmAlertTimeoutInt;
+	private int historySearchMaxResultsInt;
 	
 	@Override
 	protected GeneralPropertiesBean buildBean() {
@@ -48,6 +50,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 		propertiesBean.setHistoryDisplayMinMinutes(historyDisplayMinMinutesInt);
 		propertiesBean.setDateSearchDelta(dateSearchDeltaInt);
 		propertiesBean.setFmAlertTimeout(fmAlertTimeoutInt);
+		propertiesBean.setHistorySearchMaxResults(historySearchMaxResultsInt);
 		return propertiesBean;
 	}
 	
@@ -81,6 +84,12 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 			fmAlertTimeoutInt = Integer.parseInt(fmAlertTimeout);
 		} catch(NumberFormatException e) {
 			throw new PropertyBeanException("fmAlertTimeout", e);
+		}
+		
+		try { //convert historySearchMaxResults into number
+			historySearchMaxResultsInt = Integer.parseInt(historySearchMaxResults);
+		} catch(NumberFormatException e) {
+			throw new PropertyBeanException("historySearchMaxResults", e);
 		}
 	}
 

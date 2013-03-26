@@ -65,7 +65,7 @@ public aspect SongItemNamedQueriesAspect {
 						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 		
 		/**
-		 * Get histories with song fetched where played date is beitwe
+		 * Get histories with song fetched where played date is between
 		 */
 		@NamedQuery( 
 				name = "getSongsFetchedOrderedByPlayedTimeBetween2Dates", 
@@ -74,7 +74,21 @@ public aspect SongItemNamedQueriesAspect {
 						"WHERE history.playedDate " +
 						"BETWEEN :minDate AND :maxDate " +
 						"ORDER BY history.playedDate DESC",
-						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
+						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+		
+		/**
+		 * Get the last histories ordered by played time, with song and image fetched between 2 dates
+		 * Set limit min date
+		 */
+		@NamedQuery( 
+				name = "getSongsFetchedOrderedWithImageByPlayedTimeBetween2Dates", 
+				query = "FROM SongHistory AS history " +
+						"JOIN FETCH history.song " +
+						"JOIN FETCH history.song.image " +		
+						"WHERE history.playedDate " +
+						"BETWEEN :minDate AND :maxDate " +
+						"ORDER BY history.playedDate DESC",
+						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 					
 	});
 	
