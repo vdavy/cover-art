@@ -11,11 +11,11 @@ import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.stationmillenium.coverart.web.gwt.admin.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.StatusReportPlace.ReportType;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
+import com.stationmillenium.coverart.web.gwt.admin.client.utils.callbacks.AjaxLoaderReceiver;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.StatusReportView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.StatusReportView.Presenter;
 import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.statuses.FMStatusProxy;
@@ -34,33 +34,6 @@ public class StatusReportActivity extends AbstractActivity implements Presenter 
 	private static final Logger LOGGER = Logger.getLogger(StatusReportActivity.class.getName());
 	private ClientFactory clientFactory;
 	private ReportType type;
-	private final Receiver<List<? extends StatusProxy>> receiver = new Receiver<List<? extends StatusProxy>>() {
-
-		@Override
-		public void onSuccess(List<? extends StatusProxy> response) {
-			LOGGER.fine("Gathered statuses : " + response);
-			Collections.reverse(response); //reverse collections
-			StatusProxy indexObject = response.get(0);
-			if (indexObject instanceof FMStatusProxy) //fm case
-				clientFactory.getStatusReportView().setAlertActive(((FMStatusProxy) indexObject).isFmUp());
-			else if (indexObject instanceof ServerStatusProxy) //server case
-				clientFactory.getStatusReportView().setAlertActive(((ServerStatusProxy) indexObject).isServerUp());
-			else if (indexObject instanceof PlaylistStatusProxy) //playlist case
-				clientFactory.getStatusReportView().setAlertActive(((PlaylistStatusProxy) indexObject).isPlaylistUpdated());
-			
-			clientFactory.getStatusReportView().setStatusesList(response);
-		}
-		
-		@SuppressWarnings("unchecked")
-		@Override
-		public void onFailure(ServerFailure error) {
-			LOGGER.warning("Error during getting statuses : " + error.getMessage());
-			LOGGER.warning(error.getStackTraceString());
-			clientFactory.getStatusReportView().setStatusesList(Collections.EMPTY_LIST);
-			Window.alert(clientFactory.getConstants().getStatusesLoadingError());
-		}
-	};
-	
 	
 	/**
 	 * Create {@link StatusReportActivity}
@@ -90,16 +63,49 @@ public class StatusReportActivity extends AbstractActivity implements Presenter 
 		AdminRequestFactory adminRequestFactory = clientFactory.getAdminRequestFactory();
 		switch (type) {
 		case FM:
-			adminRequestFactory.fmStatusRequest().findAllFMStatuses().fire(receiver);
+			adminRequestFactory.fmStatusRequest().findAllFMStatuses().fire(getReceiver());
 			break;
 
 		case PLAYLIST:
-			adminRequestFactory.playlistStatusRequest().findAllPlaylistStatuses().fire(receiver);
+			adminRequestFactory.playlistStatusRequest().findAllPlaylistStatuses().fire(getReceiver());
 			break;
 			
 		case SHOUTCAST:
-			adminRequestFactory.serverStatusRequest().findAllServerStatuses().fire(receiver);
+			adminRequestFactory.serverStatusRequest().findAllServerStatuses().fire(getReceiver());
 			break;
 		}
+	}
+	
+	/**
+	 * Get a receiver
+	 * @return the get AjaxLoaderReceiver<List<? extends StatusProxy>>
+	 */
+	private AjaxLoaderReceiver<List<? extends StatusProxy>> getReceiver() {
+		return new AjaxLoaderReceiver<List<? extends StatusProxy>>(clientFactory) {
+
+			@Override
+			public void onCustomSuccess(List<? extends StatusProxy> response) {
+				LOGGER.fine("Gathered statuses : " + response);
+				Collections.reverse(response); //reverse collections
+				StatusProxy indexObject = response.get(0);
+				if (indexObject instanceof FMStatusProxy) //fm case
+					clientFactory.getStatusReportView().setAlertActive(((FMStatusProxy) indexObject).isFmUp());
+				else if (indexObject instanceof ServerStatusProxy) //server case
+					clientFactory.getStatusReportView().setAlertActive(((ServerStatusProxy) indexObject).isServerUp());
+				else if (indexObject instanceof PlaylistStatusProxy) //playlist case
+					clientFactory.getStatusReportView().setAlertActive(((PlaylistStatusProxy) indexObject).isPlaylistUpdated());
+				
+				clientFactory.getStatusReportView().setStatusesList(response);
+			}
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onCustomFailure(ServerFailure error) {
+				LOGGER.warning("Error during getting statuses : " + error.getMessage());
+				LOGGER.warning(error.getStackTraceString());
+				clientFactory.getStatusReportView().setStatusesList(Collections.EMPTY_LIST);
+				Window.alert(clientFactory.getConstants().getStatusesLoadingError());
+			}
+		};
 	}
 }

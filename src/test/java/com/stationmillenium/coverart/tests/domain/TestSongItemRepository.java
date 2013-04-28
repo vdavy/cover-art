@@ -24,6 +24,7 @@ import com.stationmillenium.coverart.domain.history.SongHistory;
 import com.stationmillenium.coverart.domain.history.SongItem;
 import com.stationmillenium.coverart.dto.hybrid.SongHistoryItemImageDTO;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO.Provider;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 
 /**
@@ -31,7 +32,7 @@ import com.stationmillenium.coverart.repositories.SongItemRepository;
  * @author vincent
  *
  */
-public class TestSongHistoryRepository {
+public class TestSongItemRepository {
 	
 	//the repository
 	@Autowired
@@ -269,6 +270,40 @@ public class TestSongHistoryRepository {
 				assertTrue(song.getSongImageDTO().	getWidth() != 0);
 			}
 		}
+	}
+	
+	/**
+	 * Test the {@link SongItemRepository#getSongsWithCustomImages()}
+	 */
+	@Test
+	public void testGetSongsWithCustomImages() {
+		//process
+		List<SongHistoryItemImageDTO> songList = repository.getSongsWithCustomImages();
+		
+		//assert
+		assertTrue(songList.size() > 0);
+		for (SongHistoryItemImageDTO song : songList) {
+			assertNotNull(song.getSongHistoryItemDTO().getArtist());
+			assertNotNull(song.getSongHistoryItemDTO().getTitle());
+			assertTrue(song.getSongHistoryItemDTO().isCustomImage());
+			
+			if ((song.getSongImageDTO().getHeight() != 0)
+					|| (song.getSongImageDTO().getWidth() != 0)){
+				assertNotNull(song.getSongImageDTO().getFileName());
+				assertTrue(song.getSongImageDTO().getHeight() != 0);
+				assertTrue(song.getSongImageDTO().	getWidth() != 0);
+				assertTrue(song.getSongImageDTO().getProvider() == Provider.CUSTOM);
+			}
+		}
+	}
+	
+	/**
+	 * Test the {@link SongItemRepository#setSongAsCustomImageSong(String, String)}
+	 */
+	@Test
+	public void testSetSongWithCustomImage() {
+		//process
+		repository.setSongAsCustomImageSong("Alicia Keys", "Doesn't Mean Anything");
 	}
 	
 }

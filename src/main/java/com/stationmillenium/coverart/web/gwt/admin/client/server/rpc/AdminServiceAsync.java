@@ -26,5 +26,12 @@ public interface AdminServiceAsync {
 	void launchMissingImagesRecovery(AsyncCallback<Void> callback);
 	void isRecoveryFinished(AsyncCallback<Boolean> callback);
 	void getRecoveredSongs(AsyncCallback<List<SongGWT>> callback);
+	void searchSongsWithoutCustomImage(String keywords, int limit, AsyncCallback<List<SongGWT>> callback);
+	void searchSongsWithoutCustomImage(String keywords, AsyncCallback<List<SongGWT>> callback);
+	void searchSongsWithCustomImage(String keywords, AsyncCallback<List<SongGWT>> callback);
+	void searchSongsWithCustomImage(String keywords, int limit, AsyncCallback<List<SongGWT>> callback);
+	void getAllCustomImageSong(AsyncCallback<List<SongGWT>> callback);
+	void setSongAsSongWithCustomImage(SongGWT songToSet,	AsyncCallback<Void> callback);
+	void removeCustomImageOnSong(SongGWT songToRemoveCustomImage, AsyncCallback<Void> callback);
 	
 }

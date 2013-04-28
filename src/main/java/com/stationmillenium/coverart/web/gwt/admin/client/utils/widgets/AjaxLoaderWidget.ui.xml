@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+    
+    <ui:with type="com.stationmillenium.coverart.web.gwt.admin.client.resources.AdminBundle" field="res" />
+    
+	<ui:style>
+		
+		.ajaxLoad {
+			background-color: #ffffff;
+			padding: 5px;
+		}
+		
+	</ui:style>
+	
+	<g:SimplePanel>
+		<g:PopupPanel styleName="{style.ajaxLoad}" ui:field="ajaxLoading" animationEnabled="true" glassEnabled="true" autoHideEnabled="false" height="50px" width="60px" visible="true">
+			<g:VerticalPanel horizontalAlignment="center">
+				<g:Image resource="{res.ajaxLoader}" />
+				<g:Label><ui:msg>Chargement...</ui:msg></g:Label>
+			</g:VerticalPanel>		
+		</g:PopupPanel>
+	</g:SimplePanel>
+</ui:UiBinder> 

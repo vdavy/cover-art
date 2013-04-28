@@ -25,10 +25,16 @@ import org.springframework.roo.addon.tostring.RooToString;
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SongHistoryImage {
-
+	
+	/**
+	 * Available images providers
+	 * @author vincent
+	 *
+	 */
 	public enum Provider {
 		LAST_FM,
-		DEEZER
+		DEEZER,
+		CUSTOM
 	}
 	
 	//image file name

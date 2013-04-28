@@ -12,6 +12,7 @@ public enum AlertType {
 
 	SHOUTCAST,
 	PLAYLIST,
-	FM;
+	FM,
+	CUSTOM_IMAGE;
 	
 }

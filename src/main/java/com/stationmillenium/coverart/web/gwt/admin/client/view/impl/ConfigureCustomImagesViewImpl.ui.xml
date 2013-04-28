@@ -1,0 +1,132 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+	xmlns:aj="urn:import:com.stationmillenium.coverart.web.gwt.admin.client.utils.widgets"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+    ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+    ui:generateLocales="default">
+	<ui:style>
+		.labelHead {
+			font-style: bold;
+			font-size: 14px;
+		}
+		
+		.exteriorPanel {
+			padding-top: 10px;
+		}
+		
+		.interiorPanel {
+			margin:5px;
+		}
+		
+		.flowPanel {
+			margin-top: 10px;
+		}
+				
+		.labelHeader {
+			font-style: italic;
+			font-size: 10px;
+		}
+		
+		.image {
+			margin-left: 10px;
+			vertical-align: top;
+		}
+		
+		.spacer {
+			display: inline;
+			padding-left: 10px;		
+		}
+			
+		.uploadForm {
+			padding-top: 10px;
+			padding-left: 5px;
+		}
+		
+	</ui:style>
+	
+	<g:VerticalPanel width="450px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
+		<g:Label ui:field="messageLabel" />
+		<g:SimplePanel styleName="{style.exteriorPanel}">
+			<g:DecoratorPanel >
+				<g:VerticalPanel verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
+					<g:SimplePanel><g:Label styleName="{style.labelHead}"><ui:msg>Liste des titres ayant une image perssonnalisée</ui:msg></g:Label></g:SimplePanel>
+					<g:DockLayoutPanel unit="PX" styleName="{style.flowPanel}" width="900px" height="300px">
+						<g:north size="50">
+							<g:FlowPanel>
+								<g:Label styleName="{style.labelHeader}"><ui:msg>Rechercher un titre parmi ceux ayant une image</ui:msg></g:Label>
+								<g:SuggestBox ui:field="searchCustomKeywords" width="120px" />
+								<g:Label styleName="{style.spacer}"/>
+								<g:Button ui:field="launchCustomSearch"><ui:msg>Rechercher</ui:msg></g:Button>
+								<g:Label styleName="{style.spacer}"/>
+								<g:Button ui:field="cancelCustomSearch"><ui:msg>Annuler</ui:msg></g:Button>		
+							</g:FlowPanel>									
+						</g:north>
+						<g:west size="410">
+							<g:FlowPanel>	
+								<c:CellList ui:field="songSearchCustomCellList" width="400px" pageSize="10" height="200px" />
+								<c:SimplePager ui:field="songSearchCustomCellListPager" width="225px" height="50px"/>
+							</g:FlowPanel>
+						</g:west>
+						<g:center>
+							<g:VerticalPanel verticalAlignment="middle" horizontalAlignment="left" >	
+								<g:SimplePanel styleName="{style.image}" width="200px" height="200px">
+									<g:Image ui:field="songCustomImage" />
+								</g:SimplePanel>
+								<g:Label styleName="{style.spacer}"/>
+								<g:Button ui:field="removeCustomImageButton"><ui:msg>Supprimer l'image</ui:msg></g:Button>
+							</g:VerticalPanel>
+						</g:center>
+						<g:east size="300">
+							<g:VerticalPanel verticalAlignment="middle" horizontalAlignment="left" styleName="{style.uploadForm}">								
+								<g:FormPanel method="post" encoding="multipart/form-data" ui:field="uploadForm">
+									<g:VerticalPanel verticalAlignment="middle" horizontalAlignment="left">	
+										<g:Hidden ui:field="jsonParam" name="json" />
+										<g:FileUpload name="file" ui:field="uploadFile" />
+									</g:VerticalPanel>
+								</g:FormPanel>
+								<g:Label styleName="{style.uploadForm}"/>
+								<g:Button ui:field="uploadImageButton"><ui:msg>Envoyer l'image</ui:msg></g:Button>
+							</g:VerticalPanel>
+						</g:east>
+					</g:DockLayoutPanel>	
+				</g:VerticalPanel>
+			</g:DecoratorPanel>
+		</g:SimplePanel>	
+		<g:SimplePanel styleName="{style.exteriorPanel}">
+			<g:DecoratorPanel>
+				<g:VerticalPanel verticalAlignment="top" horizontalAlignment="left" styleName="{style.interiorPanel}" >
+					<g:SimplePanel><g:Label styleName="{style.labelHead}"><ui:msg>Liste des titres sans image personnalisée</ui:msg></g:Label></g:SimplePanel>
+					<g:DockLayoutPanel unit="PX" styleName="{style.flowPanel}" width="600px" height="350px">
+						<g:north size="50">
+							<g:FlowPanel>
+								<g:Label styleName="{style.labelHeader}"><ui:msg>Rechercher un titre pour lui ajouter une image</ui:msg></g:Label>
+								<g:SuggestBox ui:field="searchKeywords" width="120px" />
+								<g:Label styleName="{style.spacer}"/>
+								<g:Button ui:field="launchSearch"><ui:msg>Rechercher</ui:msg></g:Button>
+								<g:Label styleName="{style.spacer}"/>
+								<g:Button ui:field="cancelSearch"><ui:msg>Annuler</ui:msg></g:Button>		
+							</g:FlowPanel>									
+						</g:north>
+						<g:west size="410">
+							<g:FlowPanel>	
+								<c:CellList ui:field="songSearchCellList" width="400px" pageSize="14" height="250px" />
+								<c:SimplePager ui:field="songSearchCellListPager" width="225px" height="50px"/>
+							</g:FlowPanel>
+						</g:west>
+						<g:center>
+							<g:VerticalPanel verticalAlignment="middle" horizontalAlignment="center" >	
+								<g:SimplePanel styleName="{style.image}" width="200px" height="200px">
+									<g:Image ui:field="songImage" />
+								</g:SimplePanel>
+								<g:Button ui:field="addImageButton" enabled="false"><ui:msg>Ajouter une image</ui:msg></g:Button>
+							</g:VerticalPanel>
+						</g:center>
+					</g:DockLayoutPanel>	
+				</g:VerticalPanel>
+			</g:DecoratorPanel>
+		</g:SimplePanel>	
+	</g:VerticalPanel>
+	
+</ui:UiBinder> 

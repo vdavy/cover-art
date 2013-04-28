@@ -104,7 +104,7 @@ public class CoverGraberRootService implements ServletContextAware {
 	 * Generate a random md5 based on current millisecond time
 	 * @return a random md5
 	 */
-	private String generateMd5Time() {		
+	public String generateMd5Time() {		
 		try {
 			String timeValue = String.valueOf(System.currentTimeMillis());
 			byte[] timeValueInBytes = timeValue.getBytes("UTF-8");
@@ -155,7 +155,7 @@ public class CoverGraberRootService implements ServletContextAware {
 	}
 	
 	/**
-	 * Get the cover images directory, where images are stord
+	 * Get the cover images directory, where images are stored
 	 * @return the directory as string
 	 */
 	public String getCoverImagesDirectory() {

@@ -78,4 +78,12 @@ privileged aspect GeneralPropertiesBean_Roo_JavaBean {
     public void GeneralPropertiesBean.setHistorySearchMaxResults(int historySearchMaxResults) {
         this.historySearchMaxResults = historySearchMaxResults;
     }
+    
+    public int GeneralPropertiesBean.getCustomImageMaxSize() {
+        return this.customImageMaxSize;
+    }
+    
+    public void GeneralPropertiesBean.setCustomImageMaxSize(int customImageMaxSize) {
+        this.customImageMaxSize = customImageMaxSize;
+    }
 }

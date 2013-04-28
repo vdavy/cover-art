@@ -49,7 +49,8 @@ public class DozerConfiguration {
 				mapping(SongItem.class, SongHistoryItemDTO.class, TypeMappingOptions.mapNull(),
 						TypeMappingOptions.mapEmptyString()).exclude("playedDate")
 						.fields("artist", "artist")
-						.fields("title", "title");
+						.fields("title", "title")
+						.fields("customImage", "customImage");
 				
 				mapping(SongHistoryItemDTO.class, SongGWTDTO.class, TypeMappingOptions.mapNull(),
 						TypeMappingOptions.mapEmptyString())
@@ -68,9 +69,11 @@ public class DozerConfiguration {
 						.fields("playedDate", "songHistoryItemDTO.playedDate")
 						.fields("song.artist", "songHistoryItemDTO.artist")
 						.fields("song.title", "songHistoryItemDTO.title")			
+						.fields("song.customImage", "songHistoryItemDTO.customImage")			
 						.fields("song.image.fileName", "songImageDTO.fileName")
 						.fields("song.image.width", "songImageDTO.width")
-						.fields("song.image.height", "songImageDTO.height");
+						.fields("song.image.height", "songImageDTO.height")
+						.fields("song.image.provider", "songImageDTO.provider");
 				
 				mapping(SongHistoryItemImageDTO.class, HistoryGWTDTO.class, TypeMappingOptions.mapNull(),
 						TypeMappingOptions.mapEmptyString())
@@ -85,20 +88,32 @@ public class DozerConfiguration {
 						TypeMappingOptions.mapEmptyString())
 						.fields("playedDate", "playedDate")
 						.fields("song.artist", "artist")
-						.fields("song.title", "title");			
+						.fields("song.title", "title")
+						.fields("song.customImage", "customImage");			
 				
 				mapping(SongItem.class, SongHistoryItemImageDTO.class, TypeMappingOptions.mapNull(),
 						TypeMappingOptions.mapEmptyString())
 						.fields("artist", "songHistoryItemDTO.artist")
-						.fields("title", "songHistoryItemDTO.title")			
+						.fields("title", "songHistoryItemDTO.title")	
+						.fields("customImage", "songHistoryItemDTO.customImage")	
 						.fields("image.fileName", "songImageDTO.fileName")
 						.fields("image.width", "songImageDTO.width")
-						.fields("image.height", "songImageDTO.height");
+						.fields("image.height", "songImageDTO.height")
+						.fields("image.provider", "songImageDTO.provider");
 				
 				mapping(SongHistoryItemDTO.class, SongGWT.class, TypeMappingOptions.mapNull(),
 						TypeMappingOptions.mapEmptyString()).exclude("playedDate")
 						.fields("artist", "artist")
 						.fields("title", "title");
+				
+				mapping(SongHistoryItemImageDTO.class, SongGWT.class, TypeMappingOptions.mapNull(),
+						TypeMappingOptions.mapEmptyString()).exclude("playedDate")
+						.fields("songHistoryItemDTO.artist", "artist")
+						.fields("songHistoryItemDTO.title", "title")
+						.fields("songHistoryItemDTO.customImage", "customImage")
+						.fields("songImageDTO.fileName", "imagePath")
+						.fields("songImageDTO.width", "imageWidth")
+						.fields("songImageDTO.height", "imageHeight");
 				
 			}
 		};

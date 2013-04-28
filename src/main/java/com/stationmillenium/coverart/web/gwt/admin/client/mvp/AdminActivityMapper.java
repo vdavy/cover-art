@@ -7,11 +7,13 @@ import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.stationmillenium.coverart.web.gwt.admin.client.activities.ConfigureAlertsActivity;
+import com.stationmillenium.coverart.web.gwt.admin.client.activities.ConfigureCustomImagesActivity;
 import com.stationmillenium.coverart.web.gwt.admin.client.activities.GeneralConfigActivity;
 import com.stationmillenium.coverart.web.gwt.admin.client.activities.PlaylistExtractActivity;
 import com.stationmillenium.coverart.web.gwt.admin.client.activities.StatusReportActivity;
 import com.stationmillenium.coverart.web.gwt.admin.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.ConfigureAlertsPlace;
+import com.stationmillenium.coverart.web.gwt.admin.client.places.ConfigureCustomImagesPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.GeneralConfigPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.PlaylistExtractPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.StatusReportPlace;
@@ -46,9 +48,10 @@ public class AdminActivityMapper implements ActivityMapper {
 			return new PlaylistExtractActivity(clientFactory);
 		else if (place instanceof StatusReportPlace)
 			return new StatusReportActivity(clientFactory, ((StatusReportPlace) place).getReportType());
+		else if (place instanceof ConfigureCustomImagesPlace)
+			return new ConfigureCustomImagesActivity(clientFactory);
 		else
 			return null;
-			
 	}
 
 }

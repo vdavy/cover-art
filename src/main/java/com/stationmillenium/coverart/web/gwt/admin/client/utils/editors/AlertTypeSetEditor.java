@@ -36,6 +36,7 @@ public class AlertTypeSetEditor extends Composite implements LeafValueEditor<Set
 	@UiField CheckBox alertEnabledFM;
 	@UiField CheckBox alertEnabledShoutcast;
 	@UiField CheckBox alertEnabledPlaylist;
+	@UiField CheckBox alertEnabledMissingImage;
 	
 	/**
 	 * Create a new editor for the alert type using a set
@@ -51,8 +52,9 @@ public class AlertTypeSetEditor extends Composite implements LeafValueEditor<Set
 			alertEnabledFM.setValue(value.contains(AlertType.FM)); //alert fm case
 			alertEnabledShoutcast.setValue(value.contains(AlertType.SHOUTCAST)); //shoutcast alert case
 			alertEnabledPlaylist.setValue(value.contains(AlertType.PLAYLIST)); //playlist alert case
+			alertEnabledMissingImage.setValue(value.contains(AlertType.CUSTOM_IMAGE)); //missing image alert case
 		} else
-			for (CheckBox checkbox : new CheckBox[]{alertEnabledFM, alertEnabledShoutcast, alertEnabledPlaylist})
+			for (CheckBox checkbox : new CheckBox[]{alertEnabledFM, alertEnabledShoutcast, alertEnabledPlaylist, alertEnabledMissingImage})
 				checkbox.setValue(false);
 	}
 
@@ -68,6 +70,9 @@ public class AlertTypeSetEditor extends Composite implements LeafValueEditor<Set
 		
 		if (alertEnabledPlaylist.getValue()) //alert fm case
 			returnSet.add(AlertType.PLAYLIST);
+		
+		if (alertEnabledMissingImage.getValue()) //missing image alert case
+			returnSet.add(AlertType.CUSTOM_IMAGE);
 		
 		return returnSet;
 	}

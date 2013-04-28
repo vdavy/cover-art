@@ -1,8 +1,10 @@
 package com.stationmillenium.coverart.tests.domain;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -131,6 +133,51 @@ public class TestSongHistoryImageRepository {
 		verify(mockedDTO).getTitle();
 		assertNull(SongHistoryImage.findSongHistoryImage(image.getId()));
 		assertNull(SongItem.findSongItem(songToInsert.getId()).getImage());
+	}
+
+	/**
+	 *  Test the {@link SongImageRepository#isSongHasImage(SongHistoryItemDTO)}
+	 */
+	@Test
+	public void testIsSongHasImage() {
+		//init
+		SongHistoryItemDTO mockedDTO = mockSongItem("David guetta", "She Wolf (Falling To Pieces)", Calendar.getInstance());
+		
+		//process
+		boolean result = repository.isSongHasImage(mockedDTO);
+		
+		//assert
+		verify(mockedDTO).getArtist();
+		verify(mockedDTO).getTitle();
+		assertTrue(result);
+		
+		//init
+		mockedDTO = mockSongItem("Inna", "Caliente", Calendar.getInstance());
+		
+		//process
+		result = repository.isSongHasImage(mockedDTO);
+		
+		//assert
+		verify(mockedDTO).getArtist();
+		verify(mockedDTO).getTitle();
+		assertFalse(result);
+	}
+
+	/**
+	 *  Test the {@link SongImageRepository#getImageFileNameOfSong(SongHistoryItemDTO)}
+	 */
+	@Test
+	public void testGetImageFileNameOfSong() {
+		//init
+		SongHistoryItemDTO mockedDTO = mockSongItem("David guetta", "She Wolf (Falling To Pieces)", Calendar.getInstance());
+		
+		//process
+		String fileName = repository.getImageFileNameOfSong(mockedDTO);
+		
+		//assert
+		verify(mockedDTO).getArtist();
+		verify(mockedDTO).getTitle();
+		assertNotNull(fileName);
 	}
 	
 }

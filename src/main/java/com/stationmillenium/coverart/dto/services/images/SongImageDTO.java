@@ -15,6 +15,17 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 public class SongImageDTO {
 
+	/**
+	 * Available images providers
+	 * @author vincent
+	 *
+	 */
+	public enum Provider {
+		LAST_FM,
+		DEEZER,
+		CUSTOM
+	}
+	
 	//image file name
 	private String fileName;
 	
@@ -23,5 +34,8 @@ public class SongImageDTO {
 	
 	//image height
 	private int height;
+	
+	//image provider
+	private Provider provider;
 	
 }

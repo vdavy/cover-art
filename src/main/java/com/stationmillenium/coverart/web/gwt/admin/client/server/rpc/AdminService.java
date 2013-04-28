@@ -70,4 +70,52 @@ public interface AdminService extends RemoteService {
 	 */
 	List<SongGWT> getRecoveredSongs();
 	
+	/**
+	 * Search songs without custom images across Lucene index
+	 * @param keywords keywords for songs search
+	 * @param limit the max number of result
+	 * @return the list of found songs as {@link SongGWT}
+	 */
+	List<SongGWT> searchSongsWithoutCustomImage(String keywords, int limit);
+	
+	/**
+	 * Search songs without custom images across Lucene index without limit
+	 * @param keywords keywords for songs search
+	 * @return the list of found songs as {@link SongGWT}
+	 */
+	List<SongGWT> searchSongsWithoutCustomImage(String keywords);
+	
+	/**
+	 * Search songs with custom images across Lucene index
+	 * @param keywords keywords for songs search
+	 * @param limit the max number of result
+	 * @return the list of found songs as {@link SongGWT}
+	 */
+	List<SongGWT> searchSongsWithCustomImage(String keywords, int limit);
+	
+	/**
+	 * Search songs with custom images across Lucene index without limit
+	 * @param keywords keywords for songs search
+	 * @return the list of found songs as {@link SongGWT}
+	 */
+	List<SongGWT> searchSongsWithCustomImage(String keywords);
+	
+	/**
+	 * Get all the songs with custom image
+	 * @return the list of {@link SongGWT}
+	 */
+	List<SongGWT> getAllCustomImageSong();
+	
+	/**
+	 * Set a song as a song with custom image
+	 * @param songToSet the song to set
+	 */
+	void setSongAsSongWithCustomImage(SongGWT songToSet);
+	
+	/**
+	 * Remove the custom image on a song - recover previous one
+	 * @param songToRemoveCustomImage the song to remove custom image
+	 */
+	void removeCustomImageOnSong(SongGWT songToRemoveCustomImage);
+	
 }

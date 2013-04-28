@@ -74,7 +74,7 @@ public class AlertEmailRequestFactoryEntity {
     }
     
     @NotNull(message = "{validation.notNull}")
-    @Size(min = 1, max = 3, message = "{validaton.alertType.oneSelected}")
+    @Size(min = 1, max = 4, message = "{validaton.alertType.oneSelected}")
     public Set<AlertType> getAlertType() {
         return alertEmail.getAlertType();
     }

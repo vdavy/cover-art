@@ -10,13 +10,13 @@
 		<roo.version>1.2.3.RELEASE</roo.version>
 
 		<!-- spring part -->
-		<spring.version>3.2.2.RELEASE</spring.version>
+		<spring.version>3.2.1.RELEASE</spring.version>
 		<aspectj.version>1.7.2</aspectj.version>
 		<slf4j.version>1.7.2</slf4j.version>
-		<hibernate.version>4.1.10.Final</hibernate.version>
+		<hibernate.version>4.2.0.Final</hibernate.version>
 		<hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
 		<hibernate.search.version>4.2.0.Final</hibernate.search.version>
-		<mysql-connector-java.version>5.1.23</mysql-connector-java.version>
+		<mysql-connector-java.version>5.1.24</mysql-connector-java.version>
 		<ehcache.version>2.6.5</ehcache.version>
 
 		<!-- third parts -->
@@ -27,11 +27,13 @@
 		<jta.version>1.1</jta.version>
 		<jstl.version>1.2</jstl.version>
 		<joda-time.version>2.0</joda-time.version>
-		<jsoup.version>1.7.1</jsoup.version>
+		<jsoup.version>1.7.2</jsoup.version>
 		<dozer.version>5.4.0</dozer.version>
 		<gwt.version>2.5.1</gwt.version>
 		<poi.version>3.9</poi.version>
-
+		<common-fileupload.version>1.3</common-fileupload.version>
+		<imgscalr.version>4.2</imgscalr.version>
+		
 		<!-- common parts -->
 		<commons-pool.version>1.6</commons-pool.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
@@ -143,6 +145,17 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${common-fileupload.version}</version>
+		</dependency>
+        <dependency>
+			<groupId>org.imgscalr</groupId>
+			<artifactId>imgscalr-lib</artifactId>
+			<version>${imgscalr.version}</version>
+		</dependency>
+            
                        
 		<!-- General dependencies for standard applications -->
 		<dependency>

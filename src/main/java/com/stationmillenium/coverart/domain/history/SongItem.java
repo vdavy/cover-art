@@ -44,6 +44,10 @@ public class SongItem {
 	@Field
 	private String title;
 	
+	//if custom image set
+	@Field
+	private boolean customImage;
+	
 	//associated image
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

@@ -83,7 +83,7 @@ public class GeneralConfigViewImpl extends AbstractMessageView implements Genera
 		this.clientFactory = clientFactory;
 		
 		//init the cell list
-		recoveredSongsList = new CellList<SongGWT>(new ProxyAbstractSafeHtmlCell<SongGWT>(new SongGWTRenderer()));
+		recoveredSongsList = new CellList<SongGWT>(new ProxyAbstractSafeHtmlCell<SongGWT>(new SongGWTRenderer(clientFactory)));
 		listDataProvider.addDataDisplay(recoveredSongsList);
 		
 		initWidget(uiBinder.createAndBindUi(this));

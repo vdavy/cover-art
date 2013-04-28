@@ -70,7 +70,21 @@ public class SongItemRepository {
 	public void deleteLastRecordedSong() {
 		Query query = entityManager.createNamedQuery("getLastSong"); //create query
 		SongItem song = (SongItem) query.getSingleResult(); //Execute query and get entity
-		song.remove(); //remove the song
+		
+		//remove needed part
+		if (song.getPlayedTimes().size() > 0) {
+			boolean removeSong = song.getPlayedTimes().size() == 1;
+			SongHistory[] songHistories = new SongHistory[song.getPlayedTimes().size()];
+			song.getPlayedTimes().toArray(songHistories);
+			song.getPlayedTimes().remove(songHistories[0]);
+			song.merge();
+			songHistories[0].remove();
+			if (removeSong) //if only one played time
+				song.remove(); //remove the song
+			
+		} else
+			song.remove(); //remove the song
+		
 	}
 	
 	/**
@@ -132,7 +146,7 @@ public class SongItemRepository {
 	 * @param provider the image provider (see {@link Provider}
 	 */
 	@Transactional
-	public void addImageToSong(SongHistoryItemDTO songToAddTime, String fileName,  int width, int height, Provider provider) {
+	private void addImageToSong(SongHistoryItemDTO songToAddTime, String fileName,  int width, int height, Provider provider, boolean customImage) {
 		//load song
 		Query query = entityManager.createNamedQuery("loadExistingSong"); //create query
 		query.setParameter("artist", songToAddTime.getArtist()); //artist param
@@ -149,7 +163,33 @@ public class SongItemRepository {
 		
 		//link to song
 		song.setImage(songHistoryImage);
+		song.setCustomImage(customImage);
 		song.merge();
+	}
+	
+	/**
+	 * Add an image to the song (non custom)
+	 * @param songToAddTime the song to add image
+	 * @param fileName the file name
+	 * @param width the width
+	 * @param height the height
+	 * @param provider the image provider (see {@link Provider}
+	 */
+	@Transactional
+	public void addImageToSong(SongHistoryItemDTO songToAddTime, String fileName,  int width, int height, Provider provider) {
+		addImageToSong(songToAddTime, fileName, width, height, provider, false);
+	}
+	
+	/**
+	 * Add an custom image to the song
+	 * @param songToAddTime the song to add image
+	 * @param fileName the file name
+	 * @param width the width
+	 * @param height the height
+	 */
+	@Transactional
+	public void addCustomImageToSong(SongHistoryItemDTO songToAddTime, String fileName,  int width, int height) {
+		addImageToSong(songToAddTime, fileName, width, height, Provider.CUSTOM, true);
 	}
 	
 	/**
@@ -247,4 +287,40 @@ public class SongItemRepository {
 		return returnList;
 	}
 	
+	/**
+	 * Get all the songs with custom images - images are fetched
+	 * @return the list of {@link SongHistoryItemImageDTO}
+	 */
+	public List<SongHistoryItemImageDTO>  getSongsWithCustomImages() {
+		Query query = entityManager.createNamedQuery("getSongsWithCustomFetchedImage", SongItem.class); //create query
+		@SuppressWarnings("unchecked")
+		List<SongItem> songList = query.getResultList();
+		
+		//convert
+		List<SongHistoryItemImageDTO> returnList = new ArrayList<>();
+		for (SongItem songItem : songList) {
+			SongHistoryItemImageDTO songHistoryItem = mapper.map(songItem, SongHistoryItemImageDTO.class); //process mapping to output dto
+			returnList.add(songHistoryItem);
+		}
+		
+		return returnList;
+	}
+	
+	/**
+	 * Set a song as a song with custom image
+	 * @param artist the artist of the song
+	 * @param title the title of the song
+	 */
+	public void setSongAsCustomImageSong(String artist, String title) {
+		//load song
+		Query query = entityManager.createNamedQuery("loadExistingSong"); //create query
+		query.setParameter("artist", artist); //artist param
+		query.setParameter("title", title); //title param
+		SongItem song  = (SongItem) query.getSingleResult(); //Execute query and get count
+				
+		//set as custom image song
+		song.setCustomImage(true);
+		song.merge();
+	}
+		
 }

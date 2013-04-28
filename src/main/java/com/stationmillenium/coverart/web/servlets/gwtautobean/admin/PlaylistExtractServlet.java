@@ -72,11 +72,11 @@ public class PlaylistExtractServlet extends HttpServlet {
 		Workbook workbook = generateXLSXSheet(playlistExtract, songList);
 		
 		//set headers
-		
-		//push file on response output stream
 		String fileDate = sdfFileFormat.format(Calendar.getInstance().getTime());
-		resp.setContentType(" application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         resp.addHeader("Content-disposition", "attachment; filename=\"" + fileNamePrefix + fileDate + ".xlsx\"");
+        
+		//push file on response output stream
 		workbook.write(resp.getOutputStream());
 	}
 

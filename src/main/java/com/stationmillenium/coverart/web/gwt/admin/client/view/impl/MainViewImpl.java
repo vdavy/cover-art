@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.stationmillenium.coverart.web.gwt.admin.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.ConfigureAlertsPlace;
+import com.stationmillenium.coverart.web.gwt.admin.client.places.ConfigureCustomImagesPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.GeneralConfigPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.PlaylistExtractPlace;
 import com.stationmillenium.coverart.web.gwt.admin.client.places.StatusReportPlace;
@@ -41,6 +42,7 @@ public class MainViewImpl extends Composite implements MainView {
 	@UiField MenuItem playlistExtractMenuItem;
 	@UiField MenuItem generalConfigMenuItem;
 	@UiField MenuItem alertsConfigMenuItem;
+	@UiField MenuItem customImagesConfigMenuItem;
 	
 	/**
 	 * Because this class has a default constructor, it can
@@ -97,6 +99,14 @@ public class MainViewImpl extends Composite implements MainView {
 				clientFactory.getPlaceController().goTo(new ConfigureAlertsPlace());
 			}
 		});
+		
+		customImagesConfigMenuItem.setScheduledCommand(new Command() { //set command for custom images configuration menu item
+			@Override
+			public void execute() {
+				clientFactory.getPlaceController().goTo(new ConfigureCustomImagesPlace());
+			}
+		});
+		
 	}
 	
 	@Override

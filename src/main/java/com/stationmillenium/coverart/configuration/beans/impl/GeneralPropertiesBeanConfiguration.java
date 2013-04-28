@@ -30,6 +30,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private @Value("${generalConfiguration.dateSearchDelta}") String dateSearchDelta;
 	private @Value("${generalConfiguration.fmAlertTimeout}") String fmAlertTimeout;
 	private @Value("${generalConfiguration.historySearchMaxResults}") String historySearchMaxResults;
+	private @Value("${generalConfiguration.customImageMaxSize}") String customImageMaxSize;
 	
 	//instance vars
 	private int playlistUpdateTimeoutInt;
@@ -38,6 +39,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private int dateSearchDeltaInt;
 	private int fmAlertTimeoutInt;
 	private int historySearchMaxResultsInt;
+	private int customImageMaxSizeInt;
 	
 	@Override
 	protected GeneralPropertiesBean buildBean() {
@@ -51,6 +53,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 		propertiesBean.setDateSearchDelta(dateSearchDeltaInt);
 		propertiesBean.setFmAlertTimeout(fmAlertTimeoutInt);
 		propertiesBean.setHistorySearchMaxResults(historySearchMaxResultsInt);
+		propertiesBean.setCustomImageMaxSize(customImageMaxSizeInt);
 		return propertiesBean;
 	}
 	
@@ -90,6 +93,12 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 			historySearchMaxResultsInt = Integer.parseInt(historySearchMaxResults);
 		} catch(NumberFormatException e) {
 			throw new PropertyBeanException("historySearchMaxResults", e);
+		}
+		
+		try { //convert customImageMaxSize into number
+			customImageMaxSizeInt = Integer.parseInt(customImageMaxSize);
+		} catch(NumberFormatException e) {
+			throw new PropertyBeanException("customImageMaxSize", e);
 		}
 	}
 

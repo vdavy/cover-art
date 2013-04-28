@@ -52,4 +52,11 @@
 		<property name="text" value="${mailConfiguration.playlistAlert.endedAlert.text}" />
 	</bean>
 
+	<!-- custom images missing templates -->
+	<bean id="missingCustomImagesAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${mailConfiguration.from}" />
+		<property name="subject" value="${mailConfiguration.missingCustomImagesAlert.subject}" />
+		<property name="text" value="${mailConfiguration.missingCustomImagesAlert.text}" />
+	</bean>
+	
 </beans>

@@ -59,7 +59,7 @@ public aspect SongItemNamedQueriesAspect {
 				name = "getSongsFetchedOrderedByPlayedTimeWithMinDate", 
 				query = "FROM SongHistory AS history " +
 						"JOIN FETCH history.song " +
-						"JOIN FETCH history.song.image " +						
+						"LEFT JOIN FETCH history.song.image " +						
 						"WHERE history.playedDate > :minDate " +
 						"ORDER BY history.playedDate DESC",
 						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
@@ -84,11 +84,21 @@ public aspect SongItemNamedQueriesAspect {
 				name = "getSongsFetchedOrderedWithImageByPlayedTimeBetween2Dates", 
 				query = "FROM SongHistory AS history " +
 						"JOIN FETCH history.song " +
-						"JOIN FETCH history.song.image " +		
+						"LEFT JOIN FETCH history.song.image " +		
 						"WHERE history.playedDate " +
 						"BETWEEN :minDate AND :maxDate " +
 						"ORDER BY history.playedDate DESC",
 						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+						
+		/**
+		 * Get the songs with custom images - fetch images
+		 */
+		@NamedQuery( 
+				name = "getSongsWithCustomFetchedImage", 
+				query = "FROM SongItem AS song " +
+						"LEFT JOIN FETCH song.image " +		
+						"WHERE song.customImage = true " +
+						"ORDER BY song.artist")
 					
 	});
 	

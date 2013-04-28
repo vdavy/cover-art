@@ -60,5 +60,9 @@ public class GeneralPropertiesBean implements PropertyBeanInterface {
 	@Min(1)
 	@Max(1000)
 	private int historySearchMaxResults;
+	
+	@Min(50)
+	@Max(200)
+	private int customImageMaxSize;
 		
 }

@@ -61,4 +61,10 @@ public interface ConfigureAlertsConstants extends Constants {
 	@DefaultStringValue("Confirmer la suppression de l'email ?")
 	String getConfirmAlertEmailDeletion();
 	
+	//alertes names
+	@DefaultStringValue("Shoutcast") String getShoutcastAlertName();
+	@DefaultStringValue("FM") String getFMAlertName();
+	@DefaultStringValue("Playlist") String getPlaylistAlertName();
+	@DefaultStringValue("Images perso") String getCustomImagesAlertName();
+	
 }

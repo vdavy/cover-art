@@ -23,7 +23,8 @@ public class SongHistoryItemDTO implements Cloneable {
 	private Calendar playedDate;
 	private String artist;
 	private String title;
-
+	private boolean customImage;
+	
 	/**
 	 * Equals only if title, artist and played date are not null and equal each other.
 	 */
@@ -58,6 +59,7 @@ public class SongHistoryItemDTO implements Cloneable {
 		SongHistoryItemDTO returnedDTO = new SongHistoryItemDTO();
 		returnedDTO.setArtist(artist);
 		returnedDTO.setTitle(title);
+		returnedDTO.setCustomImage(customImage);
 		
 		//process calendar
 		if (playedDate != null) {

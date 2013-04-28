@@ -20,6 +20,12 @@ public interface AdminBundle extends ClientBundle {
 	@Source("red-bullet.png")
 	ImageResource redBullet();
 
+	@Source("logo-millenium.png")
+	ImageResource logoMillenium();
+	
+	@Source("ajax-loader.gif")
+	ImageResource ajaxLoader();
+	
 	@Source("playlist-extract.css")
 	PlaylistExtract playlistExtract();
 	

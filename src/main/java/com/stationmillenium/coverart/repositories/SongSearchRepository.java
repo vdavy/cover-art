@@ -4,9 +4,6 @@
 package com.stationmillenium.coverart.repositories;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -220,6 +217,49 @@ public class SongSearchRepository {
 		for (SongItem song : songList) {
 				SongHistoryItemDTO	item = mapper.map(song, SongHistoryItemDTO.class);
 				resultsList.add(item);
+		}			
+		
+		return resultsList;
+	}
+	
+	/**
+	 * Search songs for custom image - return songs not having already custom image
+	 * @param keywords the keywords for search 
+	 * @param maxResults the max results - 0 for not limit
+	 * @param includeCustomImage <code>true</code> search songs with custom images, <code>false</code> search songs without
+	 * @return the found songs
+	 */
+	@Transactional
+	public List<SongHistoryItemImageDTO> searchSongsForCustomImage(String keywords, int maxResults, boolean includeCustomImage) {				
+		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager); //get full text entity manager
+		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
+
+		//make query
+		Query query = queryBuilder.bool().should(
+					queryBuilder.keyword().fuzzy()
+					.onFields("artist", "title")
+					.matching(keywords).createQuery())
+				.must(
+						queryBuilder.keyword().
+						onField("customImage").
+						matching(includeCustomImage).createQuery())
+				.createQuery();
+		FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(query, SongItem.class); //create query
+		fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID);
+		if (maxResults > 0)
+			fullTextQuery.setMaxResults(maxResults);
+		
+		//search
+		@SuppressWarnings("unchecked")
+		List<SongItem> songList = fullTextQuery.getResultList();
+
+		//mapping
+		List<SongHistoryItemImageDTO> resultsList = new ArrayList<>(); //return list
+		for (SongItem song : songList) {
+			if (song.isCustomImage() == includeCustomImage) { //add song to return list if match custom image requirement
+				SongHistoryItemImageDTO	item = mapper.map(song, SongHistoryItemImageDTO.class);
+				resultsList.add(item);
+			}
 		}			
 		
 		return resultsList;

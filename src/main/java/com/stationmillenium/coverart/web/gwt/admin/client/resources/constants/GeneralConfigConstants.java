@@ -79,4 +79,6 @@ public interface GeneralConfigConstants extends Constants {
 	@DefaultStringValue("Impossible de récupérer la liste des images récupérées")
 	String getRecoveredSongsListError();
 	
+	@DefaultStringValue("[Image perso] ")
+	String getCustomImagePrefix();
 }

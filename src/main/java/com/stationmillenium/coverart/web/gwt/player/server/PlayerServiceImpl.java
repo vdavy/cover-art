@@ -9,6 +9,8 @@ import java.util.List;
 import javax.servlet.annotation.WebServlet;
 
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
@@ -35,7 +37,8 @@ public class PlayerServiceImpl extends RemoteServiceServlet implements PlayerSer
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(PlayerServiceImpl.class);
+	
 	//polling service
 	@Autowired
 	private PollingService pollingService;
@@ -61,6 +64,7 @@ public class PlayerServiceImpl extends RemoteServiceServlet implements PlayerSer
 	 */
 	@Override
 	public SongGWTDTO getLastSong() {
+		LOGGER.debug("Get last song");
 		//get song
 		SongHistoryItemDTO songItem = pollingService.getCurrentSong(); //get current song
 		SongImageDTO image = null;
@@ -81,6 +85,7 @@ public class PlayerServiceImpl extends RemoteServiceServlet implements PlayerSer
 
 	@Override
 	public List<SongGWTDTO> getLast5PreviousSongs(boolean displayLastSong) {
+		LOGGER.debug("Get last 5 previous songs");
 		List<SongHistoryItemDTO> lastSongsList = songItemRepository.getLast5PlayedSongs(displayLastSong); //last 5 songs
 		List<SongGWTDTO> lastSongsGWTList = new ArrayList<SongGWTDTO>(); //gwt list
 		

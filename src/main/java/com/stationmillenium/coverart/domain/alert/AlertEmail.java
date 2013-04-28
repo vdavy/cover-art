@@ -39,7 +39,7 @@ public class AlertEmail {
 	
 	@NotNull	
 	@ElementCollection(fetch = FetchType.EAGER)
-	@Size(min = 1, max = 3)
+	@Size(min = 1, max = 4)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<AlertType> alertType;
 	

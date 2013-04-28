@@ -8,15 +8,19 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.AdminBundle;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.ConfigureAlertsConstants;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.ConfigureCustomImagesConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.GeneralConfigConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.PlaylistExtractConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.StatusReportConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.ConfigureAlertsMessages;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.ConfigureCustomImagesMessages;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.GeneralConfigMessages;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.autobean.AdminAutobeanFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminServiceAsync;
+import com.stationmillenium.coverart.web.gwt.admin.client.utils.widgets.AjaxLoaderWidget;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.ConfigureAlertView;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.ConfigureCustomImagesView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.GeneralConfigView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.MainView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.PlaylistExtractView;
@@ -46,4 +50,8 @@ public interface ClientFactory {
 	ConfigureAlertsConstants getConfigureAlertsConstants();
 	ConfigureAlertsMessages getConfigureAlertsMessages();
 	GeneralConfigMessages getGeneralConfigMessages();
+	ConfigureCustomImagesView getConfigureCustomImagesView();
+	ConfigureCustomImagesConstants getConfigureCustomImagesConstants();
+	ConfigureCustomImagesMessages getConfigureCustomImagesMessages();
+	AjaxLoaderWidget getAjaxLoaderWidget();
 }

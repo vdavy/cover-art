@@ -49,6 +49,36 @@ public aspect SongHistoryImageNamedQueriesAspect {
 				query = "FROM SongItem AS song " +
 						"JOIN FETCH song.image " +
 						"WHERE song.artist = :artist " +
+						"AND song.title = :title "),
+						
+		/**
+		 * Get the songs with custom images - fetch images
+		 */
+		@NamedQuery( 
+				name = "getSpecificSongWithCustomFetchedImage", 
+				query = "FROM SongItem AS song " +
+						"LEFT JOIN FETCH song.image " +		
+						"WHERE song.customImage = true " +
+						"AND song.artist = :artist " +
+						"AND song.title = :title"),
+						
+		/**
+		 * Get song with image - if image exists
+		 */
+		@NamedQuery( 
+				name = "getSongWithImageLeftJoinFetch", 
+				query = "FROM SongItem AS song " +
+						"LEFT JOIN FETCH song.image " +
+						"WHERE song.artist = :artist " +
+						"AND song.title = :title "),
+
+		/**
+		 * Getimage file name of song
+		 */
+		@NamedQuery( 
+				name = "getImageFileNameOfSong", 
+				query = "Select song.image.fileName FROM SongItem AS song " +
+						"WHERE song.artist = :artist " +
 						"AND song.title = :title ")
 		
 	});

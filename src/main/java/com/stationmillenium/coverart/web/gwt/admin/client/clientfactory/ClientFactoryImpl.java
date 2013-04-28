@@ -10,21 +10,26 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.AdminBundle;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.ConfigureAlertsConstants;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.ConfigureCustomImagesConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.GeneralConfigConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.PlaylistExtractConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.constants.StatusReportConstants;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.ConfigureAlertsMessages;
+import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.ConfigureCustomImagesMessages;
 import com.stationmillenium.coverart.web.gwt.admin.client.resources.messages.GeneralConfigMessages;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.autobean.AdminAutobeanFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.requestfactory.requests.AdminRequestFactory;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminService;
 import com.stationmillenium.coverart.web.gwt.admin.client.server.rpc.AdminServiceAsync;
+import com.stationmillenium.coverart.web.gwt.admin.client.utils.widgets.AjaxLoaderWidget;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.ConfigureAlertView;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.ConfigureCustomImagesView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.GeneralConfigView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.MainView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.PlaylistExtractView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.StatusReportView;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.ConfigureAlertViewImpl;
+import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.ConfigureCustomImagesViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.GeneralConfigViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.MainViewImpl;
 import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.PlaylistExtractViewImpl;
@@ -37,6 +42,7 @@ import com.stationmillenium.coverart.web.gwt.admin.client.view.impl.StatusReport
  */
 public class ClientFactoryImpl implements ClientFactory {
 
+	private AjaxLoaderWidget ajaxLoaderWidget = new AjaxLoaderWidget();
 	private EventBus eventBus = new SimpleEventBus();
 	private PlaceController placeController = new PlaceController(eventBus);
 	private MainViewImpl mainView = new MainViewImpl(this);
@@ -52,7 +58,10 @@ public class ClientFactoryImpl implements ClientFactory {
 	private ConfigureAlertView configureAlertView = new ConfigureAlertViewImpl(this);
 	private ConfigureAlertsConstants configureAlertsConstants = GWT.create(ConfigureAlertsConstants.class);
 	private ConfigureAlertsMessages configureAlertsMessages = GWT.create(ConfigureAlertsMessages.class);
-	private GeneralConfigMessages generalConfigMessages = GWT.create(GeneralConfigMessages.class);	
+	private GeneralConfigMessages generalConfigMessages = GWT.create(GeneralConfigMessages.class);
+	private ConfigureCustomImagesConstants configureCustomImagesConstants = GWT.create(ConfigureCustomImagesConstants.class);
+	private ConfigureCustomImagesView customImagesView = new ConfigureCustomImagesViewImpl(this);
+	private ConfigureCustomImagesMessages configureCustomImagesMessages = GWT.create(ConfigureCustomImagesMessages.class);
 	
 	@Override
 	public EventBus getEventBus() {
@@ -144,6 +153,26 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public ConfigureAlertsMessages getConfigureAlertsMessages() {
 		return configureAlertsMessages;
+	}
+
+	@Override
+	public ConfigureCustomImagesView getConfigureCustomImagesView() {
+		return customImagesView;
+	}
+	
+	@Override
+	public ConfigureCustomImagesConstants getConfigureCustomImagesConstants() {
+		return configureCustomImagesConstants;
+	}
+	
+	@Override
+	public ConfigureCustomImagesMessages getConfigureCustomImagesMessages() {
+		return configureCustomImagesMessages;
+	}
+	
+	@Override
+	public AjaxLoaderWidget getAjaxLoaderWidget() {
+		return ajaxLoaderWidget;
 	}
 	
 }

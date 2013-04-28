@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stationmillenium.coverart.domain.history.SongHistoryImage;
 import com.stationmillenium.coverart.domain.history.SongItem;
@@ -89,6 +90,7 @@ public class SongImageRepository {
 	 * Delete image of a song
 	 * @param songToDeleteImage the song to delete image
 	 */
+	@Transactional
 	public void deleteImageOfSong(SongHistoryItemDTO songToDeleteImage) {
 		//load song
 		Query query = entityManager.createNamedQuery("getSongWithImage", SongItem.class); //create query
@@ -105,4 +107,85 @@ public class SongImageRepository {
 		}
 	}
 
+	/**
+	 * Remove the custom image and attribute of a song (even if there is no image attached
+	 * @param songToRemoveCustomImage the song to remove custom image
+	 */
+	@Transactional
+	public void cancelCustomImage(SongHistoryItemDTO songToRemoveCustomImage) {
+		//load song
+		Query query = entityManager.createNamedQuery("loadExistingSong", SongItem.class); //create query
+		query.setParameter("artist", songToRemoveCustomImage.getArtist()); //artist param
+		query.setParameter("title", songToRemoveCustomImage.getTitle()); //title param
+		SongItem song = (SongItem) query.getSingleResult();
+		
+		//delete image
+		SongHistoryImage image = song.getImage();
+		if (image != null) { //if there is an image
+			song.setImage(null);
+			song.setCustomImage(false);
+			song.merge();		
+			image.remove();			
+		} else {
+			song.setCustomImage(false);
+			song.merge();	
+		}
+	}
+	
+	/**
+	 * Update the custom image of song
+	 * @param songToUpdateCustomImage the song to update
+	 * @param fileName the file name of the new image
+	 * @param width the width of the new image
+	 * @param height the height of the new image
+	 */
+	@Transactional
+	public void updateCustomImage(SongHistoryItemDTO songToUpdateCustomImage, String fileName,  int width, int height) {
+		//load song
+		Query query = entityManager.createNamedQuery("getSongWithImage", SongItem.class); //create query
+		query.setParameter("artist", songToUpdateCustomImage.getArtist()); //artist param
+		query.setParameter("title", songToUpdateCustomImage.getTitle()); //title param
+		SongItem song = (SongItem) query.getSingleResult();
+		
+		//delete image
+		SongHistoryImage image = song.getImage();
+		if (image != null) { //if there is an image
+			image.setFileName(fileName);
+			image.setWidth(width);
+			image.setHeight(height);
+			image.merge();
+		}
+	}
+	
+	/**
+	 * A song has an image ?
+	 * @param song the song to analyse
+	 * @return <code>true</code> if there is an image, <code>false</code> if not
+	 */
+	public boolean isSongHasImage(SongHistoryItemDTO song) {
+		//load song
+		Query query = entityManager.createNamedQuery("getSongWithImageLeftJoinFetch", SongItem.class); //create query
+		query.setParameter("artist", song.getArtist()); //artist param
+		query.setParameter("title", song.getTitle()); //title param
+		SongItem songItem = (SongItem) query.getSingleResult();
+		
+		//return data
+		return songItem.getImage() != null;
+	}
+
+	/**
+	 * Get the file name of a song
+	 * @param song the song to analyse
+	 * @return the file name
+	 */
+	public String getImageFileNameOfSong(SongHistoryItemDTO song) {
+		//load song
+		Query query = entityManager.createNamedQuery("getImageFileNameOfSong", String.class); //create query
+		query.setParameter("artist", song.getArtist()); //artist param
+		query.setParameter("title", song.getTitle()); //title param
+		String fileName = (String) query.getSingleResult();
+		
+		//return data
+		return fileName;
+	}
 }

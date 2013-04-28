@@ -11,6 +11,8 @@ import java.util.List;
 import javax.servlet.annotation.WebServlet;
 
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
@@ -36,7 +38,8 @@ public class HistoryServiceImpl extends RemoteServiceServlet implements HistoryS
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(HistoryServiceImpl.class);
+	
 	//song repository
 	@Autowired
 	private SongItemRepository songItemRepository;
@@ -55,6 +58,7 @@ public class HistoryServiceImpl extends RemoteServiceServlet implements HistoryS
 	
 	@Override
 	public List<HistoryGWTDTO> getSongHistory() {
+		LOGGER.debug("Get song history");
 		//setup min date
 		int historyDelayMinutes =  config.getHistoryDisplayMinMinutes();
 		Calendar minDate = Calendar.getInstance();
@@ -87,30 +91,35 @@ public class HistoryServiceImpl extends RemoteServiceServlet implements HistoryS
 	
 	@Override
 	public List<HistoryGWTDTO> getSearchSuggestions(String query, int limit) {
+		LOGGER.debug("Get search suggestions - keywords : " + query);
 		List<SongHistoryItemDTO> suggestionList = songSearchRepository.searchSongsForSuggest(query, limit);
 		return convertToGWTList(suggestionList);
 	}
 	
 	@Override
 	public List<HistoryGWTDTO> searchAll(String query) {
+		LOGGER.debug("Search all songs - keywords : " + query);
 		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongs(query, config.getHistorySearchMaxResults());
 		return convertToGWTList(songList);
 	}
 	
 	@Override
 	public List<HistoryGWTDTO> searchByArtist(String query) {
+		LOGGER.debug("Search songs by artist - keywords : " + query);
 		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongsByArtist(query, config.getHistorySearchMaxResults());
 		return convertToGWTList(songList);
 	}
 	
 	@Override
 	public List<HistoryGWTDTO> searchByTitle(String query) {
+		LOGGER.debug("Search songs by title - keywords : " + query);
 		List<SongHistoryItemImageDTO> songList = songSearchRepository.searchSongsByTitle(query, config.getHistorySearchMaxResults());
 		return convertToGWTList(songList);
 	}
 	
 	@Override
 	public List<HistoryGWTDTO> searchByDate(Date searchDate) {
+		LOGGER.debug("Search songs by date - date : " + searchDate);
 		//set up date
 		int searchDateDelta =  config.getDateSearchDelta();
 		Calendar minDate = Calendar.getInstance();

@@ -42,4 +42,12 @@ privileged aspect SongItem_Roo_JavaBean {
         this.playedTimes = playedTimes;
     }
     
+    public boolean SongItem.isCustomImage() {
+        return this.customImage;
+    }
+    
+    public void SongItem.setCustomImage(boolean customImage) {
+        this.customImage = customImage;
+    }
+    
 }

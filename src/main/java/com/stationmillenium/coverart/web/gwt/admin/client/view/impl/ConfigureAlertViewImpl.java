@@ -83,7 +83,7 @@ public class ConfigureAlertViewImpl extends AbstractMessageView implements Confi
 	 * Initialize the alert activation cell list
 	 */
 	private void initAlertActivationCellList() {
-		alertActivationList = new CellList<AlertActivationProxy>(new ProxyAbstractSafeHtmlCell<AlertActivationProxy>(new AlertActivationProxyRenderer()));
+		alertActivationList = new CellList<AlertActivationProxy>(new ProxyAbstractSafeHtmlCell<AlertActivationProxy>(new AlertActivationProxyRenderer(clientFactory)));
 		alertActivationSsm =  new SingleSelectionModel<AlertActivationProxy>();
 		alertActivationSsm.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {			
 			@Override

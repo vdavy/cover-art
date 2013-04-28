@@ -32,4 +32,12 @@ privileged aspect SongHistoryItemDTO_Roo_JavaBean {
         this.title = title;
     }
     
+    public boolean SongHistoryItemDTO.isCustomImage() {
+        return this.customImage;
+    }
+    
+    public void SongHistoryItemDTO.setCustomImage(boolean customImage) {
+        this.customImage = customImage;
+    }
+    
 }
