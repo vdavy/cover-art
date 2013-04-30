@@ -16,7 +16,7 @@ import com.google.gwt.i18n.client.Messages;
 @Generate(format = "com.google.gwt.i18n.rebind.format.PropertiesFormat")
 public interface ConfigureCustomImagesMessages extends Messages {
 
-	@DefaultMessage("Titre sélectionné : {0} {1}") String getSelectedSong(String artist, String title);
-	@DefaultMessage("Titre avec image sélectionné : {0} {1}") String getSelectedCustomSong(String artist, String title);
+	@DefaultMessage("Titre sélectionné : {0} - {1}") String getSelectedSong(String artist, String title);
+	@DefaultMessage("Titre avec image sélectionné : {0} - {1}") String getSelectedCustomSong(String artist, String title);
 	
 }
