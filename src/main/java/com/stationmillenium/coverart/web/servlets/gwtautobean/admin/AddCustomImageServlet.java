@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +86,8 @@ public class AddCustomImageServlet extends HttpServlet {
 					} else {
 						LOGGER.debug("Regular form field : " + fileItem.getFieldName());
 						if (fileItem.getFieldName().equals("json")) {
-							String paramJSON = fileItem.getString();
+							//see : http://stackoverflow.com/questions/5021295/servlet-file-upload-filename-encoding
+							String paramJSON = Streams.asString(fileItem.getInputStream(), "UTF-8");
 							LOGGER.debug("Gathered JSON data : "  + paramJSON);
 							songItem = extractParamFromJSON(paramJSON);
 						}
