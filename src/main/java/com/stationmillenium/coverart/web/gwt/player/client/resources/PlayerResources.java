@@ -20,7 +20,13 @@ public interface PlayerResources extends ClientBundle {
 	@Source("logo-player-live.png")
 	ImageResource logoPlayerLive();
 	
+	@Source("logo-small-player.png")
+	ImageResource logoSmallPlayer();
+	
 	@Source("piwik.js")
 	TextResource piwikJS();
+	
+	@Source("smallPlayer.js")
+	TextResource smallPlayerJS();
 	
 }

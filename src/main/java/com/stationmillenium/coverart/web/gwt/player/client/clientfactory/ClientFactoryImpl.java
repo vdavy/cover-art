@@ -8,13 +8,16 @@ import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
 import com.stationmillenium.coverart.web.gwt.player.client.activities.PlayerActivity;
+import com.stationmillenium.coverart.web.gwt.player.client.activities.SmallPlayerActivity;
 import com.stationmillenium.coverart.web.gwt.player.client.resources.PlayerConstants;
 import com.stationmillenium.coverart.web.gwt.player.client.resources.PlayerMessages;
 import com.stationmillenium.coverart.web.gwt.player.client.resources.PlayerResources;
 import com.stationmillenium.coverart.web.gwt.player.client.server.PlayerService;
 import com.stationmillenium.coverart.web.gwt.player.client.server.PlayerServiceAsync;
 import com.stationmillenium.coverart.web.gwt.player.client.view.PlayerViewInterface;
+import com.stationmillenium.coverart.web.gwt.player.client.view.SmallPlayerViewInterface;
 import com.stationmillenium.coverart.web.gwt.player.client.view.impl.PlayerViewImpl;
+import com.stationmillenium.coverart.web.gwt.player.client.view.impl.SmallPlayerViewImpl;
 
 /**
  * Client factory of player GWT module
@@ -29,8 +32,10 @@ public class ClientFactoryImpl implements ClientFactory {
 	private PlayerMessages messages = GWT.create(PlayerMessages.class);
 	private PlayerServiceAsync playerService = GWT.create(PlayerService.class);	
 	private PlayerResources resources = GWT.create(PlayerResources.class);
-	private PlayerActivity activity = new PlayerActivity(this);
-	private PlayerViewInterface playerView = new PlayerViewImpl(this);
+	private PlayerActivity playerActivity = new PlayerActivity(this);
+	private PlayerViewInterface playerView = null;
+	private SmallPlayerActivity smallPlayerActivity = new SmallPlayerActivity(this); 
+	private SmallPlayerViewInterface smallPlayerView = new SmallPlayerViewImpl(this);
 	
 	@Override
 	public EventBus getEventBus() {
@@ -59,6 +64,9 @@ public class ClientFactoryImpl implements ClientFactory {
 	
 	@Override
 	public PlayerViewInterface getPlayerView() {
+		if (playerView == null) //init player view only on demand
+			playerView = new PlayerViewImpl(this);
+		
 		return playerView;
 	}
 	
@@ -69,7 +77,17 @@ public class ClientFactoryImpl implements ClientFactory {
 	
 	@Override
 	public PlayerActivity getPlayerActivity() {
-		return activity;
+		return playerActivity;
+	}
+	
+	@Override
+	public SmallPlayerViewInterface getSmallPlayer() {
+		return smallPlayerView;
+	}
+	
+	@Override
+	public SmallPlayerActivity getSmallPlayerActivity() {
+		return smallPlayerActivity;
 	}
 	
 }

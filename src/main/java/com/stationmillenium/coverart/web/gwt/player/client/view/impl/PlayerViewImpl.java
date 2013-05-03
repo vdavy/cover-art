@@ -28,6 +28,7 @@ import com.stationmillenium.coverart.web.gwt.player.client.clientfactory.ClientF
 import com.stationmillenium.coverart.web.gwt.player.client.view.PlayerViewInterface;
 
 /**
+ * Implementation for {@link PlayerViewInterface}
  * @author vincent
  *
  */
@@ -54,6 +55,10 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 	//audio tag
 	private Audio audioTag;
 	
+	/**
+	 * Create a new {@link PlayerViewImpl}
+	 * @param clientFactory the client factory
+	 */
 	public PlayerViewImpl(ClientFactory clientFactory) {		
 		//init celle list
 		songList = new CellList<String>(new TextCell());

@@ -5,6 +5,7 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.stationmillenium.coverart.web.gwt.player.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.player.client.places.PlayerPlace;
+import com.stationmillenium.coverart.web.gwt.player.client.places.SmallPlayerPlace;
 
 /**
  * Player GWT module activity mapper
@@ -27,6 +28,8 @@ public class PlayerActivityMapper implements ActivityMapper {
 	public Activity getActivity(Place place) {
 		if (place instanceof PlayerPlace) 
 			return clientFactory.getPlayerActivity();
+		else if (place instanceof SmallPlayerPlace)
+			return clientFactory.getSmallPlayerActivity();
 		else
 			return null;
 	}

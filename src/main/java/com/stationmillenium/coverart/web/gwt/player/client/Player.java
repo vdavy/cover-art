@@ -17,6 +17,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.stationmillenium.coverart.web.gwt.player.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.player.client.events.AddTrackerEvent;
 import com.stationmillenium.coverart.web.gwt.player.client.events.UpdatePlayerEvent;
+import com.stationmillenium.coverart.web.gwt.player.client.events.UpdateSmallPlayerEvent;
 import com.stationmillenium.coverart.web.gwt.player.client.mvp.PlayerActivityMapper;
 import com.stationmillenium.coverart.web.gwt.player.client.mvp.PlayerEventsHandler;
 import com.stationmillenium.coverart.web.gwt.player.client.mvp.PlayerPlaceHistoryMapper;
@@ -62,16 +63,36 @@ public class Player implements EntryPoint {
 	   	// Goes to the place represented on URL else default place
 	    historyHandler.handleCurrentHistory();
 	    
-	    //timer for player update
-	    setupScheduledTimer();
+	    if (placeController.getWhere() instanceof PlayerPlace) {
+	    	//timer for player update
+		    setupScheduledTimer();
 
-	    //timer for player start
-	    setupStartTimer();
+		    //timer for player start
+		    setupStartTimer();
+		    
+		    //timer for tracking
+		    setupTrackingTimer();
+	    } else {
+	    	clientFactory.getEventBus().fireEvent(new UpdateSmallPlayerEvent());			
+	    	setupSmallPlayerScheduledTimer();
+	    }
 	    
-	    //timer for tracking
-	    setupTrackingTimer();
 	}
 
+	/**
+	 * Set up timer for player update
+	 */
+	private void setupSmallPlayerScheduledTimer() {
+		Timer timer = new Timer() {			
+			@Override
+			public void run() {
+				clientFactory.getEventBus().fireEvent(new UpdateSmallPlayerEvent());				
+			}
+		};
+		
+		timer.scheduleRepeating(10000); //update each 10s
+	}
+	
 	/**
 	 * Set up timer for player update
 	 */

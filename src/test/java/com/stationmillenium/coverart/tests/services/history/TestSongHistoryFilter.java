@@ -93,7 +93,8 @@ public class TestSongHistoryFilter {
 		//mock the list
 		songHistoryList.add(mockSongItem("Millenium", "foo", 0));
 		songHistoryList.add(mockSongItem("foo", "bar", 60));
-		songHistoryList.add(mockSongItem("foo", "Jingle", 60));				
+		songHistoryList.add(mockSongItem("foo", "Jingle", 60));		
+		songHistoryList.add(mockSongItem("Will I Am & Britney Spears", "Scream & Shout", 60));
 		songHistoryList.add(mockSongItem("", "", 60));
 		
 		//filter

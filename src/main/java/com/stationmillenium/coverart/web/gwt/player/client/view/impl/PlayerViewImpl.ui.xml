@@ -88,8 +88,8 @@
 			color: #ffffff;
 			font-family: Geneva, Arial, Helvetica, sans-serif;
 			font-weight: bold;
-			font-size: 12px;
-			margin-top: 15px;
+			font-size: 14px;
+			margin-top: 8px;
 			margin-bottom: 5px;
 			text-decoration: underline;
 		}
@@ -98,7 +98,8 @@
 		.history-list {			
 			color: #ffffff;
 			font-family: Geneva, Arial, Helvetica, sans-serif;
-			font-size: 10px;
+			font-size: 14px;
+			font-style: italic;
 		}
 		
 		.player {
