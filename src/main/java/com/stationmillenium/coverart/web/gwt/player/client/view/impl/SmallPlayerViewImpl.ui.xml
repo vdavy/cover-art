@@ -13,25 +13,24 @@
 		/* Add CSS here. See the GWT docs on UI Binder for more details */
 		.background-player {
 			background-color: black;
-			margin-left: auto;
-			margin-right: auto;
+			cursor: pointer;
+			margin-left: 0px;
+			margin-top: 0px;
 		}
 		
 		.current-song-title {
 			font-weight: bold;
 			font-family: Geneva, Arial, Helvetica, sans-serif;
-			font-size: 15px;
+			font-size: 13px;
 			color: #ffffff;
-			/*margin-top: 35px;*/
 			padding-top: 5px;
 			padding-bottom: 3px;			
 		}
 		
 		.current-song {
 			font-family: Geneva, Arial, Helvetica, sans-serif;
-			font-size: 15px;
+			font-size: 13px;
 			color: #ffffff;
-			font-size: 15px;
 			font-style: italic;			
 		}
 		
@@ -53,10 +52,10 @@
 	</ui:style>
 	
 	<!-- Panel content -->
-	<g:FocusPanel ui:field="mainPanel" width="290px">
-		<g:VerticalPanel width="290px" styleName="{style.background-player}" horizontalAlignment="center">
+	<g:FocusPanel ui:field="mainPanel" width="275px" styleName="{style.background-player}">
+		<g:VerticalPanel width="275px" horizontalAlignment="center">
 			<g:Image resource="{res.logoSmallPlayer}"/>
-			<g:FlowPanel styleName="{style.current-song-block}" width="290px" height="50px">
+			<g:FlowPanel styleName="{style.current-song-block}" width="275px" height="50px">
 				<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement à l'antenne</ui:msg></g:Label>
 				<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
 			</g:FlowPanel>		
