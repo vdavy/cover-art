@@ -10,7 +10,11 @@
 								maxOccurs="1" />
 							<element name="title" type="string" minOccurs="0"
 								maxOccurs="1" />
-							<element name="playedDate" type="dateTime" minOccurs="0"
+							<element name="imagePath" type="string" minOccurs="0"
+								maxOccurs="1" />
+							<element name="imageWidth" type="string" minOccurs="0"
+								maxOccurs="1" />
+							<element name="imageHeight" type="string" minOccurs="0"
 								maxOccurs="1" />
 						</all>
 						<attribute name="available" type="boolean" />

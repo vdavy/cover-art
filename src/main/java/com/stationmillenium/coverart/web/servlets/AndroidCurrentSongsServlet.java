@@ -20,7 +20,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
+import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
 import com.stationmillenium.coverart.dto.services.history.SongHistoryItemDTO;
+import com.stationmillenium.coverart.dto.services.images.SongImageDTO;
+import com.stationmillenium.coverart.repositories.SongImageRepository;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.schema.androidcurrentsongs.AndroidCurrentSongs;
 import com.stationmillenium.coverart.schema.androidcurrentsongs.AndroidCurrentSongs.CurrentSong;
@@ -59,6 +62,14 @@ public class AndroidCurrentSongsServlet extends HttpServlet {
 	@Autowired
 	private SongItemRepository songItemRepository;
 		
+	//song image service
+	@Autowired
+	private SongImageRepository songImageRepository;
+		
+	//config
+	@Autowired
+	private GeneralPropertiesBean config;
+		
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		AndroidCurrentSongs androidCurrentSongs = initResponse(); //init response
@@ -83,6 +94,16 @@ public class AndroidCurrentSongsServlet extends HttpServlet {
 				&& (song.getArtist() != null) && (song.getTitle() != null)
 				&& (song.getArtist().length() > 0) && (song.getTitle().length() > 0)); 
 		
+		//image part
+		SongImageDTO image = null;
+		if (song != null) {
+			image = songImageRepository.getImageForSong(song); //get image
+			
+			if (image != null) {
+				image.setFileName(config.getCoverImagesPath() + "/" + image.getFileName()); //adjust path
+				mapper.map(image, androidCurrentSongs); //map image
+			}
+		}
 		//dozer conversion for current song
 		if (androidCurrentSongs.getCurrentSong().isAvailable()) 
 			mapper.map(song, androidCurrentSongs);

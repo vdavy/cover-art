@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.5-2 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2013.06.05 à 07:32:27 PM CEST 
+// Généré le : 2013.06.05 à 10:11:23 PM CEST 
 //
 
 
@@ -15,9 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -37,7 +35,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *                 &lt;all>
  *                   &lt;element name="artist" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *                   &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                   &lt;element name="playedDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *                   &lt;element name="imagePath" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *                   &lt;element name="imageWidth" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *                   &lt;element name="imageHeight" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *                 &lt;/all>
  *                 &lt;attribute name="available" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *               &lt;/restriction>
@@ -147,7 +147,9 @@ public class AndroidCurrentSongs {
      *       &lt;all>
      *         &lt;element name="artist" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
      *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *         &lt;element name="playedDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+     *         &lt;element name="imagePath" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+     *         &lt;element name="imageWidth" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+     *         &lt;element name="imageHeight" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
      *       &lt;/all>
      *       &lt;attribute name="available" type="{http://www.w3.org/2001/XMLSchema}boolean" />
      *     &lt;/restriction>
@@ -165,8 +167,9 @@ public class AndroidCurrentSongs {
 
         protected String artist;
         protected String title;
-        @XmlSchemaType(name = "dateTime")
-        protected XMLGregorianCalendar playedDate;
+        protected String imagePath;
+        protected String imageWidth;
+        protected String imageHeight;
         @XmlAttribute(name = "available")
         protected Boolean available;
 
@@ -219,27 +222,75 @@ public class AndroidCurrentSongs {
         }
 
         /**
-         * Obtient la valeur de la propriété playedDate.
+         * Obtient la valeur de la propriété imagePath.
          * 
          * @return
          *     possible object is
-         *     {@link XMLGregorianCalendar }
+         *     {@link String }
          *     
          */
-        public XMLGregorianCalendar getPlayedDate() {
-            return playedDate;
+        public String getImagePath() {
+            return imagePath;
         }
 
         /**
-         * Définit la valeur de la propriété playedDate.
+         * Définit la valeur de la propriété imagePath.
          * 
          * @param value
          *     allowed object is
-         *     {@link XMLGregorianCalendar }
+         *     {@link String }
          *     
          */
-        public void setPlayedDate(XMLGregorianCalendar value) {
-            this.playedDate = value;
+        public void setImagePath(String value) {
+            this.imagePath = value;
+        }
+
+        /**
+         * Obtient la valeur de la propriété imageWidth.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getImageWidth() {
+            return imageWidth;
+        }
+
+        /**
+         * Définit la valeur de la propriété imageWidth.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setImageWidth(String value) {
+            this.imageWidth = value;
+        }
+
+        /**
+         * Obtient la valeur de la propriété imageHeight.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getImageHeight() {
+            return imageHeight;
+        }
+
+        /**
+         * Définit la valeur de la propriété imageHeight.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setImageHeight(String value) {
+            this.imageHeight = value;
         }
 
         /**
