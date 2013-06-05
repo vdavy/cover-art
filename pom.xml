@@ -620,16 +620,18 @@
 					</execution>
 				</executions>
 				<configuration>
-					<schemaIncludes> --> 
+					<schemaIncludes>   -->
 						<!-- <include>xsd/LastFMTrackSearch.xsd</include> -->
 						<!-- <include>xsd/DeezerTrackSearch.xsd</include>-->
-						<!-- <include>xsd/CurrentSong.xsd</include>
-					</schemaIncludes>  -->
+						<!-- <include>xsd/CurrentSong.xsd</include> -->
+						<!-- <include>xsd/AndroidCurrentSongs.xsd</include> -->
+					<!-- </schemaIncludes> -->
 					<!-- <generatePackage>com.stationmillenium.coverart.schema.lastfmtracksearch</generatePackage> -->
 					<!-- <generatePackage>com.stationmillenium.coverart.schema.deezertracksearch</generatePackage> -->
-					<!-- <generatePackage>com.stationmillenium.coverart.schema.currentsong</generatePackage>
-				</configuration>
-			</plugin> 	  -->		
+					<!-- <generatePackage>com.stationmillenium.coverart.schema.currentsong</generatePackage> -->
+					<!-- <generatePackage>com.stationmillenium.coverart.schema.androidcurrentsongs</generatePackage> -->
+				<!-- </configuration>
+			</plugin> 	 		 -->
 		</plugins>
 	</build>
 	<artifactId>coverart</artifactId>

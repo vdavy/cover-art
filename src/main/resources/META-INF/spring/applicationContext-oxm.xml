@@ -17,5 +17,6 @@
 	<oxm:jaxb2-marshaller id="oxmLastFMTrackSearch" contextPath="com.stationmillenium.coverart.schema.lastfmtracksearch"/>
 	<oxm:jaxb2-marshaller id="oxmDeezerTrackSearch" contextPath="com.stationmillenium.coverart.schema.deezertracksearch"/>
 	<oxm:jaxb2-marshaller id="oxmCurrentSong" contextPath="com.stationmillenium.coverart.schema.currentsong"/>
+	<oxm:jaxb2-marshaller id="oxmAndroidCurrentSongs" contextPath="com.stationmillenium.coverart.schema.androidcurrentsongs"/>
 
 </beans>

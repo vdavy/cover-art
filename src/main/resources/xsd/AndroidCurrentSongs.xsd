@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.station-millenium.com/AndroidCurrentSongs" xmlns:tns="http://www.station-millenium.com/AndroidCurrentSongs" elementFormDefault="qualified">
+	<element name="androidCurrentSongs">
+		<complexType>
+			<all>
+				<element name="currentSong">
+					<complexType>
+						<all>
+							<element name="artist" type="string" minOccurs="0"
+								maxOccurs="1" />
+							<element name="title" type="string" minOccurs="0"
+								maxOccurs="1" />
+							<element name="playedDate" type="dateTime" minOccurs="0"
+								maxOccurs="1" />
+						</all>
+						<attribute name="available" type="boolean" />
+					</complexType>
+				</element>
+				<element name="last5Songs">
+					<complexType>
+						<sequence>
+							<element name="song" minOccurs="0" maxOccurs="5">
+								<complexType>
+									<sequence>
+										<element name="artist" type="string" minOccurs="0" maxOccurs="1" />
+										<element name="title" type="string" minOccurs="0" maxOccurs="1" />
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+			</all>
+		</complexType>
+	</element>
+</schema>
