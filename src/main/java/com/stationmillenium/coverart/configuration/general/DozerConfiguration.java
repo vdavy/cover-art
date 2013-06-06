@@ -128,9 +128,9 @@ public class DozerConfiguration {
 				
 				mapping(SongImageDTO.class, AndroidCurrentSongs.class, TypeMappingOptions.mapNull(),
 						TypeMappingOptions.mapEmptyString()).exclude("playedDate")
-						.fields("fileName", "currentSong.imagePath")
-						.fields("width", "currentSong.imageWidth")
-						.fields("height", "currentSong.imageHeight");
+						.fields("fileName", "currentSong.image.path")
+						.fields("width", "currentSong.image.width")
+						.fields("height", "currentSong.image.height");
 			}
 		};
 		

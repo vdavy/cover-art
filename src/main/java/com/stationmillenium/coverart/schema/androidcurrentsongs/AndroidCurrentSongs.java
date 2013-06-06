@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.5-2 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2013.06.05 à 10:11:23 PM CEST 
+// Généré le : 2013.06.06 à 09:38:47 PM CEST 
 //
 
 
@@ -35,9 +35,19 @@ import javax.xml.bind.annotation.XmlType;
  *                 &lt;all>
  *                   &lt;element name="artist" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *                   &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                   &lt;element name="imagePath" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                   &lt;element name="imageWidth" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                   &lt;element name="imageHeight" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *                   &lt;element name="image" minOccurs="0">
+ *                     &lt;complexType>
+ *                       &lt;complexContent>
+ *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                           &lt;all>
+ *                             &lt;element name="path" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *                             &lt;element name="width" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *                             &lt;element name="height" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *                           &lt;/all>
+ *                         &lt;/restriction>
+ *                       &lt;/complexContent>
+ *                     &lt;/complexType>
+ *                   &lt;/element>
  *                 &lt;/all>
  *                 &lt;attribute name="available" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *               &lt;/restriction>
@@ -147,9 +157,19 @@ public class AndroidCurrentSongs {
      *       &lt;all>
      *         &lt;element name="artist" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
      *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *         &lt;element name="imagePath" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *         &lt;element name="imageWidth" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *         &lt;element name="imageHeight" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+     *         &lt;element name="image" minOccurs="0">
+     *           &lt;complexType>
+     *             &lt;complexContent>
+     *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *                 &lt;all>
+     *                   &lt;element name="path" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+     *                   &lt;element name="width" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+     *                   &lt;element name="height" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+     *                 &lt;/all>
+     *               &lt;/restriction>
+     *             &lt;/complexContent>
+     *           &lt;/complexType>
+     *         &lt;/element>
      *       &lt;/all>
      *       &lt;attribute name="available" type="{http://www.w3.org/2001/XMLSchema}boolean" />
      *     &lt;/restriction>
@@ -167,9 +187,7 @@ public class AndroidCurrentSongs {
 
         protected String artist;
         protected String title;
-        protected String imagePath;
-        protected String imageWidth;
-        protected String imageHeight;
+        protected AndroidCurrentSongs.CurrentSong.Image image;
         @XmlAttribute(name = "available")
         protected Boolean available;
 
@@ -222,75 +240,27 @@ public class AndroidCurrentSongs {
         }
 
         /**
-         * Obtient la valeur de la propriété imagePath.
+         * Obtient la valeur de la propriété image.
          * 
          * @return
          *     possible object is
-         *     {@link String }
+         *     {@link AndroidCurrentSongs.CurrentSong.Image }
          *     
          */
-        public String getImagePath() {
-            return imagePath;
+        public AndroidCurrentSongs.CurrentSong.Image getImage() {
+            return image;
         }
 
         /**
-         * Définit la valeur de la propriété imagePath.
+         * Définit la valeur de la propriété image.
          * 
          * @param value
          *     allowed object is
-         *     {@link String }
+         *     {@link AndroidCurrentSongs.CurrentSong.Image }
          *     
          */
-        public void setImagePath(String value) {
-            this.imagePath = value;
-        }
-
-        /**
-         * Obtient la valeur de la propriété imageWidth.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
-         */
-        public String getImageWidth() {
-            return imageWidth;
-        }
-
-        /**
-         * Définit la valeur de la propriété imageWidth.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
-         */
-        public void setImageWidth(String value) {
-            this.imageWidth = value;
-        }
-
-        /**
-         * Obtient la valeur de la propriété imageHeight.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
-         */
-        public String getImageHeight() {
-            return imageHeight;
-        }
-
-        /**
-         * Définit la valeur de la propriété imageHeight.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
-         */
-        public void setImageHeight(String value) {
-            this.imageHeight = value;
+        public void setImage(AndroidCurrentSongs.CurrentSong.Image value) {
+            this.image = value;
         }
 
         /**
@@ -315,6 +285,112 @@ public class AndroidCurrentSongs {
          */
         public void setAvailable(Boolean value) {
             this.available = value;
+        }
+
+
+        /**
+         * <p>Classe Java pour anonymous complex type.
+         * 
+         * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+         * 
+         * <pre>
+         * &lt;complexType>
+         *   &lt;complexContent>
+         *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+         *       &lt;all>
+         *         &lt;element name="path" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+         *         &lt;element name="width" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+         *         &lt;element name="height" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+         *       &lt;/all>
+         *     &lt;/restriction>
+         *   &lt;/complexContent>
+         * &lt;/complexType>
+         * </pre>
+         * 
+         * 
+         */
+        @XmlAccessorType(XmlAccessType.FIELD)
+        @XmlType(name = "", propOrder = {
+
+        })
+        public static class Image {
+
+            protected String path;
+            protected String width;
+            protected String height;
+
+            /**
+             * Obtient la valeur de la propriété path.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getPath() {
+                return path;
+            }
+
+            /**
+             * Définit la valeur de la propriété path.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setPath(String value) {
+                this.path = value;
+            }
+
+            /**
+             * Obtient la valeur de la propriété width.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getWidth() {
+                return width;
+            }
+
+            /**
+             * Définit la valeur de la propriété width.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setWidth(String value) {
+                this.width = value;
+            }
+
+            /**
+             * Obtient la valeur de la propriété height.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getHeight() {
+                return height;
+            }
+
+            /**
+             * Définit la valeur de la propriété height.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setHeight(String value) {
+                this.height = value;
+            }
+
         }
 
     }

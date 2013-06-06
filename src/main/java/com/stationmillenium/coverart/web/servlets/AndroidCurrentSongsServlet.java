@@ -27,6 +27,7 @@ import com.stationmillenium.coverart.repositories.SongImageRepository;
 import com.stationmillenium.coverart.repositories.SongItemRepository;
 import com.stationmillenium.coverart.schema.androidcurrentsongs.AndroidCurrentSongs;
 import com.stationmillenium.coverart.schema.androidcurrentsongs.AndroidCurrentSongs.CurrentSong;
+import com.stationmillenium.coverart.schema.androidcurrentsongs.AndroidCurrentSongs.CurrentSong.Image;
 import com.stationmillenium.coverart.schema.androidcurrentsongs.AndroidCurrentSongs.Last5Songs;
 import com.stationmillenium.coverart.schema.androidcurrentsongs.AndroidCurrentSongs.Last5Songs.Song;
 import com.stationmillenium.coverart.services.PollingService;
@@ -36,7 +37,7 @@ import com.stationmillenium.coverart.services.PollingService;
  * @author vincent
  *
  */
-@WebServlet("/android/currentSong")
+@WebServlet("/android/currentSongs")
 @Configurable
 public class AndroidCurrentSongsServlet extends HttpServlet {
 
@@ -101,6 +102,7 @@ public class AndroidCurrentSongsServlet extends HttpServlet {
 			
 			if (image != null) {
 				image.setFileName(config.getCoverImagesPath() + "/" + image.getFileName()); //adjust path
+				androidCurrentSongs.getCurrentSong().setImage(new Image());
 				mapper.map(image, androidCurrentSongs); //map image
 			}
 		}

@@ -10,12 +10,18 @@
 								maxOccurs="1" />
 							<element name="title" type="string" minOccurs="0"
 								maxOccurs="1" />
-							<element name="imagePath" type="string" minOccurs="0"
-								maxOccurs="1" />
-							<element name="imageWidth" type="string" minOccurs="0"
-								maxOccurs="1" />
-							<element name="imageHeight" type="string" minOccurs="0"
-								maxOccurs="1" />
+							<element name="image" minOccurs="0" maxOccurs="1">
+								<complexType>
+									<all>
+										<element name="path" type="string" minOccurs="0"
+											maxOccurs="1" />
+										<element name="width" type="string" minOccurs="0"
+											maxOccurs="1" />
+										<element name="height" type="string" minOccurs="0"
+											maxOccurs="1" />
+									</all>
+								</complexType>
+							</element>
 						</all>
 						<attribute name="available" type="boolean" />
 					</complexType>
