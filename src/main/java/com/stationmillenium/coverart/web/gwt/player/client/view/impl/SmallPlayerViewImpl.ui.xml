@@ -35,14 +35,14 @@
 		}
 		
 		.current-song-block {
-			background-color: #ff2217;
+			background-color: #CC046B;
 			border-radius: 5px;
-			box-shadow: 0px 0px 3px #000000;
-			background-image: -moz-linear-gradient(top, #ff2217, #000000);
-			background-image: -ms-linear-gradient(top, #ff2217, #000000);
-			background-image: -o-linear-gradient(top, #ff2217, #000000);
-			background-image: -webkit-linear-gradient(top, #ff2217, #000000);
-			background-image: linear-gradient(top, #ff2217, #000000);
+			box-shadow: 0px 0px 3px #CFCCCE;
+			background-image: -moz-linear-gradient(top, #CC046B, #CFCCCE);
+			background-image: -ms-linear-gradient(top, #CC046B, #CFCCCE);
+			background-image: -o-linear-gradient(top, #CC046B, #CFCCCE);
+			background-image: -webkit-linear-gradient(top, #CC046B, #CFCCCE);
+			background-image: linear-gradient(top, #CC046B, #CFCCCE);
 			background-clip: padding-box;
 			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
 			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
