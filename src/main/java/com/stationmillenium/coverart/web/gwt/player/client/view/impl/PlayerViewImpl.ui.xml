@@ -37,14 +37,14 @@
 		}
 		
 		.current-song-block {
-			background-color: #ff2217;
+			background-color: #F70CA1;
 			border-radius: 5px;
 			box-shadow: 0px 0px 3px #000000;
-			background-image: -moz-linear-gradient(top, #ff2217, #000000);
-			background-image: -ms-linear-gradient(top, #ff2217, #000000);
-			background-image: -o-linear-gradient(top, #ff2217, #000000);
-			background-image: -webkit-linear-gradient(top, #ff2217, #000000);
-			background-image: linear-gradient(top, #ff2217, #000000);
+			background-image: -moz-linear-gradient(top, #F70CA1, #0A0A0A);
+			background-image: -ms-linear-gradient(top, #F70CA1, #0A0A0A);
+			background-image: -o-linear-gradient(top, #F70CA1, #0A0A0A);
+			background-image: -webkit-linear-gradient(top, #F70CA1, #0A0A0A);
+			background-image: linear-gradient(top, #F70CA1, #0A0A0A);
 			background-clip: padding-box;
 			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
 			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
@@ -64,15 +64,15 @@
 		}
 		
 		.history-panel {
-			background-color: #1f7eff;
+			background-color: #025DFA;
 			border: 2px solid #999999;
 			border-radius: 5px;
 			box-shadow: 0px 0px 3px #ffffff;
-			background-image: -moz-linear-gradient(top, #1f7eff, #000000);
-			background-image: -ms-linear-gradient(top, #1f7eff, #000000);
-			background-image: -o-linear-gradient(top, #1f7eff, #000000);
-			background-image: -webkit-linear-gradient(top, #1f7eff, #000000);
-			background-image: linear-gradient(top, #1f7eff, #000000);
+			background-image: -moz-linear-gradient(top, #025DFA, #0A0A0A);
+			background-image: -ms-linear-gradient(top, #025DFA, #0A0A0A);
+			background-image: -o-linear-gradient(top, #025DFA, #0A0A0A);
+			background-image: -webkit-linear-gradient(top, #025DFA, #0A0A0A);
+			background-image: linear-gradient(top, #025DFA, #0A0A0A);
 			background-clip: padding-box;
 			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
 			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
