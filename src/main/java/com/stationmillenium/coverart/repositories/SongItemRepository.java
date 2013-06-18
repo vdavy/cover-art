@@ -67,24 +67,23 @@ public class SongItemRepository {
 	/**
 	 * Remove the last recored song
 	 */
+	@Transactional
 	public void deleteLastRecordedSong() {
 		Query query = entityManager.createNamedQuery("getLastSong"); //create query
 		SongItem song = (SongItem) query.getSingleResult(); //Execute query and get entity
 		
 		//remove needed part
-		if (song.getPlayedTimes().size() > 0) {
-			boolean removeSong = song.getPlayedTimes().size() == 1;
-			SongHistory[] songHistories = new SongHistory[song.getPlayedTimes().size()];
-			song.getPlayedTimes().toArray(songHistories);
-			song.getPlayedTimes().remove(songHistories[0]);
-			song.merge();
-			songHistories[0].remove();
-			if (removeSong) //if only one played time
-				song.remove(); //remove the song
-			
-		} else
+		if (song.getPlayedTimes().size() > 1) {
+			SongHistory songHistory = (SongHistory) song.getPlayedTimes().toArray()[0];
+			songHistory.remove();
+		} else {
+			if (!song.getPlayedTimes().isEmpty()) { //if one history
+				SongHistory songHistory = (SongHistory) song.getPlayedTimes().toArray()[0];
+				songHistory.remove(); //remove history
+			}
 			song.remove(); //remove the song
-		
+		}
+
 	}
 	
 	/**
