@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.station-millenium.com/AndroidSearchSongsHistory" xmlns:tns="http://www.station-millenium.com/AndroidSearchSongsHistory" elementFormDefault="qualified">
+	<element name="androidSearchSongsHistory">
+		<complexType>
+			<sequence minOccurs="0" maxOccurs="unbounded">
+				<element name="historySong">
+					<complexType>
+						<all>
+							<element name="playedDate" type="string" />
+							<element name="artist" type="string" />
+							<element name="title" type="string" />
+							<element name="image" minOccurs="0" maxOccurs="1">
+								<complexType>
+									<all>
+										<element name="path" type="string" minOccurs="0"
+											maxOccurs="1" />
+										<element name="width" type="string" minOccurs="0"
+											maxOccurs="1" />
+										<element name="height" type="string" minOccurs="0"
+											maxOccurs="1" />
+									</all>
+								</complexType>
+							</element>
+						</all>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

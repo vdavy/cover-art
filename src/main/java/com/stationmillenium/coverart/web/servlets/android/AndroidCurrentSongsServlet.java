@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.web.servlets;
+package com.stationmillenium.coverart.web.servlets.android;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.stream.StreamResult;
 
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,6 +47,7 @@ public class AndroidCurrentSongsServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = LoggerFactory.getLogger(AndroidCurrentSongsServlet.class);
 	
 	//the polling service
 	@Autowired
@@ -81,6 +84,10 @@ public class AndroidCurrentSongsServlet extends HttpServlet {
 		//mashall output
 		oxmAndroidCurrentSongs.setSchema(new ClassPathResource("xsd/AndroidCurrentSongs.xsd")); 
 		oxmAndroidCurrentSongs.marshal(androidCurrentSongs, new StreamResult(resp.getWriter()));
+		
+		//final log
+		if (LOGGER.isDebugEnabled())
+			LOGGER.debug("Android current songs : " + androidCurrentSongs);
 	}
 
 	/**

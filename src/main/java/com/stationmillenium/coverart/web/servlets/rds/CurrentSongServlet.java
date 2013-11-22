@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.stationmillenium.coverart.web.servlets;
+package com.stationmillenium.coverart.web.servlets.rds;
 
 import java.io.IOException;
 

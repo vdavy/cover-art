@@ -86,4 +86,12 @@ privileged aspect GeneralPropertiesBean_Roo_JavaBean {
     public void GeneralPropertiesBean.setCustomImageMaxSize(int customImageMaxSize) {
         this.customImageMaxSize = customImageMaxSize;
     }
+    
+    public int GeneralPropertiesBean.getAndroidSuggestListLimit() {
+        return this.androidSuggestListLimit;
+    }
+    
+    public void GeneralPropertiesBean.setAndroidSuggestListLimit(int androidSuggestListLimit) {
+        this.androidSuggestListLimit = androidSuggestListLimit;
+    }
 }

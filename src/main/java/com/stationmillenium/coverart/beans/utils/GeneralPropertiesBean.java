@@ -64,5 +64,9 @@ public class GeneralPropertiesBean implements PropertyBeanInterface {
 	@Min(50)
 	@Max(200)
 	private int customImageMaxSize;
+	
+	@Min(1)
+	@Max(30)
+	private int androidSuggestListLimit;
 		
 }

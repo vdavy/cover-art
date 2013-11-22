@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.stationmillenium.coverart</groupId>
 	<packaging>war</packaging>
 	<version>0.1.0.BUILD-SNAPSHOT</version>
 	<properties>
 		<!-- roo version -->
-		<roo.version>1.2.3.RELEASE</roo.version>
+		<roo.version>1.2.4.RELEASE</roo.version>
 
 		<!-- spring part -->
-		<spring.version>3.2.1.RELEASE</spring.version>
-		<aspectj.version>1.7.2</aspectj.version>
+		<spring.version>3.2.4.RELEASE</spring.version>
+		<aspectj.version>1.7.4</aspectj.version>
 		<slf4j.version>1.7.2</slf4j.version>
-		<hibernate.version>4.2.0.Final</hibernate.version>
-		<hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
-		<hibernate.search.version>4.2.0.Final</hibernate.search.version>
-		<mysql-connector-java.version>5.1.24</mysql-connector-java.version>
-		<ehcache.version>2.6.5</ehcache.version>
+		<hibernate.version>4.2.7.Final</hibernate.version>
+		<hibernate.validator.version>5.0.1.Final</hibernate.validator.version>
+		<hibernate.search.version>4.4.0.Final</hibernate.search.version>
+		<mysql-connector-java.version>5.1.27</mysql-connector-java.version>
+		<ehcache.version>2.6.6</ehcache.version>
 
 		<!-- third parts -->
 		<log4j.version>1.2.17</log4j.version>
 		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
-		<validation-api.version>1.0.0.GA</validation-api.version>
+		<validation-api.version>1.1.0.Final</validation-api.version>
 		<cglib-nodep.version>2.2.2</cglib-nodep.version>
 		<jta.version>1.1</jta.version>
 		<jstl.version>1.2</jstl.version>
@@ -45,7 +44,8 @@
 		<servlet-api.version>1.0.2.Final</servlet-api.version>
 		<el-api.version>2.2</el-api.version>
 		<jsp-api.version>2.2</jsp-api.version>
-		<java.version>1.7</java.version><!-- java 1.7 not supported by aspectj 
+		<java.version>1.7</java.version>
+        <!-- java 1.7 not supported by aspectj 
 			compiler 1.4 -->
 
 		<!-- test framework -->
@@ -608,7 +608,7 @@
 				</configuration>
 			</plugin>
 			
-			<!-- JAX-B plugin for Last FM api class generation -->
+			<!-- JAX-B plugin for XSD class generation -->
 			<!-- <plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
@@ -620,18 +620,20 @@
 					</execution>
 				</executions>
 				<configuration>
-					<schemaIncludes>   -->
+					<schemaIncludes> -->
 						<!-- <include>xsd/LastFMTrackSearch.xsd</include> -->
 						<!-- <include>xsd/DeezerTrackSearch.xsd</include>-->
 						<!-- <include>xsd/CurrentSong.xsd</include> -->
 						<!-- <include>xsd/AndroidCurrentSongs.xsd</include> -->
+						<!-- <include>xsd/AndroidSearchSongsHistory.xsd</include> -->
 					<!-- </schemaIncludes> -->
 					<!-- <generatePackage>com.stationmillenium.coverart.schema.lastfmtracksearch</generatePackage> -->
 					<!-- <generatePackage>com.stationmillenium.coverart.schema.deezertracksearch</generatePackage> -->
 					<!-- <generatePackage>com.stationmillenium.coverart.schema.currentsong</generatePackage> -->
 					<!-- <generatePackage>com.stationmillenium.coverart.schema.androidcurrentsongs</generatePackage> -->
-				<!-- </configuration>
-			</plugin> 	 		 -->
+<!-- 					<generatePackage>com.stationmillenium.coverart.schema.androidsearchsongshistory</generatePackage> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> 	  -->
 		</plugins>
 	</build>
 	<artifactId>coverart</artifactId>

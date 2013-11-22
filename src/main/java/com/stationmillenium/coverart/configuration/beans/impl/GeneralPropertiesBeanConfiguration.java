@@ -31,6 +31,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private @Value("${generalConfiguration.fmAlertTimeout}") String fmAlertTimeout;
 	private @Value("${generalConfiguration.historySearchMaxResults}") String historySearchMaxResults;
 	private @Value("${generalConfiguration.customImageMaxSize}") String customImageMaxSize;
+	private @Value("${generalConfiguration.androidSuggestListLimit}") String androidSuggestListLimit;
 	
 	//instance vars
 	private int playlistUpdateTimeoutInt;
@@ -40,6 +41,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 	private int fmAlertTimeoutInt;
 	private int historySearchMaxResultsInt;
 	private int customImageMaxSizeInt;
+	private int androidSuggestListLimitInt;
 	
 	@Override
 	protected GeneralPropertiesBean buildBean() {
@@ -54,6 +56,7 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 		propertiesBean.setFmAlertTimeout(fmAlertTimeoutInt);
 		propertiesBean.setHistorySearchMaxResults(historySearchMaxResultsInt);
 		propertiesBean.setCustomImageMaxSize(customImageMaxSizeInt);
+		propertiesBean.setAndroidSuggestListLimit(androidSuggestListLimitInt);
 		return propertiesBean;
 	}
 	
@@ -99,6 +102,12 @@ public class GeneralPropertiesBeanConfiguration extends AbstractPropertiesBeanCo
 			customImageMaxSizeInt = Integer.parseInt(customImageMaxSize);
 		} catch(NumberFormatException e) {
 			throw new PropertyBeanException("customImageMaxSize", e);
+		}
+		
+		try { //convert androidSuggestListLimit into number
+			androidSuggestListLimitInt = Integer.parseInt(androidSuggestListLimit);
+		} catch(NumberFormatException e) {
+			throw new PropertyBeanException("androidSuggestListLimit", e);
 		}
 	}
 

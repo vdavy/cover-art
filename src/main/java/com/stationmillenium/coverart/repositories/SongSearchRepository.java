@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import org.apache.lucene.search.Query;
 import org.dozer.Mapper;
 import org.hibernate.search.MassIndexer;
+import org.hibernate.search.errors.EmptyQueryException;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
@@ -113,16 +114,22 @@ public class SongSearchRepository {
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager); //get full text entity manager
 		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
 
-		//make query
-		Query query = queryBuilder.keyword()
-				.fuzzy()
-				.withThreshold(0.8f)			
-				.withPrefixLength(3)
-				.onField(fieldName)
-				.matching(keywords)
-				.createQuery();
-		
-		return processFullTextQuery(fullTextEntityManager, query, maxResults);
+		try  {
+			//make query
+			Query query = queryBuilder.keyword()
+					.fuzzy()
+					.withThreshold(0.8f)			
+					.withPrefixLength(3)
+					.onField(fieldName)
+					.matching(keywords)
+					.createQuery();
+
+			return processFullTextQuery(fullTextEntityManager, query, maxResults);
+			
+		} catch(EmptyQueryException e) { //protect agasint empty query or reserved keyword
+			LOGGER.warn("Empty query exception detected", e);
+			return  new ArrayList<>(); 
+		}
 	}
 	
 	/**
@@ -136,13 +143,19 @@ public class SongSearchRepository {
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager); //get full text entity manager
 		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
 
-		//make query
-		Query query = queryBuilder.keyword()
-				.onFields("artist", "title")
-				.matching(keywords)
-				.createQuery();
-		
-		return processFullTextQuery(fullTextEntityManager, query, maxResults);
+		try {
+			//make query
+			Query query = queryBuilder.keyword()
+					.onFields("artist", "title")
+					.matching(keywords)
+					.createQuery();
+			
+			return processFullTextQuery(fullTextEntityManager, query, maxResults);
+			
+		} catch(EmptyQueryException e) { //protect agasint empty query or reserved keyword
+			LOGGER.warn("Empty query exception detected", e);
+			return  new ArrayList<>(); 
+		}
 	}
 
 	/**
@@ -198,11 +211,18 @@ public class SongSearchRepository {
 		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
 
 		//make query
-		Query query = queryBuilder.keyword()
+		Query query = null;
+		try {
+			query = queryBuilder.keyword()
 				.fuzzy()
 				.onFields("artist", "title")
 				.matching(keywords)
 				.createQuery();
+		} catch(EmptyQueryException e) { //protect agasint empty query or reserved keyword
+			LOGGER.warn("Empty query exception detected", e);
+			return  new ArrayList<>(); 
+		}
+		
 		FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(query, SongItem.class); //create query
 		fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID);
 		if (maxResults > 0)
@@ -235,7 +255,9 @@ public class SongSearchRepository {
 		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(SongItem.class).get(); //query builder
 
 		//make query
-		Query query = queryBuilder.bool().should(
+		Query query = null;
+		try {
+			query = queryBuilder.bool().should(
 					queryBuilder.keyword().fuzzy()
 					.onFields("artist", "title")
 					.matching(keywords).createQuery())
@@ -244,6 +266,11 @@ public class SongSearchRepository {
 						onField("customImage").
 						matching(includeCustomImage).createQuery())
 				.createQuery();
+		} catch(EmptyQueryException e) { //protect agasint empty query or reserved keyword
+			LOGGER.warn("Empty query exception detected", e);
+			return  new ArrayList<>(); 
+		}
+		
 		FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(query, SongItem.class); //create query
 		fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID);
 		if (maxResults > 0)
