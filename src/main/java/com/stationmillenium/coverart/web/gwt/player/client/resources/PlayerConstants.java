@@ -16,7 +16,7 @@ public interface PlayerConstants extends Constants {
 	@DefaultStringValue("Player Millenium")
 	String getWindowTitle();
 	
-	@DefaultStringValue("Indisponible")
+	@DefaultStringValue("Station Millenium")
 	String songUnaivalaible();
 	
 	@DefaultStringArrayValue({"http://www.station-millenium.com/millenium.mp3", "http://www.station-millenium.com/millenium.ogg"})
