@@ -69,4 +69,8 @@ public class GeneralPropertiesBean implements PropertyBeanInterface {
 	@Max(30)
 	private int androidSuggestListLimit;
 		
+	@Min(1)
+	@Max(10)
+	private int historyMaxTimesCountInt;
+	
 }

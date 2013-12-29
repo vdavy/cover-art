@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
 import com.stationmillenium.coverart.domain.history.SongHistory;
 import com.stationmillenium.coverart.domain.history.SongHistoryImage;
 import com.stationmillenium.coverart.domain.history.SongItem;
@@ -52,6 +53,10 @@ public class SongSearchRepository {
 	//dozer
 	@Autowired
 	private Mapper mapper;
+	
+	//config
+	@Autowired
+	private GeneralPropertiesBean config;
 	
 	/**
 	 * Launch async indexing
@@ -177,6 +182,9 @@ public class SongSearchRepository {
 		//mapping
 		List<SongHistoryItemImageDTO> resultsList = new ArrayList<>(); //return list
 		for (SongItem song : songList) {
+			int timesCount = 1;
+			SongHistoryImage image = song.getImage(); //do not reload the image each time
+			
 			for (SongHistory history : song.getPlayedTimes()) {
 				//fill item
 				SongHistoryItemImageDTO	item = new SongHistoryItemImageDTO();
@@ -185,7 +193,6 @@ public class SongSearchRepository {
 				item.getSongHistoryItemDTO().setPlayedDate(history.getPlayedDate());
 				
 				//image
-				SongHistoryImage image = song.getImage();
 				if (image != null) {
 					item.getSongImageDTO().setFileName(image.getFileName());
 					item.getSongImageDTO().setHeight(image.getHeight());
@@ -193,7 +200,14 @@ public class SongSearchRepository {
 				}
 				
 				//add to return list
-				resultsList.add(item);
+				resultsList.add(item);	
+				
+				//do we reach the max time count? 
+				if (timesCount < config.getHistoryMaxTimesCountInt()) //no, increase and continue
+					timesCount++;
+				else //stop and exit
+					break;
+				
 			}
 		}				
 		

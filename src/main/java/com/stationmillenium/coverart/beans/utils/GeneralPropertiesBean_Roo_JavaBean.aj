@@ -94,4 +94,12 @@ privileged aspect GeneralPropertiesBean_Roo_JavaBean {
     public void GeneralPropertiesBean.setAndroidSuggestListLimit(int androidSuggestListLimit) {
         this.androidSuggestListLimit = androidSuggestListLimit;
     }
+    
+    public int GeneralPropertiesBean.getHistoryMaxTimesCountInt() {
+        return this.historyMaxTimesCountInt;
+    }
+    
+    public void GeneralPropertiesBean.setHistoryMaxTimesCountInt(int historyMaxTimesCountInt) {
+        this.historyMaxTimesCountInt = historyMaxTimesCountInt;
+    }
 }
