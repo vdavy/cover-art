@@ -67,11 +67,11 @@ public class AlertActivationRequestFactoryEntity {
     	alertActivation.setEnableAlert(enableAlert);
     }
     
+    @NotNull(message = "{validation.notNull}")
     public AlertType getAlertType() {
         return alertActivation.getAlertType();
     }
     
-    @NotNull(message = "{validation.notNull}")
     public void setAlertType(AlertType alertType) {
     	alertActivation.setAlertType(alertType);
     }
