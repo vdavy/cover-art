@@ -123,13 +123,17 @@ public class PollingService {
 			//set current song
 			if ((songHistoryList.size() > 0) && (songHistoryList.get(0) != null)) {
 				try {
-					currentSong = songHistoryList.get(0).clone(); //set current song
+					//set current song
+					if (songFilter.checkNoForbiddenKeywords(songHistoryList.get(0))) //check if the song is allowed
+						currentSong = songHistoryList.get(0).clone(); //set current song
+					else 
+						currentSong = null;
 					
 					//check playlist update timeout
 					Calendar timeoutCalendar = Calendar.getInstance();
 					timeoutCalendar.add(Calendar.MINUTE, -config.getPlaylistUpdateTimeout());
 					
-					if (timeoutCalendar.before(currentSong.getPlayedDate())) { //check playlist update
+					if (timeoutCalendar.before(songHistoryList.get(0).getPlayedDate())) { //check playlist update
 						//record playlist updated
 						boolean sendAlert = statusRepository.recordPlaylistUpdated();
 						if (sendAlert)
@@ -145,17 +149,20 @@ public class PollingService {
 						boolean sendAlert = statusRepository.recordPlaylistUpdateTimeout();
 						if (sendAlert)
 							alertService.sendActiveAlert(AlertType.PLAYLIST);
-						LOGGER.warn("Playlist not updated in timeout");						
+						LOGGER.warn("Playlist not updated in timeout");		
+						currentSong = null; //no song to display
 						return new ArrayList<>(); //return empty list
 					}					
 					
 				} catch (CloneNotSupportedException e) { //error during cloning
 					LOGGER.error("Error during current song notification", e);
+					currentSong = null; //no song to display
 					return new ArrayList<>(); //return empty list
 				}		
 				
 			} else {
 				LOGGER.warn("Playlist empty");		
+				currentSong = null; //no song to display
 				return new ArrayList<>(); //return empty list
 			}
 			
@@ -173,6 +180,7 @@ public class PollingService {
 				}					
 			}						
 
+			currentSong = null; //no song to display
 			return new ArrayList<>(); //return empty list
 		}
 	}

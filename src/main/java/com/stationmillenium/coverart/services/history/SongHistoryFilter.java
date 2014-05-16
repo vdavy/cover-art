@@ -51,17 +51,7 @@ public class SongHistoryFilter {
 		
 		//for each item of the list		
 		for (int i = 0 ; i < songHistoryList.size(); i++) {
-			boolean canBeAdded = true; //we suppose item can be added
-			for (String keyword : config.getForbiddenKeywords()) { //for each forbidden kewyord
-				if ((songHistoryList.get(i).getTitle().equals("")) //if title empty
-						|| (songHistoryList.get(i).getArtist().equals("")) //if artist empty
-						|| (songHistoryList.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase())) //if title contains forbidden keyword
-						|| (songHistoryList.get(i).getArtist().toLowerCase().contains(keyword.toLowerCase()))) { //or artist name
- 					canBeAdded = false; //rejected
- 					LOGGER.debug("Song rejected due to forbidden keywords : " + songHistoryList.get(i));
- 					break;
-				}
-			}
+			boolean canBeAdded = checkNoForbiddenKeywords(songHistoryList.get(i));
 			
 			//if not minimal length
 			long timeDelta = 0;
@@ -83,6 +73,26 @@ public class SongHistoryFilter {
 		
 		LOGGER.debug("Final list : " + filteredSongHistoryList);
 		return filteredSongHistoryList;
+	}
+
+	/**
+	 * Check if a song does not contains forbidden keywords
+	 * @param song the song as {@link SongHistoryItemDTO}
+	 * @return <code>true</code> if song is OK, <code>false</code> if not
+	 */
+	public boolean checkNoForbiddenKeywords(SongHistoryItemDTO song) {
+		boolean canBeAdded = true; //we suppose item can be added
+		for (String keyword : config.getForbiddenKeywords()) { //for each forbidden kewyord
+			if ((song.getTitle().equals("")) //if title empty
+					|| (song.getArtist().equals("")) //if artist empty
+					|| (song.getTitle().toLowerCase().contains(keyword.toLowerCase())) //if title contains forbidden keyword
+					|| (song.getArtist().toLowerCase().contains(keyword.toLowerCase()))) { //or artist name
+				canBeAdded = false; //rejected
+				LOGGER.debug("Song rejected due to forbidden keywords : " + song);
+				break;
+			}
+		}
+		return canBeAdded;
 	}
 	
 	/**

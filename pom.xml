@@ -28,7 +28,7 @@
 		<joda-time.version>2.0</joda-time.version>
 		<jsoup.version>1.7.2</jsoup.version>
 		<dozer.version>5.4.0</dozer.version>
-		<gwt.version>2.6.0</gwt.version>
+		<gwt.version>2.6.1</gwt.version>
 		<poi.version>3.9</poi.version>
 		<common-fileupload.version>1.3</common-fileupload.version>
 		<imgscalr.version>4.2</imgscalr.version>
