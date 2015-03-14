@@ -10,6 +10,8 @@ import com.stationmillenium.coverart.web.gwt.player.client.activities.SmallPlaye
 import com.stationmillenium.coverart.web.gwt.player.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.player.client.events.AddTrackerEvent;
 import com.stationmillenium.coverart.web.gwt.player.client.events.AddTrackerEvent.AddTrackerEventHandler;
+import com.stationmillenium.coverart.web.gwt.player.client.events.InitPlayerEvent;
+import com.stationmillenium.coverart.web.gwt.player.client.events.InitPlayerEvent.InitPlayerEventHandler;
 import com.stationmillenium.coverart.web.gwt.player.client.events.UpdateHistoryListEvent;
 import com.stationmillenium.coverart.web.gwt.player.client.events.UpdateHistoryListEvent.UpdateHistoryListEventHandler;
 import com.stationmillenium.coverart.web.gwt.player.client.events.UpdatePlayerEvent;
@@ -22,7 +24,7 @@ import com.stationmillenium.coverart.web.gwt.player.client.events.UpdateSmallPla
  * @author vincent
  *
  */
-public class PlayerEventsHandler implements UpdatePlayerEventHandler, UpdateHistoryListEventHandler, AddTrackerEventHandler, UpdateSmallPlayerEventHandler {
+public class PlayerEventsHandler implements UpdatePlayerEventHandler, UpdateHistoryListEventHandler, AddTrackerEventHandler, UpdateSmallPlayerEventHandler, InitPlayerEventHandler {
 
 	//log
 	private static final Logger LOGGER = Logger.getLogger(PlayerEventsHandler.class.getName());
@@ -40,11 +42,13 @@ public class PlayerEventsHandler implements UpdatePlayerEventHandler, UpdateHist
 		playerPresenter = clientFactory.getPlayerActivity();
 		smallPlayerPresenter = clientFactory.getSmallPlayerActivity();
 		
+		
 		//register event
 		clientFactory.getEventBus().addHandler(UpdatePlayerEvent.TYPE, this);
 		clientFactory.getEventBus().addHandler(UpdateHistoryListEvent.TYPE, this);
 		clientFactory.getEventBus().addHandler(AddTrackerEvent.TYPE, this);
 		clientFactory.getEventBus().addHandler(UpdateSmallPlayerEvent.TYPE, this);
+		clientFactory.getEventBus().addHandler(InitPlayerEvent.TYPE, this);
 	}
 	
 	@Override
@@ -69,6 +73,12 @@ public class PlayerEventsHandler implements UpdatePlayerEventHandler, UpdateHist
 	public void onUpdateSmallPlayer(UpdateSmallPlayerEvent event) {
 		LOGGER.fine("Update small player event received");
 		smallPlayerPresenter.updateSmallPlayer();
+	}
+	
+	@Override
+	public void initPlayer() {
+		LOGGER.fine("Init player event received");
+		playerPresenter.insertPlayer();
 	}
 	
 }

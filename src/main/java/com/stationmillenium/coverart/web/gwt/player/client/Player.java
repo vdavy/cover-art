@@ -7,15 +7,18 @@ import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.web.bindery.event.shared.EventBus;
 import com.stationmillenium.coverart.web.gwt.player.client.clientfactory.ClientFactory;
 import com.stationmillenium.coverart.web.gwt.player.client.events.AddTrackerEvent;
+import com.stationmillenium.coverart.web.gwt.player.client.events.InitPlayerEvent;
 import com.stationmillenium.coverart.web.gwt.player.client.events.UpdatePlayerEvent;
 import com.stationmillenium.coverart.web.gwt.player.client.events.UpdateSmallPlayerEvent;
 import com.stationmillenium.coverart.web.gwt.player.client.mvp.PlayerActivityMapper;
@@ -77,6 +80,12 @@ public class Player implements EntryPoint {
 	    	setupSmallPlayerScheduledTimer();
 	    }
 	    
+	    //init the player
+	    Scheduler.get().scheduleDeferred(new Command() {
+	        public void execute() {
+	        	clientFactory.getEventBus().fireEvent(new InitPlayerEvent());			
+	        }
+	    });
 	}
 
 	/**

@@ -29,4 +29,7 @@ public interface PlayerResources extends ClientBundle {
 	@Source("smallPlayer.js")
 	TextResource smallPlayerJS();
 	
+	@Source("player-muses.js")
+	TextResource playerMusesJS();
+	
 }

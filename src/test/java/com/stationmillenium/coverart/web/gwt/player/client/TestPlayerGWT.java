@@ -41,12 +41,4 @@ public class TestPlayerGWT extends GWTTestCase {
 		playerActivity.updateHistoryList(false);
 	}
 	
-	/**
-	 * Test player update
-	 */
-	public void testStreamURLs() {
-		ClientFactory clientFactory = GWT.create(ClientFactory.class);
-		String[] urls = new PlayerActivity(clientFactory).getStreamURLs();
-		assertTrue(urls.length != 0);
-	}
 }

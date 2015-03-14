@@ -8,14 +8,11 @@ import java.util.logging.Logger;
 
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.media.client.Audio;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -51,15 +48,16 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 
 	//data provider
 	ListDataProvider<String> dataProvider = new ListDataProvider<String>();
-	
-	//audio tag
-	private Audio audioTag;
+
+	private ClientFactory clientFactory;
 	
 	/**
 	 * Create a new {@link PlayerViewImpl}
 	 * @param clientFactory the client factory
 	 */
 	public PlayerViewImpl(ClientFactory clientFactory) {		
+		this.clientFactory = clientFactory;
+		
 		//init celle list
 		songList = new CellList<String>(new TextCell());
 		final SingleSelectionModel<String> ssm =  new SingleSelectionModel<String>();
@@ -75,56 +73,22 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 
 		//init ui binder
 		initWidget(uiBinder.createAndBindUi(this));
-		
-		//add html5 player if supported
-		if (Audio.isSupported()) {
-			createAudioPlayer(clientFactory);
-		}		
 	}
-
+	
+	@Override
+	public void insertPlayer() {
+		//add piwik tracking code
+		String jsCode = clientFactory.getResources().playerMusesJS().getText();
+		ScriptInjector.fromString(jsCode).inject();
+		insertPlayerJavascript();
+	}
+	
 	/**
-	 * Create the audio player
-	 * @param clientFactory the client factory
+	 * Insert player - javascript part
 	 */
-	private void createAudioPlayer(final ClientFactory clientFactory) {
-		LOGGER.info("Audio tag supported"); 
-		
-		//create it
-		audioTag = Audio.createIfSupported();
-		audioTag.setLoop(true);
-		audioTag.setControls(true);
-		audioTag.setAutoplay(true);
-		audioTag.setWidth("280px");
-		audioTag.setVolume(1);
-		audioTag.addClickHandler(new ClickHandler() { //handle 	pause click
-			@Override
-			public void onClick(ClickEvent event) {
-				Timer timer = new Timer() {						
-					@Override
-					public void run() {
-						if (audioTag.isPaused()) { //if player pause
-							String currentSrc = audioTag.getCurrentSrc(); //get current src
-							audioTag.setSrc(""); //set empty src to stop player
-							audioTag.setAutoplay(false); //disable autoplay		
-							audioTag.setPreload("none"); //no buffering
-							audioTag.setSrc(currentSrc); //reset src								
-							LOGGER.fine("Player reset src");							
-						}							
-					}
-				};
-				timer.schedule(1000); //call 500ms later, for player to pause
-			}
-		});
-
-		for (String url : clientFactory.getConstants().streamURLs()) { //add sources
-			audioTag.addSource(url);
-			LOGGER.fine("Source added : " + url);
-		}
-		
-		//add to dom
-		player.clear();
-		player.add(audioTag);
-	}
+	private native void insertPlayerJavascript() /*-{
+		$wnd.insertPlayer();
+	}-*/;
 
 	@Override
 	public void setCurrentSong(String currentSong) {
@@ -141,15 +105,6 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 	@Override
 	public void setSongHistoryList(List<String> historyList) {
 		dataProvider.setList(historyList);
-	}
-	
-	@Override
-	public boolean isMp3Stream() {
-		if (audioTag != null) {
-			String audioURL = audioTag.getCurrentSrc();
-			return ((audioURL != null) && (audioURL.contains("mp3")));
-		} else
-			return true;
 	}
 	
 }

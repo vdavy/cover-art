@@ -36,10 +36,9 @@ public interface PlayerViewInterface extends IsWidget {
 	public void setSongHistoryList(List<String> historyList);
 	
 	/**
-	 * Return <code>true</code> if mp3 stream is currently played, <code>false</code> means ogg
-	 * @return <code>true</code> if mp3 stream is currently played, <code>false</code> means ogg
+	 * Insert the player
 	 */
-	public boolean isMp3Stream();
+	public void insertPlayer();
 	
 	/**
 	 * Player view presenter interface
@@ -58,17 +57,17 @@ public interface PlayerViewInterface extends IsWidget {
 		 * @param displayLastSong if need to display last played song
 		 */
 		public void updateHistoryList(boolean displayLastSong);
-		
-		/**
-		 * Return the list of stream URL
-		 * @return URL as array
-		 */
-		public String[] getStreamURLs();
-		
+			
 		/**
 		 * Add the tracker code
 		 */
 		public void addTrackerCode();
+		
+		/**
+		 * Insert the JS player 
+		 * 
+		 */
+		public void insertPlayer();
 				
 	}
 	

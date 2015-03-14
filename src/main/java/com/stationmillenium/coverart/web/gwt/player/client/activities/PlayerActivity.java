@@ -155,27 +155,26 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 			inError = true;			
 		}
 	}
-
-	@Override
-	public String[] getStreamURLs() {
-		return clientFactory.getConstants().streamURLs();
-	}
 	
 	@Override
 	public void addTrackerCode() {
 		//add piwik tracking code
 		String jsCode = clientFactory.getResources().piwikJS().getText();
-		ScriptInjector.fromString(jsCode).inject();
-		int trackerID =  (clientFactory.getPlayerView().isMp3Stream()) ? 2 : 3;
-		sendTracking(trackerID);
-		LOGGER.fine("Tracker ID : " + trackerID);
+		ScriptInjector.fromString(jsCode).inject();		
+		sendTracking();
+		LOGGER.fine("Tracker sent");
 	}
 	
 	/**
 	 * Send a Piwik tracker goal with JSNI
-	 * @param id the id of the goal
 	 */
-	private native void sendTracking(int id) /*-{
+	private native void sendTracking() /*-{
 		$wnd.sendTrackingID(id);
 	}-*/;
+	
+	@Override
+	public void insertPlayer() {
+		clientFactory.getPlayerView().insertPlayer();
+	}
+
 }

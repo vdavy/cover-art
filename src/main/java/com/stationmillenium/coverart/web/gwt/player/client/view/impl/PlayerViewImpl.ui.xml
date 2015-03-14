@@ -133,11 +133,7 @@
 					<g:FlowPanel ui:field="player" width="290px" styleName="{style.player}">
 						<!-- flash player removed if html5 supported -->
 						<g:HTMLPanel >
-							<object type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3.swf" width="200" height="20">
-							    <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3.swf" />
-							    <param name="bgcolor" value="#000000" />
-							    <param name="FlashVars" value="mp3=http%3A//www.station-millenium.com/millenium.mp3&amp;loop=1&amp;autoplay=1&amp;showstop=1&amp;bgcolor=000000&amp;bgcolor1=fa2e00" />
-							</object>		
+							<div id="museplayer"></div>		
 						</g:HTMLPanel> 
 					</g:FlowPanel>		
 				</g:VerticalPanel>
