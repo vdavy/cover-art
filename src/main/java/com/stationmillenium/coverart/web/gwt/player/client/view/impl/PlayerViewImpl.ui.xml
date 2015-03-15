@@ -143,13 +143,13 @@
 		<g:DockLayoutPanel unit="PX" width="500px" height="145px">
 			<g:center>
 				<g:FlowPanel styleName="{style.history-panel}" width="480px">
-					<g:Label styleName="{style.history-title}"><ui:msg>5 derniers titres</ui:msg></g:Label>
+					<g:Label styleName="{style.history-title}"><ui:msg>Les 5 derniers titres :</ui:msg></g:Label>
 					<c:CellList rowCount="5" ui:field="songList" width="450px" height="120px" styleName="{style.history-list}"/>
 				</g:FlowPanel>
 			</g:center>
 			<g:south size="15">
 				<g:VerticalPanel verticalAlignment="bottom" horizontalAlignment="right" width="490px">
-					<g:Label styleName="{style.bottom-label}"><ui:msg>Player Millenium HTML5 by Vince</ui:msg></g:Label>
+					<g:Label styleName="{style.bottom-label}"><ui:msg>Player Millenium by Vince</ui:msg></g:Label>
 				</g:VerticalPanel>
 			</g:south>			
 		</g:DockLayoutPanel>		

@@ -9,10 +9,12 @@ import java.util.logging.Logger;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.ScriptInjector;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.cellview.client.CellList.Style;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -55,11 +57,20 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 	 * Create a new {@link PlayerViewImpl}
 	 * @param clientFactory the client factory
 	 */
-	public PlayerViewImpl(ClientFactory clientFactory) {		
+	public PlayerViewImpl(final ClientFactory clientFactory) {		
 		this.clientFactory = clientFactory;
 		
 		//init celle list
-		songList = new CellList<String>(new TextCell());
+		songList = new CellList<String>(new TextCell(), new CellList.Resources() {
+			@Override
+			public ImageResource cellListSelectedBackground() {
+				return null;
+			}			
+			@Override
+			public Style cellListStyle() {
+				return (Style) clientFactory.getResources().emptyCellList();
+			}
+		});
 		final SingleSelectionModel<String> ssm =  new SingleSelectionModel<String>();
 		ssm.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {			
 			@Override
