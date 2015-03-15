@@ -605,6 +605,7 @@
 				</executions>
 				<configuration>
 					<extraParam>true</extraParam>
+					<failOnError>true</failOnError>
 				</configuration>
 			</plugin>
 			

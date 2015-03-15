@@ -19,4 +19,13 @@ public interface PlayerConstants extends Constants {
 	@DefaultStringValue("Station Millenium")
 	String songUnaivalaible();
 	
+	@DefaultStringValue("http://www.station-millenium.com/cetait-quoi-ce-titre/")
+	String lastSongsURL();
+	
+	@DefaultStringValue("http://www.station-millenium.com/radio/grille-des-programmes/")
+	String programScheduleURL();
+	
+	@DefaultStringValue("http://www.station-millenium.com/formulaire-de-contact/")
+	String contactURL();
+	
 }

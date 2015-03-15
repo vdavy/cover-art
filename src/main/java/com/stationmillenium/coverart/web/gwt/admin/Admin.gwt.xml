@@ -15,7 +15,6 @@
   	<!-- source path -->
 	<source path="client"/>
 	<source path="shared"/>
-	<source path="server"/>
 	
 	<!-- Use ClientFactoryImpl by default -->
     <replace-with class="com.stationmillenium.coverart.web.gwt.admin.client.clientfactory.ClientFactoryImpl">

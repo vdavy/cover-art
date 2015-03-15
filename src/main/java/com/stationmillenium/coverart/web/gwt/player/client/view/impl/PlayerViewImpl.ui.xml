@@ -9,13 +9,22 @@
     <ui:with type="com.stationmillenium.coverart.web.gwt.player.client.resources.PlayerResources" field="res" />
     
     <!-- Style -->
+    <ui:image field="backgroundPlayerImage" src="../../resources/images/background-player.png" />
 	<ui:style>
 		/* Add CSS here. See the GWT docs on UI Binder for more details */
-		.background-player {
+		@sprite .background-player {
+			gwt-image: "backgroundPlayerImage";
 			background-color: black;
-			padding-top: 10px;
 			margin-left: auto;
 			margin-right: auto;
+		}
+		
+		.top-text {
+			font-weight: bold;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 13px;
+			color: #ffffff;	
+			cursor: pointer;
 		}
 		
 		.current-song-title {
@@ -26,8 +35,8 @@
 			margin-top: 35px;
 			padding-top: 5px;
 			padding-bottom: 3px;			
-		}
-		
+		}		
+				
 		.current-song {
 			font-family: Geneva, Arial, Helvetica, sans-serif;
 			font-size: 15px;
@@ -114,9 +123,30 @@
 		}
 	</ui:style>
 	
+	
 	<!-- Panel content -->
 	<g:VerticalPanel width="520px" height="480px" styleName="{style.background-player}" horizontalAlignment="center">
-		<g:Image resource="{res.logoPlayerLive}"/>
+		<g:AbsolutePanel width="520px" height="150px">
+			<g:at left="0" top="10">
+	    		<g:Image resource="{res.topWave}"/>
+	   		</g:at>	   	
+			<g:at left="20" top="10">
+	    		<g:Image resource="{res.liveButton}"/>
+	   		</g:at>				
+	   		<g:at left="84" top="100">
+	    		<g:Image resource="{res.logoPlayerLive}"/>
+	   		</g:at>	   		
+	   		<g:at left="187" top="10">
+	   			<g:Label ui:field="lastTitleLabel" styleName="{style.top-text}" width="75px"><ui:msg>DERNIERS TITRES</ui:msg></g:Label>
+	   		</g:at>	   	
+	   		<g:at left="285" top="10">
+	   			<g:Label ui:field="programScheduleLabel" styleName="{style.top-text}" width="100px"><ui:msg>GRILLE DES PROGRAMMES</ui:msg></g:Label>
+	   		</g:at>	  	
+	   		<g:at left="405" top="10">
+	   			<g:Label ui:field="contactLabel" styleName="{style.top-text}" width="90px"><ui:msg>PROBLEMES D'ECOUTE ?</ui:msg></g:Label>
+	   		</g:at>	  		  	
+		</g:AbsolutePanel>
+		
 		<g:DockLayoutPanel unit="PX" width="500px" height="180px" styleName="{style.player-image-block}">
 			<g:west size="200">
 				<g:SimplePanel width="200" height="200" styleName="{style.image}">

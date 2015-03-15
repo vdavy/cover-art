@@ -8,8 +8,8 @@ $wnd.insertPlayer = function() {
 	'buffering':5,
 	'title':'Station Millenium',
 	'welcome':'Hits %26 Mix',
-	'bgcolor':'#000000',
 	'skin':'faredirfare',
+	'wmode':'transparent',
 	'width':269,
 	'height':52,
 	'elementId': 'museplayer'	

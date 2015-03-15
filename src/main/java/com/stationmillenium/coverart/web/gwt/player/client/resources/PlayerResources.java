@@ -15,25 +15,31 @@ import com.google.gwt.user.cellview.client.CellList;
  */
 public interface PlayerResources extends ClientBundle {
 
-	@Source("logo-millenium.png")
+	@Source("images/logo-millenium.png")
 	ImageResource logoMillenium();
 
-	@Source("logo-player-live.png")
+	@Source("images/logo-player-live.png")
 	ImageResource logoPlayerLive();
 	
-	@Source("logo-small-player.png")
+	@Source("images/logo-small-player.png")
 	ImageResource logoSmallPlayer();
 	
-	@Source("piwik.js")
+	@Source("images/live-button.png")
+	ImageResource liveButton();
+	
+	@Source("images/top-wave.png")
+	ImageResource topWave();
+	
+	@Source("js/piwik.js")
 	TextResource piwikJS();
 	
-	@Source("smallPlayer.js")
+	@Source("js/smallPlayer.js")
 	TextResource smallPlayerJS();
 	
-	@Source("player-muses.js")
+	@Source("js/player-muses.js")
 	TextResource playerMusesJS();
 	
-	@Source("empty-cell-list.css")
+	@Source("css/empty-cell-list.css")
 	CellList.Style emptyCellList();
 	
 }
