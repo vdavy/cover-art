@@ -28,4 +28,13 @@ public interface PlayerConstants extends Constants {
 	@DefaultStringValue("http://www.station-millenium.com/formulaire-de-contact/")
 	String contactURL();
 	
+	@DefaultStringValue("https://play.google.com/store/apps/details?id=com.stationmillenium.android")
+	String googlePlayURL();
+	
+	@DefaultStringValue("https://www.facebook.com/station.millenium")
+	String facebookURL();
+	
+	@DefaultStringValue("https://twitter.com/Millenium22")
+	String twitterURL();
+	
 }

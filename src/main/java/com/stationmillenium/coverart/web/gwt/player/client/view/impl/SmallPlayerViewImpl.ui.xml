@@ -20,7 +20,7 @@
 		
 		.current-song-title {
 			font-weight: bold;
-			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-family: Lato;
 			font-size: 13px;
 			color: #ffffff;
 			padding-top: 5px;
@@ -28,7 +28,7 @@
 		}
 		
 		.current-song {
-			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-family: Lato;
 			font-size: 13px;
 			color: #ffffff;
 			font-style: italic;			

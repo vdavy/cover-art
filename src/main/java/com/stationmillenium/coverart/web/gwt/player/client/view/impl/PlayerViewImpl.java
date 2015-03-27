@@ -19,7 +19,6 @@ import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellList.Style;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -49,7 +48,6 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 	@UiField Label currentSong;
 	@UiField Image songImage;
 	@UiField(provided = true) CellList<String> songList;
-	@UiField FlowPanel player;
 
 	//data provider
 	ListDataProvider<String> dataProvider = new ListDataProvider<String>();
@@ -139,4 +137,21 @@ public class PlayerViewImpl extends Composite implements PlayerViewInterface {
 		Window.open(clientFactory.getConstants().contactURL(), null, null);
 	}
 	
+	@UiHandler("googlePlayLogo")
+	public void onClickGooglePlay(ClickEvent event) {
+		LOGGER.fine("Open Google Play page");
+		Window.open(clientFactory.getConstants().googlePlayURL(), null, null);
+	}
+	
+	@UiHandler({"facebookLogo", "facebookText"})
+	public void onClickFacebook(ClickEvent event) {
+		LOGGER.fine("Open Facebook page");
+		Window.open(clientFactory.getConstants().facebookURL(), null, null);
+	}
+	
+	@UiHandler({"twitterLogo", "twitterText"})
+	public void onClickTwitter(ClickEvent event) {
+		LOGGER.fine("Open Twitter page");
+		Window.open(clientFactory.getConstants().twitterURL(), null, null);
+	}
 }

@@ -30,6 +30,18 @@ public interface PlayerResources extends ClientBundle {
 	@Source("images/top-wave.png")
 	ImageResource topWave();
 	
+	@Source("images/bottom-wave.png")
+	ImageResource bottomWave();
+	
+	@Source("images/logo-twitter.png")
+	ImageResource twitterLogo();
+	
+	@Source("images/logo-facebook.png")
+	ImageResource facebookLogo();
+	
+	@Source("images/logo-google-play.png")
+	ImageResource googlePlayLogo();
+	
 	@Source("js/piwik.js")
 	TextResource piwikJS();
 	
