@@ -22,14 +22,10 @@ public aspect SongHistoryImageNamedQueriesAspect {
 		 * Get the last song history
 		 */
 		@NamedQuery( 
-				name = "getImageForSongWithTime", 
+				name = "getImageForSongWithCache", 
 				query = "SELECT image FROM SongHistoryImage AS image " +
-						"JOIN image.songHistory.playedTimes AS times " +
 						"WHERE image.songHistory.artist = :artist " +
-						"AND image.songHistory.title = :title " +
-						"AND times = (" +
-							"FROM SongHistory WHERE playedDate = :calendar" +
-						")",
+						"AND image.songHistory.title = :title "	,
 						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 		
 		/**

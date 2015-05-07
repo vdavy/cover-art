@@ -49,10 +49,9 @@ public class SongImageRepository {
 	 */
 	public SongImageDTO getImageForSong(SongHistoryItemDTO songToSearch) {
 		//load song
-		Query query = entityManager.createNamedQuery("getImageForSongWithTime", SongHistoryImage.class); //create query
+		Query query = entityManager.createNamedQuery("getImageForSongWithCache", SongHistoryImage.class); //create query
 		query.setParameter("artist", songToSearch.getArtist()); //artist param
 		query.setParameter("title", songToSearch.getTitle()); //title param
-		query.setParameter("calendar", songToSearch.getPlayedDate()); //calendar param
 		@SuppressWarnings("unchecked")
 		List<SongHistoryImage> imageEntityList = (List<SongHistoryImage>) query.getResultList(); //Execute query 
 
