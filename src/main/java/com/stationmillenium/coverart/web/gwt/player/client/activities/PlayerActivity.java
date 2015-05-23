@@ -31,7 +31,8 @@ import com.stationmillenium.coverart.web.gwt.player.shared.SongGWTDTO;
 public class PlayerActivity extends AbstractActivity implements PlayerViewPresenter {
 
 	//log
-	private static final Logger LOGGER = Logger.getLogger(PlayerActivity.class.getName());	
+	private static final Logger LOGGER = Logger.getLogger(PlayerActivity.class.getName());
+	private static final int TRACKER_ID = 2;
 
 	//local instances	
 	private ClientFactory clientFactory;
@@ -161,14 +162,14 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 		//add piwik tracking code
 		String jsCode = clientFactory.getResources().piwikJS().getText();
 		ScriptInjector.fromString(jsCode).inject();		
-		sendTracking();
+		sendTracking(TRACKER_ID);
 		LOGGER.fine("Tracker sent");
 	}
 	
 	/**
 	 * Send a Piwik tracker goal with JSNI
 	 */
-	private native void sendTracking() /*-{
+	private native void sendTracking(int id) /*-{
 		$wnd.sendTrackingID(id);
 	}-*/;
 	
