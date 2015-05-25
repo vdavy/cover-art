@@ -195,7 +195,7 @@
 				</g:at>			
 				<g:at top="55" left="238">
 					<g:FlowPanel width="282px" height="135px" styleName="{style.current-song-block}">
-						<g:Label width="265px" height="35px" ui:field="currentSong" styleName="{style.current-song-label}"/>
+						<g:Label width="265px" height="auto" ui:field="currentSong" styleName="{style.current-song-label}"/>
 						<g:HTMLPanel styleName="{style.player-block}">
 								<div id="museplayer"></div>		
 							</g:HTMLPanel> 
