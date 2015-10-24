@@ -12,54 +12,25 @@
 	<ui:style>
 		/* Add CSS here. See the GWT docs on UI Binder for more details */
 		.background-player {
-			background-color: black;
+			background-color: white;
 			cursor: pointer;
 			margin-left: 0px;
 			margin-top: 0px;
+			line-height: 50px;
 		}
-		
-		.current-song-title {
-			font-weight: bold;
-			font-family: Lato;
-			font-size: 13px;
-			color: #ffffff;
-			padding-top: 5px;
-			padding-bottom: 3px;			
-		}
-		
+				
 		.current-song {
 			font-family: Lato;
-			font-size: 13px;
-			color: #ffffff;
-			font-style: italic;			
+			font-size: 20px;
+			color: #000000;
+			font-family: 'Open Sans', sans-serif;		
 		}
-		
-		.current-song-block {
-			background-color: #F70CA1;
-			border-radius: 5px;
-			box-shadow: 0px 0px 3px #0A0A0A;
-			background-image: -moz-linear-gradient(top, #F70CA1, #0A0A0A);
-			background-image: -ms-linear-gradient(top, #F70CA1, #0A0A0A);
-			background-image: -o-linear-gradient(top, #F70CA1, #0A0A0A);
-			background-image: -webkit-linear-gradient(top, #F70CA1, #0A0A0A);
-			background-image: linear-gradient(top, #F70CA1, #0A0A0A);
-			background-clip: padding-box;
-			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
-			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
-			opacity: 0.85;			
-		}
-		
+				
 	</ui:style>
 	
 	<!-- Panel content -->
-	<g:FocusPanel ui:field="mainPanel" width="275px" styleName="{style.background-player}">
-		<g:VerticalPanel width="275px" horizontalAlignment="center">
-			<g:Image resource="{res.logoSmallPlayer}"/>
-			<g:FlowPanel styleName="{style.current-song-block}" width="275px" height="50px">
-				<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement à l'antenne</ui:msg></g:Label>
-				<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
-			</g:FlowPanel>		
-		</g:VerticalPanel>
+	<g:FocusPanel ui:field="mainPanel" height="50px" styleName="{style.background-player}">
+		<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
 	</g:FocusPanel>
 	
 </ui:UiBinder> 
