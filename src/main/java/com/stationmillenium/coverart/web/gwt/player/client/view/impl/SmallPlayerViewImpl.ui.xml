@@ -20,17 +20,27 @@
 		}
 				
 		.current-song {
-			font-family: Lato;
 			font-size: 20px;
-			color: #000000;
+			color: #0b87dd;
+			font-style: italic;
 			font-family: 'Open Sans', sans-serif;		
+		}
+		
+		.current-song-title {
+			font-size: 20px;
+			color: #0b87dd;
+			font-family: 'Open Sans', sans-serif;		
+			margin-right: 5px;
 		}
 				
 	</ui:style>
 	
 	<!-- Panel content -->
 	<g:FocusPanel ui:field="mainPanel" height="50px" styleName="{style.background-player}">
-		<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
+		<g:HorizontalPanel>
+			<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement à l'antenne :</ui:msg></g:Label>	
+			<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
+		</g:HorizontalPanel>
 	</g:FocusPanel>
 	
 </ui:UiBinder> 

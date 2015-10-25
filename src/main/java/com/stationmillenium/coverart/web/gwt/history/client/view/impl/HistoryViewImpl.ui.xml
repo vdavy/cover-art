@@ -11,13 +11,12 @@
     
     <!-- Style -->
 	<ui:style>
-		/* Add CSS here. See the GWT docs on UI Binder for more details */
-		.background-player {
-			background-color: black;
-		}
-		
-		.background-white {
+		/* Add CSS here. See the GWT docs on UI Binder for more details */	
+		.history-table {
 			background-color: white;
+			font-size: 35px;
+			font-weight: bold;
+			font-family: 'Open Sans', sans-serif;
 		}
 		 
 		.searchField {
@@ -60,6 +59,9 @@
 		
 		.searchFieldsBlock {
 			margin-top: 5px;
+			margin-bottom: 5px;
+			font-family: 'Open Sans', sans-serif;	
+			font-size: 20px;
 		}
 		
 		.image {
@@ -67,80 +69,82 @@
 		}
 		
 		.search-block {
-			background-color: #ff2217;
+			background-color: #ed145b;
 			border-radius: 5px;
-			box-shadow: 0px 0px 3px #000000;
-			background-image: -moz-linear-gradient(top, #ff2217, #000000);
-			background-image: -ms-linear-gradient(top, #ff2217, #000000);
-			background-image: -o-linear-gradient(top, #ff2217, #000000);
-			background-image: -webkit-linear-gradient(top, #ff2217, #000000);
-			background-image: linear-gradient(top, #ff2217, #000000);
-			background-clip: padding-box;
-			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
-			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
-			/*opacity: 0.85;*/			
 			color: #ffffff;
 			padding: 3px;
-			margin: 2px;
+			margin: 2px;			
+		}
+		
+		.search-text {
+			font-family: 'Open Sans', sans-serif;	
+			font-size: 20px;
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+		
+		.search-box {
+			font-family: 'Open Sans', sans-serif;	
+			font-size: 15px;
+			border-radius: 5px;
+			background-color: #ffffff;
+			border: none;
+			padding-left: 3px;
 		}
 		
 		.clickOnCover {
-			color: white;
+			color: black;
 			font-style: italic;
-			font-size: 10px;	
-			margin-top: 3px;
+			font-family: 'Open Sans', sans-serif;	
+			font-size: 15px;	
+			margin-top: 5px;
 		}
 		
 		.mention {
-			text-align: left;
-			color: white;
+			text-align: right;
+			color: black;
 			font-style: italic;
 			font-size: 10px;	
-			margin-top: 3px;
+			font-family: 'Open Sans', sans-serif;	
 		}
 		
 		.ajaxLoad {	
-			background-color: #0060ff;
-			border: 2px solid #707070;
+			font-family: 'Open Sans', sans-serif;	
+			background-color: white;
 			border-radius: 5px;
-			box-shadow: 0px 0px 3px #000000;
-			background-image: -moz-linear-gradient(top, #0060ff, #588ee8);
-			background-image: -ms-linear-gradient(top, #0060ff, #588ee8);
-			background-image: -o-linear-gradient(top, #0060ff, #588ee8);
-			background-image: -webkit-linear-gradient(top, #0060ff, #588ee8);
-			background-image: linear-gradient(top, #0060ff, #588ee8);
-			background-clip: padding-box;
-			/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
-			/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
-			color: #ffffff;
+			color: #4b4a4a;
 			font-size: 12px;
 			padding: 5px;
+		}
+		
+		.main-panel {	
+			margin-left: auto;
+			margin-right: auto;
 		}
 		
 	</ui:style>
 	
 	<!-- Panel content -->
-	<g:VerticalPanel width="575px" horizontalAlignment="center">
-		<g:Image resource="{res.cetaitQuoi}"/>
-		<g:DockLayoutPanel unit="PX" height="880px" width="575px" styleName="{style.background-player}" >
-			<g:north size="100">
+	<g:VerticalPanel width="100%" horizontalAlignment="center">
+		<g:DockLayoutPanel unit="PX" height="835px" width="1170px" styleName="{style.main-panel}">
+			<g:north size="120">
 				<g:VerticalPanel>
-					<g:VerticalPanel width="570px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.search-block}">					
-						<g:FlowPanel >
+					<g:VerticalPanel width="1167px" verticalAlignment="top" horizontalAlignment="left" styleName="{style.search-block}">					
+						<g:FlowPanel styleName="{style.search-text}">
 							<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnDate"><ui:msg>Rechercher par date</ui:msg></g:RadioButton>
-							<dp:DateBox ui:field="dateSearch" width="70px"/>
+							<dp:DateBox ui:field="dateSearch" width="85px" styleName="{style.search-box}"/>
 							<g:Label styleName="{style.spacer}" />
-							<g:TextBox ui:field="hourSearch" width="15px"/>
+							<g:TextBox ui:field="hourSearch" width="25px" styleName="{style.search-box}"/>
 							<g:Label styleName="{style.searchHour}"><ui:msg>H</ui:msg></g:Label>
-							<g:TextBox ui:field="minuteSearch" width="15px" />
+							<g:TextBox ui:field="minuteSearch" width="25px" styleName="{style.search-box}"/>
 							<g:Label styleName="{style.searchMinute}"><ui:msg>M</ui:msg></g:Label>			
-							<g:Button ui:field="launchSearch"><ui:msg>Rechercher</ui:msg></g:Button>
+							<g:Button ui:field="launchSearch"  styleName="{style.search-box}"><ui:msg>Rechercher</ui:msg></g:Button>
 							<g:Label styleName="{style.spacer}"/>
-							<g:Button ui:field="cancelSearch"><ui:msg>Annuler</ui:msg></g:Button>		
+							<g:Button ui:field="cancelSearch"  styleName="{style.search-box}"><ui:msg>Annuler</ui:msg></g:Button>		
 						</g:FlowPanel>	
 						<g:FlowPanel styleName="{style.searchFieldsBlock}">
 							<g:RadioButton styleName="{style.searchFieldFirst}" name="searchOn" ui:field="searchOnField">Ou</g:RadioButton>
-							<g:SuggestBox ui:field="searchKeywords" width="120px" />
+							<g:SuggestBox ui:field="searchKeywords" width="120px" styleName="{style.search-box}" />
 							<g:Label styleName="{style.searchFieldIntermediate}"><ui:msg>sur</ui:msg></g:Label>
 							<g:RadioButton name="searchType" ui:field="searchTypeAll"><ui:msg>tout</ui:msg></g:RadioButton>
 							<g:RadioButton name="searchType" ui:field="searchTypeArtist"><ui:msg>artiste</ui:msg></g:RadioButton>
@@ -150,19 +154,19 @@
 					<g:Label styleName="{style.clickOnCover}"><ui:msg>Cliquer sur un titre pour en afficher la pochette</ui:msg></g:Label>
 				</g:VerticalPanel>
 			</g:north>
-			<g:west size="575">
-				<g:VerticalPanel horizontalAlignment="center" width="575px" height="550px">
-					<g:SimplePanel styleName="{style.image}" width="200px" height="200px">
-						<g:Image ui:field="songImage" />
+			<g:west size="1170">
+				<g:VerticalPanel horizontalAlignment="center" width="1170px" height="700px">
+					<g:SimplePanel styleName="{style.image}" width="160px" height="160px">
+						<g:Image ui:field="songImage" height="150px" width="150px" />
 					</g:SimplePanel>
-					<g:FlowPanel styleName="{style.background-white}" width="410px" height="560px">	
-						<c:DataGrid ui:field="historyGrid" width="400px" pageSize="12" height="500px" />
+					<g:FlowPanel styleName="{style.history-table}" width="1170px" height="550px">	
+						<c:DataGrid ui:field="historyGrid" width="1170px" pageSize="12" height="500px" />
 						<c:SimplePager ui:field="historyGridPager" width="225px" height="50px"/>
 					</g:FlowPanel>
 				</g:VerticalPanel>			
 			</g:west>
 		</g:DockLayoutPanel>
-		<g:SimplePanel width="575px" styleName="{style.mention}">
+		<g:SimplePanel width="100%" styleName="{style.mention}">
 			<g:Label><ui:msg>Page « C’était quoi ce titre ? » Station Millenium by Vince</ui:msg></g:Label>
 		</g:SimplePanel>
 		<g:PopupPanel styleName="{style.ajaxLoad}" ui:field="ajaxLoading" animationEnabled="true" glassEnabled="true" autoHideEnabled="false" height="50px" width="60px" visible="false">

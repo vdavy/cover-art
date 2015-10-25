@@ -3,8 +3,9 @@
  */
 package com.stationmillenium.coverart.web.gwt.history.shared;
 
-import java.io.Serializable;
 import java.util.Date;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * DTO for the song
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  */
 @SuppressWarnings("serial")
-public class HistoryGWTDTO implements Serializable {
+public class HistoryGWTDTO implements IsSerializable {
 
 	//fields
 	private String artist;
