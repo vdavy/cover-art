@@ -3,13 +3,13 @@
 
 package com.stationmillenium.coverart.beans.history;
 
-import com.stationmillenium.coverart.beans.history.ShoutcastServerPropertiesBean;
+import com.stationmillenium.coverart.beans.history.IcecastServerPropertiesBean;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect ShoutcastServerPropertiesBean_Roo_ToString {
+privileged aspect IcecastServerPropertiesBean_Roo_ToString {
     
-    public String ShoutcastServerPropertiesBean.toString() {
+    public String IcecastServerPropertiesBean.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     

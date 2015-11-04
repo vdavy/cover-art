@@ -70,33 +70,37 @@ public class CoverGraberRootService implements ServletContextAware {
 	private CoverGraberServiceInterface deezerCoverGraberService;
 		
 	/**
-	 * Grab image for the list of songs
-	 * @param songList the list of songs to grab image
+	 * Grab image for the song
+	 * @param songList the song to grab image
 	 */
-	public void grabImageForSongs(List<SongHistoryItemDTO> songList) {
-		for (SongHistoryItemDTO song : songList) { //for each song 
-			Provider provider = Provider.LAST_FM; //last fm default provider
-			BufferedImage image = lastFmCoverGraberService.grabCover(song.getArtist(), song.getTitle()); //get the image
-			
-			if (image == null) { //if not found on lastfm, try deezer
-				provider = Provider.DEEZER; //deezer provider
-				image = deezerCoverGraberService.grabCover(song.getArtist(), song.getTitle()); //get the image
+	public void grabImageForSongs(SongHistoryItemDTO song) {
+		Provider provider = Provider.LAST_FM; //last fm default provider
+		BufferedImage image = lastFmCoverGraberService.grabCover(song.getArtist(), song.getTitle()); //get the image
+		
+		if (image == null) { //if not found on lastfm, try deezer
+			provider = Provider.DEEZER; //deezer provider
+			image = deezerCoverGraberService.grabCover(song.getArtist(), song.getTitle()); //get the image
+		}
+		
+		if (image != null) { //if image found				
+			try {
+				String imageFileName = generateMd5Time() + "." + generalPropertiesBean.getCoverImagesExtension(); //make file name
+				File imageFile = new File(coverImagesDirectory + "/" + imageFileName); //init file
+				ImageIO.write(image, generalPropertiesBean.getCoverImagesExtension(), imageFile); //save image
+				LOGGER.debug("Image written : " + imageFile.getAbsolutePath());					
+				
+				//record in db
+				songItemRepository.addImageToSong(song, imageFileName, image.getWidth(), image.getHeight(), provider); //add image to song
+				
+			} catch (IOException e) {
+				LOGGER.warn("Error during writing image", e);
 			}
-			
-			if (image != null) { //if image found				
-				try {
-					String imageFileName = generateMd5Time() + "." + generalPropertiesBean.getCoverImagesExtension(); //make file name
-					File imageFile = new File(coverImagesDirectory + "/" + imageFileName); //init file
-					ImageIO.write(image, generalPropertiesBean.getCoverImagesExtension(), imageFile); //save image
-					LOGGER.debug("Image written : " + imageFile.getAbsolutePath());					
-					
-					//record in db
-					songItemRepository.addImageToSong(song, imageFileName, image.getWidth(), image.getHeight(), provider); //add image to song
-					
-				} catch (IOException e) {
-					LOGGER.warn("Error during writing image", e);
-				}
-			}
+		}
+	}
+	
+	public void grabImageForSongs(List<SongHistoryItemDTO> songs) {
+		for (SongHistoryItemDTO song : songs) {
+			grabImageForSongs(song);
 		}
 	}
 

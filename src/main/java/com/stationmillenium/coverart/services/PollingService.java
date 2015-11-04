@@ -3,10 +3,7 @@
  */
 package com.stationmillenium.coverart.services;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -22,7 +19,7 @@ import com.stationmillenium.coverart.repositories.SongSearchRepository;
 import com.stationmillenium.coverart.repositories.StatusRepository;
 import com.stationmillenium.coverart.services.alerts.AlertService;
 import com.stationmillenium.coverart.services.covergraber.CoverGraberRootService;
-import com.stationmillenium.coverart.services.history.ShoutcastParser;
+import com.stationmillenium.coverart.services.history.IcecastParser;
 import com.stationmillenium.coverart.services.history.SongHistoryFilter;
 import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
 
@@ -47,7 +44,7 @@ public class PollingService {
 	//service injection
 	//the shoutcast parser
 	@Autowired
-	private ShoutcastParser shoutcastParser;
+	private IcecastParser icecastParser;
 	
 	//the song history filter
 	@Autowired
@@ -95,75 +92,71 @@ public class PollingService {
 	 */
 	public void doServerPolling() {
 		//query shoutcast
-		List<SongHistoryItemDTO> songHistoryList = queryShoutcastServer();
-		LOGGER.debug("Gathered song list : " + songHistoryList);
+		SongHistoryItemDTO song = queryIcecastServer();
+		LOGGER.debug("Gathered song : " + song);
 		
 		//insert song list
-		List<SongHistoryItemDTO> songImageMissingList = insertSongList(songHistoryList);
-		LOGGER.debug("Songs with missing image list : " + songImageMissingList);
+		SongHistoryItemDTO songImageMissing = insertSong(song);		
 		
 		//get the image
-		coverGraberRootService.grabImageForSongs(songImageMissingList);
+		if (songImageMissing != null) {
+			LOGGER.debug("Song with missing image : " + songImageMissing);
+			coverGraberRootService.grabImageForSongs(songImageMissing);
+		}
 	}
 	
 	/**
-	 * Query Shoutcast server :
+	 * Query Icecast server :
 	 * -query if server is up
 	 * -if server up, gather song list
 	 * -filter song list
 	 * @return filtered song list, or empty song list if nothing found
 	 */
-	private List<SongHistoryItemDTO> queryShoutcastServer() {
-		if (shoutcastParser.checkShoutcastStatus()) { //test if shoutcast parser up
+	private SongHistoryItemDTO queryIcecastServer() {
+		if (icecastParser.checkIcecastStatus()) { //test if shoutcast parser up
 			recordServerStatus(true); //deal with server up
 			serverStatusCalendar = null; //reset calendar
 			
-			List<SongHistoryItemDTO> songHistoryList = shoutcastParser.getSongHistoryList(); //get the list			
-						
+			SongHistoryItemDTO songItem = icecastParser.getCurrentSong(); //get the list			
+			
 			//set current song
-			if ((songHistoryList.size() > 0) && (songHistoryList.get(0) != null)) {
+			if (songItem != null) {
 				try {
 					//set current song
-					if (songFilter.checkNoForbiddenKeywords(songHistoryList.get(0))) //check if the song is allowed
-						currentSong = songHistoryList.get(0).clone(); //set current song
-					else 
+					if (songFilter.checkNoForbiddenKeywords(songItem)) { //check if the song is allowed
+						currentSong = songItem.clone(); //set current song					
+						
+						if (!isPlaylistAlert(songItem)) { //check playlist update
+							//record playlist updated
+							boolean sendAlert = statusRepository.recordPlaylistUpdated();
+							if (sendAlert)
+								alertService.sendEndedAlert(AlertType.PLAYLIST);
+							LOGGER.debug("Playlist updated");
+
+							return songItem;
+						
+						} else { //playlist not updated
+							boolean sendAlert = statusRepository.recordPlaylistUpdateTimeout();
+							if (sendAlert)
+								alertService.sendActiveAlert(AlertType.PLAYLIST);
+							LOGGER.warn("Playlist not updated in timeout");		
+							currentSong = null; //no song to display
+							return null; //return empty list
+						}					
+					} else {
 						currentSong = null;
-					
-					//check playlist update timeout
-					Calendar timeoutCalendar = Calendar.getInstance();
-					timeoutCalendar.add(Calendar.MINUTE, -config.getPlaylistUpdateTimeout());
-					
-					if (timeoutCalendar.before(songHistoryList.get(0).getPlayedDate())) { //check playlist update
-						//record playlist updated
-						boolean sendAlert = statusRepository.recordPlaylistUpdated();
-						if (sendAlert)
-							alertService.sendEndedAlert(AlertType.PLAYLIST);
-						LOGGER.debug("Playlist updated");
-						
-						//playlist updated - process filtering
-						List<SongHistoryItemDTO> filteredSongHistoryFiltersList = songFilter.filterSongHistory(songHistoryList); //process filter
-						songFilter.filterLastRecordedSong(filteredSongHistoryFiltersList); //filter last recorded song
-						return filteredSongHistoryFiltersList;			
-						
-					} else { //playlist not updated
-						boolean sendAlert = statusRepository.recordPlaylistUpdateTimeout();
-						if (sendAlert)
-							alertService.sendActiveAlert(AlertType.PLAYLIST);
-						LOGGER.warn("Playlist not updated in timeout");		
-						currentSong = null; //no song to display
-						return new ArrayList<>(); //return empty list
-					}					
+						return null;
+					}
 					
 				} catch (CloneNotSupportedException e) { //error during cloning
 					LOGGER.error("Error during current song notification", e);
 					currentSong = null; //no song to display
-					return new ArrayList<>(); //return empty list
-				}		
-				
+					return null; //return empty list
+				}						
 			} else {
 				LOGGER.warn("Playlist empty");		
 				currentSong = null; //no song to display
-				return new ArrayList<>(); //return empty list
+				return null; //return empty list
 			}
 			
 		} else { //if server down
@@ -181,8 +174,24 @@ public class PollingService {
 			}						
 
 			currentSong = null; //no song to display
-			return new ArrayList<>(); //return empty list
+			return null; //return empty list
 		}
+	}
+	
+	/**
+	 * Is the playlist alert is active ?
+	 * @param songItem the gathered song
+	 * @return true if alert active, false if not
+	 */
+	private boolean isPlaylistAlert(SongHistoryItemDTO songItem) {
+		//check playlist update timeout
+		Calendar timeoutCalendar = Calendar.getInstance();
+		timeoutCalendar.add(Calendar.MINUTE, -config.getPlaylistUpdateTimeout());
+		SongHistoryItemDTO lastRecordedSong = songHistoryRepository.getLastSongHistoryItem();
+		
+		return lastRecordedSong.getArtist().equals(songItem.getArtist())
+				&& lastRecordedSong.getTitle().equals(songItem.getTitle())
+				&& timeoutCalendar.after(songItem.getPlayedDate());
 	}
 	
 	/**
@@ -207,41 +216,36 @@ public class PollingService {
 	 * Stop when last recorded song is encountered
 	 * @param songList the song list to insert
 	 */
-	private List<SongHistoryItemDTO> insertSongList(List<SongHistoryItemDTO> songList) {
+	private SongHistoryItemDTO insertSong(SongHistoryItemDTO songToInsert) {
 		//compute current date
 		Calendar currentDate = Calendar.getInstance();
 		currentDate.add(Calendar.MINUTE, 1);
 		
 		SongHistoryItemDTO lastSong = songHistoryRepository.getLastSongHistoryItem(); //get last recorded song
-		List<SongHistoryItemDTO> listToInsert = new ArrayList<>(); //list of song to insert
-		
-		for (int i = 0; i < songList.size(); i++) { //for each song in the list
-			if (!lastSong.equals(songList.get(i))) { //if not equals
-				if (((lastSong.getPlayedDate() == null) //if no entity found
-						|| (lastSong.getPlayedDate().before(songList.get(i).getPlayedDate()))) 
-						&& (currentDate.after(songList.get(i).getPlayedDate()))) //past the last recorded song and not in the future
-					listToInsert.add(songList.get(i)); //add to the list
-				else
-					LOGGER.warn("Song not in right time range : " + songList.get(i));
-			} else
-				break; //reach the same - do not add and quit
-		}
-		
-		Collections.reverse(listToInsert);
-		LOGGER.info("Song list inserted : " + listToInsert);
-		List<SongHistoryItemDTO> songListToGatherImage = new ArrayList<>(); //list to put new song where image is missing
-		for (SongHistoryItemDTO song : listToInsert) {
-			if (songHistoryRepository.isExistingSong(song)) { //check if sonf already exists
-				songHistoryRepository.addTimeToExistingSong(song); //just add time
-				LOGGER.debug("Song already exists : " + song);
-			} else {
-				songHistoryRepository.insertSongHistory(song); //insert in db		
-				LOGGER.debug("Song not existing : " + song);
-				songListToGatherImage.add(song); //add it into the list to 
+
+		if (!(lastSong.getArtist().equals(songToInsert.getArtist()) && lastSong.getTitle().equals(songToInsert.getTitle()))) { //if not equals
+			
+			if (((lastSong.getPlayedDate() == null) //if no entity found
+					|| (lastSong.getPlayedDate().before(songToInsert.getPlayedDate()))) 
+					&& (currentDate.after(songToInsert.getPlayedDate()))) //past the last recorded song and not in the future
+				
+				if (songHistoryRepository.isExistingSong(songToInsert)) { //check if sonf already exists
+					songHistoryRepository.addTimeToExistingSong(songToInsert); //just add time
+					LOGGER.debug("Song already exists : " + songToInsert);
+				} else {
+					songHistoryRepository.insertSongHistory(songToInsert); //insert in db		
+					LOGGER.debug("Song not existing : " + songToInsert);
+					return songToInsert;
+				}
+			else {
+				LOGGER.warn("Song not in right time range : " + songToInsert);
 			}
+		} else {
+			LOGGER.debug("Song already inserted : " + songToInsert);
 		}
 		
-		return songListToGatherImage;
+		LOGGER.info("Song inserted : " + songToInsert);
+		return null;
 	}
 	
 	/**

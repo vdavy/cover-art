@@ -9,7 +9,7 @@
 		<roo.version>1.2.4.RELEASE</roo.version>
 
 		<!-- spring part -->
-		<spring.version>3.2.4.RELEASE</spring.version>
+		<spring.version>3.2.15.RELEASE</spring.version>
 		<aspectj.version>1.7.4</aspectj.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<hibernate.version>4.2.7.Final</hibernate.version>
@@ -17,6 +17,7 @@
 		<hibernate.search.version>4.4.0.Final</hibernate.search.version>
 		<mysql-connector-java.version>5.1.27</mysql-connector-java.version>
 		<ehcache.version>2.6.6</ehcache.version>
+		<jackson.version>2.6.3</jackson.version>
 
 		<!-- third parts -->
 		<log4j.version>1.2.17</log4j.version>
@@ -26,7 +27,6 @@
 		<jta.version>1.1</jta.version>
 		<jstl.version>1.2</jstl.version>
 		<joda-time.version>2.0</joda-time.version>
-		<jsoup.version>1.7.2</jsoup.version>
 		<dozer.version>5.4.0</dozer.version>
 		<gwt.version>2.7.0</gwt.version>
 		<poi.version>3.9</poi.version>
@@ -93,11 +93,6 @@
 	</pluginRepositories>
 	<dependencies>
 		<!-- Added dependencies -->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>${jsoup.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
@@ -235,6 +230,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
@@ -437,6 +437,13 @@
 			<artifactId>requestfactory-apt</artifactId>
 			<version>${gwt.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

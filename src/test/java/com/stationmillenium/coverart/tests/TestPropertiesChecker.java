@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stationmillenium.coverart.beans.covergraber.LastFMCoverServicePropertiesBean;
-import com.stationmillenium.coverart.beans.history.ShoutcastServerPropertiesBean;
+import com.stationmillenium.coverart.beans.history.IcecastServerPropertiesBean;
 import com.stationmillenium.coverart.beans.history.SongHistoryFilterPropertiesBean;
 import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
 
@@ -25,7 +25,7 @@ public class TestPropertiesChecker {
 	
 	//the configuration for the shoutast server
 	@Autowired
-	private ShoutcastServerPropertiesBean shoutcastPropertiesBean;
+	private IcecastServerPropertiesBean shoutcastPropertiesBean;
 	
 	//the configuration for the song history filter
 	@Autowired
