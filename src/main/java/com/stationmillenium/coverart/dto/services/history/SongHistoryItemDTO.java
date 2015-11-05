@@ -70,4 +70,16 @@ public class SongHistoryItemDTO implements Cloneable {
 		
 		return returnedDTO;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "SongHistoryItemDTO [playedDate=" + (playedDate != null ? playedDate.getTime() : null) + ", artist="
+				+ artist + ", title=" + title + ", customImage=" + customImage
+				+ "]";
+	}
+	
+	
 }

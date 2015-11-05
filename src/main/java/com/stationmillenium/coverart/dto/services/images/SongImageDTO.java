@@ -37,5 +37,16 @@ public class SongImageDTO {
 	
 	//image provider
 	private Provider provider;
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "SongImageDTO [fileName=" + fileName + ", width=" + width
+				+ ", height=" + height + ", provider=" + provider + "]";
+	}
+	
+	
 	
 }

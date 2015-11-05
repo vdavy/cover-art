@@ -23,5 +23,14 @@ public class SongHistoryItemImageDTO {
 	
 	//image of song
 	private SongImageDTO songImageDTO = new SongImageDTO();
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "SongHistoryItemImageDTO [songHistoryItemDTO="
+				+ songHistoryItemDTO + ", songImageDTO=" + songImageDTO + "]";
+	}
 	
 }
