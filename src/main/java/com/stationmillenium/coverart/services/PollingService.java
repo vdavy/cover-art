@@ -223,7 +223,7 @@ public class PollingService {
 		
 		SongHistoryItemDTO lastSong = songHistoryRepository.getLastSongHistoryItem(); //get last recorded song
 
-		if (!(lastSong.getArtist().equals(songToInsert.getArtist()) && lastSong.getTitle().equals(songToInsert.getTitle()))) { //if not equals
+		if (!(lastSong.getArtist().equalsIgnoreCase(songToInsert.getArtist()) && lastSong.getTitle().equalsIgnoreCase(songToInsert.getTitle()))) { //if not equals
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Last song artist : '" + lastSong.getArtist() + "' - song to insert artist : '" + songToInsert.getArtist() + "' - Last song title : '" + lastSong.getTitle() + "' - song to insert title : '"+ songToInsert.getTitle() 
 						+ "'\nlastSong.getArtist().equals(songToInsert.getArtist()) = " + (lastSong.getArtist().equals(songToInsert.getArtist())) 
