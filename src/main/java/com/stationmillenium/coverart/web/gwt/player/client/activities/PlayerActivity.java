@@ -71,7 +71,7 @@ public class PlayerActivity extends AbstractActivity implements PlayerViewPresen
 						clientFactory.getPlayerView().setCurrentSong(text);
 						Window.setTitle(clientFactory.getMessages().windowTitlecurrentSong(newSong.getArtist(), newSong.getTitle()));
 						if (newSong.getImagePath() != null) {
-							SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + newSong.getImagePath());
+							SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + newSong.getImagePath().substring(1));
 							clientFactory.getPlayerView().setImage(imageUri, newSong.getImageWidth(), newSong.getImageHeight());
 						} else {
 							clientFactory.getPlayerView().setImage(

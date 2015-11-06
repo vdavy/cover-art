@@ -233,7 +233,7 @@ public class HistoryActivity extends AbstractActivity implements HistoryViewPres
 	@Override
 	public void songSelected(HistoryGWTDTO selectedSong) {
 		if (selectedSong.getImagePath() != null) { //if image for selected song
-			SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + selectedSong.getImagePath());
+			SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + selectedSong.getImagePath().substring(1));
 			clientFactory.getHistoryView().setImage(imageUri, selectedSong.getImageWidth(), selectedSong.getImageHeight());
 		} else //display fallback image
 			displayDefaultImage();	
