@@ -224,27 +224,31 @@ public class PollingService {
 		SongHistoryItemDTO lastSong = songHistoryRepository.getLastSongHistoryItem(); //get last recorded song
 
 		if (!(lastSong.getArtist().equals(songToInsert.getArtist()) && lastSong.getTitle().equals(songToInsert.getTitle()))) { //if not equals
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("Last song artist : '" + lastSong.getArtist() + "' - song to insert artist : '" + songToInsert.getArtist() + "' - Last song title : '" + lastSong.getTitle() + "' - song to insert title : '"+ songToInsert.getTitle() 
+						+ "'\nlastSong.getArtist().equals(songToInsert.getArtist()) = " + (lastSong.getArtist().equals(songToInsert.getArtist())) 
+						+ "\nlastSong.getTitle().equals(songToInsert.getTitle()) = " + (lastSong.getTitle().equals(songToInsert.getTitle()))) ;
+			}
 			
 			if (((lastSong.getPlayedDate() == null) //if no entity found
 					|| (lastSong.getPlayedDate().before(songToInsert.getPlayedDate()))) 
-					&& (currentDate.after(songToInsert.getPlayedDate()))) //past the last recorded song and not in the future
+					&& (currentDate.after(songToInsert.getPlayedDate()))) { //past the last recorded song and not in the future
 				
 				if (songHistoryRepository.isExistingSong(songToInsert)) { //check if sonf already exists
 					songHistoryRepository.addTimeToExistingSong(songToInsert); //just add time
-					LOGGER.debug("Song already exists : " + songToInsert);
+					LOGGER.debug("Song already exists - insert time : " + songToInsert);
 				} else {
 					songHistoryRepository.insertSongHistory(songToInsert); //insert in db		
 					LOGGER.debug("Song not existing : " + songToInsert);
 					return songToInsert;
 				}
-			else {
+			} else {
 				LOGGER.warn("Song not in right time range : " + songToInsert);
 			}
 		} else {
 			LOGGER.debug("Song already inserted : " + songToInsert);
 		}
-		
-		LOGGER.info("Song inserted : " + songToInsert);
+
 		return null;
 	}
 	
