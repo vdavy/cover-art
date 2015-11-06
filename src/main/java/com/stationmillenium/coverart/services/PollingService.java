@@ -169,7 +169,7 @@ public class PollingService {
 				currentServerDownTime.add(Calendar.SECOND, -config.getAlertTimeout()); //add alert delay time
 				if (currentServerDownTime.after(serverStatusCalendar)) {
 					recordServerStatus(false);
-					LOGGER.debug("Record server down at : " + currentServerDownTime);
+					LOGGER.debug("Record server down at : " + currentServerDownTime.getTime());
 				}					
 			}						
 
