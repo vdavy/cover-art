@@ -50,6 +50,7 @@ public class SongItemRepository {
 	 * Get the last recorded song in the DB
 	 * @return the {@link SongHistoryItemDTO} filled with last recorded song data - empty DTO if not found
 	 */
+	@Transactional
 	public SongHistoryItemDTO getLastSongHistoryItem() {
 		try {
 			Query query = entityManager.createNamedQuery("getLastSong"); //create query
@@ -196,6 +197,7 @@ public class SongItemRepository {
 	 * @param displayLastSong display last song
 	 * @return the list of {@link SongHistoryItemDTO}
 	 */
+	@Transactional
 	public List<SongHistoryItemDTO> getLast5PlayedSongs(boolean displayLastSong) {
 		//query db
 		Query query = entityManager.createNamedQuery("getSongsOrderedByPlayedTime", SongItem.class); //create query
@@ -221,6 +223,7 @@ public class SongItemRepository {
 	 * @param minDate the min date for song extract
 	 * @return the list of {@link SongHistoryItemImageDTO}
 	 */
+	@Transactional
 	public List<SongHistoryItemImageDTO> getLastSongsFromMinDate(Calendar minDate) {
 		//query db
 		Query query = entityManager.createNamedQuery("getSongsFetchedOrderedByPlayedTimeWithMinDate", SongHistory.class); //create query
@@ -244,6 +247,7 @@ public class SongItemRepository {
 	 * @param maxDate the max date (excluding)
 	 * @return the list of {@link SongHistoryItemDTO}
 	 */
+	@Transactional
 	public List<SongHistoryItemDTO> getSongsPlayedBetween2Dates(Calendar minDate, Calendar maxDate) {
 		//prepare query
 		Query query = entityManager.createNamedQuery("getSongsFetchedOrderedByPlayedTimeBetween2Dates", SongHistory.class); //create query
@@ -268,6 +272,7 @@ public class SongItemRepository {
 	 * @param maxDate the max date (excluding)
 	 * @return the list of {@link SongHistoryItemDTO}
 	 */
+	@Transactional
 	public List<SongHistoryItemImageDTO> getSongsPlayedBetween2DatesWithImages(Calendar minDate, Calendar maxDate) {
 		//prepare query
 		Query query = entityManager.createNamedQuery("getSongsFetchedOrderedWithImageByPlayedTimeBetween2Dates", SongHistory.class); //create query
@@ -310,6 +315,7 @@ public class SongItemRepository {
 	 * @param artist the artist of the song
 	 * @param title the title of the song
 	 */
+	@Transactional
 	public void setSongAsCustomImageSong(String artist, String title) {
 		//load song
 		Query query = entityManager.createNamedQuery("loadExistingSong"); //create query

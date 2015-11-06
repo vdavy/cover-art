@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stationmillenium.coverart.domain.alert.AlertActivation;
 import com.stationmillenium.coverart.domain.alert.AlertEmail;
@@ -39,6 +40,7 @@ public class AlertRepository {
 	 * @param alertType the alert type 
 	 * @return the list of email as string
 	 */
+	@Transactional
 	public List<String> getEmailFromAlertType(AlertType alertType) {
 		//process query
 		Query query = entityManager.createNamedQuery("getEmailFromAlertType", AlertEmail.class);
@@ -58,6 +60,7 @@ public class AlertRepository {
 	 * @param email the email
 	 * @return the list of {@link AlertType} or empty list if not found
 	 */
+	@Transactional
 	public List<AlertType> getAlertTypeForEmail(String email) {
 		//process query
 		Query query = entityManager.createNamedQuery("getAlertTypeFromEmail", AlertType.class);
@@ -77,6 +80,7 @@ public class AlertRepository {
 	 * @param alertType the alert type
 	 * @return true if alert enbaled, false if not
 	 */
+	@Transactional
 	public boolean getAlertEnabledForType(AlertType alertType) {
 		//process query
 		Query query = entityManager.createNamedQuery("getAlertEnabledForAlertType", AlertActivation.class);

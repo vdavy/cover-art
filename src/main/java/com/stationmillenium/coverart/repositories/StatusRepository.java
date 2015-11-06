@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stationmillenium.coverart.domain.statuses.FMStatus;
 import com.stationmillenium.coverart.domain.statuses.PlaylistStatus;
@@ -37,6 +38,7 @@ public class StatusRepository {
 	 * Get the last server status as boolean
 	 * @return <code>true</code> if server up, <code>false</code> if server down
 	 */
+	@Transactional
 	public boolean getLastServerStatus() {
 		return getLastStatus("getLastServerStatusBoolean");		
 	}
@@ -45,6 +47,7 @@ public class StatusRepository {
 	 * Get the last FM status as boolean
 	 * @return <code>true</code> if FM up, <code>false</code> if FM down
 	 */
+	@Transactional
 	public boolean getLastFMStatus() {
 		return getLastStatus("getLastFMStatusBoolean");		
 	}
@@ -67,6 +70,7 @@ public class StatusRepository {
 	/**
 	 * Record in database that server is up
 	 */
+	@Transactional
 	public void recordServerUp() {
 		recordServerStatus(true);
 	}
@@ -74,6 +78,7 @@ public class StatusRepository {
 	/**
 	 * Record in database that server is down
 	 */
+	@Transactional
 	public void recordServerDown() {
 		recordServerStatus(false);
 	}
@@ -92,6 +97,7 @@ public class StatusRepository {
 	/**
 	 * Record in database that fm is up
 	 */
+	@Transactional
 	public void recordFMUp() {
 		recordFMStatus(true);
 	}
@@ -99,6 +105,7 @@ public class StatusRepository {
 	/**
 	 * Record in database that FM is down
 	 */
+	@Transactional
 	public void recordFMDown() {
 		recordFMStatus(false);
 	}
@@ -118,6 +125,7 @@ public class StatusRepository {
 	 * Record playlist update timeout
 	 * @return <code>true</code> if status updated in database, <code>false</code> otherwhise
 	 */
+	@Transactional
 	public boolean recordPlaylistUpdateTimeout() {
 		return recordPlaylist(false);
 	}
@@ -126,6 +134,7 @@ public class StatusRepository {
 	 * Record playlist updated
 	 * @return <code>true</code> if status updated in database, <code>false</code> otherwhise
 	 */
+	@Transactional
 	public boolean recordPlaylistUpdated() {
 		return recordPlaylist(true);
 	}

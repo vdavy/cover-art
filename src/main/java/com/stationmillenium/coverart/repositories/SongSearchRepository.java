@@ -93,6 +93,7 @@ public class SongSearchRepository {
 	 * @param maxResults the max results count to return
 	 * @return the song list found (empty list if nothing found)
 	 */	
+	@Transactional
 	public List<SongHistoryItemImageDTO> searchSongsByArtist(String artistName, int maxResults) {				
 		return searchSongsWithFuzzyField(artistName, "artist", maxResults);
 	}
@@ -103,6 +104,7 @@ public class SongSearchRepository {
 	 * @param maxResults the max results count to return
 	 * @return the song list found (empty list if nothing found)
 	 */
+	@Transactional
 	public List<SongHistoryItemImageDTO> searchSongsByTitle(String titleName, int maxResults) {
 		return searchSongsWithFuzzyField(titleName, "title", maxResults);
 	}
@@ -170,6 +172,7 @@ public class SongSearchRepository {
 	 * @param maxResults the max results count to return
 	 * @return the found entities
 	 */
+	@Transactional
 	private List<SongHistoryItemImageDTO> processFullTextQuery(FullTextEntityManager fullTextEntityManager, Query query, int maxResults) {
 		FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(query, SongItem.class); //create query
 		fullTextQuery.setMaxResults(maxResults);

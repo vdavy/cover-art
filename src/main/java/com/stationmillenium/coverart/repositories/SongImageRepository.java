@@ -47,6 +47,7 @@ public class SongImageRepository {
 	 * @param songToSearch the song to search for image
 	 * @return the {@link SongImageDTO} if found, null otherwise
 	 */
+	@Transactional
 	public SongImageDTO getImageForSong(SongHistoryItemDTO songToSearch) {
 		//load song
 		Query query = entityManager.createNamedQuery("getImageForSongWithCache", SongHistoryImage.class); //create query
@@ -69,6 +70,7 @@ public class SongImageRepository {
 	 * Get all the songs with image associated (if image exists)
 	 * @return the list of {@link SongHistoryItemImageDTO}
 	 */
+	@Transactional
 	public List<SongHistoryItemImageDTO> getAllSongsWithImage() {
 		//load entities
 		Query query = entityManager.createNamedQuery("getAllSongsWithImage", SongItem.class);
@@ -161,6 +163,7 @@ public class SongImageRepository {
 	 * @param song the song to analyse
 	 * @return <code>true</code> if there is an image, <code>false</code> if not
 	 */
+	@Transactional
 	public boolean isSongHasImage(SongHistoryItemDTO song) {
 		//load song
 		Query query = entityManager.createNamedQuery("getSongWithImageLeftJoinFetch", SongItem.class); //create query
@@ -177,6 +180,7 @@ public class SongImageRepository {
 	 * @param song the song to analyse
 	 * @return the file name
 	 */
+	@Transactional
 	public String getImageFileNameOfSong(SongHistoryItemDTO song) {
 		//load song
 		Query query = entityManager.createNamedQuery("getImageFileNameOfSong", String.class); //create query
