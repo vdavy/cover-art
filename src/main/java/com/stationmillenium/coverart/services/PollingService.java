@@ -163,7 +163,7 @@ public class PollingService {
 			//deal with server down
 			if (serverStatusCalendar == null) {
 				serverStatusCalendar = Calendar.getInstance();
-				LOGGER.debug("Server down at : " + serverStatusCalendar);
+				LOGGER.debug("Server down at : " + serverStatusCalendar.getTime());
 			} else {
 				Calendar currentServerDownTime = Calendar.getInstance();
 				currentServerDownTime.add(Calendar.SECOND, -config.getAlertTimeout()); //add alert delay time
