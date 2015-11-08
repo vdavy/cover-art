@@ -185,7 +185,7 @@ public class StatusReportViewImpl extends Composite implements StatusReportView 
 			selectedAlert.setText(clientFactory.getConstants().getSelectedAlertPlaylist());
 			break;
 			
-		case SHOUTCAST:
+		case ICECAST:
 			selectedAlert.setText(clientFactory.getConstants().getSelectedAlertServer());
 			break;
 		}		

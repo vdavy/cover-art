@@ -70,7 +70,7 @@ public class StatusReportActivity extends AbstractActivity implements Presenter 
 			adminRequestFactory.playlistStatusRequest().findAllPlaylistStatuses().fire(getReceiver());
 			break;
 			
-		case SHOUTCAST:
+		case ICECAST:
 			adminRequestFactory.serverStatusRequest().findAllServerStatuses().fire(getReceiver());
 			break;
 		}

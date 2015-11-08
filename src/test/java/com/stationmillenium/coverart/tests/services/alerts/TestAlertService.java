@@ -31,14 +31,14 @@ public class TestAlertService {
 		email.setEmail("address@mail.com");
 		email.setAlertType(new HashSet<AlertType>());
 		email.getAlertType().add(AlertType.FM);
-		email.getAlertType().add(AlertType.SHOUTCAST);
+		email.getAlertType().add(AlertType.ICECAST);
 		email.getAlertType().add(AlertType.PLAYLIST);
 		email.persist();
 		
 		email = new AlertEmail();
 		email.setEmail("address@mail.com");
 		email.setAlertType(new HashSet<AlertType>());
-		email.getAlertType().add(AlertType.SHOUTCAST);
+		email.getAlertType().add(AlertType.ICECAST);
 		email.getAlertType().add(AlertType.PLAYLIST);
 		email.persist();
 		
@@ -56,7 +56,7 @@ public class TestAlertService {
 		
 		//alert init for shoutcast
 		alertActivation = new AlertActivation();
-		alertActivation.setAlertType(AlertType.SHOUTCAST);
+		alertActivation.setAlertType(AlertType.ICECAST);
 		alertActivation.setEnableAlert(true);
 		alertActivation.persist();
 	}
@@ -82,7 +82,7 @@ public class TestAlertService {
 	 */
 	@Test
 	public void testActiveAlertShoutcast() {
-		alertService.sendActiveAlert(AlertType.SHOUTCAST);
+		alertService.sendActiveAlert(AlertType.ICECAST);
 	}
 	
 	/**
@@ -106,7 +106,7 @@ public class TestAlertService {
 	 */
 	@Test
 	public void testDisabledAlertShoutcast() {
-		alertService.sendEndedAlert(AlertType.SHOUTCAST);
+		alertService.sendEndedAlert(AlertType.ICECAST);
 	}
 	
 	/**

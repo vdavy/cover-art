@@ -162,8 +162,8 @@ public class ConfigureAlertsActivity extends AbstractActivity implements Present
 			translation = clientFactory.getConfigureAlertsConstants().getPlaylistAlertName();
 			break;
 
-		case SHOUTCAST:
-			translation = clientFactory.getConfigureAlertsConstants().getShoutcastAlertName();
+		case ICECAST:
+			translation = clientFactory.getConfigureAlertsConstants().getIcecastAlertName();
 			break;
 		}
 		

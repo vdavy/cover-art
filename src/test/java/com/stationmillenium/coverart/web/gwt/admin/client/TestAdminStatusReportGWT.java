@@ -45,7 +45,7 @@ public class TestAdminStatusReportGWT extends GWTTestCase {
 	 */
 	public void testStatusReportShoutcastType() {
 		ClientFactory clientFactory = GWT.create(ClientFactory.class);
-		new StatusReportActivity(clientFactory, ReportType.SHOUTCAST).start(clientFactory.getMainView().getContentPanel(), null);
+		new StatusReportActivity(clientFactory, ReportType.ICECAST).start(clientFactory.getMainView().getContentPanel(), null);
 	}
 	
 }

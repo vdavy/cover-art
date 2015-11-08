@@ -40,8 +40,8 @@ public class AlertService {
 	//mail templates
 	@Autowired @Qualifier("fmActiveAlertTemplate") private SimpleMailMessage fmActiveAlertTemplate;
 	@Autowired @Qualifier("fmEndedAlertTemplate") private SimpleMailMessage fmEndedAlertTemplate;
-	@Autowired @Qualifier("shoutcastActiveAlertTemplate") private SimpleMailMessage shoutcastActiveAlertTemplate;
-	@Autowired @Qualifier("shoutcastEndedAlertTemplate") private SimpleMailMessage shoutcastEndedAlertTemplate;
+	@Autowired @Qualifier("icecastActiveAlertTemplate") private SimpleMailMessage icecastActiveAlertTemplate;
+	@Autowired @Qualifier("icecastEndedAlertTemplate") private SimpleMailMessage icecastEndedAlertTemplate;
 	@Autowired @Qualifier("playlistActiveAlertTemplate") private SimpleMailMessage playlistActiveAlertTemplate;
 	@Autowired @Qualifier("playlistEndedAlertTemplate") private SimpleMailMessage playlistEndedAlertTemplate;
 	
@@ -75,13 +75,13 @@ public class AlertService {
 					}
 					break;
 				
-				case SHOUTCAST:
+				case ICECAST:
 					if (activeAlert) {
-						LOGGER.debug("Send active alert mail for shoutcast");					
-						sendMail(shoutcastActiveAlertTemplate, emailList);
+						LOGGER.debug("Send active alert mail for Icecast");					
+						sendMail(icecastActiveAlertTemplate, emailList);
 					} else {
-						LOGGER.debug("Send ended alert mail for shoutcast");					
-						sendMail(shoutcastEndedAlertTemplate, emailList);
+						LOGGER.debug("Send ended alert mail for Icecast");					
+						sendMail(icecastEndedAlertTemplate, emailList);
 					}
 					break;
 				}

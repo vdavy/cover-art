@@ -24,7 +24,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SongHistory {
 
-	//played date on shoutcast server
+	//played date on server
 	@NotNull
 	private Calendar playedDate;
 	

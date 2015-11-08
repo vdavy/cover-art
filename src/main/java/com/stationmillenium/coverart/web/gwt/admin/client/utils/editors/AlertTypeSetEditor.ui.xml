@@ -12,7 +12,7 @@
 		<g:Label ui:field="errors" />
 		<g:FlowPanel>
 			<g:CheckBox ui:field="alertEnabledFM"><ui:msg>FM</ui:msg></g:CheckBox>
-			<g:CheckBox ui:field="alertEnabledShoutcast"><ui:msg>Shoutcast</ui:msg></g:CheckBox>
+			<g:CheckBox ui:field="alertEnabledIcecast"><ui:msg>Icecast</ui:msg></g:CheckBox>
 			<g:CheckBox ui:field="alertEnabledPlaylist"><ui:msg>Playlist</ui:msg></g:CheckBox>
 			<g:CheckBox ui:field="alertEnabledMissingImage"><ui:msg>Images manquantes</ui:msg></g:CheckBox>
 		</g:FlowPanel>

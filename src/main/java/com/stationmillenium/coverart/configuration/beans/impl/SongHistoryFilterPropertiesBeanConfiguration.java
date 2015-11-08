@@ -26,7 +26,7 @@ import com.stationmillenium.coverart.configuration.beans.AbstractPropertiesBeanC
 import com.stationmillenium.coverart.exceptions.PropertyBeanException;
 
 /**
- * Shoutcast server properties bean configuration
+ * Song history filter properties bean configuration
  * @author vincent
  *
  */

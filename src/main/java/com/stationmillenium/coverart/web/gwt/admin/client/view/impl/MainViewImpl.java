@@ -36,7 +36,7 @@ public class MainViewImpl extends Composite implements MainView {
 	@UiField SimplePanel contentPanel;
 	
 	//menus widget 
-	@UiField MenuItem shoutcastStatusMenuItem;
+	@UiField MenuItem icecastStatusMenuItem;
 	@UiField MenuItem playlistStatusMenuItem;
 	@UiField MenuItem fmStatusMenuItem;
 	@UiField MenuItem playlistExtractMenuItem;
@@ -58,10 +58,10 @@ public class MainViewImpl extends Composite implements MainView {
 	public MainViewImpl(final ClientFactory clientFactory) {
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		shoutcastStatusMenuItem.setScheduledCommand(new Command() {	 //set command for shoutcast menu item
+		icecastStatusMenuItem.setScheduledCommand(new Command() {	 //set command for Icecast menu item
 			@Override
 			public void execute() {
-				clientFactory.getPlaceController().goTo(new StatusReportPlace(ReportType.SHOUTCAST));				
+				clientFactory.getPlaceController().goTo(new StatusReportPlace(ReportType.ICECAST));				
 			}
 		});
 		

@@ -47,7 +47,7 @@ public class TestAlertRepository {
 		
 		//alert init for shoutcast
 		alertActivation = new AlertActivation();
-		alertActivation.setAlertType(AlertType.SHOUTCAST);
+		alertActivation.setAlertType(AlertType.ICECAST);
 		alertActivation.setEnableAlert(true);
 		alertActivation.persist();
 		
@@ -56,7 +56,7 @@ public class TestAlertRepository {
 		email.setEmail("1@toto.com");
 		email.setAlertType(new HashSet<AlertType>());
 		email.getAlertType().add(AlertType.FM);
-		email.getAlertType().add(AlertType.SHOUTCAST);
+		email.getAlertType().add(AlertType.ICECAST);
 		email.persist();
 		
 		email = new AlertEmail();
@@ -82,7 +82,7 @@ public class TestAlertRepository {
 		assertEquals(emailList.get(0), "2@toto.com");
 		
 		//test fm shoutcast type
-		emailList = alertRepository.getEmailFromAlertType(AlertType.SHOUTCAST);
+		emailList = alertRepository.getEmailFromAlertType(AlertType.ICECAST);
 		assertEquals(emailList.size(), 1);
 		assertEquals(emailList.get(0), "1@toto.com");
 	}
@@ -99,7 +99,7 @@ public class TestAlertRepository {
 		//test mail 1
 		alertTypeList = alertRepository.getAlertTypeForEmail("1@toto.com");
 		assertEquals(alertTypeList.size(), 2);
-		assertEquals(alertTypeList.get(0), AlertType.SHOUTCAST);
+		assertEquals(alertTypeList.get(0), AlertType.ICECAST);
 		assertEquals(alertTypeList.get(1), AlertType.FM);
 		
 		//test mail 2
@@ -115,7 +115,7 @@ public class TestAlertRepository {
 	public void testGetAlertEnabledForType() {
 		assertTrue(alertRepository.getAlertEnabledForType(AlertType.FM));
 		assertFalse(alertRepository.getAlertEnabledForType(AlertType.PLAYLIST));
-		assertTrue(alertRepository.getAlertEnabledForType(AlertType.SHOUTCAST));
+		assertTrue(alertRepository.getAlertEnabledForType(AlertType.ICECAST));
 	}
 	
 	/**

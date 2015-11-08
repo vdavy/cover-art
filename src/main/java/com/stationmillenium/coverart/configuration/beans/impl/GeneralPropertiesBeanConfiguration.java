@@ -13,7 +13,7 @@ import com.stationmillenium.coverart.configuration.beans.AbstractPropertiesBeanC
 import com.stationmillenium.coverart.exceptions.PropertyBeanException;
 
 /**
- * Shoutcast server properties bean configuration
+ * General properties bean configuration
  * @author vincent
  *
  */

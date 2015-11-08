@@ -42,7 +42,7 @@ public class Admin implements EntryPoint {
 	    // Start PlaceHistoryHandler with our PlaceHistoryMapper
 	    AdminPlaceHistoryMapper historyMapper = GWT.create(AdminPlaceHistoryMapper.class);
 	    PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
-	    historyHandler.register(placeController, eventBus, new StatusReportPlace(ReportType.SHOUTCAST));
+	    historyHandler.register(placeController, eventBus, new StatusReportPlace(ReportType.ICECAST));
 	    
 	    // build UI
 	    RootPanel.get().add(clientFactory.getMainViewAsWidget());

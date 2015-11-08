@@ -34,7 +34,7 @@ public class AlertTypeSetEditor extends Composite implements LeafValueEditor<Set
 	//fields
 	@UiField Label errors;
 	@UiField CheckBox alertEnabledFM;
-	@UiField CheckBox alertEnabledShoutcast;
+	@UiField CheckBox alertEnabledIcecast;
 	@UiField CheckBox alertEnabledPlaylist;
 	@UiField CheckBox alertEnabledMissingImage;
 	
@@ -50,11 +50,11 @@ public class AlertTypeSetEditor extends Composite implements LeafValueEditor<Set
 	public void setValue(Set<AlertType> value) {
 		if (value != null) {
 			alertEnabledFM.setValue(value.contains(AlertType.FM)); //alert fm case
-			alertEnabledShoutcast.setValue(value.contains(AlertType.SHOUTCAST)); //shoutcast alert case
+			alertEnabledIcecast.setValue(value.contains(AlertType.ICECAST)); //Icecast alert case
 			alertEnabledPlaylist.setValue(value.contains(AlertType.PLAYLIST)); //playlist alert case
 			alertEnabledMissingImage.setValue(value.contains(AlertType.CUSTOM_IMAGE)); //missing image alert case
 		} else
-			for (CheckBox checkbox : new CheckBox[]{alertEnabledFM, alertEnabledShoutcast, alertEnabledPlaylist, alertEnabledMissingImage})
+			for (CheckBox checkbox : new CheckBox[]{alertEnabledFM, alertEnabledIcecast, alertEnabledPlaylist, alertEnabledMissingImage})
 				checkbox.setValue(false);
 	}
 
@@ -65,8 +65,8 @@ public class AlertTypeSetEditor extends Composite implements LeafValueEditor<Set
 		if (alertEnabledFM.getValue()) //alert fm case
 			returnSet.add(AlertType.FM);
 		
-		if (alertEnabledShoutcast.getValue()) //alert shoutcast case
-			returnSet.add(AlertType.SHOUTCAST);
+		if (alertEnabledIcecast.getValue()) //alert Icecast case
+			returnSet.add(AlertType.ICECAST);
 		
 		if (alertEnabledPlaylist.getValue()) //alert fm case
 			returnSet.add(AlertType.PLAYLIST);

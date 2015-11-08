@@ -10,7 +10,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
 /**
- * Place to report status for shoutcast, playlist and fm
+ * Place to report status for Icecast, playlist and fm
  * @author vincent
  *
  */
@@ -19,7 +19,7 @@ public class StatusReportPlace extends Place {
 	private static final Logger LOGGER = Logger.getLogger(StatusReportPlace.class.getName());
 	
 	public static enum ReportType {
-		SHOUTCAST,
+		ICECAST,
 		PLAYLIST,
 		FM
 	}
@@ -58,8 +58,8 @@ public class StatusReportPlace extends Place {
 				ReportType reportType = ReportType.valueOf(token);
 				return new StatusReportPlace(reportType);
 			} catch (Exception e) {
-				LOGGER.log(Level.WARNING, "Error during parsing report type - go to Shoutcast", e);
-				return new StatusReportPlace(ReportType.SHOUTCAST);
+				LOGGER.log(Level.WARNING, "Error during parsing report type - go to Icecast", e);
+				return new StatusReportPlace(ReportType.ICECAST);
 			}
 		}
 

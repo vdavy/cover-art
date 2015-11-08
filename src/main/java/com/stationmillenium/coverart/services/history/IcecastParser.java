@@ -63,7 +63,7 @@ public class IcecastParser {
 	}
 	
 	/**
-	 * Parse the Shoutcast song history list and return the list
+	 * Parse the Icecast song history list and return the list
 	 * @return the list, never null
 	 */
 	public SongHistoryItemDTO getCurrentSong() {		

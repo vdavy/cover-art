@@ -10,7 +10,7 @@ package com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts
  */
 public enum AlertType {
 
-	SHOUTCAST,
+	ICECAST,
 	PLAYLIST,
 	FM,
 	CUSTOM_IMAGE;

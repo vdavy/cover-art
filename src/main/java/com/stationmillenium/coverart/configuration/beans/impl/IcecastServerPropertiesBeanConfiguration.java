@@ -16,7 +16,7 @@ import com.stationmillenium.coverart.configuration.beans.AbstractPropertiesBeanC
 import com.stationmillenium.coverart.exceptions.PropertyBeanException;
 
 /**
- * Shoutcast server properties bean configuration
+ * Icecast server properties bean configuration
  * @author vincent
  *
  */
@@ -42,11 +42,11 @@ public class IcecastServerPropertiesBeanConfiguration extends AbstractProperties
 	
 	/**
 	 * Provide the produced bean
-	 * @return the <code>ShoutcastServerPropertiesBean</code>
+	 * @return the <code>IcecastServerPropertiesBean</code>
 	 */
 	@Bean
-	@Qualifier("shoutcastServerPropertiesBean")
-	public IcecastServerPropertiesBean getShoutcastServerPropertiesBean() {
+	@Qualifier("icecastServerPropertiesBean")
+	public IcecastServerPropertiesBean getIcecastServerPropertiesBean() {
 		IcecastServerPropertiesBean bean = assembleBean();
 		return bean;
 	}

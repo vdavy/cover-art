@@ -29,15 +29,15 @@
 	</bean>
 	
 	<!-- shouctast templates -->
-	<bean id="shoutcastActiveAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+	<bean id="icecastActiveAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
 		<property name="from" value="${mailConfiguration.from}" />
-		<property name="subject" value="${mailConfiguration.shoutcastAlert.activeAlert.subject}" />
-		<property name="text" value="${mailConfiguration.shoutcastAlert.activeAlert.text}" />
+		<property name="subject" value="${mailConfiguration.icecastAlert.activeAlert.subject}" />
+		<property name="text" value="${mailConfiguration.icecastAlert.activeAlert.text}" />
 	</bean>
-	<bean id="shoutcastEndedAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
+	<bean id="icecastEndedAlertTemplate" class="org.springframework.mail.SimpleMailMessage">
 		<property name="from" value="${mailConfiguration.from}" />
-		<property name="subject" value="${mailConfiguration.shoutcastAlert.endedAlert.subject}" />
-		<property name="text" value="${mailConfiguration.shoutcastAlert.endedAlert.text}" />
+		<property name="subject" value="${mailConfiguration.icecastAlert.endedAlert.subject}" />
+		<property name="text" value="${mailConfiguration.icecastAlert.endedAlert.text}" />
 	</bean>
 	
 	<!-- playlist templates -->

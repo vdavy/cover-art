@@ -18,12 +18,13 @@
     		<!-- hibernate search -->
     		<property name="hibernate.search.default.directory_provider" value="filesystem"/> 
 			<!-- <property name="hibernate.search.default.indexBase" value="/home/vincent/Documents/Pépé/Dev/workspace/git/cover-art/indexes"/> -->  
-			<property name="hibernate.search.default.indexBase" value="/home/millenium/tomcat/webapps/coverart/indexes"/>
+			<!-- <property name="hibernate.search.default.indexBase" value="/home/millenium/tomcat/webapps/coverart/indexes"/> -->
+			<property name="hibernate.search.default.indexBase" value="/root/tomcat/index"/> 
     		
     		<!-- debug -->    		
-    		<property name="hibernate.show_sql" value="true"/>
-    		<property name="hibernate.format_sql" value="true"/>
-    		<property name="hibernate.use_sql_comments" value="true"/>    		
+    		<property name="hibernate.show_sql" value="false"/>
+    		<property name="hibernate.format_sql" value="false"/>
+    		<property name="hibernate.use_sql_comments" value="false"/>    		
     		
             <!-- Uncomment the following two properties for JBoss only -->
             <!-- property name="hibernate.validator.apply_to_ddl" value="false" /-->

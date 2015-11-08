@@ -15,7 +15,7 @@
 			<g:MenuBar animationEnabled="true" width="500px" autoOpen="true">
 				<g:MenuItem><ui:msg>Rapport de status</ui:msg>
 			    	<g:MenuBar vertical="true" animationEnabled="true" autoOpen="true">
-			       		<g:MenuItem ui:field="shoutcastStatusMenuItem"><ui:msg>Shoutcast</ui:msg></g:MenuItem>
+			       		<g:MenuItem ui:field="icecastStatusMenuItem"><ui:msg>Icecast</ui:msg></g:MenuItem>
 			       		<g:MenuItem ui:field="playlistStatusMenuItem"><ui:msg>Playlist</ui:msg></g:MenuItem>
 			       		<g:MenuItem ui:field="fmStatusMenuItem"><ui:msg>FM</ui:msg></g:MenuItem>
 			     	</g:MenuBar>

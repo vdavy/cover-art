@@ -49,7 +49,7 @@ public interface StatusReportConstants extends Constants {
 	@DefaultStringValue("Alerte sélectionnée : playlist inactive")
 	String getSelectedAlertPlaylist();
 	
-	@DefaultStringValue("Alerte sélectionnée : serveur Shoutcast")
+	@DefaultStringValue("Alerte sélectionnée : serveur Icecast")
 	String getSelectedAlertServer();
 	
 	@DefaultStringValue("Alerte actuellement non active")

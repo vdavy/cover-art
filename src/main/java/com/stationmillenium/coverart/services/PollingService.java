@@ -24,7 +24,7 @@ import com.stationmillenium.coverart.services.history.SongHistoryFilter;
 import com.stationmillenium.coverart.web.gwt.admin.shared.requestfactory.alerts.AlertType;
 
 /**
- * Service to poll the Shoutcast server periodically
+ * Service to poll the Icecast server periodically
  * Main service class
  * @author vincent
  *
@@ -42,7 +42,7 @@ public class PollingService {
 	private Calendar serverStatusCalendar;
 	
 	//service injection
-	//the shoutcast parser
+	//the Icecast parser
 	@Autowired
 	private IcecastParser icecastParser;
 	
@@ -85,13 +85,13 @@ public class PollingService {
 	
 	/**
 	 * Method to do server polling :
-	 * -query shoutcast server
+	 * -query Icecast server
 	 * -filter song
 	 * -record in DB if needed
 	 * -launch cover search
 	 */
 	public void doServerPolling() {
-		//query shoutcast
+		//query Icecast
 		SongHistoryItemDTO song = queryIcecastServer();
 		LOGGER.debug("Gathered song : " + song);
 		
@@ -113,7 +113,7 @@ public class PollingService {
 	 * @return filtered song list, or empty song list if nothing found
 	 */
 	private SongHistoryItemDTO queryIcecastServer() {
-		if (icecastParser.checkIcecastStatus()) { //test if shoutcast parser up
+		if (icecastParser.checkIcecastStatus()) { //test if Icecast parser up
 			recordServerStatus(true); //deal with server up
 			serverStatusCalendar = null; //reset calendar
 			
@@ -203,10 +203,10 @@ public class PollingService {
 		if (statusRepository.getLastServerStatus() != serverStatus) { //if server status changed from previous one
 			if (serverStatus) {
 				statusRepository.recordServerUp(); //record server up
-				alertService.sendEndedAlert(AlertType.SHOUTCAST); //stop sending alert
+				alertService.sendEndedAlert(AlertType.ICECAST); //stop sending alert
 			} else {
 				statusRepository.recordServerDown(); //record server down
-				alertService.sendActiveAlert(AlertType.SHOUTCAST); //send alert
+				alertService.sendActiveAlert(AlertType.ICECAST); //send alert
 			}
 		}
 	}

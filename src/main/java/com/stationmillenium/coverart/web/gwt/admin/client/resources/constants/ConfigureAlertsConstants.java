@@ -62,7 +62,7 @@ public interface ConfigureAlertsConstants extends Constants {
 	String getConfirmAlertEmailDeletion();
 	
 	//alertes names
-	@DefaultStringValue("Shoutcast") String getShoutcastAlertName();
+	@DefaultStringValue("Icecast") String getIcecastAlertName();
 	@DefaultStringValue("FM") String getFMAlertName();
 	@DefaultStringValue("Playlist") String getPlaylistAlertName();
 	@DefaultStringValue("Images perso") String getCustomImagesAlertName();
