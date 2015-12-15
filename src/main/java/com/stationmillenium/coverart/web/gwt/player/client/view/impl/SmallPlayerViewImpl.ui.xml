@@ -21,14 +21,14 @@
 				
 		.current-song {
 			font-size: 20px;
-			color: #0b87dd;
+			color: #1F5B85;
 			font-style: italic;
 			font-family: 'Open Sans', sans-serif;		
 		}
 		
 		.current-song-title {
 			font-size: 20px;
-			color: #0b87dd;
+			color: #1F5B85;
 			font-family: 'Open Sans', sans-serif;		
 			margin-right: 5px;
 		}
