@@ -1,0 +1,33 @@
+.dataGridCell {
+	padding: 4px;
+	overflow: hidden;
+	font-size: 20px;
+	color: #0b87dd;
+	font-family: 'Open Sans', sans-serif;	
+	font-weight: bold;
+}
+
+.dataGridEvenRow {
+	background-color: white;	
+}
+
+.dataGridOddRow {
+	background-color: #cecece;
+}
+
+.dataGridSelectedRow {
+	background-color: none;
+}
+
+.dataGridOddRowCell {
+	border: none;
+}
+
+.dataGridEvenRowCell {
+	border: none;
+}
+
+.dataGridSelectedRowCell {
+	border: none;
+	padding: 4px;
+}

@@ -38,6 +38,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.stationmillenium.coverart.web.gwt.history.client.clientfactory.ClientFactory;
+import com.stationmillenium.coverart.web.gwt.history.client.resources.DatagridResources;
 import com.stationmillenium.coverart.web.gwt.history.client.view.HistoryViewInterface;
 import com.stationmillenium.coverart.web.gwt.history.client.view.HistoryViewInterface.HistoryViewPresenter.SearchFieldType;
 import com.stationmillenium.coverart.web.gwt.history.shared.HistoryGWTDTO;
@@ -58,6 +59,9 @@ public class HistoryViewImpl extends Composite implements HistoryViewInterface {
 	interface HistoryViewImplUiBinder extends UiBinder<Widget, HistoryViewImpl> {
 	}
 	
+	//CellTable custom UI resource
+	private DataGrid.Resources datagridRes = GWT.create(DatagridResources.class);
+	
 	//ui fields
 	@UiField RadioButton searchOnField;
 	@UiField RadioButton searchOnDate;
@@ -68,7 +72,7 @@ public class HistoryViewImpl extends Composite implements HistoryViewInterface {
 	@UiField DateBox dateSearch;
 	@UiField TextBox hourSearch;
 	@UiField TextBox minuteSearch;
-	@UiField(provided = true) DataGrid<HistoryGWTDTO> historyGrid = new DataGrid<HistoryGWTDTO>();
+	@UiField(provided = true) DataGrid<HistoryGWTDTO> historyGrid = new DataGrid<HistoryGWTDTO>(10, datagridRes);
 	@UiField(provided = true) SimplePager historyGridPager;
 	@UiField Image songImage;
 	@UiField PopupPanel ajaxLoading;

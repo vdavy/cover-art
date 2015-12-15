@@ -21,9 +21,6 @@ public interface PlayerResources extends ClientBundle {
 	@Source("images/logo-player-live.png")
 	ImageResource logoPlayerLive();
 	
-	@Source("images/logo-small-player.png")
-	ImageResource logoSmallPlayer();
-	
 	@Source("images/live-button.png")
 	ImageResource liveButton();
 	
