@@ -35,7 +35,7 @@
 	</ui:style>
 	
 	<!-- Panel content -->
-	<g:FocusPanel ui:field="mainPanel" height="50px" styleName="{style.background-player}">
+	<g:FocusPanel ui:field="mainPanel" styleName="{style.background-player}">
 		<g:HorizontalPanel>
 			<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement à l'antenne :</ui:msg></g:Label>	
 			<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
