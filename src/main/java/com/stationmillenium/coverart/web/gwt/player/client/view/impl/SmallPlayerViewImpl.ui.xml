@@ -16,7 +16,6 @@
 			cursor: pointer;
 			margin-left: 0px;
 			margin-top: 0px;
-			line-height: 50px;
 		}
 				
 		.current-song {
