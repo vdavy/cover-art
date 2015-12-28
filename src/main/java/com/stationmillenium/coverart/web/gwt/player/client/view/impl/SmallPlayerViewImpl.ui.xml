@@ -19,14 +19,14 @@
 		}
 				
 		.current-song {
-			font-size: 20px;
+			font-size: 19px;
 			color: #428bca;
 			font-style: italic;
 			font-family: 'Open Sans', sans-serif;		
 		}
 		
 		.current-song-title {
-			font-size: 20px;
+			font-size: 19px;
 			color: #428bca;
 			font-family: 'Open Sans', sans-serif;		
 			margin-right: 5px;
@@ -37,7 +37,7 @@
 	<!-- Panel content -->
 	<g:FocusPanel ui:field="mainPanel" styleName="{style.background-player}">
 		<g:HorizontalPanel>
-			<g:Label styleName="{style.current-song-title}"><ui:msg>Actuellement à l'antenne :</ui:msg></g:Label>	
+			<g:Label styleName="{style.current-song-title}"><ui:msg>ON AIR :</ui:msg></g:Label>	
 			<g:Label ui:field="currentSong" styleName="{style.current-song}"/>
 		</g:HorizontalPanel>
 	</g:FocusPanel>
