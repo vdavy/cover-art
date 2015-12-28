@@ -22,10 +22,10 @@ public interface PlayerConstants extends Constants {
 	@DefaultStringValue("http://www.station-millenium.com/cetait-quoi-ce-titre/")
 	String lastSongsURL();
 	
-	@DefaultStringValue("http://www.station-millenium.com/radio/grille-des-programmes/")
+	@DefaultStringValue("http://www.station-millenium.com/radio/la-grille-des-programmes/")
 	String programScheduleURL();
 	
-	@DefaultStringValue("http://www.station-millenium.com/formulaire-de-contact/")
+	@DefaultStringValue("http://www.station-millenium.com/contact/")
 	String contactURL();
 	
 	@DefaultStringValue("https://play.google.com/store/apps/details?id=com.stationmillenium.android")
