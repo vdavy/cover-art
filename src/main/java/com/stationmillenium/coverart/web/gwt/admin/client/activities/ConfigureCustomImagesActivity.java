@@ -201,7 +201,7 @@ public class ConfigureCustomImagesActivity extends AbstractActivity implements P
 		clientFactory.getConfigureCustomImagesView().setMessageLabelTextAndStyle(messageText, MessageLabelStyle.DEFAULT);
 		
 		if (selectedSong.getImagePath() != null) { //if image for selected song
-			SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + selectedSong.getImagePath());
+			SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + selectedSong.getImagePath().substring(1));
 			clientFactory.getConfigureCustomImagesView().setSearchedImage(imageUri, selectedSong.getImageWidth(), selectedSong.getImageHeight());
 		} else //display fallback image
 			displayDefaultImage();	
@@ -244,7 +244,7 @@ public class ConfigureCustomImagesActivity extends AbstractActivity implements P
 		clientFactory.getConfigureCustomImagesView().setMessageLabelTextAndStyle(messageText, MessageLabelStyle.DEFAULT);
 		
 		if (selectedSong.getImagePath() != null) { //if image for selected song
-			SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + selectedSong.getImagePath());
+			SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + selectedSong.getImagePath().substring(1));
 			clientFactory.getConfigureCustomImagesView().setSearchedCustomImage(imageUri, selectedSong.getImageWidth(), selectedSong.getImageHeight());
 		} else //display fallback image
 			displayDefaultCustomImage();	
@@ -411,7 +411,7 @@ public class ConfigureCustomImagesActivity extends AbstractActivity implements P
 
 			//display new image
 			clientFactory.getConfigureCustomImagesView().setMessageLabelTextAndStyle(clientFactory.getConfigureCustomImagesConstants().getCustomImageProperlyAdded(), MessageLabelStyle.GREEN);
-			SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + selectedCustomSong.getImagePath());
+			SafeUri imageUri = UriUtils.fromString(GWT.getHostPageBaseURL() + selectedCustomSong.getImagePath().substring(1));
 			clientFactory.getConfigureCustomImagesView().setSearchedCustomImage(imageUri, selectedCustomSong.getImageWidth(), selectedCustomSong.getImageHeight());
 			
 		}	else {
