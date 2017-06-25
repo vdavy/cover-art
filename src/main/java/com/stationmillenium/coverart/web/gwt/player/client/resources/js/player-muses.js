@@ -1,7 +1,7 @@
 //declare function to send tracking to piwik
 $wnd.insertPlayer = function() {
 	$wnd.MRP.insert({
-	'url':'http://www.station-millenium.com/millenium.mp3',
+	'url':'https://www.station-millenium.com/millenium.mp3',
 	'codec':'mp3',
 	'volume':100,
 	'autoplay':true,
