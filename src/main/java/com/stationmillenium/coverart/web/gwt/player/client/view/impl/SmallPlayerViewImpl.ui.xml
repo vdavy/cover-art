@@ -27,7 +27,7 @@
 		
 		.current-song-title {
 			font-size: 19px;
-			color: #428bca;
+			color: #e6007e;
 			font-family: 'Open Sans', sans-serif;		
 			margin-right: 5px;
 		}
