@@ -87,7 +87,7 @@ public aspect SongItemNamedQueriesAspect {
 						"LEFT JOIN FETCH history.song.image " +		
 						"WHERE history.playedDate " +
 						"BETWEEN :minDate AND :maxDate " +
-						"ORDER BY history.playedDate DESC",
+						"ORDER BY history.playedDate ASC",
 						hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 						
 		/**
