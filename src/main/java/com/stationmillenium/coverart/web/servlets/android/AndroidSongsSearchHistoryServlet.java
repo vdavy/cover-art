@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.stream.StreamResult;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,6 +71,9 @@ public class AndroidSongsSearchHistoryServlet extends HttpServlet {
 	@Autowired
 	@Qualifier("oxmAndroidSearchSongsHistory")
 	private Jaxb2Marshaller oxmAndroidSearchSongsHistory;
+
+	@Autowired
+	private ObjectMapper objectMapper;
 
 	//song repository
 	@Autowired
@@ -165,9 +169,12 @@ public class AndroidSongsSearchHistoryServlet extends HttpServlet {
 		}
 
 		//mashall output
-		oxmAndroidSearchSongsHistory.setSchema(new ClassPathResource("xsd/AndroidSearchSongsHistory.xsd")); 
-		oxmAndroidSearchSongsHistory.marshal(androidSearchSongsHistory, new StreamResult(resp.getWriter()));
-
+		if (req.getParameter("json") != null && req.getParameter("json").equals("true")) {
+			objectMapper.writeValue(resp.getWriter(), androidSearchSongsHistory);
+		} else {
+			oxmAndroidSearchSongsHistory.setSchema(new ClassPathResource("xsd/AndroidSearchSongsHistory.xsd"));
+			oxmAndroidSearchSongsHistory.marshal(androidSearchSongsHistory, new StreamResult(resp.getWriter()));
+		}
 		//final log
 		if (LOGGER.isDebugEnabled())
 			LOGGER.debug("Android current songs : " + androidSearchSongsHistory);

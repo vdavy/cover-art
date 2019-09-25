@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.stream.StreamResult;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 import com.stationmillenium.coverart.beans.utils.GeneralPropertiesBean;
@@ -57,7 +59,10 @@ public class AndroidCurrentSongsServlet extends HttpServlet {
 	@Autowired
 	@Qualifier("oxmAndroidCurrentSongs")
 	private Jaxb2Marshaller oxmAndroidCurrentSongs;
-		
+
+	@Autowired
+	private ObjectMapper objectMapper;
+
 	//dozer
 	@Autowired
 	private Mapper mapper;
@@ -82,9 +87,13 @@ public class AndroidCurrentSongsServlet extends HttpServlet {
 		fillInData(androidCurrentSongs);
 					
 		//mashall output
-		oxmAndroidCurrentSongs.setSchema(new ClassPathResource("xsd/AndroidCurrentSongs.xsd")); 
-		oxmAndroidCurrentSongs.marshal(androidCurrentSongs, new StreamResult(resp.getWriter()));
-		
+		if (req.getParameter("json") != null && req.getParameter("json").equals("true")) {
+			objectMapper.writeValue(resp.getWriter(), androidCurrentSongs);
+		} else {
+			oxmAndroidCurrentSongs.setSchema(new ClassPathResource("xsd/AndroidCurrentSongs.xsd"));
+			oxmAndroidCurrentSongs.marshal(androidCurrentSongs, new StreamResult(resp.getWriter()));
+		}
+
 		//final log
 		if (LOGGER.isDebugEnabled())
 			LOGGER.debug("Android current songs : " + androidCurrentSongs);
