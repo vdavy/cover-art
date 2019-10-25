@@ -132,6 +132,11 @@ public class DozerConfiguration {
 						.fields("fileName", "currentSong.image.path")
 						.fields("width", "currentSong.image.width")
 						.fields("height", "currentSong.image.height");
+
+				mapping(SongImageDTO.class, AndroidCurrentSongs.Last5Songs.Song.Image.class, TypeMappingOptions.mapNull(), TypeMappingOptions.mapEmptyString())
+						.fields("fileName", "path")
+						.fields("width", "width")
+						.fields("height", "height");
 				
 				mapping(SongHistoryItemImageDTO.class, AndroidSearchSongsHistory.HistorySong.class, TypeMappingOptions.mapNull(), TypeMappingOptions.dateFormat("YYYYMMdd-HHmm"),
 						TypeMappingOptions.mapEmptyString())

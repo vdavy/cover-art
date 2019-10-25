@@ -131,6 +131,15 @@ public class AndroidCurrentSongsServlet extends HttpServlet {
 		for (SongHistoryItemDTO lastSong : lastSongsList) {
 			Song lastSongXML = new Song();
 			mapper.map(lastSong, lastSongXML);
+
+			image = songImageRepository.getImageForSong(lastSong); //get image
+			if (image != null) {
+				image.setFileName(config.getCoverImagesPath() + "/" + image.getFileName()); //adjust path
+				Song.Image imageXML = new Song.Image();
+				mapper.map(image, imageXML);
+				lastSongXML.setImage(imageXML);
+			}
+
 			androidCurrentSongs.getLast5Songs().getSong().add(lastSongXML);
 		}
 	}

@@ -1,8 +1,8 @@
 //
-// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.5-2 
-// Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.3.0 
+// Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2013.06.06 à 09:38:47 PM CEST 
+// Généré le : 2019.10.25 à 10:03:13 AM CEST 
 //
 
 
@@ -53,6 +53,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AndroidCurrentSongs.Last5Songs.Song }
+     * 
+     */
+    public AndroidCurrentSongs.Last5Songs.Song createAndroidCurrentSongsLast5SongsSong() {
+        return new AndroidCurrentSongs.Last5Songs.Song();
+    }
+
+    /**
      * Create an instance of {@link AndroidCurrentSongs.CurrentSong }
      * 
      */
@@ -61,11 +69,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AndroidCurrentSongs.Last5Songs.Song }
+     * Create an instance of {@link AndroidCurrentSongs.Last5Songs.Song.Image }
      * 
      */
-    public AndroidCurrentSongs.Last5Songs.Song createAndroidCurrentSongsLast5SongsSong() {
-        return new AndroidCurrentSongs.Last5Songs.Song();
+    public AndroidCurrentSongs.Last5Songs.Song.Image createAndroidCurrentSongsLast5SongsSongImage() {
+        return new AndroidCurrentSongs.Last5Songs.Song.Image();
     }
 
     /**
