@@ -15,7 +15,7 @@
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<hibernate.validator.version>5.1.0.Final</hibernate.validator.version>
 		<hibernate.search.version>4.4.0.Final</hibernate.search.version>
-		<mysql-connector-java.version>5.1.27</mysql-connector-java.version>
+		<mysql-connector-java.version>8.0.16</mysql-connector-java.version>
 		<ehcache.version>2.6.6</ehcache.version>
 		<jackson.version>2.6.3</jackson.version>
 
